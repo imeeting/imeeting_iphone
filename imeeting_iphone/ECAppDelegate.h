@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class ECRootViewController;
+
 @interface ECAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) ECRootViewController *rootViewController;
 
 @end

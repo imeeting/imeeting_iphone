@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  imeeting_iphone
+
+  Created by star king on 12-6-4.
+  Copyright (c) 2012年 elegant cloud. All rights reserved.
+*/
+
+"register" = "登录";
+"phone number" = "手机号码";
