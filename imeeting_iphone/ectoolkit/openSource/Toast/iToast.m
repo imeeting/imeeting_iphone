@@ -108,6 +108,12 @@ static iToastSettings *sharedSettings = nil;
 	return toast;
 }
 
++ (void)showDefaultToast:(NSString *)text andDuration:(NSInteger)duration {
+    iToast *_toast = [iToast makeText:text];
+    [_toast setDuration:duration];
+    [_toast setGravity:iToastGravityBottom];
+    [_toast show];
+}
 
 - (iToast *) setDuration:(NSInteger ) duration{
 	[self theSettings].duration = duration;

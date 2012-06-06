@@ -8,3 +8,12 @@
 
 "register" = "Register";
 "phone number" = "Phone Number";
+"get validate code" = "Get Validation Code";
+"Step 1" = "Step 1: Input phone number to retrieve validation code";
+"Step 2" = "Step 2: Input code and press 'Next' to verify";
+"Step 3" = "Step 3: Input password and confirmation to finish the register";
+"input code" = "Input Validation Code";
+"Next" = "Next Step";
+"input pwd" = "Input Password";
+"confirm pwd" = "Confirm Password";
+"Finish" = "Finish Register";

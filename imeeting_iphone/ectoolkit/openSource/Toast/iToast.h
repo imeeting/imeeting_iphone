@@ -52,6 +52,7 @@ typedef enum iToastType {
 - (iToast *) setPostion:(CGPoint) position;
 
 + (iToast *) makeText:(NSString *) text;
++ (void) showDefaultToast:(NSString*)text andDuration:(NSInteger)duration;
 
 -(iToastSettings *) theSettings;
 
