@@ -34,3 +34,5 @@
 "please input confirm password" = "请输入确认密码";
 "pwd1 is different to pwd2" = "两次密码不一致";
 "finishing register.." = "正在完成注册..";
+"Login" = "登录";
+

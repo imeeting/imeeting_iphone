@@ -1,22 +1,27 @@
 //
-//  ECRootViewController.m
+//  ECLoginViewController.m
 //  imeeting_iphone
 //
-//  Created by star king on 12-6-4.
+//  Created by star king on 12-6-7.
 //  Copyright (c) 2012年 elegant cloud. All rights reserved.
 //
 
-#import "ECRootViewController.h"
 #import "ECLoginViewController.h"
+#import "ECLoginUIView.h"
 
-@interface ECRootViewController ()
+@interface ECLoginViewController ()
 
 @end
 
-@implementation ECRootViewController
+@implementation ECLoginViewController
 
-- (id)initWithUIViewController {
-    return [super initWithRootViewController:[[ECLoginViewController alloc] init]];
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self = [self initWithCompatibleView:[[ECLoginUIView alloc] init]];
+    }
+    return self;
 }
 
 - (void)viewDidLoad

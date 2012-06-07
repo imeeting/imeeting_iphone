@@ -48,6 +48,8 @@
 		F8D5E36D157F5841005B5581 /* UICompatibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E36A157F5841005B5581 /* UICompatibleView.m */; };
 		F8D5E36E157F5841005B5581 /* UIViewController+CompatibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E36C157F5841005B5581 /* UIViewController+CompatibleView.m */; };
 		F8DECFA3157C6FBC00BED245 /* ECRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DECFA2157C6FBC00BED245 /* ECRootViewController.m */; };
+		F8E49FDB1580B74300E8B2C0 /* ECLoginUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */; };
+		F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,10 @@
 		F8DECFA1157C6FBC00BED245 /* ECRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECRootViewController.h; sourceTree = "<group>"; };
 		F8DECFA2157C6FBC00BED245 /* ECRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECRootViewController.m; sourceTree = "<group>"; };
 		F8E49FD81580558D00E8B2C0 /* url_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = url_config.h; sourceTree = "<group>"; };
+		F8E49FD91580B74300E8B2C0 /* ECLoginUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; name = ECLoginUIView.h; path = system/views/ECLoginUIView.h; sourceTree = "<group>"; };
+		F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECLoginUIView.m; path = system/views/ECLoginUIView.m; sourceTree = "<group>"; };
+		F8E49FDC1580B76B00E8B2C0 /* ECLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECLoginViewController.h; path = system/controller/ECLoginViewController.h; sourceTree = "<group>"; };
+		F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECLoginViewController.m; path = system/controller/ECLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +387,10 @@
 		F8C9564D157DAC2F008FDFD3 /* login */ = {
 			isa = PBXGroup;
 			children = (
+				F8E49FD91580B74300E8B2C0 /* ECLoginUIView.h */,
+				F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */,
+				F8E49FDC1580B76B00E8B2C0 /* ECLoginViewController.h */,
+				F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -563,6 +573,8 @@
 				F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */,
 				F8D5E36D157F5841005B5581 /* UICompatibleView.m in Sources */,
 				F8D5E36E157F5841005B5581 /* UIViewController+CompatibleView.m in Sources */,
+				F8E49FDB1580B74300E8B2C0 /* ECLoginUIView.m in Sources */,
+				F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
