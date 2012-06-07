@@ -24,7 +24,7 @@
     ASIHTTPRequest *_request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:pUrl]];
     
     // set timeout seconds
-    [_request setTimeOutSeconds:5.0];
+    [_request setTimeOutSeconds:10.0];
     
     // set user infomation
     _request.userInfo = pUserInfo;
@@ -64,7 +64,7 @@
     ASIFormDataRequest *_request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:pUrl]];
     
     // set timeout seconds
-    [_request setTimeOutSeconds:5.0];
+    [_request setTimeOutSeconds:10.0];
     
     //  set post value
     [pPostBodyDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
@@ -111,7 +111,7 @@
     ASIFormDataRequest *_request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:pUrl]];
     
     // set timeout seconds
-    [_request setTimeOutSeconds:5.0];
+    [_request setTimeOutSeconds:10.0];
     
     //  set post value
     NSMutableArray *_postBodyDataArray = [[NSMutableArray alloc] init];
