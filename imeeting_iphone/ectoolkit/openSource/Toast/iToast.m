@@ -37,10 +37,10 @@ static iToastSettings *sharedSettings = nil;
 		theSettings = [iToastSettings getSharedSettings];
 	}
 	
-	UIFont *font = [UIFont systemFontOfSize:16];
+	UIFont *font = [UIFont systemFontOfSize:14];
 	CGSize textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(280, 60)];
 	
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + 5, textSize.height + 5)];
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + 0, textSize.height + 5)];
 	label.backgroundColor = [UIColor clearColor];
 	label.textColor = [UIColor whiteColor];
 	label.font = font;

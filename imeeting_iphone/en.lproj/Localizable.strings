@@ -7,7 +7,7 @@
 */
 
 "register" = "Register";
-"phone number" = "Phone Number";
+"phone number" = "Input Phone Number";
 "get validate code" = "Get Validation Code";
 "Step 1" = "Step 1: Input phone number to retrieve validation code";
 "Step 2" = "Step 2: Input code and press 'Next' to verify";
@@ -34,4 +34,17 @@
 "please input confirm password" = "Please input confirmation password!";
 "pwd1 is different to pwd2" = "Two passwords are different!";
 "finishing register.." = "Finishing register..";
+"Register OK" = "Register OK";
+"OK" = "OK";
 "Login" = "Login";
+"Account Setting" = "Account Setting";
+"Remember Pwd" = "Remember Password";
+"Auto Login" = "Auto Login";
+"Logining" = "Logining..";
+"Wrong phone number or password" = "Wrong phone number or password!";
+"Error in login, please retry." = "Error in login, please retry!";
+
+
+
+
+

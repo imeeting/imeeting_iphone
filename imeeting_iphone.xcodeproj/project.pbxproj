@@ -10,7 +10,7 @@
 		F8039AA7157C65B4005903AC /* imeeting_iphone-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F863C869157C61320045C08C /* imeeting_iphone-Info.plist */; };
 		F814E246157C9CFC00FBBB19 /* UserBean.m in Sources */ = {isa = PBXBuildFile; fileRef = F814E240157C9CFC00FBBB19 /* UserBean.m */; };
 		F814E247157C9CFC00FBBB19 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F814E242157C9CFC00FBBB19 /* UserManager.m */; };
-		F814E248157C9CFC00FBBB19 /* NSString+util.m in Sources */ = {isa = PBXBuildFile; fileRef = F814E245157C9CFC00FBBB19 /* NSString+util.m */; };
+		F814E248157C9CFC00FBBB19 /* NSString+CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F814E245157C9CFC00FBBB19 /* NSString+CommonUtils.m */; };
 		F814E271157C9DC000FBBB19 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F814E24C157C9DC000FBBB19 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F814E272157C9DC000FBBB19 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = F814E24F157C9DC000FBBB19 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F814E273157C9DC000FBBB19 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = F814E251157C9DC000FBBB19 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -45,11 +45,16 @@
 		F8C9565B157E17A0008FDFD3 /* UIColor+ECUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C9565A157E17A0008FDFD3 /* UIColor+ECUIColor.m */; };
 		F8D5E35C157EEF30005B5581 /* ECRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */; };
 		F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */; };
-		F8D5E36D157F5841005B5581 /* UICompatibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E36A157F5841005B5581 /* UICompatibleView.m */; };
-		F8D5E36E157F5841005B5581 /* UIViewController+CompatibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E36C157F5841005B5581 /* UIViewController+CompatibleView.m */; };
 		F8DECFA3157C6FBC00BED245 /* ECRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DECFA2157C6FBC00BED245 /* ECRootViewController.m */; };
 		F8E49FDB1580B74300E8B2C0 /* ECLoginUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */; };
 		F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */; };
+		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
+		F8ED8AAF1581D5F8009ECF13 /* ECUIControlTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AAE1581D5F8009ECF13 /* ECUIControlTableViewCell.m */; };
+		F8ED8AB21581E817009ECF13 /* ECUrlConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AB11581E817009ECF13 /* ECUrlConfig.m */; };
+		F8ED8AB915820A9E009ECF13 /* UIView+UI+ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AB415820A9D009ECF13 /* UIView+UI+ViewController.m */; };
+		F8ED8ABA15820A9E009ECF13 /* UIViewExtensionBean.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AB615820A9E009ECF13 /* UIViewExtensionBean.m */; };
+		F8ED8ABB15820A9E009ECF13 /* UIViewExtensionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AB815820A9E009ECF13 /* UIViewExtensionManager.m */; };
+		F8ED8ABE15820B1C009ECF13 /* UIViewController+CompatibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8ABD15820B1B009ECF13 /* UIViewController+CompatibleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,8 +73,8 @@
 		F814E240157C9CFC00FBBB19 /* UserBean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBean.m; sourceTree = "<group>"; };
 		F814E241157C9CFC00FBBB19 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
 		F814E242157C9CFC00FBBB19 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
-		F814E244157C9CFC00FBBB19 /* NSString+util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+util.h"; sourceTree = "<group>"; };
-		F814E245157C9CFC00FBBB19 /* NSString+util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+util.m"; sourceTree = "<group>"; };
+		F814E244157C9CFC00FBBB19 /* NSString+CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "NSString+CommonUtils.h"; sourceTree = "<group>"; };
+		F814E245157C9CFC00FBBB19 /* NSString+CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CommonUtils.m"; sourceTree = "<group>"; };
 		F814E24B157C9DC000FBBB19 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		F814E24C157C9DC000FBBB19 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		F814E24D157C9DC000FBBB19 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -134,17 +139,27 @@
 		F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterViewController.m; path = system/controller/ECRegisterViewController.m; sourceTree = "<group>"; };
 		F8D5E35D157EEF3A005B5581 /* ECRegisterUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterUIView.h; path = system/views/ECRegisterUIView.h; sourceTree = "<group>"; };
 		F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterUIView.m; path = system/views/ECRegisterUIView.m; sourceTree = "<group>"; };
-		F8D5E369157F5841005B5581 /* UICompatibleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICompatibleView.h; sourceTree = "<group>"; };
-		F8D5E36A157F5841005B5581 /* UICompatibleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICompatibleView.m; sourceTree = "<group>"; };
-		F8D5E36B157F5841005B5581 /* UIViewController+CompatibleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CompatibleView.h"; sourceTree = "<group>"; };
-		F8D5E36C157F5841005B5581 /* UIViewController+CompatibleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CompatibleView.m"; sourceTree = "<group>"; };
 		F8DECFA1157C6FBC00BED245 /* ECRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECRootViewController.h; sourceTree = "<group>"; };
 		F8DECFA2157C6FBC00BED245 /* ECRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECRootViewController.m; sourceTree = "<group>"; };
-		F8E49FD81580558D00E8B2C0 /* url_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = url_config.h; sourceTree = "<group>"; };
-		F8E49FD91580B74300E8B2C0 /* ECLoginUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; name = ECLoginUIView.h; path = system/views/ECLoginUIView.h; sourceTree = "<group>"; };
+		F8E49FD91580B74300E8B2C0 /* ECLoginUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECLoginUIView.h; path = system/views/ECLoginUIView.h; sourceTree = "<group>"; };
 		F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECLoginUIView.m; path = system/views/ECLoginUIView.m; sourceTree = "<group>"; };
 		F8E49FDC1580B76B00E8B2C0 /* ECLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECLoginViewController.h; path = system/controller/ECLoginViewController.h; sourceTree = "<group>"; };
 		F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECLoginViewController.m; path = system/controller/ECLoginViewController.m; sourceTree = "<group>"; };
+		F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECBaseUIView.h; sourceTree = "<group>"; };
+		F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECBaseUIView.m; sourceTree = "<group>"; };
+		F8ED8AAC1581987E009ECF13 /* ectoolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ectoolkit.h; sourceTree = "<group>"; };
+		F8ED8AAD1581D5F8009ECF13 /* ECUIControlTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUIControlTableViewCell.h; sourceTree = "<group>"; };
+		F8ED8AAE1581D5F8009ECF13 /* ECUIControlTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUIControlTableViewCell.m; sourceTree = "<group>"; };
+		F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUrlConfig.h; sourceTree = "<group>"; };
+		F8ED8AB11581E817009ECF13 /* ECUrlConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUrlConfig.m; sourceTree = "<group>"; };
+		F8ED8AB315820A9D009ECF13 /* UIView+UI+ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UI+ViewController.h"; sourceTree = "<group>"; };
+		F8ED8AB415820A9D009ECF13 /* UIView+UI+ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UI+ViewController.m"; sourceTree = "<group>"; };
+		F8ED8AB515820A9E009ECF13 /* UIViewExtensionBean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExtensionBean.h; sourceTree = "<group>"; };
+		F8ED8AB615820A9E009ECF13 /* UIViewExtensionBean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewExtensionBean.m; sourceTree = "<group>"; };
+		F8ED8AB715820A9E009ECF13 /* UIViewExtensionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExtensionManager.h; sourceTree = "<group>"; };
+		F8ED8AB815820A9E009ECF13 /* UIViewExtensionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewExtensionManager.m; sourceTree = "<group>"; };
+		F8ED8ABC15820B1B009ECF13 /* UIViewController+CompatibleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CompatibleView.h"; sourceTree = "<group>"; };
+		F8ED8ABD15820B1B009ECF13 /* UIViewController+CompatibleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CompatibleView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +197,7 @@
 				F814E249157C9DC000FBBB19 /* openSource */,
 				F814E23E157C9CFC00FBBB19 /* user */,
 				F814E243157C9CFC00FBBB19 /* util */,
+				F8ED8AAC1581987E009ECF13 /* ectoolkit.h */,
 			);
 			path = ectoolkit;
 			sourceTree = "<group>";
@@ -200,8 +216,8 @@
 		F814E243157C9CFC00FBBB19 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				F814E244157C9CFC00FBBB19 /* NSString+util.h */,
-				F814E245157C9CFC00FBBB19 /* NSString+util.m */,
+				F814E244157C9CFC00FBBB19 /* NSString+CommonUtils.h */,
+				F814E245157C9CFC00FBBB19 /* NSString+CommonUtils.m */,
 				F814E297157CC8E300FBBB19 /* HttpUtil.h */,
 				F814E298157CC8E300FBBB19 /* HttpUtil.m */,
 				F8C95659157E17A0008FDFD3 /* UIColor+ECUIColor.h */,
@@ -409,10 +425,16 @@
 		F8D5E368157F5841005B5581 /* ecui */ = {
 			isa = PBXGroup;
 			children = (
-				F8D5E369157F5841005B5581 /* UICompatibleView.h */,
-				F8D5E36A157F5841005B5581 /* UICompatibleView.m */,
-				F8D5E36B157F5841005B5581 /* UIViewController+CompatibleView.h */,
-				F8D5E36C157F5841005B5581 /* UIViewController+CompatibleView.m */,
+				F8ED8ABC15820B1B009ECF13 /* UIViewController+CompatibleView.h */,
+				F8ED8ABD15820B1B009ECF13 /* UIViewController+CompatibleView.m */,
+				F8ED8AB315820A9D009ECF13 /* UIView+UI+ViewController.h */,
+				F8ED8AB415820A9D009ECF13 /* UIView+UI+ViewController.m */,
+				F8ED8AB515820A9E009ECF13 /* UIViewExtensionBean.h */,
+				F8ED8AB615820A9E009ECF13 /* UIViewExtensionBean.m */,
+				F8ED8AB715820A9E009ECF13 /* UIViewExtensionManager.h */,
+				F8ED8AB815820A9E009ECF13 /* UIViewExtensionManager.m */,
+				F8ED8AAD1581D5F8009ECF13 /* ECUIControlTableViewCell.h */,
+				F8ED8AAE1581D5F8009ECF13 /* ECUIControlTableViewCell.m */,
 			);
 			path = ecui;
 			sourceTree = "<group>";
@@ -420,6 +442,8 @@
 		F8DECFA0157C6F9600BED245 /* appViews */ = {
 			isa = PBXGroup;
 			children = (
+				F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */,
+				F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */,
 				F8E49FD41580555400E8B2C0 /* config */,
 				F814E289157CA16200FBBB19 /* system */,
 				F8DECFA1157C6FBC00BED245 /* ECRootViewController.h */,
@@ -431,7 +455,8 @@
 		F8E49FD41580555400E8B2C0 /* config */ = {
 			isa = PBXGroup;
 			children = (
-				F8E49FD81580558D00E8B2C0 /* url_config.h */,
+				F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */,
+				F8ED8AB11581E817009ECF13 /* ECUrlConfig.m */,
 			);
 			name = config;
 			path = imeeting_iphone/config;
@@ -552,7 +577,7 @@
 				F8DECFA3157C6FBC00BED245 /* ECRootViewController.m in Sources */,
 				F814E246157C9CFC00FBBB19 /* UserBean.m in Sources */,
 				F814E247157C9CFC00FBBB19 /* UserManager.m in Sources */,
-				F814E248157C9CFC00FBBB19 /* NSString+util.m in Sources */,
+				F814E248157C9CFC00FBBB19 /* NSString+CommonUtils.m in Sources */,
 				F814E271157C9DC000FBBB19 /* ASIAuthenticationDialog.m in Sources */,
 				F814E272157C9DC000FBBB19 /* ASIDataCompressor.m in Sources */,
 				F814E273157C9DC000FBBB19 /* ASIDataDecompressor.m in Sources */,
@@ -571,10 +596,15 @@
 				F8C9565B157E17A0008FDFD3 /* UIColor+ECUIColor.m in Sources */,
 				F8D5E35C157EEF30005B5581 /* ECRegisterViewController.m in Sources */,
 				F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */,
-				F8D5E36D157F5841005B5581 /* UICompatibleView.m in Sources */,
-				F8D5E36E157F5841005B5581 /* UIViewController+CompatibleView.m in Sources */,
 				F8E49FDB1580B74300E8B2C0 /* ECLoginUIView.m in Sources */,
 				F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */,
+				F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */,
+				F8ED8AAF1581D5F8009ECF13 /* ECUIControlTableViewCell.m in Sources */,
+				F8ED8AB21581E817009ECF13 /* ECUrlConfig.m in Sources */,
+				F8ED8AB915820A9E009ECF13 /* UIView+UI+ViewController.m in Sources */,
+				F8ED8ABA15820A9E009ECF13 /* UIViewExtensionBean.m in Sources */,
+				F8ED8ABB15820A9E009ECF13 /* UIViewExtensionManager.m in Sources */,
+				F8ED8ABE15820B1C009ECF13 /* UIViewController+CompatibleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

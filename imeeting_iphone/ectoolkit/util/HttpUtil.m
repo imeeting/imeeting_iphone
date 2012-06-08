@@ -8,7 +8,7 @@
 
 #import "HttpUtil.h"
 #import "UserManager.h"
-#import "NSString+util.h"
+#import "NSString+CommonUtils.h"
 
 @implementation HttpUtil
 

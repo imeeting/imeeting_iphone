@@ -8,7 +8,7 @@
 
 #import "UserManager.h"
 
-#import "NSString+util.h"
+#import "NSString+CommonUtils.h"
 
 static UserManager *shareUserManager = nil;
 
@@ -19,8 +19,8 @@ static UserManager *shareUserManager = nil;
 +(UserManager *) shareSingleton {
     @synchronized(self){
         if(nil == shareUserManager) {
-            //[[self alloc] init];
             shareUserManager = [super alloc];
+            shareUserManager.userBean = [[UserBean alloc] init];
         }
     }
     
@@ -50,7 +50,7 @@ static UserManager *shareUserManager = nil;
     
     // set user bean
     _mUserBean.name = pName;
-    _mUserBean.passwordMd5 = pPwd;
+    _mUserBean.password = pPwd;
     
     return _mUserBean;
 }

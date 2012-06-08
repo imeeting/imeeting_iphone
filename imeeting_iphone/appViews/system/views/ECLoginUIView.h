@@ -6,13 +6,18 @@
 //  Copyright (c) 2012年 elegant cloud. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "UICompatibleView.h"
+#import "ECBaseUIView.h"
 
-@interface ECLoginUIView : UICompatibleView <UITextFieldDelegate> {
+@interface ECLoginUIView : ECBaseUIView <UITableViewDataSource> {
     UITextField *_mUserNameInput;
     UITextField *_mPwdInput;
     
+    UISwitch *_mRememberPwdSwitch;
+    UISwitch *_mAutoLoginSwitch;
+    
+    UIButton *_mLoginButton;
+    
+    MBProgressHUD *_mHud;
 }
 
 @end

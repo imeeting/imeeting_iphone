@@ -12,7 +12,7 @@
     // name
     NSString *_mName;
     // password md5
-    NSString *_mPasswordMd5;
+    NSString *_mPassword;
     // user key
     NSString *_mUserKey;
     // subscribe id
@@ -26,11 +26,13 @@
 }
 
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *passwordMd5;
+@property (nonatomic, retain) NSString *password;
 @property (nonatomic, retain) NSString *userKey;
 @property (nonatomic, retain) NSString *subscriberId;
 @property (nonatomic, retain) NSString *nodeID;
 @property (nonatomic, retain) NSString *balance;
 @property (nonatomic, retain) NSString *userType;
+@property (nonatomic) BOOL rememberPwd;
+@property (nonatomic) BOOL autoLogin;
 
 @end
