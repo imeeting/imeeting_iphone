@@ -7,8 +7,7 @@
 //
 
 #import "ECLoginUIView.h"
-#import "ECUIControlTableViewCell.h"
-#import "UserManager.h"
+#import "ectoolkit.h"
 
 @interface ECLoginUIView ()
 - (void)initUI;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIViewController+CompatibleView.h"
+#import "ectoolkit.h"
 
 @interface ECLoginViewController : UIViewController
 

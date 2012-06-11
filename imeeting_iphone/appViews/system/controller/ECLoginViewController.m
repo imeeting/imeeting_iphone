@@ -9,7 +9,6 @@
 #import "ECLoginViewController.h"
 #import "ECLoginUIView.h"
 #import "ECRegisterViewController.h"
-#import "UserManager.h"
 #import "ECUrlConfig.h"
 
 @interface ECLoginViewController ()
