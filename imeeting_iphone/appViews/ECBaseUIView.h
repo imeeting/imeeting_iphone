@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ectoolkit.h"
+#import "CommonToolkit/CommonToolkit.h"
 
-@interface ECBaseUIView : UIView <UITextFieldDelegate> 
+@interface ECBaseUIView : UIView <UITextFieldDelegate> {
+    MBProgressHUD *_mHud;
+}
 
 - (UITextField*)makeTextFieldWithPlaceholder:(NSString*)placeholder frame:(CGRect)frame keyboardType:(UIKeyboardType)keyboardType;
 - (UIButton*)makeButtonWithTitle:(NSString*)title frame:(CGRect)frame;

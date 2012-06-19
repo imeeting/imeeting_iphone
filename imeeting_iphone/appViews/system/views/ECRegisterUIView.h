@@ -18,7 +18,6 @@
     UIView *_mStep2View; // view for verifying phone code
     UIView *_mStep3View; // view for inputing password
     
-    MBProgressHUD *_mHud;
 }
 
 

@@ -33,4 +33,8 @@
     return [NSString stringWithFormat:@"%@%@", [ECUrlConfig ServerAddr], @"/user/login"];
 }
 
++ (NSString*)GetGroupListUrl {
+    return [NSString stringWithFormat:@"%@%@", [ECUrlConfig ServerAddr], @"/group/list"];
+}
+
 @end

@@ -10,6 +10,8 @@
 #import "ECLoginUIView.h"
 #import "ECRegisterViewController.h"
 #import "ECUrlConfig.h"
+#import "ECMainPageViewController.h"
+#import "UserBean+IMeeting.h"
 
 @interface ECLoginViewController ()
 // check if need automatic login
@@ -25,10 +27,11 @@
         [self initLogin];
         self = [self initWithCompatibleView:[[ECLoginUIView alloc] init]];
         
-        UserBean *userBean = [[UserManager shareSingleton] userBean];
+        UserBean *userBean = [[UserManager shareUserManager] userBean];
         if (userBean.autoLogin && userBean.password) {
             [self.view performSelector:@selector(loginAction)];
         }
+        
     }
     return self;
 }
@@ -39,7 +42,7 @@
     NSString *password = [userDefaults objectForKey:@"password"];
     NSNumber *autologin = [userDefaults objectForKey:@"autologin"];
     
-    UserBean *userBean = [[UserManager shareSingleton] userBean];
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
     userBean.name = username;
     userBean.password = password;
     if (password) {
@@ -77,15 +80,14 @@
 
 - (void)login {
     NSLog(@"do login");
-    UserBean *userBean = [[UserManager shareSingleton] userBean];
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
     
     // validate user account
-    NSString *md5Pwd = [userBean.password md5];
-    NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userBean.name, @"loginName", md5Pwd, @"loginPwd", nil];
+    NSString *pwd = userBean.password;
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userBean.name, @"loginName", pwd, @"loginPwd", nil];
     
     // send request
-    [HttpUtil sendFormRequestWithUrl:[ECUrlConfig UserLoginUrl] andPostBody:param andUserInfo:nil andDelegate:self andFinishedRespMethod:@selector(onFinishedLogin:) andFailedRespMethod:@selector(onNetworkFailed:) andRequestType:synchronous];
-    
+    [HttpUtil postRequestWithUrl:[ECUrlConfig UserLoginUrl] andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedLogin:) andFailedRespSelector:nil];
 }
 
 #pragma mark - Http Request Response Callback Functions
@@ -106,7 +108,7 @@
                     // login successfully
 
                     // save the account info
-                    UserBean *userBean = [[UserManager shareSingleton] userBean];
+                    UserBean *userBean = [[UserManager shareUserManager] userBean];
                     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                     [userDefaults setObject:userBean.name forKey:@"username"];
                     if (userBean.rememberPwd) {
@@ -122,10 +124,10 @@
                     userBean.userKey = userkey;
                     
                     // jump to main view
-                    [[[UIAlertView alloc] initWithTitle:@"Login" message:@"Login Success" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+                    [self.navigationController pushViewController:[[ECMainPageViewController alloc] init] animated:YES];
                 } else if ([result isEqualToString:@"1"] || [result isEqualToString:@"2"]) {
                     // login failed
-                    [iToast showDefaultToast:NSLocalizedString(@"Wrong phone number or password", "") andDuration:iToastDurationNormal];
+                    [[iToast makeText:NSLocalizedString(@"Wrong phone number or password", "")] show];
                 } else {
                     goto login_error;
                 }
@@ -142,16 +144,7 @@
     return;
     
 login_error:
-    [iToast showDefaultToast:NSLocalizedString(@"Error in login, please retry.", "") andDuration:iToastDurationNormal];   
-    
+    [[iToast makeText:NSLocalizedString(@"Error in login, please retry.", "")] show];
 
 }
-
-- (void)onNetworkFailed:(ASIHTTPRequest *)pRequest {
-    NSError *_error = [pRequest error];
-    NSLog(@"onNetworkFailed - request url = %@, error: %@, response data:%@", pRequest.url, _error, pRequest.responseData);
-    [iToast showDefaultToast:NSLocalizedString(@"network exception", "") andDuration:iToastDurationNormal];
-    
-}
-
 @end

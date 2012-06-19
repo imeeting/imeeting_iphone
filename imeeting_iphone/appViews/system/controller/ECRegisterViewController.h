@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ectoolkit.h"
+#import "CommonToolkit/CommonToolkit.h"
 
 @interface ECRegisterViewController : UIViewController <UIAlertViewDelegate>
 

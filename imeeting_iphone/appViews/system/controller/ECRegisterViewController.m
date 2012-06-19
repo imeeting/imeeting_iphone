@@ -19,7 +19,6 @@
 
 - (void)onFinishedRegister:(ASIHTTPRequest*)pRequest;
 
-- (void)onNetworkFailed:(ASIHTTPRequest*)pRequest;
 @end
 
 @implementation ECRegisterViewController
@@ -53,14 +52,14 @@
     // send request to server to get validation code
     NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:phoneNumber, @"phone", nil];
     
-    [HttpUtil sendFormRequestWithUrl:[ECUrlConfig RetrievePhoneCodeUrl] andPostBody:param andUserInfo:nil andDelegate:self andFinishedRespMethod:@selector(onFinishedGetPhoneCode:) andFailedRespMethod:@selector(onNetworkFailed:) andRequestType:synchronous];
+    [HttpUtil postRequestWithUrl:[ECUrlConfig RetrievePhoneCodeUrl] andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetPhoneCode:) andFailedRespSelector:nil];
 }
 
 - (void)verifyCode:(NSString *)code {
     NSLog(@"verify code");
 
     NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:code, @"code", nil];
-    [HttpUtil sendFormRequestWithUrl:[ECUrlConfig CheckPhoneCodeUrl] andPostBody:param andUserInfo:nil andDelegate:self andFinishedRespMethod:@selector(onFinishedCheckPhoneCode:) andFailedRespMethod:@selector(onNetworkFailed:) andRequestType:synchronous];
+    [HttpUtil postRequestWithUrl:[ECUrlConfig CheckPhoneCodeUrl] andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedCheckPhoneCode:) andFailedRespSelector:nil];
 }
 
 - (void)finishRegisterWithPwds:(NSArray*)pwds {
@@ -68,7 +67,7 @@
     
     NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[pwds objectAtIndex:0], @"password", [pwds objectAtIndex:1], @"password1", nil];
     
-    [HttpUtil sendFormRequestWithUrl:[ECUrlConfig UserRegisterUrl] andPostBody:param andUserInfo:nil andDelegate:self andFinishedRespMethod:@selector(onFinishedRegister:) andFailedRespMethod:@selector(onNetworkFailed:) andRequestType:synchronous];
+    [HttpUtil postRequestWithUrl:[ECUrlConfig UserRegisterUrl] andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedRegister:) andFailedRespSelector:nil];
 }
 
 - (void)jumpToLoginView {
@@ -93,9 +92,9 @@
                     // get phone code successfully, jump to step 2
                     [self.view performSelector:@selector(switchToStep2View)];
                 } else if ([result isEqualToString:@"2"]) {
-                    [iToast showDefaultToast:NSLocalizedString(@"Invalid Phone Number!", "") andDuration:iToastDurationNormal];
+                    [[iToast makeText:NSLocalizedString(@"Invalid Phone Number!", "")] show];
                 } else if ([result isEqualToString:@"3"]) {
-                    [iToast showDefaultToast:NSLocalizedString(@"Existed Phone Number!", "") andDuration:iToastDurationNormal];
+                    [[iToast makeText:NSLocalizedString(@"Existed Phone Number!", "")] show];
                 } else {
                     goto get_phone_code_error;
                 }
@@ -112,7 +111,7 @@
     return;
     
 get_phone_code_error:
-    [iToast showDefaultToast:NSLocalizedString(@"Error in retrieving validation code, please retry.", "") andDuration:iToastDurationNormal];
+    [[iToast makeText:NSLocalizedString(@"Error in retrieving validation code, please retry.", "")] show];
 }
 
 - (void)onFinishedCheckPhoneCode:(ASIHTTPRequest *)pRequest {
@@ -131,9 +130,9 @@ get_phone_code_error:
                     // check phone code successfully, jump to step 3 to fill password
                     [self.view performSelector:@selector(switchToStep3View)];
                 } else if ([result isEqualToString:@"2"]) {
-                    [iToast showDefaultToast:NSLocalizedString(@"Wrong Validation Code!", "") andDuration:iToastDurationNormal];
+                    [[iToast makeText:NSLocalizedString(@"Wrong Validation Code!", "")] show];
                 } else if ([result isEqualToString:@"6"]) {
-                    [iToast showDefaultToast:NSLocalizedString(@"code check session timeout", "") andDuration:iToastDurationNormal];
+                    [[iToast makeText:NSLocalizedString(@"code check session timeout", "")] show];
                     [self.view performSelector:@selector(switchToStep1View)];
 
                 }
@@ -150,7 +149,7 @@ get_phone_code_error:
     return;
     
 check_phone_code_error:
-    [iToast showDefaultToast:NSLocalizedString(@"Error in checking validation code, please retry.", "") andDuration:iToastDurationNormal];   
+    [[iToast makeText:NSLocalizedString(@"Error in checking validation code, please retry.", "")] show];
 }
 
 - (void)onFinishedRegister:(ASIHTTPRequest *)pRequest {
@@ -170,7 +169,7 @@ check_phone_code_error:
                     [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Register OK", "") delegate:self cancelButtonTitle:NSLocalizedString(@"OK", "") otherButtonTitles:nil, nil] show];
 
                 } else if ([result isEqualToString:@"6"]) {
-                    [iToast showDefaultToast:NSLocalizedString(@"register session timeout", "") andDuration:iToastDurationNormal];
+                    [[iToast makeText:NSLocalizedString(@"register session timeout", "")] show];
                     [self.view performSelector:@selector(switchToStep1View)];
                     
                 }
@@ -187,15 +186,8 @@ check_phone_code_error:
     return;
 
 finish_register_error:
-    [iToast showDefaultToast:NSLocalizedString(@"Error in finishing register, please retry.", "") andDuration:iToastDurationNormal];   
+    [[iToast makeText:NSLocalizedString(@"Error in finishing register, please retry.", "")] show];
     
-}
-
-- (void)onNetworkFailed:(ASIHTTPRequest *)pRequest {
-    NSError *_error = [pRequest error];
-    NSLog(@"onNetworkFailed - request url = %@, error: %@, response data:%@", pRequest.url, _error, pRequest.responseData);
-    [iToast showDefaultToast:NSLocalizedString(@"network exception", "") andDuration:iToastDurationNormal];
-
 }
 
 #pragma mark - AlertView Delegate Implementation

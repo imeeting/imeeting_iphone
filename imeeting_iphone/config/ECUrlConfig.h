@@ -20,5 +20,6 @@
 
 + (NSString*)UserLoginUrl;
 
++ (NSString*)GetGroupListUrl;
 
 @end

@@ -16,8 +16,6 @@
     UISwitch *_mAutoLoginSwitch;
     
     UIButton *_mLoginButton;
-    
-    MBProgressHUD *_mHud;
 }
 
 @end

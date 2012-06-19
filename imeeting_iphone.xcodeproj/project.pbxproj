@@ -24,14 +24,22 @@
 		F863C884157C61320045C08C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F863C882157C61320045C08C /* InfoPlist.strings */; };
 		F863C887157C61320045C08C /* imeeting_iphoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F863C886157C61320045C08C /* imeeting_iphoneTests.m */; };
 		F863C896157C65250045C08C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F863C894157C65250045C08C /* Localizable.strings */; };
-		F87BED7715859AAC00339C0C /* libectoolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F87BED701585989E00339C0C /* libectoolkit.a */; };
+		F87BF5E11585DE3E00339C0C /* ECMainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F87BF5E01585DE3E00339C0C /* ECMainPageView.m */; };
+		F87BF5E41585DE6500339C0C /* ECMainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87BF5E31585DE6500339C0C /* ECMainPageViewController.m */; };
+		F8AD9458158872EC007B3C87 /* ECGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AD9457158872EC007B3C87 /* ECGroupCell.m */; };
 		F8D5E35C157EEF30005B5581 /* ECRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */; };
 		F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */; };
 		F8DECFA3157C6FBC00BED245 /* ECRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DECFA2157C6FBC00BED245 /* ECRootViewController.m */; };
+		F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BEC7158EC57200467088 /* QuartzCore.framework */; };
+		F8E3BED7158F0EAC00467088 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */; };
+		F8E3BEE8158F1F9100467088 /* UserBean+IMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */; };
+		F8E3BF08158F327700467088 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BF07158F327600467088 /* AddressBook.framework */; };
+		F8E3BF0B158F3F7C00467088 /* CommonToolkitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E3BF0A158F3F7C00467088 /* CommonToolkitBundle.bundle */; };
 		F8E49FDB1580B74300E8B2C0 /* ECLoginUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */; };
 		F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */; };
 		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
 		F8ED8AB21581E817009ECF13 /* ECUrlConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AB11581E817009ECF13 /* ECUrlConfig.m */; };
+		F8F1A748158B2030003F1EE8 /* fashionChannel.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F1A747158B2030003F1EE8 /* fashionChannel.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,24 +50,11 @@
 			remoteGlobalIDString = F863C85C157C61320045C08C;
 			remoteInfo = imeeting_iphone;
 		};
-		F87BED6F1585989E00339C0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F87BED6B1585989E00339C0C /* ectoolkit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8ED8ACD1582104E009ECF13;
-			remoteInfo = ectoolkit;
-		};
-		F87BED71158598AE00339C0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F87BED6B1585989E00339C0C /* ectoolkit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F8ED8ACC1582104E009ECF13;
-			remoteInfo = ectoolkit;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F8039AA6157C65B4005903AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F8050CD11589852E00024951 /* ECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstants.h; sourceTree = "<group>"; };
 		F814E27F157CA07800FBBB19 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F814E282157CA09600FBBB19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F814E285157CA0B600FBBB19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -83,13 +78,24 @@
 		F863C892157C62170045C08C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/star/workspace/xcode/imeeting/imeeting_iphone/imeeting_iphone/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
 		F863C893157C62170045C08C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/star/workspace/xcode/imeeting/imeeting_iphone/imeeting_iphoneTests/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
 		F863C895157C65250045C08C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		F87BED6B1585989E00339C0C /* ectoolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ectoolkit.xcodeproj; path = ../ectoolkit/ectoolkit.xcodeproj; sourceTree = "<group>"; };
+		F87BF5DF1585DE3E00339C0C /* ECMainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMainPageView.h; path = mainpage/ECMainPageView.h; sourceTree = "<group>"; };
+		F87BF5E01585DE3E00339C0C /* ECMainPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECMainPageView.m; path = mainpage/ECMainPageView.m; sourceTree = "<group>"; };
+		F87BF5E21585DE6500339C0C /* ECMainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMainPageViewController.h; path = mainpage/ECMainPageViewController.h; sourceTree = "<group>"; };
+		F87BF5E31585DE6500339C0C /* ECMainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECMainPageViewController.m; path = mainpage/ECMainPageViewController.m; sourceTree = "<group>"; };
+		F8AD9456158872EC007B3C87 /* ECGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupCell.h; path = mainpage/ECGroupCell.h; sourceTree = "<group>"; };
+		F8AD9457158872EC007B3C87 /* ECGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupCell.m; path = mainpage/ECGroupCell.m; sourceTree = "<group>"; };
 		F8D5E35A157EEF30005B5581 /* ECRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterViewController.h; path = system/controller/ECRegisterViewController.h; sourceTree = "<group>"; };
 		F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterViewController.m; path = system/controller/ECRegisterViewController.m; sourceTree = "<group>"; };
 		F8D5E35D157EEF3A005B5581 /* ECRegisterUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterUIView.h; path = system/views/ECRegisterUIView.h; sourceTree = "<group>"; };
 		F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterUIView.m; path = system/views/ECRegisterUIView.m; sourceTree = "<group>"; };
 		F8DECFA1157C6FBC00BED245 /* ECRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECRootViewController.h; sourceTree = "<group>"; };
 		F8DECFA2157C6FBC00BED245 /* ECRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECRootViewController.m; sourceTree = "<group>"; };
+		F8E3BEC7158EC57200467088 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphonesimulator/CommonToolkit.framework"; sourceTree = "<group>"; };
+		F8E3BEE6158F1F9100467088 /* UserBean+IMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UserBean+IMeeting.h"; path = "system/user/UserBean+IMeeting.h"; sourceTree = "<group>"; };
+		F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UserBean+IMeeting.m"; path = "system/user/UserBean+IMeeting.m"; sourceTree = "<group>"; };
+		F8E3BF07158F327600467088 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		F8E3BF0A158F3F7C00467088 /* CommonToolkitBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = CommonToolkitBundle.bundle; path = "../Build/Products/Debug-iphonesimulator/CommonToolkitBundle.bundle"; sourceTree = "<group>"; };
 		F8E49FD91580B74300E8B2C0 /* ECLoginUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECLoginUIView.h; path = system/views/ECLoginUIView.h; sourceTree = "<group>"; };
 		F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECLoginUIView.m; path = system/views/ECLoginUIView.m; sourceTree = "<group>"; };
 		F8E49FDC1580B76B00E8B2C0 /* ECLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECLoginViewController.h; path = system/controller/ECLoginViewController.h; sourceTree = "<group>"; };
@@ -98,6 +104,7 @@
 		F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECBaseUIView.m; sourceTree = "<group>"; };
 		F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUrlConfig.h; sourceTree = "<group>"; };
 		F8ED8AB11581E817009ECF13 /* ECUrlConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUrlConfig.m; sourceTree = "<group>"; };
+		F8F1A747158B2030003F1EE8 /* fashionChannel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fashionChannel.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +112,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F87BED7715859AAC00339C0C /* libectoolkit.a in Frameworks */,
+				F8E3BF08158F327700467088 /* AddressBook.framework in Frameworks */,
+				F8E3BED7158F0EAC00467088 /* CommonToolkit.framework in Frameworks */,
+				F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */,
 				F814E288157CA0CE00FBBB19 /* libz.1.2.5.dylib in Frameworks */,
 				F814E286157CA0B600FBBB19 /* CFNetwork.framework in Frameworks */,
 				F814E284157CA0AB00FBBB19 /* SystemConfiguration.framework in Frameworks */,
@@ -132,6 +141,7 @@
 		F814E289157CA16200FBBB19 /* system */ = {
 			isa = PBXGroup;
 			children = (
+				F8E3BEE5158F1F4B00467088 /* user */,
 				F8C9564E157DAC41008FDFD3 /* register */,
 				F8C9564D157DAC2F008FDFD3 /* login */,
 			);
@@ -141,7 +151,6 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
-				F8ED8B3C15821493009ECF13 /* Dependencies */,
 				F863C860157C61320045C08C /* Frameworks */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
 				F863C87F157C61320045C08C /* imeeting_iphoneTests */,
@@ -161,6 +170,9 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8E3BF07158F327600467088 /* AddressBook.framework */,
+				F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */,
+				F8E3BEC7158EC57200467088 /* QuartzCore.framework */,
 				F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */,
 				F814E285157CA0B600FBBB19 /* CFNetwork.framework */,
 				F814E282157CA09600FBBB19 /* SystemConfiguration.framework */,
@@ -176,6 +188,8 @@
 		F863C867157C61320045C08C /* imeeting_iphone */ = {
 			isa = PBXGroup;
 			children = (
+				F8F1A743158B1292003F1EE8 /* Resources */,
+				F8E49FD41580555400E8B2C0 /* config */,
 				F863C870157C61320045C08C /* ECAppDelegate.h */,
 				F863C871157C61320045C08C /* ECAppDelegate.m */,
 				F8DECFA0157C6F9600BED245 /* appViews */,
@@ -215,12 +229,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F87BED6C1585989E00339C0C /* Products */ = {
+		F87BF5DE1585DD9A00339C0C /* mainpage */ = {
 			isa = PBXGroup;
 			children = (
-				F87BED701585989E00339C0C /* libectoolkit.a */,
+				F87BF5DF1585DE3E00339C0C /* ECMainPageView.h */,
+				F87BF5E01585DE3E00339C0C /* ECMainPageView.m */,
+				F87BF5E21585DE6500339C0C /* ECMainPageViewController.h */,
+				F87BF5E31585DE6500339C0C /* ECMainPageViewController.m */,
+				F8AD9456158872EC007B3C87 /* ECGroupCell.h */,
+				F8AD9457158872EC007B3C87 /* ECGroupCell.m */,
 			);
-			name = Products;
+			name = mainpage;
 			sourceTree = "<group>";
 		};
 		F8C9564D157DAC2F008FDFD3 /* login */ = {
@@ -248,9 +267,9 @@
 		F8DECFA0157C6F9600BED245 /* appViews */ = {
 			isa = PBXGroup;
 			children = (
+				F87BF5DE1585DD9A00339C0C /* mainpage */,
 				F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */,
 				F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */,
-				F8E49FD41580555400E8B2C0 /* config */,
 				F814E289157CA16200FBBB19 /* system */,
 				F8DECFA1157C6FBC00BED245 /* ECRootViewController.h */,
 				F8DECFA2157C6FBC00BED245 /* ECRootViewController.m */,
@@ -258,22 +277,34 @@
 			path = appViews;
 			sourceTree = "<group>";
 		};
+		F8E3BEE5158F1F4B00467088 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				F8E3BEE6158F1F9100467088 /* UserBean+IMeeting.h */,
+				F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */,
+			);
+			name = user;
+			sourceTree = "<group>";
+		};
 		F8E49FD41580555400E8B2C0 /* config */ = {
 			isa = PBXGroup;
 			children = (
 				F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */,
 				F8ED8AB11581E817009ECF13 /* ECUrlConfig.m */,
+				F8050CD11589852E00024951 /* ECConstants.h */,
 			);
 			name = config;
 			path = imeeting_iphone/config;
 			sourceTree = SOURCE_ROOT;
 		};
-		F8ED8B3C15821493009ECF13 /* Dependencies */ = {
+		F8F1A743158B1292003F1EE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F87BED6B1585989E00339C0C /* ectoolkit.xcodeproj */,
+				F8E3BF0A158F3F7C00467088 /* CommonToolkitBundle.bundle */,
+				F8F1A747158B2030003F1EE8 /* fashionChannel.png */,
 			);
-			name = Dependencies;
+			name = Resources;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,13 +315,12 @@
 			buildConfigurationList = F863C88A157C61320045C08C /* Build configuration list for PBXNativeTarget "imeeting_iphone" */;
 			buildPhases = (
 				F863C859157C61320045C08C /* Sources */,
-				F863C85A157C61320045C08C /* Frameworks */,
 				F863C85B157C61320045C08C /* Resources */,
+				F863C85A157C61320045C08C /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F87BED72158598AE00339C0C /* PBXTargetDependency */,
 			);
 			name = imeeting_iphone;
 			productName = imeeting_iphone;
@@ -337,12 +367,6 @@
 			mainGroup = F863C852157C61320045C08C;
 			productRefGroup = F863C85E157C61320045C08C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = F87BED6C1585989E00339C0C /* Products */;
-					ProjectRef = F87BED6B1585989E00339C0C /* ectoolkit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				F863C85C157C61320045C08C /* imeeting_iphone */,
@@ -351,24 +375,16 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		F87BED701585989E00339C0C /* libectoolkit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libectoolkit.a;
-			remoteRef = F87BED6F1585989E00339C0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		F863C85B157C61320045C08C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8E3BF0B158F3F7C00467088 /* CommonToolkitBundle.bundle in Resources */,
 				F863C86C157C61320045C08C /* InfoPlist.strings in Resources */,
 				F863C896157C65250045C08C /* Localizable.strings in Resources */,
 				F8039AA7157C65B4005903AC /* imeeting_iphone-Info.plist in Resources */,
+				F8F1A748158B2030003F1EE8 /* fashionChannel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +428,10 @@
 				F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */,
 				F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */,
 				F8ED8AB21581E817009ECF13 /* ECUrlConfig.m in Sources */,
+				F87BF5E11585DE3E00339C0C /* ECMainPageView.m in Sources */,
+				F87BF5E41585DE6500339C0C /* ECMainPageViewController.m in Sources */,
+				F8AD9458158872EC007B3C87 /* ECGroupCell.m in Sources */,
+				F8E3BEE8158F1F9100467088 /* UserBean+IMeeting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,11 +450,6 @@
 			isa = PBXTargetDependency;
 			target = F863C85C157C61320045C08C /* imeeting_iphone */;
 			targetProxy = F863C87D157C61320045C08C /* PBXContainerItemProxy */;
-		};
-		F87BED72158598AE00339C0C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ectoolkit;
-			targetProxy = F87BED71158598AE00339C0C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -489,7 +504,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -507,7 +522,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -517,10 +532,19 @@
 		F863C88B157C61320045C08C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../../../Downloads\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "imeeting_iphone/imeeting_iphone-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../ectoolkit/ectoolkit\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "imeeting_iphone/imeeting_iphone-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -529,10 +553,19 @@
 		F863C88C157C61320045C08C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../../../Downloads\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "imeeting_iphone/imeeting_iphone-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../ectoolkit/ectoolkit\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "imeeting_iphone/imeeting_iphone-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

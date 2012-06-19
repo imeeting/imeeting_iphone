@@ -7,7 +7,8 @@
 //
 
 #import "ECLoginUIView.h"
-#import "ectoolkit.h"
+#import "CommonToolkit/CommonToolkit.h"
+#import "UserBean+IMeeting.h"
 
 @interface ECLoginUIView ()
 - (void)initUI;
@@ -21,6 +22,8 @@
     if (self) {
         // init UI
         [self initUI];
+        [self addSubview:_mHud];
+
     }
     return self;
 }
@@ -56,12 +59,8 @@
     
     [self addSubview:loginTableView];
         
-    _mHud = [[MBProgressHUD alloc] initWithView:self];
-    
-    [self addSubview:_mHud];
-    
     //##### set user info in the view
-    UserBean *userBean = [[UserManager shareSingleton] userBean];
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
     _mUserNameInput.text = userBean.name;
     _mPwdInput.text = userBean.password;
     _mRememberPwdSwitch.on = userBean.rememberPwd;
@@ -112,20 +111,22 @@
     
     if (!phoneNumber || [phoneNumber isEqualToString:@""]) {
         NSLog(@"phone number is null");
-        [iToast showDefaultToast:NSLocalizedString(@"please input phone number first", "") andDuration:iToastDurationNormal];
+        [[iToast makeText:NSLocalizedString(@"please input phone number first", "")] show];
         return;
     }
     
     if (!pwd || [pwd isEqualToString:@""]) {
-        [iToast showDefaultToast:NSLocalizedString(@"please input password", "") andDuration:iToastDurationNormal];
+        [[iToast makeText:NSLocalizedString(@"please input password", "")] show];
         return;
         
     }
     
-    
-    UserBean *userBean = [[UserManager shareSingleton] setUser:phoneNumber andPwd:pwd];
-    userBean.rememberPwd = rememberPwd;
-    userBean.autoLogin = autoLogin;
+    UserBean *ub = [[UserManager shareUserManager] userBean];
+    if (!ub.autoLogin) {
+        [[UserManager shareUserManager] setUser:phoneNumber andPassword:pwd];
+    }
+    ub.rememberPwd = rememberPwd;
+    ub.autoLogin = autoLogin;
     
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(login)]) {
         [_mHud setLabelText:NSLocalizedString(@"Logining", "")];

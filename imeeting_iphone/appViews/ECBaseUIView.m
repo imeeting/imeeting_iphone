@@ -16,7 +16,10 @@
     if (self) {
         self.frame = CGRectMake(0, 0, 320, 480);
         // set background color
-        self.backgroundColor = [UIColor colorWithRGB: 240 green: 255 blue: 255 alpha:1];
+        self.backgroundColor = [UIColor colorWithIntegerRed:240 integerGreen:255 integerBlue:255 alpha:1];
+        
+        _mHud = [[MBProgressHUD alloc] initWithView:self];
+        
     }
     return self;
 }
@@ -56,7 +59,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = text;
     label.font = [UIFont systemFontOfSize:14.0];
-    label.textColor = [UIColor colorWithRGB:79 green:79 blue:79 alpha:1];
+    label.textColor = [UIColor colorWithIntegerRed:79 integerGreen:79 integerBlue:79 alpha:1];
     label.backgroundColor = [UIColor clearColor];
     return label;
 }
