@@ -17,6 +17,7 @@
     if (self) {
         mGroupDataSource = [[NSMutableArray alloc] initWithCapacity:20];
         self.hasNext = [[NSNumber alloc] initWithBool:NO];
+        //[self setEditing:YES animated:YES];
     }
     return self;
 }
@@ -73,7 +74,7 @@
 #pragma mark - TableView Delegate implementations
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [ECGroupCell cellHeight];
+    return [ECGroupCell cellHeight:[mGroupDataSource objectAtIndex:indexPath.row]];
 }
 
 // row selected action
@@ -81,7 +82,16 @@
     NSLog(@"select %d", indexPath.row);
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [mGroupDataSource removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationRight];
+    }
+}
 
 @end
 
