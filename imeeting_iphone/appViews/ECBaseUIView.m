@@ -16,7 +16,7 @@
     if (self) {
         self.frame = CGRectMake(0, 0, 320, 480);
         // set background color
-        self.backgroundColor = [UIColor colorWithIntegerRed:240 integerGreen:255 integerBlue:255 alpha:1];
+        self.backgroundColor = [UIColor whiteColor];
         
         _mHud = [[MBProgressHUD alloc] initWithView:self];
         

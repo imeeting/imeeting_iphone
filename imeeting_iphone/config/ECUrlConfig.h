@@ -8,18 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ECUrlConfig : NSObject
-
-+ (NSString*)ServerAddr;
-
-+ (NSString*)RetrievePhoneCodeUrl;
-
-+ (NSString*)CheckPhoneCodeUrl;
-
-+ (NSString*)UserRegisterUrl;
-
-+ (NSString*)UserLoginUrl;
-
-+ (NSString*)GetGroupListUrl;
-
-@end
+#define SERVER_ADDR             @"http://192.168.1.13/imeeting"
+#define RETRIEVE_PHONE_CODE_URL [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/getPhoneCode"]
+#define CHECK_PHONE_CODE_URL    [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/checkPhoneCode"]
+#define USER_REGISTER_URL       [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/regUser"]
+#define USER_LOGIN_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/login"]
+#define GET_GROUP_LIST_URL      [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/list"]
+#define HIDE_GROUP_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/hide"]

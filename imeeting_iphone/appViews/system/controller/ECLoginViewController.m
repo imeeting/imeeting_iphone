@@ -87,7 +87,7 @@
     NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userBean.name, @"loginName", pwd, @"loginPwd", nil];
     
     // send request
-    [HttpUtil postRequestWithUrl:[ECUrlConfig UserLoginUrl] andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedLogin:) andFailedRespSelector:nil];
+    [HttpUtil postRequestWithUrl:USER_LOGIN_URL andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedLogin:) andFailedRespSelector:nil];
 }
 
 #pragma mark - Http Request Response Callback Functions

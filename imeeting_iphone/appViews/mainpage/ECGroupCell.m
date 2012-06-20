@@ -129,7 +129,7 @@
             
             for (NSUInteger i = 0; i < 5; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];
-                UIImage *icon = [UIImage imageNamed:@"fashionChannel"];
+                UIImage *icon = [UIImage imageNamed:@"guy2"];
                 UIView *cell = [self makeCellWithName:name Icon:icon];
                 CGRect frame = CGRectMake(i * cellWidth, 0, cellWidth, cellHeight);
                 cell.frame = frame;
@@ -140,7 +140,7 @@
             int len = self.attendeeArray.count > 10 ? 10 : self.attendeeArray.count;
             for (NSUInteger i = 5; i < len; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];
-                UIImage *icon = [UIImage imageNamed:@"fashionChannel"];
+                UIImage *icon = [UIImage imageNamed:@"guy"];
                 UIView *cell = [self makeCellWithName:name Icon:icon];
                 CGRect frame = CGRectMake((i - 5) * cellWidth, 0, cellWidth, cellHeight);
                 cell.frame = frame;
@@ -152,7 +152,7 @@
         } else {
             for (NSUInteger i = 0; i < self.attendeeArray.count; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];
-                UIImage *icon = [UIImage imageNamed:@"fashionChannel"];
+                UIImage *icon = [UIImage imageNamed:@"guy2"];
                 UIView *cell = [self makeCellWithName:name Icon:icon];
                 CGRect frame = CGRectMake(i * cellWidth, 0, cellWidth, cellHeight);
                 cell.frame = frame;
@@ -181,6 +181,8 @@
     iconView.contentMode = UIViewContentModeScaleAspectFit;
     iconView.image = icon;
     iconView.backgroundColor = [UIColor clearColor];
+    iconView.layer.masksToBounds = YES;
+    [iconView.layer setCornerRadius:5.0];
     [cell addSubview:iconView];
     
     UILabel *nameLabel =[[UILabel alloc] initWithFrame:CGRectMake(Padding, iconView.frame.origin.y + iconView.frame.size.height + Padding, NameLabelWidth, NameLabelHeight)];

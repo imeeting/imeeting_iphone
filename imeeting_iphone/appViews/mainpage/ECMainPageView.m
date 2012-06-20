@@ -12,12 +12,12 @@
 @implementation ECMainTableView
 
 
-- (id)init {
-    self = [super init];
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
         mGroupDataSource = [[NSMutableArray alloc] initWithCapacity:20];
         self.hasNext = [[NSNumber alloc] initWithBool:NO];
-        //[self setEditing:YES animated:YES];
+        self.autoLoadDelegate = self;
     }
     return self;
 }
@@ -42,10 +42,6 @@
 
 - (void)appendGroupDataSourceWithArray:(NSArray *)groupArray {
     [mGroupDataSource addObjectsFromArray:groupArray];
-}
-
-- (NSInteger)dataCount {
-    return mGroupDataSource.count;
 }
 
 #pragma mark - TableView datasource implementations
@@ -86,8 +82,18 @@
     return UITableViewCellEditingStyleDelete;
 }
 
+- (void)hideGroup:(NSDictionary *)groupInfo {
+    NSString *groupId = [groupInfo objectForKey:@"groupId"];
+    UIView *superView = self.superview;
+    if (superView && [superView respondsToSelector:@selector(hideGroup:)]) {
+        [superView performSelector:@selector(hideGroup:) withObject:groupId];
+    } 
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSDictionary *groupInfo = [mGroupDataSource objectAtIndex:indexPath.row];
+        [self hideGroup:groupInfo];
         [mGroupDataSource removeObjectAtIndex:indexPath.row];
         [tableView deleteRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationRight];
     }
@@ -98,7 +104,7 @@
 @interface ECMainPageView ()
 
 - (void)initUI;
-
+- (void)hideGroup:(NSString*)groupId;
 @end
 
 @implementation ECMainPageView
@@ -165,7 +171,11 @@
     mGroupTableView.hasNext = flag;
 }
 
-
+- (void)hideGroup:(NSString*)groupId {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(hideGroup:)]) {
+        [self.viewControllerRef performSelector:@selector(hideGroup:) withObject:groupId];
+    }
+}
 
 
 

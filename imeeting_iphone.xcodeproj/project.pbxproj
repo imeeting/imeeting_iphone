@@ -38,8 +38,8 @@
 		F8E49FDB1580B74300E8B2C0 /* ECLoginUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */; };
 		F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */; };
 		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
-		F8ED8AB21581E817009ECF13 /* ECUrlConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AB11581E817009ECF13 /* ECUrlConfig.m */; };
-		F8F1A748158B2030003F1EE8 /* fashionChannel.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F1A747158B2030003F1EE8 /* fashionChannel.png */; };
+		F8FA19661591781D00947304 /* guy.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FA19651591781D00947304 /* guy.png */; };
+		F8FA196A15917A1E00947304 /* guy2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FA196915917A1E00947304 /* guy2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,8 +103,8 @@
 		F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECBaseUIView.h; sourceTree = "<group>"; };
 		F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECBaseUIView.m; sourceTree = "<group>"; };
 		F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUrlConfig.h; sourceTree = "<group>"; };
-		F8ED8AB11581E817009ECF13 /* ECUrlConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUrlConfig.m; sourceTree = "<group>"; };
-		F8F1A747158B2030003F1EE8 /* fashionChannel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fashionChannel.png; sourceTree = "<group>"; };
+		F8FA19651591781D00947304 /* guy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guy.png; path = imeeting_iphone/Resources/images/guy.png; sourceTree = "<group>"; };
+		F8FA196915917A1E00947304 /* guy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guy2.png; path = imeeting_iphone/Resources/images/guy2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,7 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */,
-				F8ED8AB11581E817009ECF13 /* ECUrlConfig.m */,
 				F8050CD11589852E00024951 /* ECConstants.h */,
 			);
 			name = config;
@@ -300,8 +299,9 @@
 		F8F1A743158B1292003F1EE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8FA196915917A1E00947304 /* guy2.png */,
+				F8FA19651591781D00947304 /* guy.png */,
 				F8E3BF0A158F3F7C00467088 /* CommonToolkitBundle.bundle */,
-				F8F1A747158B2030003F1EE8 /* fashionChannel.png */,
 			);
 			name = Resources;
 			path = ..;
@@ -384,7 +384,8 @@
 				F863C86C157C61320045C08C /* InfoPlist.strings in Resources */,
 				F863C896157C65250045C08C /* Localizable.strings in Resources */,
 				F8039AA7157C65B4005903AC /* imeeting_iphone-Info.plist in Resources */,
-				F8F1A748158B2030003F1EE8 /* fashionChannel.png in Resources */,
+				F8FA19661591781D00947304 /* guy.png in Resources */,
+				F8FA196A15917A1E00947304 /* guy2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +428,6 @@
 				F8E49FDB1580B74300E8B2C0 /* ECLoginUIView.m in Sources */,
 				F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */,
 				F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */,
-				F8ED8AB21581E817009ECF13 /* ECUrlConfig.m in Sources */,
 				F87BF5E11585DE3E00339C0C /* ECMainPageView.m in Sources */,
 				F87BF5E41585DE6500339C0C /* ECMainPageViewController.m in Sources */,
 				F8AD9458158872EC007B3C87 /* ECGroupCell.m in Sources */,

@@ -9,6 +9,7 @@
 #import "ECMainPageViewController.h"
 #import "ECMainPageView.h"
 #import "ECUrlConfig.h"
+#import "ECConstants.h"
 
 @interface ECMainPageViewController ()
 - (void)onFinishedGetGroupList:(ASIHTTPRequest*)pRequest;
@@ -50,7 +51,7 @@
 // get the newest group list from server
 - (void)refreshGroupList {
     NSLog(@"ECMainPageViewController - refresh Group List");
-    [HttpUtil postSignatureRequestWithUrl:[ECUrlConfig GetGroupListUrl] andPostFormat:urlEncoded andParameter:nil andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetGroupList:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:GET_GROUP_LIST_URL andPostFormat:urlEncoded andParameter:nil andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetGroupList:) andFailedRespSelector:nil];
 }
 
 - (void)onFinishedGetGroupList:(ASIHTTPRequest *)pRequest {
@@ -89,7 +90,7 @@
     NSLog(@"current offset: %d, next offset: %d", mOffset.integerValue, nextOffset.integerValue);
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:nextOffset, @"offset", nil];
-    [HttpUtil postSignatureRequestWithUrl:[ECUrlConfig GetGroupListUrl] andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedLoadingMoreGroupList:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:GET_GROUP_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedLoadingMoreGroupList:) andFailedRespSelector:nil];
 }
 
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest {
@@ -121,5 +122,12 @@
     }
 
 }
+
+- (void)hideGroup:(NSString *)groupId {
+    NSLog(@"hide group: %@", groupId);
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:groupId, GROUP_ID, nil];
+    [HttpUtil postSignatureRequestWithUrl:HIDE_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:nil andFailedRespSelector:nil];
+}
+
 
 @end

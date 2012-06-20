@@ -21,7 +21,7 @@
 #pragma mark - UI Initialization
 
 - (UIView*)makeStepView {
-    UIColor *stepViewBgColor = [UIColor colorWithIntegerRed:240 integerGreen:255 integerBlue:255 alpha:0.9];
+    UIColor *stepViewBgColor = self.backgroundColor;
     CGRect stepViewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     UIView *stepView = [[UIView alloc] initWithFrame:stepViewFrame];
     stepView.backgroundColor = stepViewBgColor;

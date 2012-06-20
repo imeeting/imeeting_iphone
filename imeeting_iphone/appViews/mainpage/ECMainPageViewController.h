@@ -16,4 +16,5 @@
 
 - (void)refreshGroupList;
 - (void)loadMoreGroupList;
+- (void)hideGroup:(NSString*)groupId;
 @end

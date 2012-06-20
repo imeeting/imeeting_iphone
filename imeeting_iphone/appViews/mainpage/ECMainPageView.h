@@ -10,13 +10,13 @@
 #import "ECBaseUIView.h"
 
 
-@interface ECMainTableView : ECLoadMoreUITableView <UITableViewDelegate, UITableViewDataSource> {
+@interface ECMainTableView : ECLoadMoreUITableView <UITableViewDelegate, UITableViewDataSource, AutoLoadDelegate> {
     NSMutableArray *mGroupDataSource;
 }
 
 - (void)setGroupDataSource:(NSArray *)groupArray;
 - (void)appendGroupDataSourceWithArray:(NSArray *)groupArray;
-
+- (void)hideGroup:(NSDictionary*)groupInfo;
 @end
 
 
