@@ -9,16 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CommonToolkit/CommonToolkit.h"
 
-static CGFloat TitleLabelHeight = 18;
-static CGFloat TitleLabelWidth = 150;
-static CGFloat TimeLabelHeight = 16;
-static CGFloat TimeLabelWidth = 150;
-static CGFloat IconHeight = 40;
-static CGFloat IconWidth = 40;
-static CGFloat NameLabelHeight = 18;
-static CGFloat NameLabelWidth = 50;
-static CGFloat Margin = 4;
-static CGFloat Padding = 2;
 
 /*
 @interface AttendeeListView : JTListView <JTListViewDelegate, JTListViewDataSource>

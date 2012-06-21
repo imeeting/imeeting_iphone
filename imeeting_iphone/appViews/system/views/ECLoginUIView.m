@@ -13,6 +13,7 @@
 @interface ECLoginUIView ()
 - (void)initUI;
 - (void)loginAction;
+- (void)textFieldValueChanged:(UITextField*)textField;
 @end
 
 @implementation ECLoginUIView
@@ -43,7 +44,7 @@
     // user password input
     _mPwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(0, 0, 280, 30) keyboardType:UIKeyboardTypeDefault];
     _mPwdInput.secureTextEntry = YES;
-    [_mPwdInput addTarget:self action:@selector(textFieldValueChanged) forControlEvents:UIControlEventValueChanged];
+    [_mPwdInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
 
     
     _mRememberPwdSwitch = [[UISwitch alloc] init];
@@ -71,7 +72,8 @@
     
 }
 
-- (void)textFieldValueChanged {
+- (void)textFieldValueChanged:(UITextField*)textField {
+    NSLog(@"text field value changed");
     UserBean *ub = [[UserManager shareUserManager] userBean];
     ub.autoLogin = NO;
 }

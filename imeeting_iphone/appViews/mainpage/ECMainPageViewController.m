@@ -10,6 +10,7 @@
 #import "ECMainPageView.h"
 #import "ECUrlConfig.h"
 #import "ECConstants.h"
+#import "ECGroupVideoViewController.h"
 
 @interface ECMainPageViewController ()
 - (void)onFinishedGetGroupList:(ASIHTTPRequest*)pRequest;
@@ -129,5 +130,10 @@
     [HttpUtil postSignatureRequestWithUrl:HIDE_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:nil andFailedRespSelector:nil];
 }
 
+- (void)itemSelected:(NSDictionary *)group {
+    ECGroupVideoViewController *gvc = [[ECGroupVideoViewController alloc] init];
+    gvc.groupInfo = group;
+    [self.navigationController pushViewController:gvc animated:NO];
+}
 
 @end

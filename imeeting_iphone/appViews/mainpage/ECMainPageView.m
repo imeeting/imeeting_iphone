@@ -23,17 +23,14 @@
 }
 
 - (void)refreshDataSource {
-    UIView *superView = self.superview;
-    if (superView && [superView respondsToSelector:@selector(refreshGroupList)]) {
-        [superView performSelector:@selector(refreshGroupList)];
-    }
+    ECMainPageView *mainPage = (ECMainPageView*)self.superview;
+
+    [mainPage refreshGroupList];
 }
 
 - (void)loadMoreDataSource {
-    UIView *superView = self.superview;
-    if (superView && [superView respondsToSelector:@selector(loadMoreDataSource)]) {
-        [superView performSelector:@selector(loadMoreDataSource)];
-    } 
+    ECMainPageView *mainPage = (ECMainPageView*)self.superview;
+    [mainPage loadMoreDataSource];
 }
 
 - (void)setGroupDataSource:(NSArray *)groupArray {
@@ -76,6 +73,9 @@
 // row selected action
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"select %d", indexPath.row);
+    NSDictionary *group = [mGroupDataSource objectAtIndex:indexPath.row];
+    ECMainPageView *mainPage = (ECMainPageView*)self.superview;
+    [mainPage itemSelected:group];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,10 +84,8 @@
 
 - (void)hideGroup:(NSDictionary *)groupInfo {
     NSString *groupId = [groupInfo objectForKey:@"groupId"];
-    UIView *superView = self.superview;
-    if (superView && [superView respondsToSelector:@selector(hideGroup:)]) {
-        [superView performSelector:@selector(hideGroup:) withObject:groupId];
-    } 
+    ECMainPageView *mainPage = (ECMainPageView*)self.superview;
+    [mainPage hideGroup:groupId];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,7 +112,7 @@
     self.title = NSLocalizedString(@"Talking Group", "");
     self.leftBarButtonItem = nil;
     
-    mGroupTableView = [[ECMainTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480 - 64)];
+    mGroupTableView = [[ECMainTableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 64)];
     mGroupTableView.backgroundColor = self.backgroundColor;
     mGroupTableView.dataSource = mGroupTableView;
     mGroupTableView.delegate = mGroupTableView;
@@ -177,6 +175,11 @@
     }
 }
 
+- (void)itemSelected:(NSDictionary *)group {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(itemSelected:)]) {
+        [self.viewControllerRef performSelector:@selector(itemSelected:) withObject:group];
+    }
+}
 
 
 @end

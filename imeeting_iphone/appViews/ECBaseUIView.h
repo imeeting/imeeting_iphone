@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CommonToolkit/CommonToolkit.h"
 
+static CGFloat StatusBarHeight = 20;
+
 @interface ECBaseUIView : UIView <UITextFieldDelegate> {
     MBProgressHUD *_mHud;
 }

@@ -7,7 +7,8 @@
 //
 
 #import "ECAppDelegate.h"
-#import "ECRootViewController.h"
+#import "CommonToolkit/AppRootViewController.h"
+#import "ECLoginViewController.h"
 
 @implementation ECAppDelegate
 
@@ -18,8 +19,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.rootViewController = [[ECRootViewController alloc] initWithUIViewController];
-    
+    self.window.rootViewController = [[AppRootViewController alloc] initWithPresentViewController:[[ECLoginViewController alloc] init] andMode:navigationController];
     
     [self.window makeKeyAndVisible];
     return YES;

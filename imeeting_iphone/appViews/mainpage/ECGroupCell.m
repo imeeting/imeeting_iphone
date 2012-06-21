@@ -8,6 +8,20 @@
 
 #import "ECGroupCell.h"
 #import "ECConstants.h"
+
+static CGFloat TitleLabelHeight = 18;
+static CGFloat TitleLabelWidth = 140;
+static CGFloat TimeLabelHeight = 16;
+static CGFloat TimeLabelWidth = 150;
+static CGFloat IconHeight = 40;
+static CGFloat IconWidth = 40;
+static CGFloat NameLabelHeight = 18;
+static CGFloat NameLabelWidth = 50;
+static CGFloat MarginTop = 6;
+static CGFloat Margin = 12;
+static CGFloat Padding = 2;
+
+
 /*
 @implementation AttendeeListView
 
@@ -228,7 +242,7 @@
 @implementation ECGroupCell
 
 + (CGFloat)cellHeight:(NSDictionary*)groupInfoJson {
-    CGFloat cellHeight = Margin + TitleLabelHeight;
+    CGFloat cellHeight = MarginTop + TitleLabelHeight;
     if (groupInfoJson) {
         NSArray *attendees = [groupInfoJson objectForKey:GROUP_ATTENDEES];
         CGFloat attendeeGridHeight = [AttendeeGridView GridViewHeight:attendees];
@@ -248,13 +262,13 @@
             NSArray *attendees = [groupInfoJson objectForKey:GROUP_ATTENDEES];
             mStatus = [groupInfoJson objectForKey:GROUP_STATUS];
             
-            mTitle = [[UILabel alloc] initWithFrame:CGRectMake(Margin, Margin, TitleLabelWidth, TitleLabelHeight)];
+            mTitle = [[UILabel alloc] initWithFrame:CGRectMake(Margin, MarginTop, TitleLabelWidth, TitleLabelHeight)];
             mTitle.text = title;
             mTitle.font = [UIFont systemFontOfSize:18];
             mTitle.backgroundColor = [UIColor clearColor];
             [self.contentView addSubview:mTitle];
             
-            mTime = [[UILabel alloc] initWithFrame:CGRectMake(mTitle.frame.origin.x + mTitle.frame.size.width + Margin, Margin + (TitleLabelHeight - TimeLabelHeight), TimeLabelWidth, TimeLabelHeight)];
+            mTime = [[UILabel alloc] initWithFrame:CGRectMake(mTitle.frame.origin.x + mTitle.frame.size.width + Margin, MarginTop + (TitleLabelHeight - TimeLabelHeight), TimeLabelWidth, TimeLabelHeight)];
             if (createdTime) {
                 NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:createdTime.doubleValue];
                 NSDateFormatter *formater = [[NSDateFormatter alloc] init];
@@ -262,7 +276,7 @@
                 NSString *time = [formater stringFromDate:date];
                 mTime.text = time;
             }
-            mTime.font = [UIFont systemFontOfSize:14];
+            mTime.font = [UIFont systemFontOfSize:12];
             mTime.textColor = [UIColor colorWithIntegerRed:205 integerGreen:133 integerBlue:63 alpha:1];
             mTime.backgroundColor = [UIColor clearColor];
             [mTime setTextAlignment:UITextAlignmentRight];
@@ -277,7 +291,7 @@
             */
             
             mAttendeeGridView = [[AttendeeGridView alloc] initWithAttendees:attendees];
-            mAttendeeGridView.frame = CGRectMake(0, mTitle.frame.origin.y + mTitle.frame.size.height, mAttendeeGridView.frame.size.width, mAttendeeGridView.frame.size.height);
+            mAttendeeGridView.frame = CGRectMake(Margin, mTitle.frame.origin.y + mTitle.frame.size.height, mAttendeeGridView.frame.size.width, mAttendeeGridView.frame.size.height);
             [self.contentView addSubview:mAttendeeGridView];
             
             /*

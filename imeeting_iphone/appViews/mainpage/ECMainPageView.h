@@ -31,5 +31,6 @@
 - (void)appendGroupDataSourceWithArray:(NSArray *)groupArray;
 - (void)refreshGroupList;
 - (void)loadMoreDataSource;
-
+- (void)itemSelected:(NSDictionary*)group;
+- (void)hideGroup:(NSString*)groupId;
 @end
