@@ -13,13 +13,13 @@ static CGFloat TitleLabelHeight = 18;
 static CGFloat TitleLabelWidth = 140;
 static CGFloat TimeLabelHeight = 16;
 static CGFloat TimeLabelWidth = 150;
-static CGFloat IconHeight = 40;
-static CGFloat IconWidth = 40;
+static CGFloat IconHeight = 50;
+static CGFloat IconWidth = 50;
 static CGFloat NameLabelHeight = 18;
 static CGFloat NameLabelWidth = 50;
 static CGFloat MarginTop = 6;
 static CGFloat Margin = 12;
-static CGFloat Padding = 2;
+static CGFloat Padding = 3;
 
 
 /*
@@ -248,7 +248,7 @@ static CGFloat Padding = 2;
         CGFloat attendeeGridHeight = [AttendeeGridView GridViewHeight:attendees];
         cellHeight += attendeeGridHeight;
     }
-    return  cellHeight;
+    return cellHeight;
 }
 
 - (id)initWithGroupInfo:(NSDictionary *)groupInfoJson {

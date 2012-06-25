@@ -11,10 +11,14 @@
 #import "ECUrlConfig.h"
 #import "ECConstants.h"
 #import "ECGroupVideoViewController.h"
+#import "ECGroupAttendeeListViewController.h"
+#import "ECGroupManager.h"
 
 @interface ECMainPageViewController ()
 - (void)onFinishedGetGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest;
+- (void)onFinishedJoinGroup:(ASIHTTPRequest*)pRequest;
+- (void)joinGroup:(NSString*)groupId;
 @end
 
 @implementation ECMainPageViewController
@@ -131,9 +135,52 @@
 }
 
 - (void)itemSelected:(NSDictionary *)group {
+    
     ECGroupVideoViewController *gvc = [[ECGroupVideoViewController alloc] init];
-    gvc.groupInfo = group;
-    [self.navigationController pushViewController:gvc animated:NO];
+    ECGroupAttendeeListViewController *alvc =[[ECGroupAttendeeListViewController alloc] init];
+    ECGroupModule *module = [[ECGroupModule alloc] init];
+    module.videoController = gvc;
+    module.attendeeController = alvc;
+    [ECGroupManager sharedECGroupManager].currentGroupModule = module;    
+    NSString *groupId = [group objectForKey:@"groupId"];
+    module.groupId = groupId;
+    
+    // send http request to join the group
+    ECMainPageView *mainPage = (ECMainPageView*)self.view;
+    [mainPage showHudWhileExcuting:@selector(joinGroup:) onTarget:self withObject:groupId hudText:nil animated:YES];
+}
+
+- (void)joinGroup:(NSString*)groupId {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:groupId, GROUP_ID, nil];
+    [HttpUtil postSignatureRequestWithUrl:JOIN_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedJoinGroup:) andFailedRespSelector:nil];
+
+}
+
+- (void)onFinishedJoinGroup:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedJoinGroup - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+        case 200: {
+            // join group ok
+            // switch to group view
+            UIViewController *videoController = [ECGroupManager sharedECGroupManager].currentGroupModule.videoController;
+            [self.navigationController pushViewController:videoController animated:NO];
+            return;
+        }
+        case 403:
+            [[iToast makeText:NSLocalizedString(@"you'are prohibited to join the group", "")] show];
+            break;
+        case 404:
+            [[iToast makeText:NSLocalizedString(@"group doesn't exist", "")] show];
+            break;
+        default:
+            [iToast makeText:NSLocalizedString(@"error in join group", "")];
+            break;
+    }
+    
+    [[ECGroupManager sharedECGroupManager] setCurrentGroupModule:nil];
 }
 
 @end

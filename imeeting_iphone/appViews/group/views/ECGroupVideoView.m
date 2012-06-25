@@ -16,6 +16,10 @@ static CGFloat MyVideoViewWidth = 90;
 static CGFloat MyVideoViewHeight = 120;
 static CGFloat LeaveButtonWidth = 80;
 static CGFloat LeaveButtonHeight = 40;
+static CGFloat SwitchToAttendeeListButtonWidth = 90;
+static CGFloat SwitchToAttendeeListButtonHeight = 30;
+static CGFloat SwitchFBCameraButtonWidth = 50;
+static CGFloat SwitchFBCameraButtonHeight = 30;
 
 
 @interface ECGroupVideoView ()
@@ -23,6 +27,7 @@ static CGFloat LeaveButtonHeight = 40;
 - (UIView*)makeVideoRegion;
 - (UIView*)makeBottonBar;
 - (void)onLeaveAction;
+- (void)onSwitchToAttendeeListViewAction;
 @end
 
 @implementation ECGroupVideoView
@@ -42,11 +47,22 @@ static CGFloat LeaveButtonHeight = 40;
     [self addSubview:[self makeVideoRegion]];
     [self addSubview:[self makeBottonBar]];
     
+    CGFloat padding = 10;
+    // make switch to attendee list view button
+    UIButton *switchToAttenListButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [switchToAttenListButton setTitle:NSLocalizedString(@"Attendee List", "") forState:UIControlStateNormal];
+    switchToAttenListButton.frame = CGRectMake(self.frame.size.width - SwitchToAttendeeListButtonWidth - 5, padding, SwitchToAttendeeListButtonWidth, SwitchToAttendeeListButtonHeight);
+    [switchToAttenListButton addTarget:self action:@selector(onSwitchToAttendeeListViewAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:switchToAttenListButton];
+    
+    // make switch camera button
+    
+    
 }
 
 - (UIView *)makeVideoRegion {
     UIView *videoRegion = [[UIView alloc] initWithFrame:CGRectMake(0, 0, VideoRegionWidth, VideoRegionHeight)];
-    videoRegion.backgroundColor = [UIColor whiteColor];
+    videoRegion.backgroundColor = [UIColor orangeColor];
     
     CGColorRef borderColor = [[UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:0.8] CGColor];
     
@@ -72,6 +88,7 @@ static CGFloat LeaveButtonHeight = 40;
     mLeaveGroupButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [mLeaveGroupButton setTitle:NSLocalizedString(@"Leave", "") forState:UIControlStateNormal];
     mLeaveGroupButton.frame = CGRectMake(secWidth + (secWidth - LeaveButtonWidth) / 2, (BottomBarHeight - LeaveButtonHeight) / 2, LeaveButtonWidth, LeaveButtonHeight);
+    mLeaveGroupButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [mLeaveGroupButton addTarget:self action:@selector(onLeaveAction) forControlEvents:UIControlEventTouchUpInside];
     [bottomBar addSubview:mLeaveGroupButton];
     
@@ -91,6 +108,12 @@ static CGFloat LeaveButtonHeight = 40;
 - (void)onLeaveAction {
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(onLeaveGroup)]) {
         [self.viewControllerRef performSelector:@selector(onLeaveGroup)];
+    }
+}
+
+- (void)onSwitchToAttendeeListViewAction {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(onSwitchToAttendeeListView)]) {
+        [self.viewControllerRef performSelector:@selector(onSwitchToAttendeeListView)];
     }
 }
 

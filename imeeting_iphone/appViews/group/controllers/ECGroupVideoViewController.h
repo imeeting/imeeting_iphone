@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ECGroupVideoViewController : UIViewController
-
-@property (nonatomic, retain) NSDictionary *groupInfo;
-
 - (void)onLeaveGroup;
-
+- (void)onSwitchToAttendeeListView;
 @end

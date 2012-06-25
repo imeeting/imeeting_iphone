@@ -24,6 +24,11 @@
     return self;
 }
 
+- (void)showHudWhileExcuting:(SEL)selector onTarget:(id)target withObject:(NSObject *)object hudText:(NSString*)text animated:(BOOL)aninmated {
+    _mHud.labelText = text;
+    [_mHud showWhileExecuting:selector onTarget:target withObject:object animated:aninmated];
+}
+
 - (UITextField*)makeTextFieldWithPlaceholder:(NSString *)placeholder frame:(CGRect)frame keyboardType:(UIKeyboardType)keyboardType {
     UITextField *textField = [[UITextField alloc] initWithFrame:frame];
     textField.textColor = [UIColor blackColor];

@@ -15,3 +15,6 @@
 #define USER_LOGIN_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/login"]
 #define GET_GROUP_LIST_URL      [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/list"]
 #define HIDE_GROUP_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/hide"]
+#define JOIN_GROUP_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/join"]
+#define UNJOIN_GROUP_URL        [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/unjoin"]
+#define GET_ATTENDEE_LIST_URL   [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/attendeeList"]

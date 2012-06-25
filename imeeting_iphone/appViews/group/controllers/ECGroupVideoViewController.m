@@ -8,14 +8,15 @@
 
 #import "ECGroupVideoViewController.h"
 #import "ECGroupVideoView.h"
+#import "ECGroupAttendeeListViewController.h"
+#import "ECGroupModule.h"
+#import "ECGroupManager.h"
 
 @interface ECGroupVideoViewController ()
 
 @end
 
 @implementation ECGroupVideoViewController
-
-@synthesize groupInfo = _groupInfo;
 
 - (id)init {
     self = [self initWithCompatibleView:[[ECGroupVideoView alloc] init]];
@@ -46,13 +47,14 @@
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 #pragma mark - actions
 - (void)onLeaveGroup {
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [module onLeaveGroup];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onSwitchToAttendeeListView {
+    [self.navigationController pushViewController:[[ECGroupAttendeeListViewController alloc] init] animated:YES];
 }
 @end
