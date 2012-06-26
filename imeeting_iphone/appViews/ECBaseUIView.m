@@ -17,16 +17,9 @@
         self.frame = CGRectMake(0, 0, 320, 480);
         // set background color
         self.backgroundColor = [UIColor whiteColor];
-        
-        _mHud = [[MBProgressHUD alloc] initWithView:self];
-        
+                
     }
     return self;
-}
-
-- (void)showHudWhileExcuting:(SEL)selector onTarget:(id)target withObject:(NSObject *)object hudText:(NSString*)text animated:(BOOL)aninmated {
-    _mHud.labelText = text;
-    [_mHud showWhileExecuting:selector onTarget:target withObject:object animated:aninmated];
 }
 
 - (UITextField*)makeTextFieldWithPlaceholder:(NSString *)placeholder frame:(CGRect)frame keyboardType:(UIKeyboardType)keyboardType {

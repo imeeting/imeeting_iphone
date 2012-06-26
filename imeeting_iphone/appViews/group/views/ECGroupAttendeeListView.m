@@ -75,60 +75,86 @@ static CGFloat padding = 4;
         // init UI
         self.selectionStyle = UITableViewCellSelectionStyleGray;
         
-        mGuyIcon = [[UIImageView alloc] initWithFrame:CGRectMake(padding, (cellHeight - guyIconHeight) / 2, guyIconWidth, guyIconHeight)];
+        mGuyIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, (cellHeight - guyIconHeight) / 2, guyIconWidth, guyIconHeight)];
         mGuyIcon.contentMode = UIViewContentModeScaleAspectFit;
         mGuyIcon.backgroundColor = [UIColor clearColor];
         mGuyIcon.layer.masksToBounds = YES;
         mGuyIcon.image = [UIImage imageNamed:@"guydefault"];
         [mGuyIcon.layer setCornerRadius:5.0];
-        [self addSubview:mGuyIcon];
+        [self.contentView addSubview:mGuyIcon];
         
-        mNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(mGuyIcon.frame.origin.x + guyIconWidth + padding, 0, nameLabelWidth, nameLabelHeight)];
+        mNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(mGuyIcon.frame.origin.x + guyIconWidth + padding * 2, padding, nameLabelWidth, nameLabelHeight)];
         mNameLabel.textColor = [UIColor blackColor];
         mNameLabel.backgroundColor = [UIColor clearColor];
         mNameLabel.font = [UIFont boldSystemFontOfSize:16];
-        [self addSubview:mNameLabel];
+        [self.contentView addSubview:mNameLabel];
         
-        mNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(mNameLabel.frame.origin.x, mNameLabel.frame.origin.y + mNameLabel.frame.size.height + padding, numberLabelWidth, numberLabelHeight)];
+        mNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(mNameLabel.frame.origin.x, mNameLabel.frame.origin.y + mNameLabel.frame.size.height, numberLabelWidth, numberLabelHeight)];
         mNumberLabel.textColor = [UIColor colorWithIntegerRed:105 integerGreen:105 integerBlue:105 alpha:1];
         mNumberLabel.backgroundColor = [UIColor clearColor];
         mNumberLabel.font = [UIFont systemFontOfSize:12];
-        [self addSubview:mNumberLabel];
+        [self.contentView addSubview:mNumberLabel];
         
         mPhoneStatusIcon = [[UIImageView alloc] initWithFrame:CGRectMake(mNameLabel.frame.origin.x + mNameLabel.frame.size.width + padding, (cellHeight - phoneStatusIconHeight) / 2, phoneStatusIconWidth, phoneStatusIconHeight)];
         mPhoneStatusIcon.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:mPhoneStatusIcon];
+        [self.contentView addSubview:mPhoneStatusIcon];
         
         mVideoStatusIcon = [[UIImageView alloc] initWithFrame:CGRectMake(mPhoneStatusIcon.frame.origin.x + mPhoneStatusIcon.frame.size.width + padding, (cellHeight - videoStatusIconWidth) / 2, videoStatusIconWidth, videoStatusIconHeight)];
         mVideoStatusIcon.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:mVideoStatusIcon];
+        [self.contentView addSubview:mVideoStatusIcon];
         
         guyIconImg = [UIImage imageNamed:@"guy2"];
         phoneInTalkingImg = [UIImage imageNamed:@"voice_on"];
         phoneMutedImg = [UIImage imageNamed:@"voice_off"];
-        videoOnImg = [UIImage imageNamed:@"camera"];
-        videoOffImg = [videoOnImg grayImage];
-        
-        [self updateAttendee:attendee];
+        videoOnImg = [UIImage imageNamed:@"video_on"];
+        videoOffImg = [UIImage imageNamed:@"video_off"];
+
+        normalBGColor = [UIColor colorWithIntegerRed:232 integerGreen:232 integerBlue:232 alpha:0.9];
+        selectedBGColor = [UIColor colorWithIntegerRed:139 integerGreen:119 integerBlue:101 alpha:0.9];
+        self.contentView.backgroundColor = normalBGColor;
+
+        [self updateAttendeeStatus:attendee];
     }
     return self;
 }
 
-- (void)updateAttendee:(NSDictionary *)attendee {
+- (void)updateAttendeeStatus:(NSDictionary *)attendee {
     NSString *username = [attendee objectForKey:USERNAME];
     NSString *onlineStatus = [attendee objectForKey:ONLINE_STATUS];
     NSString *videoStatus = [attendee objectForKey:VIDEO_STATUS];
     NSString *telephoneStatus = [attendee objectForKey:TELEPHONE_STATUS];
     
+    mNameLabel.text = @"Username";
+    mNumberLabel.text = username;
+    
     if ([onlineStatus isEqualToString:ONLINE]) {
-        mGuyIcon.image = guyIconImg;        
+        mGuyIcon.image = guyIconImg;
+        
+        if ([videoStatus isEqualToString:ON]) {
+            mVideoStatusIcon.image = videoOnImg;
+        } else {
+            mVideoStatusIcon.image = videoOffImg;
+        }
+        
     } else {
         mGuyIcon.image = [guyIconImg grayImage];
     }
     
+   
+    
     // for test UI
-    mVideoStatusIcon.image = videoOnImg;
-    mPhoneStatusIcon.image = phoneMutedImg;
+//    mPhoneStatusIcon.image = phoneInTalkingImg;
+}
+
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+    if (selected) {
+        self.contentView.backgroundColor = selectedBGColor;
+    } else {
+        self.contentView.backgroundColor = normalBGColor;
+    }
 }
 
 @end
@@ -150,7 +176,6 @@ static CGFloat padding = 4;
     if (self) {
         _attendeeArray = [[NSMutableArray alloc] initWithCapacity:10];
         [self initUI];
-        [self addSubview:_mHud];
 
     }
     return self;
@@ -168,12 +193,36 @@ static CGFloat padding = 4;
     [self addSubview:acb];
     
     
-    mAttendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480 - acb.frame.size.height)];
+    mAttendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480 - acb.frame.size.height - NavigationBarHeight - StatusBarHeight)];
     mAttendeeListTableView.backgroundColor = self.backgroundColor;
     mAttendeeListTableView.dataSource = self;
     mAttendeeListTableView.delegate = self;
     [self addSubview:mAttendeeListTableView];
     
+}
+
+- (void)updateAttendee:(NSDictionary *)attendee {
+    NSLog(@"AttendeeListView - update attendee");
+    
+    NSString *username = [attendee objectForKey:USERNAME];
+    NSString *accountName = [[UserManager shareUserManager] userBean].name;
+
+    if (![username isEqualToString:accountName]) {
+        NSUInteger i = 0;
+        for (i = 0; i < _attendeeArray.count; i++) {
+            NSDictionary *att = [_attendeeArray objectAtIndex:i];
+            NSString *tempName = [att objectForKey:USERNAME];
+            if ([tempName isEqualToString:username]) {
+                break;
+            }
+        }
+        if (i < _attendeeArray.count) {
+            NSLog(@"replace attendee at index %d", i);
+            NSMutableDictionary *foundAttendee = [_attendeeArray objectAtIndex:i];
+            [foundAttendee setValuesForKeysWithDictionary:attendee];
+            [mAttendeeListTableView reloadData];
+        }
+    }
 }
 
 #pragma mark - button actions
@@ -190,11 +239,25 @@ static CGFloat padding = 4;
 }
 
 - (void)addContactAction {
-    NSLog(@"add contact");
+    NSLog(@"add contact - thread: %@ obj: %@", [NSThread currentThread], self);
 }
 
 - (void)setAttendeeArray:(NSMutableArray *)attendeeArray {
-    _attendeeArray = attendeeArray;
+    [_attendeeArray removeAllObjects];
+    for (NSDictionary *att in attendeeArray) {
+        NSMutableDictionary *newAtt = [[NSMutableDictionary alloc] initWithDictionary:att];
+        [_attendeeArray addObject:newAtt];
+    }
+     NSLog(@"attendee size: %d", _attendeeArray.count);
+    [mAttendeeListTableView reloadData];
+}
+
+- (void)appendAttendee:(NSDictionary *)attendee {
+    if (!attendee) {
+        return;
+    }
+    NSMutableDictionary *newAtt = [[NSMutableDictionary alloc] initWithDictionary:attendee];
+    [_attendeeArray addObject:newAtt];
     [mAttendeeListTableView reloadData];
 }
 

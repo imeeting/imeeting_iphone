@@ -37,7 +37,6 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
     self = [super initWithFrame:frame];
     if (self) {
         [self initUI];
-        [self addSubview:_mHud];
     }
     return self;
 }

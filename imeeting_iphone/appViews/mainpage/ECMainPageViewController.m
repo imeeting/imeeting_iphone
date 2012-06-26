@@ -147,7 +147,8 @@
     
     // send http request to join the group
     ECMainPageView *mainPage = (ECMainPageView*)self.view;
-    [mainPage showHudWhileExcuting:@selector(joinGroup:) onTarget:self withObject:groupId hudText:nil animated:YES];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:mainPage];
+    [hud showWhileExecuting:@selector(joinGroup:) onTarget:self withObject:groupId animated:YES];
 }
 
 - (void)joinGroup:(NSString*)groupId {
@@ -165,7 +166,9 @@
         case 200: {
             // join group ok
             // switch to group view
-            UIViewController *videoController = [ECGroupManager sharedECGroupManager].currentGroupModule.videoController;
+            ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
+            [module connectToNotifyServer];
+            UIViewController *videoController = module.videoController;
             [self.navigationController pushViewController:videoController animated:NO];
             return;
         }

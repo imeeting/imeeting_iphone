@@ -24,6 +24,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
         [self initLogin];
         self = [self initWithCompatibleView:[[ECLoginUIView alloc] init]];
         

@@ -56,7 +56,7 @@
         case 200: {
             NSMutableArray *jsonArray = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
             if (jsonArray) {
-                NSLog(@"attendee size: %d", jsonArray.count);
+                
                 ECGroupAttendeeListView *attListView = (ECGroupAttendeeListView*)self.view;
                 [attListView setAttendeeArray:jsonArray];
             }
@@ -84,4 +84,10 @@
     [self.navigationController popToViewController:con animated:YES];
 }
 
+- (void)updateAttendee:(NSDictionary *)attendee {
+    NSLog(@"AttendeeListViewController - update attendee");
+
+    ECGroupAttendeeListView *attListView = (ECGroupAttendeeListView*)self.view;
+    [attListView updateAttendee:attendee];
+}
 @end

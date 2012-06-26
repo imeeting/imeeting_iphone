@@ -127,8 +127,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self initUI];
-        
-        [self addSubview:_mHud];
         mFirstLoad = YES;
     }
     return self;
@@ -151,8 +149,9 @@
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(refreshGroupList)]) {
         if (mFirstLoad) {
             mFirstLoad = NO;
-            _mHud.labelText = nil;
-            [_mHud showWhileExecuting:@selector(refreshGroupList) onTarget:self.viewControllerRef withObject:nil animated:YES];
+            MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
+            hud.labelText = nil;
+            [hud showWhileExecuting:@selector(refreshGroupList) onTarget:self.viewControllerRef withObject:nil animated:YES];
         } else {
             [NSThread detachNewThreadSelector:@selector(refreshGroupList) toTarget:self.viewControllerRef withObject:nil];
         }

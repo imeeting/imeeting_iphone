@@ -36,3 +36,14 @@ static NSString *OFF = @"off";
 // telephone status
 static NSString *IDLE = @"idle";
 static NSString *CALLING = @"calling";
+
+
+// Notify Constants
+static NSString *TOPIC = @"topic";
+static NSString *SUBSCRIBER_ID = @"subscriber_id";
+static NSString *SUBSCRIBE = @"subscribe";
+static NSString *NOTICE_LIST = @"notice_list";
+static NSString *CMD = @"cmd";
+static NSString *NOTICE = @"notice";
+static NSString *NOTIFY = @"notify";
+static NSString *CACHE = @"cache";

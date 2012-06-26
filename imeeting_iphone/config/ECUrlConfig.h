@@ -18,3 +18,6 @@
 #define JOIN_GROUP_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/join"]
 #define UNJOIN_GROUP_URL        [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/unjoin"]
 #define GET_ATTENDEE_LIST_URL   [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/attendeeList"]
+
+
+#define NOTIFY_SERVER_HOST              @"msg.walkwork.net"

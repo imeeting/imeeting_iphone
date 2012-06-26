@@ -55,6 +55,7 @@
 }
 
 - (void)onSwitchToAttendeeListView {
-    [self.navigationController pushViewController:[[ECGroupAttendeeListViewController alloc] init] animated:YES];
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [self.navigationController pushViewController:module.attendeeController animated:YES];
 }
 @end

@@ -9,13 +9,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CommonToolkit/CommonToolkit.h"
 
-@interface ECGroupModule : NSObject
+@interface ECGroupModule : NSObject <SocketIODelegate> {
+    SocketIO *mSocketIO;
+    BOOL needConnectToNotifyServer;
+}
 
 @property (nonatomic, retain) UIViewController *videoController;
 @property (nonatomic, retain) UIViewController *attendeeController;
 @property (nonatomic, retain) NSString *groupId;
 
+- (void)connectToNotifyServer;
+- (void)stopGetNoticeFromNotifyServer;
 - (void)onLeaveGroup;
 
 @end

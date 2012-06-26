@@ -11,10 +11,8 @@
 
 
 @interface ECBaseUIView : UIView <UITextFieldDelegate> {
-    MBProgressHUD *_mHud;
 }
 
-- (void)showHudWhileExcuting:(SEL)selector onTarget:(id)target withObject:(NSObject *)object hudText:(NSString*)text animated:(BOOL)aninmated;
 - (UITextField*)makeTextFieldWithPlaceholder:(NSString*)placeholder frame:(CGRect)frame keyboardType:(UIKeyboardType)keyboardType;
 - (UIButton*)makeButtonWithTitle:(NSString*)title frame:(CGRect)frame;
 - (UILabel*)makeLabel:(NSString*)text frame:(CGRect)frame;

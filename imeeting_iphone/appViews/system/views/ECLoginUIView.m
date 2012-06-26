@@ -23,7 +23,6 @@
     if (self) {
         // init UI
         [self initUI];
-        [self addSubview:_mHud];
 
     }
     return self;
@@ -138,8 +137,11 @@
     ub.autoLogin = autoLogin;
     
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(login)]) {
-        [_mHud setLabelText:NSLocalizedString(@"Logining", "")];
-        [_mHud showWhileExecuting:@selector(login) onTarget:self.viewControllerRef withObject:nil animated:YES];
+        
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
+        [hud setLabelText:NSLocalizedString(@"Logining", "")];
+        [hud showWhileExecuting:@selector(login) onTarget:self.viewControllerRef withObject:nil animated:YES];
+         
     }
 }
 

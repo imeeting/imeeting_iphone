@@ -30,10 +30,13 @@
     UIImage *videoOnImg;
     UIImage *videoOffImg;
     UIImage *guyIconImg;
+    
+    UIColor *normalBGColor;
+    UIColor *selectedBGColor;
 }
 + (CGFloat)cellHeight;
 - (id)initWithAttendee:(NSDictionary*)attendee;
-- (void)updateAttendee:(NSDictionary*)attendee;
+- (void)updateAttendeeStatus:(NSDictionary*)attendee;
 @end
 
 @interface ECGroupAttendeeListView : ECBaseUIView <UITableViewDataSource, UITableViewDelegate>{
@@ -41,4 +44,6 @@
 }
 
 @property (nonatomic, retain) NSMutableArray *attendeeArray;
+- (void)updateAttendee:(NSDictionary*)attendee;
+- (void)appendAttendee:(NSDictionary*)attendee;
 @end

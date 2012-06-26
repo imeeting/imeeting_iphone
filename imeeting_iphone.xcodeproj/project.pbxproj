@@ -29,6 +29,10 @@
 		F8AD9458158872EC007B3C87 /* ECGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AD9457158872EC007B3C87 /* ECGroupCell.m */; };
 		F8D5E35C157EEF30005B5581 /* ECRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */; };
 		F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */; };
+		F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */; };
+		F8D791B11599603800986BCD /* video_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D791AF1599603800986BCD /* video_off.png */; };
+		F8D791B21599603800986BCD /* video_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D791B01599603800986BCD /* video_on.png */; };
+		F8D791C61599670A00986BCD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D791C51599670A00986BCD /* libicucore.dylib */; };
 		F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BEC7158EC57200467088 /* QuartzCore.framework */; };
 		F8E3BED7158F0EAC00467088 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */; };
 		F8E3BEE8158F1F9100467088 /* UserBean+IMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */; };
@@ -44,7 +48,6 @@
 		F8E58F8D15985AE300CC2F1C /* guydefault.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F8C15985AE300CC2F1C /* guydefault.png */; };
 		F8E58F951598695300CC2F1C /* voice_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F931598695300CC2F1C /* voice_off.png */; };
 		F8E58F961598695300CC2F1C /* voice_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F941598695300CC2F1C /* voice_on.png */; };
-		F8E58F981598742A00CC2F1C /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F971598742A00CC2F1C /* camera.png */; };
 		F8ED85871592CDFE00E38F0C /* camera_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85851592CDFE00E38F0C /* camera_off.png */; };
 		F8ED85881592CDFE00E38F0C /* camera_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85861592CDFE00E38F0C /* camera_on.png */; };
 		F8ED858F15931AB800E38F0C /* gerlor_001.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED858E15931AB800E38F0C /* gerlor_001.png */; };
@@ -103,6 +106,11 @@
 		F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterViewController.m; path = system/controller/ECRegisterViewController.m; sourceTree = "<group>"; };
 		F8D5E35D157EEF3A005B5581 /* ECRegisterUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterUIView.h; path = system/views/ECRegisterUIView.h; sourceTree = "<group>"; };
 		F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterUIView.m; path = system/views/ECRegisterUIView.m; sourceTree = "<group>"; };
+		F8D791AA15995AB700986BCD /* UINavigationController+CustomNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CustomNavigation.h"; sourceTree = "<group>"; };
+		F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CustomNavigation.m"; sourceTree = "<group>"; };
+		F8D791AF1599603800986BCD /* video_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_off.png; path = imeeting_iphone/Resources/images/video_off.png; sourceTree = "<group>"; };
+		F8D791B01599603800986BCD /* video_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_on.png; path = imeeting_iphone/Resources/images/video_on.png; sourceTree = "<group>"; };
+		F8D791C51599670A00986BCD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		F8E3BEC7158EC57200467088 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphonesimulator/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F8E3BEE6158F1F9100467088 /* UserBean+IMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UserBean+IMeeting.h"; path = "system/user/UserBean+IMeeting.h"; sourceTree = "<group>"; };
@@ -123,7 +131,6 @@
 		F8E58F8C15985AE300CC2F1C /* guydefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guydefault.png; path = imeeting_iphone/Resources/images/guydefault.png; sourceTree = "<group>"; };
 		F8E58F931598695300CC2F1C /* voice_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_off.png; path = imeeting_iphone/Resources/images/voice_off.png; sourceTree = "<group>"; };
 		F8E58F941598695300CC2F1C /* voice_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_on.png; path = imeeting_iphone/Resources/images/voice_on.png; sourceTree = "<group>"; };
-		F8E58F971598742A00CC2F1C /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = imeeting_iphone/Resources/images/camera.png; sourceTree = "<group>"; };
 		F8ED85851592CDFE00E38F0C /* camera_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_off.png; path = imeeting_iphone/Resources/images/camera_off.png; sourceTree = "<group>"; };
 		F8ED85861592CDFE00E38F0C /* camera_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_on.png; path = imeeting_iphone/Resources/images/camera_on.png; sourceTree = "<group>"; };
 		F8ED858E15931AB800E38F0C /* gerlor_001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gerlor_001.png; path = imeeting_iphone/Resources/images/gerlor_001.png; sourceTree = "<group>"; };
@@ -147,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D791C61599670A00986BCD /* libicucore.dylib in Frameworks */,
 				F8E3BF08158F327700467088 /* AddressBook.framework in Frameworks */,
 				F8E3BED7158F0EAC00467088 /* CommonToolkit.framework in Frameworks */,
 				F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */,
@@ -205,6 +213,7 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8D791C51599670A00986BCD /* libicucore.dylib */,
 				F8E3BF07158F327600467088 /* AddressBook.framework */,
 				F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */,
 				F8E3BEC7158EC57200467088 /* QuartzCore.framework */,
@@ -299,9 +308,19 @@
 			name = Register;
 			sourceTree = "<group>";
 		};
+		F8D791AE15995B2400986BCD /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				F8D791AA15995AB700986BCD /* UINavigationController+CustomNavigation.h */,
+				F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
 		F8DECFA0157C6F9600BED245 /* AppViews */ = {
 			isa = PBXGroup;
 			children = (
+				F8D791AE15995B2400986BCD /* Custom */,
 				F8FA196B1591DFBA00947304 /* Group */,
 				F87BF5DE1585DD9A00339C0C /* MainPage */,
 				F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */,
@@ -334,7 +353,8 @@
 		F8F1A743158B1292003F1EE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F8E58F971598742A00CC2F1C /* camera.png */,
+				F8D791AF1599603800986BCD /* video_off.png */,
+				F8D791B01599603800986BCD /* video_on.png */,
 				F8E58F931598695300CC2F1C /* voice_off.png */,
 				F8E58F941598695300CC2F1C /* voice_on.png */,
 				F8E58F8C15985AE300CC2F1C /* guydefault.png */,
@@ -475,7 +495,8 @@
 				F8E58F8D15985AE300CC2F1C /* guydefault.png in Resources */,
 				F8E58F951598695300CC2F1C /* voice_off.png in Resources */,
 				F8E58F961598695300CC2F1C /* voice_on.png in Resources */,
-				F8E58F981598742A00CC2F1C /* camera.png in Resources */,
+				F8D791B11599603800986BCD /* video_off.png in Resources */,
+				F8D791B21599603800986BCD /* video_on.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +548,7 @@
 				F8EED8871594575B0072FD39 /* ECGroupAttendeeListViewController.m in Sources */,
 				F8E58F7E1597F9A200CC2F1C /* ECGroupManager.m in Sources */,
 				F8E58F821597FA2A00CC2F1C /* ECGroupModule.m in Sources */,
+				F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +649,7 @@
 		F863C88B157C61320045C08C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Feng (873P3T58BW)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
@@ -641,6 +664,7 @@
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36CC9F79-D831-44C1-B40B-BC40517D94E8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -648,6 +672,7 @@
 		F863C88C157C61320045C08C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Feng (873P3T58BW)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
@@ -662,6 +687,7 @@
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36CC9F79-D831-44C1-B40B-BC40517D94E8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

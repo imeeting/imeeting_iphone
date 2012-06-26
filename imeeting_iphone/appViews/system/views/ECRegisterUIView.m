@@ -116,7 +116,7 @@
     self = [super init];
     if (self) {
         [self initUI];
-        [self addSubview:_mHud];
+     //   [self addSubview:_mHud];
 
     }
     return self;
@@ -163,8 +163,9 @@
     }
 
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(getValidationCodeByPhoneNumber:)]) {
-        _mHud.labelText = NSLocalizedString(@"Retrieving Validation Code..", "");
-        [_mHud showWhileExecuting:@selector(getValidationCodeByPhoneNumber:) onTarget:self.viewControllerRef withObject:phoneNumber animated:YES];
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
+        hud.labelText = NSLocalizedString(@"Retrieving Validation Code..", "");
+        [hud showWhileExecuting:@selector(getValidationCodeByPhoneNumber:) onTarget:self.viewControllerRef withObject:phoneNumber animated:YES];
     }
 }
 
@@ -181,8 +182,9 @@
     }
     
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(verifyCode:)]) {
-        _mHud.labelText = NSLocalizedString(@"Checking Validation Code..", "");
-        [_mHud showWhileExecuting:@selector(verifyCode:) onTarget:self.viewControllerRef withObject:code animated:YES];
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
+        hud.labelText = NSLocalizedString(@"Checking Validation Code..", "");
+        [hud showWhileExecuting:@selector(verifyCode:) onTarget:self.viewControllerRef withObject:code animated:YES];
     }
     
 }
@@ -213,8 +215,9 @@
     
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(finishRegisterWithPwds:)]) {
         NSArray *pwds = [[NSArray alloc] initWithObjects:pwd1, pwd2, nil];
-        _mHud.labelText = NSLocalizedString(@"finishing register..", "");
-        [_mHud showWhileExecuting:@selector(finishRegisterWithPwds:) onTarget:self.viewControllerRef withObject:pwds animated:YES];
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
+        hud.labelText = NSLocalizedString(@"finishing register..", "");
+        [hud showWhileExecuting:@selector(finishRegisterWithPwds:) onTarget:self.viewControllerRef withObject:pwds animated:YES];
     }
     
 }
