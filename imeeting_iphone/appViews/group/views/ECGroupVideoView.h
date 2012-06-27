@@ -10,11 +10,18 @@
 #import "ECBaseUIView.h"
 
 @interface ECGroupVideoView : ECBaseUIView {
-    UIImageView *mMyVideoView;
+    
     UIImageView *mOppositeVideoView;
     
     UIButton *mLeaveGroupButton;
     UIButton *mOpenCameraButton;
+    
+    BOOL isCameraOpen;
+    
+    UIImage *cameraOnImg;
+    UIImage *cameraOffImg;
 }
 
+@property (nonatomic,retain) UIView *myVideoView;
+@property (nonatomic,retain) UIImageView *oppositeVideoView;
 @end

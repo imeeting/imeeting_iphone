@@ -36,6 +36,9 @@
 }
 
 - (void)onLeaveGroup {
+    ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
+    [videoCtrl.videoManager releaseSession];
+    
     [self stopGetNoticeFromNotifyServer];
     
     // send http request to unjoin the group
@@ -76,12 +79,31 @@
 }
 
 - (void)processOneNotice:(NSDictionary *)notice {
-    NSString *action = [notice objectForKey:@"action"];
-    if ([action isEqualToString:@"update_status"]) {
+    NSString *action = [notice objectForKey:ACTION];
+    if ([action isEqualToString:ACTION_UPDATE_STATUS]) {
         // update attendee status
-        NSDictionary *attendee = [notice objectForKey:@"attendee"];
+        NSDictionary *attendee = [notice objectForKey:ATTENDEE];
         ECGroupAttendeeListViewController *avc = (ECGroupAttendeeListViewController*)_attendeeController;
         [avc updateAttendee:attendee];
+    }
+}
+
+#pragma mark - notify methods
+
+- (void)notifyWithMsg:(NSDictionary *)msg {
+    if (msg) {
+        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:self.groupId, TOPIC, msg, MSG, nil];
+        [mSocketIO sendEvent:NOTIFY withData:data];
+    }
+}
+
+- (void)broadcastAttendeeStatus:(NSDictionary *)attendee {
+    if (attendee) {
+        NSMutableDictionary *msg = [[NSMutableDictionary alloc] initWithCapacity:5];
+        [msg setObject:self.groupId forKey:GROUP_ID];
+        [msg setObject:ACTION_UPDATE_STATUS forKey:ACTION];
+        [msg setObject:attendee forKey:ATTENDEE];
+        [self notifyWithMsg:msg];
     }
 }
 

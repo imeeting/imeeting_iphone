@@ -21,12 +21,15 @@
 
 - (id)init {
     self = [self initWithCompatibleView:[[ECGroupAttendeeListView alloc] init]];
-    
+    isListLoaded = NO;
     return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self refreshAttendeeList];
+    if (!isListLoaded) {
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
+        [hud showWhileExecuting:@selector(refreshAttendeeList) onTarget:self withObject:nil animated:YES];
+    }
     [super viewWillAppear:animated];
 }
 
@@ -44,7 +47,7 @@
 
 - (void)refreshAttendeeList {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:[ECGroupManager sharedECGroupManager].currentGroupModule.groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:GET_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetAttendeeList:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:GET_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetAttendeeList:) andFailedRespSelector:nil];
 }
 
 - (void)onFinishedGetAttendeeList:(ASIHTTPRequest *)pRequest {
@@ -56,9 +59,9 @@
         case 200: {
             NSMutableArray *jsonArray = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
             if (jsonArray) {
-                
                 ECGroupAttendeeListView *attListView = (ECGroupAttendeeListView*)self.view;
                 [attListView setAttendeeArray:jsonArray];
+                isListLoaded = YES;
             }
             
             break;
@@ -67,7 +70,7 @@
             break;
     }
     
-
+    
 }
 
 #pragma mark - actions
@@ -78,7 +81,7 @@
 - (void)leaveGroup {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     [module onLeaveGroup];
-
+    
     NSArray * controllers = [self.navigationController viewControllers];
     UIViewController * con = [controllers objectAtIndex:1];
     [self.navigationController popToViewController:con animated:YES];
@@ -86,7 +89,7 @@
 
 - (void)updateAttendee:(NSDictionary *)attendee {
     NSLog(@"AttendeeListViewController - update attendee");
-
+    
     ECGroupAttendeeListView *attListView = (ECGroupAttendeeListView*)self.view;
     [attListView updateAttendee:attendee];
 }

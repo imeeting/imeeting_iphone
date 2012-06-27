@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECGroupAttendeeListViewController : UIViewController
+@interface ECGroupAttendeeListViewController : UIViewController {
+    BOOL isListLoaded;
+}
 
 - (void)switchToVideo;
 - (void)leaveGroup;

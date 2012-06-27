@@ -20,6 +20,7 @@ static NSString *GROUP_CREATED_TIME = @"created_time";
 static NSString *GROUP_STATUS = @"status";
 
 // Attendee Constants
+static NSString *ATTENDEE = @"attendee";
 static NSString *USERNAME = @"username";
 static NSString *ONLINE_STATUS = @"online_status";
 static NSString *VIDEO_STATUS = @"video_status";
@@ -40,6 +41,7 @@ static NSString *CALLING = @"calling";
 
 // Notify Constants
 static NSString *TOPIC = @"topic";
+static NSString *MSG = @"msg";
 static NSString *SUBSCRIBER_ID = @"subscriber_id";
 static NSString *SUBSCRIBE = @"subscribe";
 static NSString *NOTICE_LIST = @"notice_list";
@@ -47,3 +49,7 @@ static NSString *CMD = @"cmd";
 static NSString *NOTICE = @"notice";
 static NSString *NOTIFY = @"notify";
 static NSString *CACHE = @"cache";
+
+// Action Constants
+static NSString *ACTION = @"action";
+static NSString *ACTION_UPDATE_STATUS = @"update_status";

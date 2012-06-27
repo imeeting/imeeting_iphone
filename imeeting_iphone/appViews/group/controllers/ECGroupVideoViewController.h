@@ -7,8 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AVFoundation/AVFoundation.h"
+#import "ECVideoManager.h"
 
-@interface ECGroupVideoViewController : UIViewController
+@interface ECGroupVideoViewController : UIViewController {
+    AVCaptureVideoPreviewLayer *mPreviewLayer;
+}
+
+@property (nonatomic, retain) ECVideoManager *videoManager;
+
 - (void)onLeaveGroup;
 - (void)onSwitchToAttendeeListView;
+- (void)switchCamera;
+- (void)startCaptureVideo;
+- (void)stopCaptureVideo;
+
 @end

@@ -12,13 +12,13 @@ static CGFloat VideoRegionWidth = 320;
 static CGFloat VideoRegionHeight = 480;
 static CGFloat BottomBarWidth = 320;
 static CGFloat BottomBarHeight = 50;
-static CGFloat MyVideoViewWidth = 90;
-static CGFloat MyVideoViewHeight = 120;
+static CGFloat MyVideoViewWidth = 108;
+static CGFloat MyVideoViewHeight = 144;
 static CGFloat LeaveButtonWidth = 80;
 static CGFloat LeaveButtonHeight = 40;
 static CGFloat SwitchToAttendeeListButtonWidth = 90;
 static CGFloat SwitchToAttendeeListButtonHeight = 30;
-static CGFloat SwitchFBCameraButtonWidth = 50;
+static CGFloat SwitchFBCameraButtonWidth = 53;
 static CGFloat SwitchFBCameraButtonHeight = 30;
 
 
@@ -28,15 +28,21 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
 - (UIView*)makeBottonBar;
 - (void)onLeaveAction;
 - (void)onSwitchToAttendeeListViewAction;
+
+- (void)onOpenCameraButtonClickAction;
+- (void)onSwitchFBCameraAction;
 @end
 
 @implementation ECGroupVideoView
+@synthesize myVideoView = mMyVideoView;
+@synthesize oppositeVideoView = mOppositeVideoView;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         [self initUI];
+        isCameraOpen = NO;
     }
     return self;
 }
@@ -55,7 +61,11 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
     [self addSubview:switchToAttenListButton];
     
     // make switch camera button
-    
+    UIButton *cameraSwitchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    cameraSwitchButton.frame = CGRectMake(5, padding, SwitchFBCameraButtonWidth, SwitchFBCameraButtonHeight);
+    [cameraSwitchButton setBackgroundImage:[UIImage imageNamed:@"camera_switch"] forState:UIControlStateNormal];
+    [cameraSwitchButton addTarget:self action:@selector(onSwitchFBCameraAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:cameraSwitchButton];
     
 }
 
@@ -69,8 +79,7 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
     mOppositeVideoView.contentMode = UIViewContentModeScaleAspectFit;
     [videoRegion addSubview:mOppositeVideoView];
     
-    mMyVideoView = [[UIImageView alloc] initWithFrame:CGRectMake(VideoRegionWidth - MyVideoViewWidth, VideoRegionHeight - BottomBarHeight - MyVideoViewHeight, MyVideoViewWidth, MyVideoViewHeight)];
-    mMyVideoView.contentMode = UIViewContentModeScaleAspectFit;
+    mMyVideoView = [[UIView alloc] initWithFrame:CGRectMake(VideoRegionWidth - MyVideoViewWidth, VideoRegionHeight - BottomBarHeight - MyVideoViewHeight, MyVideoViewWidth, MyVideoViewHeight)];
     [mMyVideoView.layer setBorderWidth:2];
     [mMyVideoView.layer setBorderColor:borderColor];
     mMyVideoView.backgroundColor = [UIColor colorWithIntegerRed:159 integerGreen:182 integerBlue:205 alpha:1];
@@ -91,11 +100,14 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
     [mLeaveGroupButton addTarget:self action:@selector(onLeaveAction) forControlEvents:UIControlEventTouchUpInside];
     [bottomBar addSubview:mLeaveGroupButton];
     
+    cameraOnImg = [UIImage imageNamed:@"camera_on"];
+    cameraOffImg = [UIImage imageNamed:@"camera_off"];
+    
     mOpenCameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
     CGFloat ocbW = 40;
     mOpenCameraButton.frame = CGRectMake(secWidth * 2 + (secWidth - ocbW) / 2, (BottomBarHeight - ocbW) / 2, ocbW, ocbW);
-    UIImage *camera = [UIImage imageNamed:@"camera_off"];
-    [mOpenCameraButton setBackgroundImage:camera forState:UIControlStateNormal];
+    [mOpenCameraButton setBackgroundImage:cameraOffImg forState:UIControlStateNormal];
+    [mOpenCameraButton addTarget:self action:@selector(onOpenCameraButtonClickAction) forControlEvents:UIControlEventTouchUpInside];
     [bottomBar addSubview:mOpenCameraButton];
     
 
@@ -116,4 +128,27 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
     }
 }
 
+- (void)onOpenCameraButtonClickAction {
+    if (isCameraOpen) {
+        isCameraOpen = NO;
+        // close camera to stop capture video
+        [mOpenCameraButton setBackgroundImage:cameraOffImg forState:UIControlStateNormal];
+        if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(stopCaptureVideo)]) {
+            [self.viewControllerRef performSelector:@selector(stopCaptureVideo)];
+        }
+    } else {
+        isCameraOpen = YES;
+        // open camera to capture video
+        [mOpenCameraButton setBackgroundImage:cameraOnImg forState:UIControlStateNormal];
+        if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(startCaptureVideo)]) {
+            [self.viewControllerRef performSelector:@selector(startCaptureVideo)];
+        }
+    }
+}
+
+- (void)onSwitchFBCameraAction {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(switchCamera)]) {
+        [self.viewControllerRef performSelector:@selector(switchCamera)];
+    }
+}
 @end

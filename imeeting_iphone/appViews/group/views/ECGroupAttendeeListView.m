@@ -131,8 +131,10 @@ static CGFloat padding = 4;
         mGuyIcon.image = guyIconImg;
         
         if ([videoStatus isEqualToString:ON]) {
+            NSLog(@"set video on image");
             mVideoStatusIcon.image = videoOnImg;
         } else {
+            NSLog(@"set video off image");
             mVideoStatusIcon.image = videoOffImg;
         }
         
@@ -217,7 +219,7 @@ static CGFloat padding = 4;
             }
         }
         if (i < _attendeeArray.count) {
-            NSLog(@"replace attendee at index %d", i);
+            NSLog(@"refresh attendee at index %d", i);
             NSMutableDictionary *foundAttendee = [_attendeeArray objectAtIndex:i];
             [foundAttendee setValuesForKeysWithDictionary:attendee];
             [mAttendeeListTableView reloadData];

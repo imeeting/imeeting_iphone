@@ -23,5 +23,6 @@
 - (void)connectToNotifyServer;
 - (void)stopGetNoticeFromNotifyServer;
 - (void)onLeaveGroup;
-
+- (void)notifyWithMsg:(NSDictionary*)msg;
+- (void)broadcastAttendeeStatus:(NSDictionary*)attendee;
 @end

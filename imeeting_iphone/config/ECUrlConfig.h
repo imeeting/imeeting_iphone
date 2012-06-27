@@ -18,6 +18,7 @@
 #define JOIN_GROUP_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/join"]
 #define UNJOIN_GROUP_URL        [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/unjoin"]
 #define GET_ATTENDEE_LIST_URL   [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/attendeeList"]
+#define UPDATE_ATTENDEE_STATUS_URL  [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/updateAttendeeStatus"]
 
-
-#define NOTIFY_SERVER_HOST              @"msg.walkwork.net"
+#define NOTIFY_SERVER_HOST      @"msg.walkwork.net"
+#define RTMP_SERVER_URL         @"rtmp://122.96.24.173/quick_server"
