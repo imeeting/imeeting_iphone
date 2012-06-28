@@ -93,4 +93,13 @@
     ECGroupAttendeeListView *attListView = (ECGroupAttendeeListView*)self.view;
     [attListView updateAttendee:attendee withMyself:myself];
 }
+
+- (void)onAttendeeSelected:(NSDictionary *)attendee {
+    NSString *username = [attendee objectForKey:USERNAME];
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [module.videoManager stopVideoFetch];
+    [module.videoManager startVideoFetchWithTargetUsername:username];
+    [self switchToVideo];
+}
+
 @end

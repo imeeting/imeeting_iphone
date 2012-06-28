@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F8039AA7157C65B4005903AC /* imeeting_iphone-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F863C869157C61320045C08C /* imeeting_iphone-Info.plist */; };
+		F80BD3ED159C29A900A83C81 /* ECVideoEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3EC159C29A900A83C81 /* ECVideoEncode.m */; };
+		F80BD3F1159C3FF400A83C81 /* ECVideoDecode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3F0159C3FF400A83C81 /* ECVideoDecode.m */; };
 		F814E281157CA08B00FBBB19 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E27F157CA07800FBBB19 /* MobileCoreServices.framework */; };
 		F814E284157CA0AB00FBBB19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E282157CA09600FBBB19 /* SystemConfiguration.framework */; };
 		F814E286157CA0B600FBBB19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E285157CA0B600FBBB19 /* CFNetwork.framework */; };
@@ -90,6 +92,11 @@
 /* Begin PBXFileReference section */
 		F8039AA6157C65B4005903AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F8050CD11589852E00024951 /* ECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstants.h; sourceTree = "<group>"; };
+		F80BD3EB159C29A900A83C81 /* ECVideoEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECVideoEncode.h; path = video/ECVideoEncode.h; sourceTree = "<group>"; };
+		F80BD3EC159C29A900A83C81 /* ECVideoEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECVideoEncode.m; path = video/ECVideoEncode.m; sourceTree = "<group>"; };
+		F80BD3EF159C3FF400A83C81 /* ECVideoDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECVideoDecode.h; path = video/ECVideoDecode.h; sourceTree = "<group>"; };
+		F80BD3F0159C3FF400A83C81 /* ECVideoDecode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECVideoDecode.m; path = video/ECVideoDecode.m; sourceTree = "<group>"; };
+		F80BD400159C685A00A83C81 /* ECVideoFetchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ECVideoFetchDelegate.h; path = video/ECVideoFetchDelegate.h; sourceTree = "<group>"; };
 		F814E27F157CA07800FBBB19 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F814E282157CA09600FBBB19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F814E285157CA0B600FBBB19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -399,7 +406,6 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
-				F885A66F159B114500709FC7 /* libbz2.1.0.dylib */,
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
@@ -420,6 +426,7 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F885A66F159B114500709FC7 /* libbz2.1.0.dylib */,
 				F885A5A2159ABE5D00709FC7 /* CoreVideo.framework */,
 				F885A59F159ABE4C00709FC7 /* CoreMedia.framework */,
 				F885A586159AA24000709FC7 /* AVFoundation.framework */,
@@ -503,6 +510,11 @@
 				F885A66D159AFFB500709FC7 /* quicklibav.h */,
 				F885A592159AB07800709FC7 /* ECVideoManager.h */,
 				F885A593159AB07800709FC7 /* ECVideoManager.m */,
+				F80BD3EB159C29A900A83C81 /* ECVideoEncode.h */,
+				F80BD3EC159C29A900A83C81 /* ECVideoEncode.m */,
+				F80BD3EF159C3FF400A83C81 /* ECVideoDecode.h */,
+				F80BD3F0159C3FF400A83C81 /* ECVideoDecode.m */,
+				F80BD400159C685A00A83C81 /* ECVideoFetchDelegate.h */,
 			);
 			name = Video;
 			sourceTree = "<group>";
@@ -1144,6 +1156,8 @@
 				F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */,
 				F885A594159AB07800709FC7 /* ECVideoManager.m in Sources */,
 				F885A66E159AFFB500709FC7 /* quicklibav.c in Sources */,
+				F80BD3ED159C29A900A83C81 /* ECVideoEncode.m in Sources */,
+				F80BD3F1159C3FF400A83C81 /* ECVideoDecode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,18 +26,12 @@
 @end
 
 @implementation ECGroupVideoViewController
-@synthesize videoManager = _videoManager;
 
 - (id)init {
     self = [self initWithCompatibleView:[[ECGroupVideoView alloc] init]];
     
     if (self) {
         isFirstLoad = YES;
-        self.videoManager = [[ECVideoManager alloc] init];
-        self.videoManager.liveName = [[UserManager shareUserManager] userBean].name;
-        self.videoManager.rtmpUrl = RTMP_SERVER_URL;
-        self.videoManager.outImgWidth = 144;
-        self.videoManager.outImgHeight = 192;
     }
     
     return self;
@@ -49,7 +43,8 @@
     
     if (isFirstLoad) {
         isFirstLoad = NO;
-        [self.videoManager setupSession];
+        ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+        [module.videoManager setupSession];
     }
     
     [super viewWillAppear:animated];
@@ -87,7 +82,8 @@
 
 - (void)attachVideoPreviewLayer {
     ECGroupVideoView *videoView = (ECGroupVideoView*)self.view;
-    AVCaptureSession *session = self.videoManager.session;
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    AVCaptureSession *session = module.videoManager.session;
     if (session) {
         UIView *myVideoView = videoView.myVideoView;
         if (!mPreviewLayer) {
@@ -107,13 +103,15 @@
 
 // switch between front and back camera
 - (void)switchCamera {
-    [self.videoManager switchCamera];
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [module.videoManager switchCamera];
 }
 
 // start to capture video and upload
 - (void)startCaptureVideo {
     [self attachVideoPreviewLayer];
-    [self.videoManager startVideoCapture];
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [module.videoManager startVideoCapture];
     [self broadcastVideoOnStatus];
     [self updateMyVideoOnStatus];
 }
@@ -122,7 +120,8 @@
 - (void)stopCaptureVideo {
     [self broadcastVideoOffStatus];
     [self detachVideoPreviewLayer];
-    [self.videoManager stopVideoCapture];
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [module.videoManager stopVideoCapture];
     [self updateMyVideoOffStatus];
 }
 
@@ -157,5 +156,12 @@
     NSDictionary *me = [NSDictionary dictionaryWithObjectsAndKeys:username, USERNAME, OFF, VIDEO_STATUS, nil];
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     [module updateMyStatus:me];
+}
+
+- (void)renderOppositVideo:(UIImage *)videoImage {
+    NSLog(@"render opposite video");
+    ECGroupVideoView *videoView = (ECGroupVideoView*)self.view;
+    UIImageView *oppositView = videoView.oppositeVideoView;
+    oppositView.image = videoImage;
 }
 @end

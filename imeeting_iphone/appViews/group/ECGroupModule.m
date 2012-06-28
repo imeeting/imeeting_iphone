@@ -25,19 +25,26 @@
 @synthesize videoController = _videoController;
 @synthesize attendeeController = _attendeeController;
 @synthesize groupId = _groupId;
+@synthesize videoManager = _videoManager;
 
 - (id)init {
     self = [super init];
     if (self) {
         mSocketIO = [[SocketIO alloc] initWithDelegate:self];
         needConnectToNotifyServer = YES;
+        self.videoManager = [[ECVideoManager alloc] init];
+        self.videoManager.liveName = [[UserManager shareUserManager] userBean].name;
+        self.videoManager.rtmpUrl = RTMP_SERVER_URL;
+        self.videoManager.outImgWidth = 144;
+        self.videoManager.outImgHeight = 192;
+        [self.videoManager setVideoFetchDelegate:self];
+
     }
     return self;
 }
 
 - (void)onLeaveGroup {
-    ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
-    [videoCtrl.videoManager releaseSession];
+    [self.videoManager releaseSession];
     
     [self stopGetNoticeFromNotifyServer];
     // send http request to unjoin the group
@@ -142,7 +149,6 @@
     }
 }
 
-// add by ares
 - (void) socketIODidConnectError:(NSString *) errorMsg {
     NSLog(@"socket io connect error");
     if (needConnectToNotifyServer) {
@@ -150,5 +156,11 @@
     }
 }
 
+#pragma mark - video fetch delegate
+- (void)onFetchNewImage:(UIImage *)image {
+    NSLog(@"Module - onFetchNewImage");
+    ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
+    [videoCtrl renderOppositVideo:image];
+}
 
 @end

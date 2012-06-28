@@ -297,6 +297,10 @@ static CGFloat padding = 4;
 
 // row selected action
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *attendee = [_attendeeArray objectAtIndex:indexPath.row];
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(onAttendeeSelected:)]) {
+        [self.viewControllerRef performSelector:@selector(onAttendeeSelected:) withObject:attendee];
+    }
 }
 
 @end

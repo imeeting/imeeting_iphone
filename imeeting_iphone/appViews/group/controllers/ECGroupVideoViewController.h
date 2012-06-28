@@ -16,12 +16,11 @@
     BOOL isFirstLoad; // inidcate if the controller loads first.
 }
 
-@property (nonatomic, retain) ECVideoManager *videoManager;
-
 - (void)onLeaveGroup;
 - (void)onSwitchToAttendeeListView;
 - (void)switchCamera;
 - (void)startCaptureVideo;
 - (void)stopCaptureVideo;
-
+// render the video of selected guy
+- (void)renderOppositVideo:(UIImage*)videoImage;
 @end

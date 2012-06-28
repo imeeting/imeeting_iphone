@@ -10,8 +10,9 @@
 
 #import <Foundation/Foundation.h>
 #import "CommonToolkit/CommonToolkit.h"
+#import "ECVideoManager.h"
 
-@interface ECGroupModule : NSObject <SocketIODelegate> {
+@interface ECGroupModule : NSObject <SocketIODelegate, ECVideoFetchDelegate> {
     SocketIO *mSocketIO;
     BOOL needConnectToNotifyServer;
 }
@@ -19,6 +20,7 @@
 @property (nonatomic, retain) UIViewController *videoController;
 @property (nonatomic, retain) UIViewController *attendeeController;
 @property (nonatomic, retain) NSString *groupId;
+@property (nonatomic, retain) ECVideoManager *videoManager;
 
 - (void)connectToNotifyServer;
 - (void)stopGetNoticeFromNotifyServer;

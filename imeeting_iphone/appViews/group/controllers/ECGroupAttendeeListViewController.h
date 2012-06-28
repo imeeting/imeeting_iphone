@@ -16,4 +16,5 @@
 - (void)leaveGroup;
 - (void)refreshAttendeeList;
 - (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
+- (void)onAttendeeSelected:(NSDictionary*)attendee;
 @end

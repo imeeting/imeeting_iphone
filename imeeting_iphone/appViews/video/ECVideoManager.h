@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "AVFoundation/AVFoundation.h"
-#import "quicklibav.h"
-#import "libswscale/swscale.h"
+#import "ECVideoEncode.h"
+#import "ECVideoDecode.h"
 
 @interface ECVideoManager : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate> {
     QuickVideoOutput *qvo;
@@ -28,8 +28,11 @@
 @property (nonatomic,retain) NSString *rtmpUrl;
 @property (nonatomic,retain) NSString *liveName;
 
-@property (readwrite) int outImgWidth;
-@property (readwrite) int outImgHeight;
+@property (nonatomic) int outImgWidth;
+@property (nonatomic) int outImgHeight;
+
+@property (nonatomic,retain) ECVideoEncode *videoEncode;
+@property (nonatomic,retain) ECVideoDecode *videoDecode;
 
 - (void)switchCamera;
 - (AVCaptureDevice*)cameraWithPosition:(AVCaptureDevicePosition)postion;
@@ -37,5 +40,7 @@
 - (void)stopVideoCapture;
 - (void)setupSession;
 - (void)releaseSession;
-
+- (void)setVideoFetchDelegate:(id)delegate;
+- (void)startVideoFetchWithTargetUsername:(NSString*)username;
+- (void)stopVideoFetch;
 @end
