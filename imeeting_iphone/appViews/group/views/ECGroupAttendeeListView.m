@@ -203,13 +203,18 @@ static CGFloat padding = 4;
     
 }
 
-- (void)updateAttendee:(NSDictionary *)attendee {
+- (void)updateAttendee:(NSDictionary *)attendee withMyself:(BOOL)myself {
     NSLog(@"AttendeeListView - update attendee");
     
     NSString *username = [attendee objectForKey:USERNAME];
     NSString *accountName = [[UserManager shareUserManager] userBean].name;
 
-    if (![username isEqualToString:accountName]) {
+    BOOL update = YES;
+    if ([username isEqualToString:accountName] && !myself) {
+        update = NO;
+    }
+    
+    if (update) {
         NSUInteger i = 0;
         for (i = 0; i < _attendeeArray.count; i++) {
             NSDictionary *att = [_attendeeArray objectAtIndex:i];
@@ -241,7 +246,7 @@ static CGFloat padding = 4;
 }
 
 - (void)addContactAction {
-    NSLog(@"add contact - thread: %@ obj: %@", [NSThread currentThread], self);
+    NSLog(@"add contact");
 }
 
 - (void)setAttendeeArray:(NSMutableArray *)attendeeArray {

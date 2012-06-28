@@ -25,4 +25,5 @@
 - (void)onLeaveGroup;
 - (void)notifyWithMsg:(NSDictionary*)msg;
 - (void)broadcastAttendeeStatus:(NSDictionary*)attendee;
+- (void)updateMyStatus:(NSDictionary*)me;
 @end

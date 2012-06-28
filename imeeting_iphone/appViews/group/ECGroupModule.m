@@ -40,13 +40,9 @@
     [videoCtrl.videoManager releaseSession];
     
     [self stopGetNoticeFromNotifyServer];
-    
     // send http request to unjoin the group
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:_groupId, GROUP_ID, nil];
     [HttpUtil postSignatureRequestWithUrl:UNJOIN_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:nil andFailedRespSelector:@selector(onNetworkFailed:)];
-    
-    // remove current module from group manager
-    [[ECGroupManager sharedECGroupManager] setCurrentGroupModule:nil];
 }
 
 - (void)onNetworkFailed:(ASIHTTPRequest *)request {
@@ -54,6 +50,7 @@
 }
 
 - (void)connectToNotifyServer {
+    NSLog(@"connect to notify server..");
     [mSocketIO connectToHost:NOTIFY_SERVER_HOST onPort:80];
 }
 
@@ -84,8 +81,13 @@
         // update attendee status
         NSDictionary *attendee = [notice objectForKey:ATTENDEE];
         ECGroupAttendeeListViewController *avc = (ECGroupAttendeeListViewController*)_attendeeController;
-        [avc updateAttendee:attendee];
+        [avc updateAttendee:attendee withMyself:NO];
     }
+}
+
+- (void)updateMyStatus:(NSDictionary *)me {
+    ECGroupAttendeeListViewController *avc = (ECGroupAttendeeListViewController*)_attendeeController;
+    [avc updateAttendee:me withMyself:YES];
 }
 
 #pragma mark - notify methods
@@ -118,6 +120,7 @@
 }
 
 - (void) socketIODidDisconnect:(SocketIO *)socket {
+    NSLog(@"socket io disconnected");
     if (needConnectToNotifyServer) {
         [self connectToNotifyServer];
     }
@@ -142,6 +145,9 @@
 // add by ares
 - (void) socketIODidConnectError:(NSString *) errorMsg {
     NSLog(@"socket io connect error");
+    if (needConnectToNotifyServer) {
+        [self connectToNotifyServer];
+    }
 }
 
 

@@ -20,6 +20,8 @@
 - (void)detachVideoPreviewLayer;
 - (void)broadcastVideoOnStatus;
 - (void)broadcastVideoOffStatus;
+- (void)updateMyVideoOnStatus;
+- (void)updateMyVideoOffStatus;
 - (void)onNetworkFailed:(ASIHTTPRequest*)request;
 @end
 
@@ -30,12 +32,12 @@
     self = [self initWithCompatibleView:[[ECGroupVideoView alloc] init]];
     
     if (self) {
+        isFirstLoad = YES;
         self.videoManager = [[ECVideoManager alloc] init];
         self.videoManager.liveName = [[UserManager shareUserManager] userBean].name;
         self.videoManager.rtmpUrl = RTMP_SERVER_URL;
         self.videoManager.outImgWidth = 144;
         self.videoManager.outImgHeight = 192;
-        [self.videoManager setupSession];
     }
     
     return self;
@@ -44,6 +46,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
+    if (isFirstLoad) {
+        isFirstLoad = NO;
+        [self.videoManager setupSession];
+    }
+    
     [super viewWillAppear:animated];
 }
 
@@ -107,6 +115,7 @@
     [self attachVideoPreviewLayer];
     [self.videoManager startVideoCapture];
     [self broadcastVideoOnStatus];
+    [self updateMyVideoOnStatus];
 }
 
 // close camera, stop video capture
@@ -114,7 +123,7 @@
     [self broadcastVideoOffStatus];
     [self detachVideoPreviewLayer];
     [self.videoManager stopVideoCapture];
-   
+    [self updateMyVideoOffStatus];
 }
 
 #pragma mark - broadcast status
@@ -134,5 +143,19 @@
 
 - (void)onNetworkFailed:(ASIHTTPRequest *)request {
     // do nothing
+}
+
+- (void)updateMyVideoOnStatus {
+    NSString *username = [[UserManager shareUserManager] userBean].name;
+    NSDictionary *me = [NSDictionary dictionaryWithObjectsAndKeys:username, USERNAME, ON, VIDEO_STATUS, nil];
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [module updateMyStatus:me];
+}
+
+- (void)updateMyVideoOffStatus {
+    NSString *username = [[UserManager shareUserManager] userBean].name;
+    NSDictionary *me = [NSDictionary dictionaryWithObjectsAndKeys:username, USERNAME, OFF, VIDEO_STATUS, nil];
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [module updateMyStatus:me];
 }
 @end

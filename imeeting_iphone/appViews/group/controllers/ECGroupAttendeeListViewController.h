@@ -15,5 +15,5 @@
 - (void)switchToVideo;
 - (void)leaveGroup;
 - (void)refreshAttendeeList;
-- (void)updateAttendee:(NSDictionary*)attendee;
+- (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
 @end

@@ -87,10 +87,10 @@
     [self.navigationController popToViewController:con animated:YES];
 }
 
-- (void)updateAttendee:(NSDictionary *)attendee {
+- (void)updateAttendee:(NSDictionary *)attendee withMyself:(BOOL)myself {
     NSLog(@"AttendeeListViewController - update attendee");
     
     ECGroupAttendeeListView *attListView = (ECGroupAttendeeListView*)self.view;
-    [attListView updateAttendee:attendee];
+    [attListView updateAttendee:attendee withMyself:myself];
 }
 @end

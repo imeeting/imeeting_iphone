@@ -12,6 +12,8 @@
 
 @interface ECGroupVideoViewController : UIViewController {
     AVCaptureVideoPreviewLayer *mPreviewLayer;
+    
+    BOOL isFirstLoad; // inidcate if the controller loads first.
 }
 
 @property (nonatomic, retain) ECVideoManager *videoManager;

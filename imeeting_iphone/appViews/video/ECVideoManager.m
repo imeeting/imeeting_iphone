@@ -1,5 +1,5 @@
 //
-//  ECVideoCaptureManager.m
+//  ECVideoManager.m
 //  imeeting_iphone
 //
 //  Created by star king on 12-6-27.
@@ -144,9 +144,6 @@
     
     [self setVideoOutputFps:STREAM_FRAME_RATE AndOrientation:AVCaptureVideoOrientationPortrait];
     
-    
-    //###### video encode setup
-   // [self setupVideoEncode];
 }
 
 // setup video encoding related resources
@@ -195,8 +192,6 @@
     self.session = nil;
     self.currentVideoInput = nil;
     self.videoDataOutput = nil;
-    
-    //[self releaseVideoEncode];
 }
 
 // release video encoding related resources

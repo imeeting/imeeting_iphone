@@ -44,6 +44,9 @@
 }
 
 @property (nonatomic, retain) NSMutableArray *attendeeArray;
-- (void)updateAttendee:(NSDictionary*)attendee;
+// update attendee status.
+// for the condition that attendee is equal to my account:
+// if myself flag is YES, attendee will be updated, else not.
+- (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
 - (void)appendAttendee:(NSDictionary*)attendee;
 @end
