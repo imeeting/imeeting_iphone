@@ -168,6 +168,7 @@
             // switch to group view
             ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
             [module connectToNotifyServer];
+            [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.attendeeController withObject:nil];
             UIViewController *videoController = module.videoController;
             [self.navigationController pushViewController:videoController animated:NO];
             return;

@@ -11,43 +11,18 @@
 #import "AVFoundation/AVFoundation.h"
 #import "quicklibav.h"
 
-@interface ECVideoDecode ()
-- (void)handleError;
-- (int)openVideoInputStream:(const char*)playPath;
-- (void)readVideoFrame;
-- (void)closeVideoInputStream;
-- (UIImage*)imageFromAVPicture:(AVFrame*)picture width:(int)width height:(int)height;
-@end
-
-@implementation ECVideoDecode
-@synthesize rtmpUrl = _rtmpUrl;
-@synthesize dstImgWidth = _dstImgWidth;
-@synthesize dstImgHeight = _dstImgHeight;
+@implementation VideoFetchExecutor
 @synthesize delegate = _delegate;
+@synthesize imgWidth = _imgWidth;
+@synthesize imgHeight = _imgHeight;
+@synthesize rtmpUrl = _rtmpUrl;
 
 - (id)init {
     self = [super init];
     if (self) {
-        inputFormatContext = NULL;
         dst_pix_fmt = PIX_FMT_RGB24;
-        inputFormatContext = NULL;
-        videoCodecContext = NULL;
-        videoCodec = NULL;
-        self.dstImgWidth = 144;
-        self.dstImgHeight = 192;
     }
     return self;
-}
-
-- (void)setupVideoDecode {
-    av_register_all();
-    avformat_network_init();
-    
-}
-
-- (void)releaseVideoDecode {
-    avformat_network_deinit();
-    [self stopFetchVideoPicture];
 }
 
 - (int)openVideoInputStream:(const char *)playPath {
@@ -100,13 +75,14 @@
 }
 
 - (void)readVideoFrame {
+    NSLog(@"### read video frame start");
     if (!inputFormatContext) {
         return;
     }
     
     AVPacket packet;
     
-    // allocate a video frame to stor ethe decoded image
+    // allocate a video frame to store the decoded image
     videoFrame = avcodec_alloc_frame();
     if (!videoFrame) {
         NSLog(@"cannot allocate video frame");
@@ -114,9 +90,7 @@
         return;
     }
     
-    
-    //avpicture_alloc(videoPicture, dst_pix_fmt, self.dstImgWidth, self.dstImgHeight);
-    videoPicture = alloc_picture(dst_pix_fmt, self.dstImgWidth, self.dstImgHeight);
+    videoPicture = alloc_picture(dst_pix_fmt, self.imgWidth, self.imgHeight);
     if (!videoPicture) {
         NSLog(@"failed to alloc video picture");
         [self handleError];
@@ -127,6 +101,11 @@
     
     int gotPicture;
     while (readFrame && av_read_frame(inputFormatContext, &packet) >= 0) {
+        NSThread *currentThread = [NSThread currentThread];
+        if (currentThread.isCancelled) {
+            NSLog(@"video frame read thread is cancelled");
+            break;
+        }
         NSLog(@"read video frame");
         // check if the packet is from video stream
         if (packet.stream_index == videoStream) {
@@ -136,13 +115,12 @@
             if (gotPicture) {
                 NSLog(@"got video picture");
                 // get a video frame
-                img_convert_ctx = sws_getCachedContext(img_convert_ctx, videoCodecContext->width, videoCodecContext->height, videoCodecContext->pix_fmt, self.dstImgWidth, self.dstImgHeight, dst_pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
+                img_convert_ctx = sws_getCachedContext(img_convert_ctx, videoCodecContext->width, videoCodecContext->height, videoCodecContext->pix_fmt, self.imgWidth, self.imgHeight, dst_pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
                 // convert YUV420 to RGB32
                 sws_scale(img_convert_ctx, videoFrame->data, videoFrame->linesize, 0, videoCodecContext->height, videoPicture->data, videoPicture->linesize);
                 
-                UIImage *img = [self imageFromAVPicture:videoPicture width:self.dstImgWidth height:self.dstImgHeight];
-                NSLog(@"converted image: %@", img);
-                NSLog(@"delegate: %@", self.delegate);
+                UIImage *img = [self imageFromAVPicture:videoPicture width:self.imgWidth height:self.imgHeight];
+            //    NSLog(@"delegate: %@", self.delegate);
                 if (self.delegate && [self.delegate respondsToSelector:@selector(onFetchNewImage:)]) {
                     NSLog(@"have delegate - perform selector");
                     [self.delegate performSelectorOnMainThread:@selector(onFetchNewImage:) withObject:img waitUntilDone:NO];
@@ -168,6 +146,10 @@
 }
 
 - (void)startFetchVideoPictureWithUsername:(NSString *)username {
+    if (_delegate && [_delegate respondsToSelector:@selector(onFetchVideoBeginToPrepare:)]) {
+        [_delegate performSelectorOnMainThread:@selector(onFetchVideoBeginToPrepare:) withObject:username waitUntilDone:NO];
+    }
+    
     NSMutableString *playPath = [[NSMutableString alloc] initWithCapacity:20];
     NSString *myName = [[UserManager shareUserManager] userBean].name;
     [playPath appendFormat:@"%@/%@ live=1 conn=S:%@", self.rtmpUrl, username, myName];
@@ -180,7 +162,16 @@
         return;
     }
     
+    if (_delegate && [_delegate respondsToSelector:@selector(onFetchVideoPrepared)]) {
+        [_delegate performSelectorOnMainThread:@selector(onFetchVideoPrepared) withObject:nil waitUntilDone:NO];
+    }
+    
     [self readVideoFrame];
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onFetchEnd)]) {
+        [_delegate performSelectorOnMainThread:@selector(onFetchEnd) withObject:nil waitUntilDone:NO];
+    }
+    
     [self closeVideoInputStream];
 }
 
@@ -189,21 +180,19 @@
 }
 
 - (void)closeVideoInputStream {
+    NSLog(@"close video input stream");
     if (videoCodecContext) {
         avcodec_close(videoCodecContext);
         videoCodecContext = NULL;
     }
-    
     if (inputFormatContext) {
         avformat_close_input(&inputFormatContext);
         inputFormatContext = NULL;
     }
-    
     if (videoFrame) {
         av_free(videoFrame);
         videoFrame = NULL;
     }
-    
     if (videoPicture) {
         if (videoPicture->data[0]) {
             av_free(videoPicture->data[0]);
@@ -211,10 +200,69 @@
         av_free(videoPicture);
         videoPicture = NULL;
     }
+    NSLog(@"video input stream closed");
 
+    
 }
 
 - (void)handleError {
     [self closeVideoInputStream];
+    if (_delegate && [_delegate respondsToSelector:@selector(onFetchFailed)]) {
+        [_delegate performSelectorOnMainThread:@selector(onFetchFailed) withObject:nil waitUntilDone:NO];
+    }
 }
+
+
+
+@end
+
+
+@implementation ECVideoDecode
+@synthesize rtmpUrl = _rtmpUrl;
+@synthesize dstImgWidth = _dstImgWidth;
+@synthesize dstImgHeight = _dstImgHeight;
+@synthesize delegate = _delegate;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.dstImgWidth = 144;
+        self.dstImgHeight = 192;
+    }
+    return self;
+}
+
+- (void)setupVideoDecode {
+    av_register_all();
+    avformat_network_init();
+    
+}
+
+- (void)releaseVideoDecode {
+    [self stopFetchVideoPicture];
+    sleep(0.5);
+    NSLog(@"before avformat_network_deinit");
+    avformat_network_deinit();
+    NSLog(@"after avformat_network_deinit");
+}
+
+
+- (void)startFetchVideoPictureWithUsername:(NSString *)username {
+    executor = [[VideoFetchExecutor alloc] init];
+    executor.imgWidth = self.dstImgWidth;
+    executor.imgHeight = self.dstImgHeight;
+    executor.rtmpUrl = self.rtmpUrl;
+    executor.delegate = self.delegate;
+    
+    exeThread = [[NSThread alloc] initWithTarget:executor selector:@selector(startFetchVideoPictureWithUsername:) object:username];
+    [exeThread start];
+    
+}
+
+- (void)stopFetchVideoPicture {
+    executor.delegate = nil;
+    //[executor stopFetchVideoPicture];
+    [exeThread cancel];
+}
+
 @end

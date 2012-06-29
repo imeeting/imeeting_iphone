@@ -15,6 +15,7 @@
 
 @interface ECGroupAttendeeListViewController ()
 - (void)onFinishedGetAttendeeList:(ASIHTTPRequest*)pRequest;
+- (void)onNetworkFailed:(ASIHTTPRequest*)request;
 @end
 
 @implementation ECGroupAttendeeListViewController
@@ -26,11 +27,13 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     if (!isListLoaded) {
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
         [hud showWhileExecuting:@selector(refreshAttendeeList) onTarget:self withObject:nil animated:YES];
     }
     [super viewWillAppear:animated];
+     
 }
 
 - (void)viewDidLoad
@@ -47,7 +50,7 @@
 
 - (void)refreshAttendeeList {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:[ECGroupManager sharedECGroupManager].currentGroupModule.groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:GET_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetAttendeeList:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:GET_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetAttendeeList:) andFailedRespSelector:@selector(onNetworkFailed:)];
 }
 
 - (void)onFinishedGetAttendeeList:(ASIHTTPRequest *)pRequest {
@@ -73,6 +76,10 @@
     
 }
 
+- (void)onNetworkFailed:(ASIHTTPRequest *)request {
+    // do nothing
+}
+
 #pragma mark - actions
 - (void)switchToVideo {
     [self.navigationController popViewControllerAnimated:NO];
@@ -96,10 +103,20 @@
 
 - (void)onAttendeeSelected:(NSDictionary *)attendee {
     NSString *username = [attendee objectForKey:USERNAME];
-    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
-    [module.videoManager stopVideoFetch];
-    [module.videoManager startVideoFetchWithTargetUsername:username];
-    [self switchToVideo];
+    NSString *videoStatus = [attendee objectForKey:VIDEO_STATUS];
+    NSString *onlineStatus = [attendee objectForKey:ONLINE_STATUS];
+    if ([onlineStatus isEqualToString:ONLINE]) {
+        if ([videoStatus isEqualToString:ON]) {
+            ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+            [module.videoManager stopVideoFetch];
+            [module.videoManager startVideoFetchWithTargetUsername:username];
+            [self switchToVideo];
+        } else {
+            [[iToast makeText:NSLocalizedString(@"This attendee's video is off", "")] show];
+        }
+    } else {
+        [[iToast makeText:NSLocalizedString(@"This attendee is offline", "")] show];
+    }
 }
 
 @end

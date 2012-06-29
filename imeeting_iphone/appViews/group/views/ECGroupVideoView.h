@@ -15,13 +15,23 @@
     
     UIButton *mLeaveGroupButton;
     UIButton *mOpenCameraButton;
+    UIButton *mCameraSwitchButton;
     
     BOOL isCameraOpen;
     
     UIImage *cameraOnImg;
     UIImage *cameraOffImg;
+    
+    UILabel *mOppositeVideoNameLabel;
+    UIActivityIndicatorView *loadVideoIndicator;
 }
 
 @property (nonatomic,retain) UIView *myVideoView;
 @property (nonatomic,retain) UIImageView *oppositeVideoView;
+
+- (void)startShowLoadingVideo;
+- (void)stopShowLoadingVideo;
+- (void)setOppositeVideoName:(NSString*)name;
+- (void)resetOppositeVideoUI;
+- (void)showVideoLoadFailedInfo;
 @end

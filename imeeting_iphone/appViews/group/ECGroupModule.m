@@ -30,6 +30,7 @@
 - (id)init {
     self = [super init];
     if (self) {
+        isLeave = NO;
         mSocketIO = [[SocketIO alloc] initWithDelegate:self];
         needConnectToNotifyServer = YES;
         self.videoManager = [[ECVideoManager alloc] init];
@@ -44,12 +45,14 @@
 }
 
 - (void)onLeaveGroup {
+    isLeave = YES;
     [self.videoManager releaseSession];
     
     [self stopGetNoticeFromNotifyServer];
     // send http request to unjoin the group
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:_groupId, GROUP_ID, nil];
     [HttpUtil postSignatureRequestWithUrl:UNJOIN_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:nil andFailedRespSelector:@selector(onNetworkFailed:)];
+    
 }
 
 - (void)onNetworkFailed:(ASIHTTPRequest *)request {
@@ -159,8 +162,42 @@
 #pragma mark - video fetch delegate
 - (void)onFetchNewImage:(UIImage *)image {
     NSLog(@"Module - onFetchNewImage");
-    ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
-    [videoCtrl renderOppositVideo:image];
+    if (!isLeave) {
+        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
+        [videoCtrl renderOppositVideo:image];
+    }
 }
 
+- (void)onFetchFailed {
+    NSLog(@"onFetchFailed");
+    if (!isLeave) {
+        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
+        [videoCtrl showVideoLoadFailedInfo];
+    }
+}
+
+- (void)onFetchVideoBeginToPrepare:(NSString*)name {
+    NSLog(@"onFetchVideoBeginToPrepare");
+    if (!isLeave) {
+        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
+        [videoCtrl setOppositeVideoName:name];
+        [videoCtrl startVideoLoadingIndicator];
+    }
+}
+
+- (void)onFetchVideoPrepared {
+    NSLog(@"onFetchVideoPrepared");
+    if (!isLeave) {
+        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
+        [videoCtrl stopVideoLoadingIndicator];
+    }
+}
+
+- (void)onFetchEnd {
+    NSLog(@"onFetchEnd");
+    if (!isLeave) {
+        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
+        [videoCtrl resetOppositeVideoView];
+    }
+}
 @end

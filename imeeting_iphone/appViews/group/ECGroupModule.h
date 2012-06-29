@@ -15,6 +15,7 @@
 @interface ECGroupModule : NSObject <SocketIODelegate, ECVideoFetchDelegate> {
     SocketIO *mSocketIO;
     BOOL needConnectToNotifyServer;
+    BOOL isLeave;
 }
 
 @property (nonatomic, retain) UIViewController *videoController;

@@ -9,9 +9,9 @@
 #import "ECGroupVideoView.h"
 
 static CGFloat VideoRegionWidth = 320;
-static CGFloat VideoRegionHeight = 480;
+static CGFloat VideoRegionHeight = 426;
 static CGFloat BottomBarWidth = 320;
-static CGFloat BottomBarHeight = 50;
+static CGFloat BottomBarHeight = 54;
 static CGFloat MyVideoViewWidth = 108;
 static CGFloat MyVideoViewHeight = 144;
 static CGFloat LeaveButtonWidth = 80;
@@ -20,7 +20,8 @@ static CGFloat SwitchToAttendeeListButtonWidth = 90;
 static CGFloat SwitchToAttendeeListButtonHeight = 30;
 static CGFloat SwitchFBCameraButtonWidth = 53;
 static CGFloat SwitchFBCameraButtonHeight = 30;
-
+static CGFloat OppositeNameLabelWidth = 100;
+static CGFloat OppositeNameLabelHeight = 20;
 
 @interface ECGroupVideoView ()
 - (void)initUI;
@@ -49,6 +50,7 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
 
 - (void)initUI {
     NSLog(@"ECGroupVideoView - initUI");
+    
     [self addSubview:[self makeVideoRegion]];
     [self addSubview:[self makeBottonBar]];
     
@@ -61,35 +63,62 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
     [self addSubview:switchToAttenListButton];
     
     // make switch camera button
-    UIButton *cameraSwitchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    cameraSwitchButton.frame = CGRectMake(5, padding, SwitchFBCameraButtonWidth, SwitchFBCameraButtonHeight);
-    [cameraSwitchButton setBackgroundImage:[UIImage imageNamed:@"camera_switch"] forState:UIControlStateNormal];
-    [cameraSwitchButton addTarget:self action:@selector(onSwitchFBCameraAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:cameraSwitchButton];
+    mCameraSwitchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    mCameraSwitchButton.frame = CGRectMake(5, padding, SwitchFBCameraButtonWidth, SwitchFBCameraButtonHeight);
+    [mCameraSwitchButton setBackgroundImage:[UIImage imageNamed:@"camera_switch"] forState:UIControlStateNormal];
+    [mCameraSwitchButton addTarget:self action:@selector(onSwitchFBCameraAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:mCameraSwitchButton];
+    [mCameraSwitchButton setHidden:YES];
     
+       
 }
 
 - (UIView *)makeVideoRegion {
     UIView *videoRegion = [[UIView alloc] initWithFrame:CGRectMake(0, 0, VideoRegionWidth, VideoRegionHeight)];
-    videoRegion.backgroundColor = [UIColor orangeColor];
+    videoRegion.backgroundColor = [UIColor clearColor];
     
     CGColorRef borderColor = [[UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:0.8] CGColor];
     
     mOppositeVideoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, VideoRegionWidth, VideoRegionHeight)];
-    mOppositeVideoView.contentMode = UIViewContentModeScaleAspectFit;
+    mOppositeVideoView.contentMode = UIViewContentModeScaleAspectFill;
+    mOppositeVideoView.backgroundColor = [UIColor colorWithIntegerRed:240 integerGreen:255 integerBlue:255 alpha:1];
     [videoRegion addSubview:mOppositeVideoView];
     
-    mMyVideoView = [[UIView alloc] initWithFrame:CGRectMake(VideoRegionWidth - MyVideoViewWidth, VideoRegionHeight - BottomBarHeight - MyVideoViewHeight, MyVideoViewWidth, MyVideoViewHeight)];
+    // make load video indicator
+   
+    loadVideoIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loadVideoIndicator.center = CGPointMake(mOppositeVideoView.center.x, mOppositeVideoView.center.y);
+
+    UILabel *loadVideoLabel = [[UILabel alloc] initWithFrame:CGRectMake((loadVideoIndicator.frame.size.width - 120) / 2, 25, 120, 20)];
+    loadVideoLabel.text = NSLocalizedString(@"Loading Video", "");
+    loadVideoLabel.font = [UIFont systemFontOfSize:14];
+    loadVideoLabel.backgroundColor = [UIColor clearColor];
+    loadVideoLabel.textAlignment = UITextAlignmentCenter;
+    [loadVideoIndicator addSubview:loadVideoLabel];
+    [mOppositeVideoView addSubview:loadVideoIndicator];
+    
+    // make name label
+    mOppositeVideoNameLabel = [[UILabel alloc] initWithFrame:CGRectMake((mOppositeVideoView.frame.size.width - OppositeNameLabelWidth) / 2, 15, OppositeNameLabelWidth, OppositeNameLabelHeight)];
+    mOppositeVideoNameLabel.font = [UIFont systemFontOfSize:12];
+    [mOppositeVideoNameLabel.layer setMasksToBounds:YES];
+    [mOppositeVideoNameLabel.layer setCornerRadius:10];
+    mOppositeVideoNameLabel.backgroundColor = [UIColor colorWithIntegerRed:156 integerGreen:156 integerBlue:156 alpha:0.5];
+    mOppositeVideoNameLabel.textAlignment = UITextAlignmentCenter;
+    [mOppositeVideoView addSubview:mOppositeVideoNameLabel];
+    [mOppositeVideoNameLabel setHidden:YES];
+        
+    mMyVideoView = [[UIView alloc] initWithFrame:CGRectMake(VideoRegionWidth - MyVideoViewWidth, VideoRegionHeight - MyVideoViewHeight, MyVideoViewWidth, MyVideoViewHeight)];
     [mMyVideoView.layer setBorderWidth:2];
     [mMyVideoView.layer setBorderColor:borderColor];
     mMyVideoView.backgroundColor = [UIColor colorWithIntegerRed:159 integerGreen:182 integerBlue:205 alpha:1];
     [videoRegion addSubview:mMyVideoView];
     
+    
     return videoRegion;
 }
 
 - (UIView *)makeBottonBar {
-    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, VideoRegionHeight - BottomBarHeight, BottomBarWidth, BottomBarHeight)];
+    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, VideoRegionHeight, BottomBarWidth, BottomBarHeight)];
     bottomBar.backgroundColor = [UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:0.8];
     CGFloat secWidth = BottomBarWidth / 3;
     
@@ -133,6 +162,7 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
         isCameraOpen = NO;
         // close camera to stop capture video
         [mOpenCameraButton setBackgroundImage:cameraOffImg forState:UIControlStateNormal];
+        [mCameraSwitchButton setHidden:YES];
         if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(stopCaptureVideo)]) {
             [self.viewControllerRef performSelector:@selector(stopCaptureVideo)];
         }
@@ -140,8 +170,10 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
         isCameraOpen = YES;
         // open camera to capture video
         [mOpenCameraButton setBackgroundImage:cameraOnImg forState:UIControlStateNormal];
+        [mCameraSwitchButton setHidden:NO];
         if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(startCaptureVideo)]) {
-            [self.viewControllerRef performSelector:@selector(startCaptureVideo)];
+            //[self.viewControllerRef performSelector:@selector(startCaptureVideo)];
+            [NSThread detachNewThreadSelector:@selector(startCaptureVideo) toTarget:self.viewControllerRef withObject:nil];
         }
     }
 }
@@ -150,5 +182,33 @@ static CGFloat SwitchFBCameraButtonHeight = 30;
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(switchCamera)]) {
         [self.viewControllerRef performSelector:@selector(switchCamera)];
     }
+}
+
+#pragma mark - video status
+- (void)startShowLoadingVideo {
+    mOppositeVideoView.image = nil;
+    [loadVideoIndicator startAnimating];
+}
+
+- (void)stopShowLoadingVideo {
+    [loadVideoIndicator stopAnimating];
+}
+
+- (void)setOppositeVideoName:(NSString *)name {
+    mOppositeVideoNameLabel.text = name;
+    [mOppositeVideoNameLabel setHidden:NO];
+}
+
+- (void)resetOppositeVideoUI {
+    [mOppositeVideoNameLabel setHidden:YES];
+    [loadVideoIndicator stopAnimating];
+    mOppositeVideoView.image = nil;
+}
+
+- (void)showVideoLoadFailedInfo {
+    [loadVideoIndicator stopAnimating];
+    [[iToast makeText:NSLocalizedString(@"Unable to load video", "")] show];
+    sleep(1);
+    [self resetOppositeVideoUI];
 }
 @end

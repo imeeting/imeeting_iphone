@@ -54,7 +54,7 @@
 
 - (void)setOutImgHeight:(int)outImgHeight {
     self.videoEncode.outImgHeight = outImgHeight;
-    self.videoDecode.dstImgWidth = outImgHeight;
+    self.videoDecode.dstImgHeight = outImgHeight;
 }
 
 - (NSString *)liveName {
@@ -196,7 +196,7 @@
 // close camera, stop video capture
 - (void)stopVideoCapture {
     if (self.session) {
-        [[UIApplication sharedApplication] setIdleTimerDisabled:NO]; // don't keep screen always light
+        [[UIApplication sharedApplication] setIdleTimerDisabled:NO]; // enable idle timer
         [self.session stopRunning];
         [self.videoEncode releaseVideoEncode];
     }
@@ -213,8 +213,7 @@
 }
 
 - (void)startVideoFetchWithTargetUsername:(NSString *)username {
-   // [self.videoDecode startFetchVideoPictureWithUsername:username];
-    [NSThread detachNewThreadSelector:@selector(startFetchVideoPictureWithUsername:) toTarget:self.videoDecode withObject:username];
+    [self.videoDecode startFetchVideoPictureWithUsername:username];
 }
 
 - (void)stopVideoFetch {
@@ -225,19 +224,17 @@
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
     NSLog(@"capture output");
     
-    @autoreleasepool {
-        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-        CVPixelBufferLockBaseAddress(imageBuffer, 0);
-        
-        // get information about image
-        uint8_t *imgBaseAddress = (uint8_t*)CVPixelBufferGetBaseAddress(imageBuffer);
-        size_t width = CVPixelBufferGetWidth(imageBuffer);
-        size_t height = CVPixelBufferGetHeight(imageBuffer);
-                
-        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-        
-        [self.videoEncode processRawFrame:imgBaseAddress andWidth:width andHeight:height];
-    }
+    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    CVPixelBufferLockBaseAddress(imageBuffer, 0);
+    
+    // get information about image
+    uint8_t *imgBaseAddress = (uint8_t*)CVPixelBufferGetBaseAddress(imageBuffer);
+    size_t width = CVPixelBufferGetWidth(imageBuffer);
+    size_t height = CVPixelBufferGetHeight(imageBuffer);
+    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+    
+    [self.videoEncode processRawFrame:imgBaseAddress andWidth:width andHeight:height];
+    
 }
 
 @end

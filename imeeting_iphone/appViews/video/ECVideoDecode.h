@@ -12,7 +12,7 @@
 #import "libswscale/swscale.h"
 #import "ECVideoFetchDelegate.h"
 
-@interface ECVideoDecode : NSObject {
+@interface VideoFetchExecutor : NSObject {
     AVFormatContext *inputFormatContext;
     AVCodecContext *videoCodecContext;
     AVCodec *videoCodec;
@@ -22,8 +22,29 @@
     
     struct SwsContext *img_convert_ctx;    
     enum PixelFormat dst_pix_fmt;
-
+    
     BOOL readFrame;
+    
+}
+@property (nonatomic, retain) id delegate;
+@property (nonatomic) int imgWidth;
+@property (nonatomic) int imgHeight;
+@property (nonatomic, retain) NSString *rtmpUrl;
+
+- (void)startFetchVideoPictureWithUsername:(NSString*)username;
+- (void)stopFetchVideoPicture;
+- (void)handleError;
+- (int)openVideoInputStream:(const char*)playPath;
+- (void)readVideoFrame;
+- (void)closeVideoInputStream;
+- (UIImage*)imageFromAVPicture:(AVFrame*)picture width:(int)width height:(int)height;
+
+@end
+
+@interface ECVideoDecode : NSObject {
+    VideoFetchExecutor *executor;
+    NSThread *exeThread;
+
 }
 @property (nonatomic,retain) NSString *rtmpUrl;
 @property (nonatomic) int dstImgWidth;

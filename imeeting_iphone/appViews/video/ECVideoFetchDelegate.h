@@ -10,4 +10,9 @@
 
 @protocol ECVideoFetchDelegate <NSObject>
 - (void)onFetchNewImage:(UIImage*)image;
+@optional
+- (void)onFetchFailed;
+- (void)onFetchVideoBeginToPrepare:(NSString*)name;
+- (void)onFetchVideoPrepared;
+- (void)onFetchEnd;
 @end

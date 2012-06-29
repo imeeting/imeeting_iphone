@@ -72,7 +72,9 @@
 - (void)onLeaveGroup {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     [module onLeaveGroup];
+    NSLog(@"module onLeaveGroup ok");
     [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"poped view controller");
 }
 
 - (void)onSwitchToAttendeeListView {
@@ -163,5 +165,30 @@
     ECGroupVideoView *videoView = (ECGroupVideoView*)self.view;
     UIImageView *oppositView = videoView.oppositeVideoView;
     oppositView.image = videoImage;
+}
+
+- (void)setOppositeVideoName:(NSString *)name {
+    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    [view setOppositeVideoName:name];
+}
+
+- (void)startVideoLoadingIndicator {
+    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    [view startShowLoadingVideo];
+}
+
+- (void)stopVideoLoadingIndicator {
+    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    [view stopShowLoadingVideo];
+}
+
+- (void)resetOppositeVideoView {
+    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    [view resetOppositeVideoUI];
+}
+
+- (void)showVideoLoadFailedInfo {
+    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    [view showVideoLoadFailedInfo];
 }
 @end

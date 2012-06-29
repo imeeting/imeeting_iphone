@@ -23,4 +23,9 @@
 - (void)stopCaptureVideo;
 // render the video of selected guy
 - (void)renderOppositVideo:(UIImage*)videoImage;
+- (void)setOppositeVideoName:(NSString*)name;
+- (void)startVideoLoadingIndicator;
+- (void)stopVideoLoadingIndicator;
+- (void)resetOppositeVideoView;
+- (void)showVideoLoadFailedInfo;
 @end

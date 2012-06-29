@@ -49,6 +49,9 @@
 "Video" = "Video";
 "error in join group" = "Cannot join the group, please try later!";
 "Invite Attendee" = "Invite Attendee";
+"This attendee's video is off" = "This attendee's video is not open";
+"Loading Video" = "Loading Video";
+"This attendee is offline" = "This attendee is offline";
 
 
 

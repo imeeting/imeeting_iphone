@@ -49,5 +49,7 @@
 "Video" = "视频";
 "error in join group" = "无法进入当前组, 请稍后重试！";
 "Invite Attendee" = "邀请参与者";
-
+"This attendee's video is off" = "此参与者尚未打开视频";
+"Loading Video" = "正在加载视频";
+"This attendee is offline" = "此参与者已离开";
 
