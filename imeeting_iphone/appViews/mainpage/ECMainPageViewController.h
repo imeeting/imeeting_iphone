@@ -17,5 +17,6 @@
 - (void)refreshGroupList;
 - (void)loadMoreGroupList;
 - (void)hideGroup:(NSString*)groupId;
+- (void)createNewGroup;
 - (void)itemSelected:(NSDictionary*)group;
 @end

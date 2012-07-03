@@ -51,5 +51,22 @@
 "Invite Attendee" = "邀请参与者";
 "This attendee's video is off" = "此参与者尚未打开视频";
 "Loading Video" = "正在加载视频";
-"This attendee is offline" = "此参与者已离开";
-
+"This attendee is offline" = "此参与者尚未进入";
+"error in creating group" = "新建讨论组失败";
+"select attendee" = "选择参与者";
+"contacts list table view section header title" = "通信录";
+"meeting contacts table view in meeting section header title" = "在会议中";
+"meeting contacts table view prein meeting section header title" = "待邀请";
+"contact has no phone number alertView title" = "此人没有号码";
+"contact has no phone number alertView button title" = "重新选择";
+"contact phone number select actionSheet title" = "选择邀请 %@ 加入讨论组的号码";
+"contact has been in meeting" = "已经在会议中";
+"contact with user input phone number has been existed in prein meeting" = "邀请列表已存在此号码";
+"new added phone number is nil" = "操作已被拒绝，新添加的电话号码为空";
+"invite" = "邀请";
+"inviting attendees" = "正在发送邀请请求";
+"new added contact with user input phone number has been existed in prein meeting" = "邀请列表已存在此号码";
+"error in inviting attendees" = "参与者邀请失败";
+"Creating Group" = "正在创建讨论组";
+"no attendee selected" = "您尚未选择参与者！";
+"finishing creating group" = "正在完成创建";

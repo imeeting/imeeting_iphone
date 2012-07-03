@@ -13,12 +13,15 @@
 #import "ECGroupVideoViewController.h"
 #import "ECGroupAttendeeListViewController.h"
 #import "ECGroupManager.h"
+#import "ContactsSelectViewController.h"
 
 @interface ECMainPageViewController ()
 - (void)onFinishedGetGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedJoinGroup:(ASIHTTPRequest*)pRequest;
+- (void)onFinishedCreateGroup:(ASIHTTPRequest*)pRequest;
 - (void)joinGroup:(NSString*)groupId;
+- (void)setupGroupModuleWithGroupId:(NSString*)groupId;
 @end
 
 @implementation ECMainPageViewController
@@ -135,20 +138,24 @@
 }
 
 - (void)itemSelected:(NSDictionary *)group {
+    NSString *groupId = [group objectForKey:@"groupId"];
     
+    [self setupGroupModuleWithGroupId:groupId];
+    
+    // send http request to join the group
+    ECMainPageView *mainPage = (ECMainPageView*)self.view;
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:mainPage];
+    [hud showWhileExecuting:@selector(joinGroup:) onTarget:self withObject:groupId animated:YES];
+}
+
+- (void)setupGroupModuleWithGroupId:(NSString *)groupId {
     ECGroupVideoViewController *gvc = [[ECGroupVideoViewController alloc] init];
     ECGroupAttendeeListViewController *alvc =[[ECGroupAttendeeListViewController alloc] init];
     ECGroupModule *module = [[ECGroupModule alloc] init];
     module.videoController = gvc;
     module.attendeeController = alvc;
     [ECGroupManager sharedECGroupManager].currentGroupModule = module;    
-    NSString *groupId = [group objectForKey:@"groupId"];
     module.groupId = groupId;
-    
-    // send http request to join the group
-    ECMainPageView *mainPage = (ECMainPageView*)self.view;
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:mainPage];
-    [hud showWhileExecuting:@selector(joinGroup:) onTarget:self withObject:groupId animated:YES];
 }
 
 - (void)joinGroup:(NSString*)groupId {
@@ -168,7 +175,9 @@
             // switch to group view
             ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
             [module connectToNotifyServer];
+          
             [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.attendeeController withObject:nil];
+          
             UIViewController *videoController = module.videoController;
             [self.navigationController pushViewController:videoController animated:NO];
             return;
@@ -185,6 +194,12 @@
     }
     
     [[ECGroupManager sharedECGroupManager] setCurrentGroupModule:nil];
+}
+
+- (void)createNewGroup {    
+    ContactsSelectViewController *csvc = [[ContactsSelectViewController alloc] init];
+    csvc.isAppearedInCreateNewGroup = YES;
+    [self.navigationController pushViewController:csvc animated:YES];
 }
 
 @end

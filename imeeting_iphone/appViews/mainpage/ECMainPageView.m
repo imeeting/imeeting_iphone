@@ -103,6 +103,7 @@
 
 - (void)initUI;
 - (void)hideGroup:(NSString*)groupId;
+- (void)onCreateNewGroupAction;
 @end
 
 @implementation ECMainPageView
@@ -111,6 +112,8 @@
     
     self.title = NSLocalizedString(@"Talking Group", "");
     self.leftBarButtonItem = nil;
+    self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onCreateNewGroupAction)];
+    
     
     mGroupTableView = [[ECMainTableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 64)];
     mGroupTableView.backgroundColor = self.backgroundColor;
@@ -180,5 +183,14 @@
     }
 }
 
+#pragma mark - button action
+- (void)onCreateNewGroupAction {
+    NSLog(@"create group");
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(createNewGroup)]) {
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
+        hud.labelText = NSLocalizedString(@"Creating Group", "");
+        [hud showWhileExecuting:@selector(createNewGroup) onTarget:self.viewControllerRef withObject:nil animated:YES];
+    }
+}
 
 @end

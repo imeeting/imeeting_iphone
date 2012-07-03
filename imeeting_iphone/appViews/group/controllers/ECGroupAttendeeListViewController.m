@@ -12,6 +12,7 @@
 #import "ECGroupManager.h"
 #import "ECConstants.h"
 #import "ECUrlConfig.h"
+#import "ContactsSelectViewController.h"
 
 @interface ECGroupAttendeeListViewController ()
 - (void)onFinishedGetAttendeeList:(ASIHTTPRequest*)pRequest;
@@ -19,16 +20,16 @@
 @end
 
 @implementation ECGroupAttendeeListViewController
-
+@synthesize refreshList = _refreshList;
 - (id)init {
     self = [self initWithCompatibleView:[[ECGroupAttendeeListView alloc] init]];
-    isListLoaded = NO;
+    _refreshList = YES;
     return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
-    if (!isListLoaded) {
+    NSLog(@"ECGroupAttendeeListViewController - viewwillappear");
+    if (_refreshList) {
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
         [hud showWhileExecuting:@selector(refreshAttendeeList) onTarget:self withObject:nil animated:YES];
     }
@@ -64,7 +65,7 @@
             if (jsonArray) {
                 ECGroupAttendeeListView *attListView = (ECGroupAttendeeListView*)self.view;
                 [attListView setAttendeeArray:jsonArray];
-                isListLoaded = YES;
+                _refreshList = NO;
             }
             
             break;
@@ -117,6 +118,12 @@
     } else {
         [[iToast makeText:NSLocalizedString(@"This attendee is offline", "")] show];
     }
+}
+
+- (void)addContacts {
+    ContactsSelectViewController *csvc = [[ContactsSelectViewController alloc] init];
+    csvc.isAppearedInCreateNewGroup = NO;
+    [self.navigationController pushViewController:csvc animated:YES];
 }
 
 @end

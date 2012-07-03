@@ -18,6 +18,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // load address book
+    [[AddressBookManager shareAddressBookManager] traversalAddressBook];
+    
     // Override point for customization after application launch.
     self.window.rootViewController = [[AppRootViewController alloc] initWithPresentViewController:[[ECLoginViewController alloc] init] andMode:navigationController];
     [self.window makeKeyAndVisible];

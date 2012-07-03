@@ -247,6 +247,9 @@ static CGFloat padding = 4;
 
 - (void)addContactAction {
     NSLog(@"add contact");
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(addContacts)]) {
+        [self.viewControllerRef performSelector:@selector(addContacts)];
+    }
 }
 
 - (void)setAttendeeArray:(NSMutableArray *)attendeeArray {

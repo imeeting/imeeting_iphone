@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECGroupAttendeeListViewController : UIViewController {
-    BOOL isListLoaded;
-}
+@interface ECGroupAttendeeListViewController : UIViewController
+
+@property (nonatomic) BOOL refreshList;
 
 - (void)switchToVideo;
 - (void)leaveGroup;
 - (void)refreshAttendeeList;
 - (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
 - (void)onAttendeeSelected:(NSDictionary*)attendee;
+- (void)addContacts;
 @end

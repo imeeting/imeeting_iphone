@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F8039AA7157C65B4005903AC /* imeeting_iphone-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F863C869157C61320045C08C /* imeeting_iphone-Info.plist */; };
+		F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F807584515A294C1008D8656 /* MessageUI.framework */; };
 		F80BD3ED159C29A900A83C81 /* ECVideoEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3EC159C29A900A83C81 /* ECVideoEncode.m */; };
 		F80BD3F1159C3FF400A83C81 /* ECVideoDecode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3F0159C3FF400A83C81 /* ECVideoDecode.m */; };
 		F814E281157CA08B00FBBB19 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E27F157CA07800FBBB19 /* MobileCoreServices.framework */; };
@@ -52,6 +53,18 @@
 		F8D791B11599603800986BCD /* video_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D791AF1599603800986BCD /* video_off.png */; };
 		F8D791B21599603800986BCD /* video_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D791B01599603800986BCD /* video_on.png */; };
 		F8D791C61599670A00986BCD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D791C51599670A00986BCD /* libicucore.dylib */; };
+		F8E0C07D15A14DC900E66F27 /* ContactDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C07A15A14DC900E66F27 /* ContactDefault.png */; };
+		F8E0C07E15A14DC900E66F27 /* ContactPreinMeeting.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C07B15A14DC900E66F27 /* ContactPreinMeeting.png */; };
+		F8E0C07F15A14DC900E66F27 /* ContactSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C07C15A14DC900E66F27 /* ContactSelected.png */; };
+		F8E0C08215A14DDE00E66F27 /* Pinyin4jBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C08115A14DDE00E66F27 /* Pinyin4jBundle.bundle */; };
+		F8E0C0B115A14F2500E66F27 /* ContactBean+IMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0A015A14F2500E66F27 /* ContactBean+IMeeting.m */; };
+		F8E0C0B215A14F2500E66F27 /* ContactsSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0A315A14F2500E66F27 /* ContactsSelectViewController.m */; };
+		F8E0C0B315A14F2500E66F27 /* ABContactsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0A615A14F2500E66F27 /* ABContactsListView.m */; };
+		F8E0C0B415A14F2500E66F27 /* ContactsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0A815A14F2500E66F27 /* ContactsListTableViewCell.m */; };
+		F8E0C0B515A14F2500E66F27 /* ContactsProcessSoftKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AA15A14F2500E66F27 /* ContactsProcessSoftKeyboard.m */; };
+		F8E0C0B615A14F2500E66F27 /* ContactsProcessToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AC15A14F2500E66F27 /* ContactsProcessToolbar.m */; };
+		F8E0C0B715A14F2500E66F27 /* ContactsSelectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */; };
+		F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */; };
 		F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BEC7158EC57200467088 /* QuartzCore.framework */; };
 		F8E3BED7158F0EAC00467088 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */; };
 		F8E3BEE8158F1F9100467088 /* UserBean+IMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */; };
@@ -92,6 +105,7 @@
 /* Begin PBXFileReference section */
 		F8039AA6157C65B4005903AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F8050CD11589852E00024951 /* ECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstants.h; sourceTree = "<group>"; };
+		F807584515A294C1008D8656 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F80BD3EB159C29A900A83C81 /* ECVideoEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECVideoEncode.h; path = video/ECVideoEncode.h; sourceTree = "<group>"; };
 		F80BD3EC159C29A900A83C81 /* ECVideoEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECVideoEncode.m; path = video/ECVideoEncode.m; sourceTree = "<group>"; };
 		F80BD3EF159C3FF400A83C81 /* ECVideoDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECVideoDecode.h; path = video/ECVideoDecode.h; sourceTree = "<group>"; };
@@ -309,6 +323,26 @@
 		F8D791AF1599603800986BCD /* video_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_off.png; path = imeeting_iphone/Resources/images/video_off.png; sourceTree = "<group>"; };
 		F8D791B01599603800986BCD /* video_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_on.png; path = imeeting_iphone/Resources/images/video_on.png; sourceTree = "<group>"; };
 		F8D791C51599670A00986BCD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		F8E0C07A15A14DC900E66F27 /* ContactDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactDefault.png; path = imeeting_iphone/Resources/images/ContactDefault.png; sourceTree = "<group>"; };
+		F8E0C07B15A14DC900E66F27 /* ContactPreinMeeting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactPreinMeeting.png; path = imeeting_iphone/Resources/images/ContactPreinMeeting.png; sourceTree = "<group>"; };
+		F8E0C07C15A14DC900E66F27 /* ContactSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactSelected.png; path = imeeting_iphone/Resources/images/ContactSelected.png; sourceTree = "<group>"; };
+		F8E0C08115A14DDE00E66F27 /* Pinyin4jBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Pinyin4jBundle.bundle; path = imeeting_iphone/Resources/bundles/Pinyin4jBundle.bundle; sourceTree = "<group>"; };
+		F8E0C09F15A14F2500E66F27 /* ContactBean+IMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ContactBean+IMeeting.h"; path = "contactselection/ContactBean+IMeeting.h"; sourceTree = "<group>"; };
+		F8E0C0A015A14F2500E66F27 /* ContactBean+IMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ContactBean+IMeeting.m"; path = "contactselection/ContactBean+IMeeting.m"; sourceTree = "<group>"; };
+		F8E0C0A215A14F2500E66F27 /* ContactsSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsSelectViewController.h; path = contactselection/viewControllers/ContactsSelectViewController.h; sourceTree = "<group>"; };
+		F8E0C0A315A14F2500E66F27 /* ContactsSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsSelectViewController.m; path = contactselection/viewControllers/ContactsSelectViewController.m; sourceTree = "<group>"; };
+		F8E0C0A515A14F2500E66F27 /* ABContactsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABContactsListView.h; path = contactselection/views/ABContactsListView.h; sourceTree = "<group>"; };
+		F8E0C0A615A14F2500E66F27 /* ABContactsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABContactsListView.m; path = contactselection/views/ABContactsListView.m; sourceTree = "<group>"; };
+		F8E0C0A715A14F2500E66F27 /* ContactsListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsListTableViewCell.h; path = contactselection/views/ContactsListTableViewCell.h; sourceTree = "<group>"; };
+		F8E0C0A815A14F2500E66F27 /* ContactsListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsListTableViewCell.m; path = contactselection/views/ContactsListTableViewCell.m; sourceTree = "<group>"; };
+		F8E0C0A915A14F2500E66F27 /* ContactsProcessSoftKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsProcessSoftKeyboard.h; path = contactselection/views/ContactsProcessSoftKeyboard.h; sourceTree = "<group>"; };
+		F8E0C0AA15A14F2500E66F27 /* ContactsProcessSoftKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsProcessSoftKeyboard.m; path = contactselection/views/ContactsProcessSoftKeyboard.m; sourceTree = "<group>"; };
+		F8E0C0AB15A14F2500E66F27 /* ContactsProcessToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsProcessToolbar.h; path = contactselection/views/ContactsProcessToolbar.h; sourceTree = "<group>"; };
+		F8E0C0AC15A14F2500E66F27 /* ContactsProcessToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsProcessToolbar.m; path = contactselection/views/ContactsProcessToolbar.m; sourceTree = "<group>"; };
+		F8E0C0AD15A14F2500E66F27 /* ContactsSelectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsSelectContainerView.h; path = contactselection/views/ContactsSelectContainerView.h; sourceTree = "<group>"; };
+		F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsSelectContainerView.m; path = contactselection/views/ContactsSelectContainerView.m; sourceTree = "<group>"; };
+		F8E0C0AF15A14F2500E66F27 /* MeetingContactsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingContactsListView.h; sourceTree = "<group>"; };
+		F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingContactsListView.m; sourceTree = "<group>"; };
 		F8E3BEC7158EC57200467088 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphonesimulator/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F8E3BEE6158F1F9100467088 /* UserBean+IMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UserBean+IMeeting.h"; path = "system/user/UserBean+IMeeting.h"; sourceTree = "<group>"; };
@@ -352,6 +386,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */,
 				F885A670159B114500709FC7 /* libbz2.1.0.dylib in Frameworks */,
 				F885A5A3159ABE5D00709FC7 /* CoreVideo.framework in Frameworks */,
 				F885A5A0159ABE4C00709FC7 /* CoreMedia.framework in Frameworks */,
@@ -426,6 +461,7 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F807584515A294C1008D8656 /* MessageUI.framework */,
 				F885A66F159B114500709FC7 /* libbz2.1.0.dylib */,
 				F885A5A2159ABE5D00709FC7 /* CoreVideo.framework */,
 				F885A59F159ABE4C00709FC7 /* CoreMedia.framework */,
@@ -922,6 +958,7 @@
 		F8DECFA0157C6F9600BED245 /* AppViews */ = {
 			isa = PBXGroup;
 			children = (
+				F8E0C08315A14F0200E66F27 /* ContactSelection */,
 				F885A591159AB02E00709FC7 /* Video */,
 				F8D791AE15995B2400986BCD /* Custom */,
 				F8FA196B1591DFBA00947304 /* Group */,
@@ -932,6 +969,54 @@
 			);
 			name = AppViews;
 			path = appViews;
+			sourceTree = "<group>";
+		};
+		F8E0C08315A14F0200E66F27 /* ContactSelection */ = {
+			isa = PBXGroup;
+			children = (
+				F8E0C09F15A14F2500E66F27 /* ContactBean+IMeeting.h */,
+				F8E0C0A015A14F2500E66F27 /* ContactBean+IMeeting.m */,
+				F8E0C0B915A176B000E66F27 /* ContactList */,
+				F8E0C0BA15A176EC00E66F27 /* ContactProcessToolbar */,
+				F8E0C0A715A14F2500E66F27 /* ContactsListTableViewCell.h */,
+				F8E0C0A815A14F2500E66F27 /* ContactsListTableViewCell.m */,
+				F8E0C0AD15A14F2500E66F27 /* ContactsSelectContainerView.h */,
+				F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */,
+				F8E0C0A215A14F2500E66F27 /* ContactsSelectViewController.h */,
+				F8E0C0A315A14F2500E66F27 /* ContactsSelectViewController.m */,
+				F8E0C0A415A14F2500E66F27 /* In_PreinMeetingContactList */,
+			);
+			name = ContactSelection;
+			sourceTree = "<group>";
+		};
+		F8E0C0A415A14F2500E66F27 /* In_PreinMeetingContactList */ = {
+			isa = PBXGroup;
+			children = (
+				F8E0C0AF15A14F2500E66F27 /* MeetingContactsListView.h */,
+				F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */,
+			);
+			name = In_PreinMeetingContactList;
+			path = contactselection/views;
+			sourceTree = "<group>";
+		};
+		F8E0C0B915A176B000E66F27 /* ContactList */ = {
+			isa = PBXGroup;
+			children = (
+				F8E0C0A515A14F2500E66F27 /* ABContactsListView.h */,
+				F8E0C0A615A14F2500E66F27 /* ABContactsListView.m */,
+			);
+			name = ContactList;
+			sourceTree = "<group>";
+		};
+		F8E0C0BA15A176EC00E66F27 /* ContactProcessToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				F8E0C0A915A14F2500E66F27 /* ContactsProcessSoftKeyboard.h */,
+				F8E0C0AA15A14F2500E66F27 /* ContactsProcessSoftKeyboard.m */,
+				F8E0C0AB15A14F2500E66F27 /* ContactsProcessToolbar.h */,
+				F8E0C0AC15A14F2500E66F27 /* ContactsProcessToolbar.m */,
+			);
+			name = ContactProcessToolbar;
 			sourceTree = "<group>";
 		};
 		F8E3BEE5158F1F4B00467088 /* User */ = {
@@ -956,6 +1041,10 @@
 		F8F1A743158B1292003F1EE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8E0C08115A14DDE00E66F27 /* Pinyin4jBundle.bundle */,
+				F8E0C07A15A14DC900E66F27 /* ContactDefault.png */,
+				F8E0C07B15A14DC900E66F27 /* ContactPreinMeeting.png */,
+				F8E0C07C15A14DC900E66F27 /* ContactSelected.png */,
 				F885A583159A9DDA00709FC7 /* camera_switch.png */,
 				F8D791AF1599603800986BCD /* video_off.png */,
 				F8D791B01599603800986BCD /* video_on.png */,
@@ -1102,6 +1191,10 @@
 				F8D791B11599603800986BCD /* video_off.png in Resources */,
 				F8D791B21599603800986BCD /* video_on.png in Resources */,
 				F885A584159A9DDA00709FC7 /* camera_switch.png in Resources */,
+				F8E0C07D15A14DC900E66F27 /* ContactDefault.png in Resources */,
+				F8E0C07E15A14DC900E66F27 /* ContactPreinMeeting.png in Resources */,
+				F8E0C07F15A14DC900E66F27 /* ContactSelected.png in Resources */,
+				F8E0C08215A14DDE00E66F27 /* Pinyin4jBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1158,6 +1251,14 @@
 				F885A66E159AFFB500709FC7 /* quicklibav.c in Sources */,
 				F80BD3ED159C29A900A83C81 /* ECVideoEncode.m in Sources */,
 				F80BD3F1159C3FF400A83C81 /* ECVideoDecode.m in Sources */,
+				F8E0C0B115A14F2500E66F27 /* ContactBean+IMeeting.m in Sources */,
+				F8E0C0B215A14F2500E66F27 /* ContactsSelectViewController.m in Sources */,
+				F8E0C0B315A14F2500E66F27 /* ABContactsListView.m in Sources */,
+				F8E0C0B415A14F2500E66F27 /* ContactsListTableViewCell.m in Sources */,
+				F8E0C0B515A14F2500E66F27 /* ContactsProcessSoftKeyboard.m in Sources */,
+				F8E0C0B615A14F2500E66F27 /* ContactsProcessToolbar.m in Sources */,
+				F8E0C0B715A14F2500E66F27 /* ContactsSelectContainerView.m in Sources */,
+				F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1284,7 +1385,7 @@
 					"\"$(SRCROOT)/Library/x264lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36CC9F79-D831-44C1-B40B-BC40517D94E8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9591FBA6-0D81-4954-B742-47FEEB099BBA";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\" \"$(SRCROOT)/Library/ffmpeglib\" \"$(SRCROOT)/Library/openssllib\" \"$(SRCROOT)/Library/rtmplib\" \"$(SRCROOT)/Library/speexlib\" \"$(SRCROOT)/Library/x264lib\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1319,7 +1420,7 @@
 					"\"$(SRCROOT)/Library/x264lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36CC9F79-D831-44C1-B40B-BC40517D94E8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9591FBA6-0D81-4954-B742-47FEEB099BBA";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\" \"$(SRCROOT)/Library/ffmpeglib\" \"$(SRCROOT)/Library/openssllib\" \"$(SRCROOT)/Library/rtmplib\" \"$(SRCROOT)/Library/speexlib\" \"$(SRCROOT)/Library/x264lib\"";
 				WRAPPER_EXTENSION = app;
 			};
