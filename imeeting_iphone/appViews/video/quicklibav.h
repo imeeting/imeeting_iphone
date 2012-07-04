@@ -18,6 +18,7 @@ typedef struct QuickVideoOutput {
     AVStream *video_stream;
     int width;
     int height;
+    int initSuccessFlag;
 } QuickVideoOutput;
 
 /*

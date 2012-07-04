@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ECBaseUIView.h"
 
-@interface ECGroupVideoView : ECBaseUIView {
+@interface ECGroupVideoView : ECBaseUIView <UIAlertViewDelegate> {
     
     UIImageView *mOppositeVideoView;
     

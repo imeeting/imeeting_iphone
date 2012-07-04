@@ -45,7 +45,7 @@
         
         // set title
         self.title = NSLocalizedString(@"select attendee", nil);
-        self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"invite", "") style:UIBarButtonItemStylePlain target:self action:@selector(onInviteAttendeeAction)];
+        self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"invite", "") style:UIBarButtonItemStyleDone target:self action:@selector(onInviteAttendeeAction)];
         
         
         // get UIScreen bounds
@@ -286,6 +286,13 @@
 - (void)onInviteAttendeeAction {
     NSArray *selectedAttendeeArray = [self preinMeetingContactsInfoArray];
     NSLog(@"selected attendee count: %d", selectedAttendeeArray.count);
+    
+    if (!self.isAppearedInCreatingNewGroup) {
+        if (selectedAttendeeArray.count <= 0) {
+            [[iToast makeText:NSLocalizedString(@"no attendee selected", "")] show];
+            return;
+        }
+    }
     
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(inviteAttendees:)]) {
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];

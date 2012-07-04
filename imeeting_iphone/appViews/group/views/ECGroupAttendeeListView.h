@@ -39,7 +39,7 @@
 - (void)updateAttendeeStatus:(NSDictionary*)attendee;
 @end
 
-@interface ECGroupAttendeeListView : ECBaseUIView <UITableViewDataSource, UITableViewDelegate>{
+@interface ECGroupAttendeeListView : ECBaseUIView <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>{
     UITableView *mAttendeeListTableView;
 }
 

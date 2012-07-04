@@ -10,7 +10,7 @@
 #import "ECGroupCell.h"
 
 @implementation ECMainTableView
-
+@synthesize currentDeletedIndexPath = _currentDeletedIndexPath;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -90,11 +90,15 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        self.currentDeletedIndexPath = indexPath;
         NSDictionary *groupInfo = [mGroupDataSource objectAtIndex:indexPath.row];
         [self hideGroup:groupInfo];
-        [mGroupDataSource removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationRight];
     }
+}
+
+- (void)removeGroupFromUI:(NSIndexPath *)indexPath {
+    [mGroupDataSource removeObjectAtIndex:indexPath.row];
+    [self deleteRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationTop];
 }
 
 @end
@@ -173,7 +177,8 @@
 
 - (void)hideGroup:(NSString*)groupId {
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(hideGroup:)]) {
-        [self.viewControllerRef performSelector:@selector(hideGroup:) withObject:groupId];
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
+        [hud showWhileExecuting:@selector(hideGroup:) onTarget:self.viewControllerRef withObject:groupId animated:YES];
     }
 }
 
@@ -183,13 +188,20 @@
     }
 }
 
+- (void)removeSelectedGroupFromUI {
+    NSIndexPath *indexPath = [mGroupTableView currentDeletedIndexPath];
+    [mGroupTableView removeGroupFromUI:indexPath];
+}
+
+- (void)reloadTableViewData {
+    [mGroupTableView reloadData];
+}
+
 #pragma mark - button action
 - (void)onCreateNewGroupAction {
     NSLog(@"create group");
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(createNewGroup)]) {
-        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
-        hud.labelText = NSLocalizedString(@"Creating Group", "");
-        [hud showWhileExecuting:@selector(createNewGroup) onTarget:self.viewControllerRef withObject:nil animated:YES];
+        [self.viewControllerRef performSelector:@selector(createNewGroup)];
     }
 }
 

@@ -16,7 +16,7 @@
     if (self) {
         // Custom initialization
         // set navigationBar tint color
-        self.navigationBar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
+       // self.navigationBar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
     }
     return self;
 }

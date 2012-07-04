@@ -98,10 +98,6 @@
         [HttpUtil postSignatureRequestWithUrl:CREATE_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedInviteAttendees:) andFailedRespSelector:nil];
     } else {
         // already in group
-        if (attendeeArray.count <= 0) {
-            [[iToast makeText:NSLocalizedString(@"no attendee selected", "")] show];
-            return;
-        }
         
         NSString *groupId = [[ECGroupManager sharedECGroupManager] currentGroupModule].groupId;
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:groupId, GROUP_ID, attendeesJsonString, GROUP_ATTENDEES, nil];

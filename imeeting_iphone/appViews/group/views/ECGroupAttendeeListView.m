@@ -240,10 +240,26 @@ static CGFloat padding = 4;
 }
 
 - (void)leaveGroupAction {
-    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(leaveGroup)]) {
-        [self.viewControllerRef performSelector:@selector(leaveGroup)];
+    [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Leave Group?", "") delegate:self cancelButtonTitle:NSLocalizedString(@"OK", "") otherButtonTitles:NSLocalizedString(@"Cancel", ""), nil] show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            // leave group
+            if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(leaveGroup)]) {
+                [self.viewControllerRef performSelector:@selector(leaveGroup)];
+            }
+            break;
+        case 1:
+            // stay in group
+            break;
+        default:
+            break;
     }
 }
+
 
 - (void)addContactAction {
     NSLog(@"add contact");

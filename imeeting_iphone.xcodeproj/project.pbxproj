@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F8039AA7157C65B4005903AC /* imeeting_iphone-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F863C869157C61320045C08C /* imeeting_iphone-Info.plist */; };
 		F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F807584515A294C1008D8656 /* MessageUI.framework */; };
 		F80BD3ED159C29A900A83C81 /* ECVideoEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3EC159C29A900A83C81 /* ECVideoEncode.m */; };
 		F80BD3F1159C3FF400A83C81 /* ECVideoDecode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3F0159C3FF400A83C81 /* ECVideoDecode.m */; };
@@ -15,17 +14,13 @@
 		F814E284157CA0AB00FBBB19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E282157CA09600FBBB19 /* SystemConfiguration.framework */; };
 		F814E286157CA0B600FBBB19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E285157CA0B600FBBB19 /* CFNetwork.framework */; };
 		F814E288157CA0CE00FBBB19 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */; };
+		F85D1F2615A434B10038D41A /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F85D1F2515A434B10038D41A /* CommonToolkit.framework */; };
 		F863C862157C61320045C08C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C861157C61320045C08C /* UIKit.framework */; };
 		F863C864157C61320045C08C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C863157C61320045C08C /* Foundation.framework */; };
 		F863C866157C61320045C08C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C865157C61320045C08C /* CoreGraphics.framework */; };
 		F863C86C157C61320045C08C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F863C86A157C61320045C08C /* InfoPlist.strings */; };
 		F863C86E157C61320045C08C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F863C86D157C61320045C08C /* main.m */; };
 		F863C872157C61320045C08C /* ECAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F863C871157C61320045C08C /* ECAppDelegate.m */; };
-		F863C87A157C61320045C08C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C879157C61320045C08C /* SenTestingKit.framework */; };
-		F863C87B157C61320045C08C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C861157C61320045C08C /* UIKit.framework */; };
-		F863C87C157C61320045C08C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C863157C61320045C08C /* Foundation.framework */; };
-		F863C884157C61320045C08C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F863C882157C61320045C08C /* InfoPlist.strings */; };
-		F863C887157C61320045C08C /* imeeting_iphoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F863C886157C61320045C08C /* imeeting_iphoneTests.m */; };
 		F863C896157C65250045C08C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F863C894157C65250045C08C /* Localizable.strings */; };
 		F87BF5E11585DE3E00339C0C /* ECMainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F87BF5E01585DE3E00339C0C /* ECMainPageView.m */; };
 		F87BF5E41585DE6500339C0C /* ECMainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87BF5E31585DE6500339C0C /* ECMainPageViewController.m */; };
@@ -66,10 +61,8 @@
 		F8E0C0B715A14F2500E66F27 /* ContactsSelectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */; };
 		F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */; };
 		F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BEC7158EC57200467088 /* QuartzCore.framework */; };
-		F8E3BED7158F0EAC00467088 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */; };
 		F8E3BEE8158F1F9100467088 /* UserBean+IMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */; };
 		F8E3BF08158F327700467088 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BF07158F327600467088 /* AddressBook.framework */; };
-		F8E3BF0B158F3F7C00467088 /* CommonToolkitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E3BF0A158F3F7C00467088 /* CommonToolkitBundle.bundle */; };
 		F8E49FDB1580B74300E8B2C0 /* ECLoginUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */; };
 		F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */; };
 		F8E58F7E1597F9A200CC2F1C /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */; };
@@ -80,6 +73,7 @@
 		F8E58F8D15985AE300CC2F1C /* guydefault.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F8C15985AE300CC2F1C /* guydefault.png */; };
 		F8E58F951598695300CC2F1C /* voice_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F931598695300CC2F1C /* voice_off.png */; };
 		F8E58F961598695300CC2F1C /* voice_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F941598695300CC2F1C /* voice_on.png */; };
+		F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */; };
 		F8ED85871592CDFE00E38F0C /* camera_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85851592CDFE00E38F0C /* camera_off.png */; };
 		F8ED85881592CDFE00E38F0C /* camera_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85861592CDFE00E38F0C /* camera_on.png */; };
 		F8ED858F15931AB800E38F0C /* gerlor_001.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED858E15931AB800E38F0C /* gerlor_001.png */; };
@@ -91,16 +85,6 @@
 		F8FA19731591E73100947304 /* ECGroupVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FA19721591E73100947304 /* ECGroupVideoView.m */; };
 		F8FA19761591E76700947304 /* ECGroupVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FA19751591E76700947304 /* ECGroupVideoViewController.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		F863C87D157C61320045C08C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F863C854157C61320045C08C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F863C85C157C61320045C08C;
-			remoteInfo = imeeting_iphone;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F8039AA6157C65B4005903AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -115,6 +99,7 @@
 		F814E282157CA09600FBBB19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F814E285157CA0B600FBBB19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		F85D1F2515A434B10038D41A /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphonesimulator/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F863C85D157C61320045C08C /* imeeting_iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imeeting_iphone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F863C861157C61320045C08C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F863C863157C61320045C08C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -125,14 +110,7 @@
 		F863C86F157C61320045C08C /* imeeting_iphone-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "imeeting_iphone-Prefix.pch"; sourceTree = "<group>"; };
 		F863C870157C61320045C08C /* ECAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECAppDelegate.h; sourceTree = "<group>"; };
 		F863C871157C61320045C08C /* ECAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ECAppDelegate.m; sourceTree = "<group>"; };
-		F863C878157C61320045C08C /* imeeting_iphoneTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = imeeting_iphoneTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F863C879157C61320045C08C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		F863C881157C61320045C08C /* imeeting_iphoneTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "imeeting_iphoneTests-Info.plist"; sourceTree = "<group>"; };
-		F863C883157C61320045C08C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F863C885157C61320045C08C /* imeeting_iphoneTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imeeting_iphoneTests.h; sourceTree = "<group>"; };
-		F863C886157C61320045C08C /* imeeting_iphoneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = imeeting_iphoneTests.m; sourceTree = "<group>"; };
 		F863C892157C62170045C08C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/star/workspace/xcode/imeeting/imeeting_iphone/imeeting_iphone/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
-		F863C893157C62170045C08C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/star/workspace/xcode/imeeting/imeeting_iphone/imeeting_iphoneTests/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
 		F863C895157C65250045C08C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F87BF5DF1585DE3E00339C0C /* ECMainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMainPageView.h; path = mainpage/ECMainPageView.h; sourceTree = "<group>"; };
 		F87BF5E01585DE3E00339C0C /* ECMainPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECMainPageView.m; path = mainpage/ECMainPageView.m; sourceTree = "<group>"; };
@@ -344,11 +322,9 @@
 		F8E0C0AF15A14F2500E66F27 /* MeetingContactsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingContactsListView.h; sourceTree = "<group>"; };
 		F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingContactsListView.m; sourceTree = "<group>"; };
 		F8E3BEC7158EC57200467088 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphonesimulator/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F8E3BEE6158F1F9100467088 /* UserBean+IMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UserBean+IMeeting.h"; path = "system/user/UserBean+IMeeting.h"; sourceTree = "<group>"; };
 		F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UserBean+IMeeting.m"; path = "system/user/UserBean+IMeeting.m"; sourceTree = "<group>"; };
 		F8E3BF07158F327600467088 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		F8E3BF0A158F3F7C00467088 /* CommonToolkitBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = CommonToolkitBundle.bundle; path = "../Build/Products/Debug-iphonesimulator/CommonToolkitBundle.bundle"; sourceTree = "<group>"; };
 		F8E49FD91580B74300E8B2C0 /* ECLoginUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECLoginUIView.h; path = system/views/ECLoginUIView.h; sourceTree = "<group>"; };
 		F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECLoginUIView.m; path = system/views/ECLoginUIView.m; sourceTree = "<group>"; };
 		F8E49FDC1580B76B00E8B2C0 /* ECLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECLoginViewController.h; path = system/controller/ECLoginViewController.h; sourceTree = "<group>"; };
@@ -363,6 +339,7 @@
 		F8E58F8C15985AE300CC2F1C /* guydefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guydefault.png; path = imeeting_iphone/Resources/images/guydefault.png; sourceTree = "<group>"; };
 		F8E58F931598695300CC2F1C /* voice_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_off.png; path = imeeting_iphone/Resources/images/voice_off.png; sourceTree = "<group>"; };
 		F8E58F941598695300CC2F1C /* voice_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_on.png; path = imeeting_iphone/Resources/images/voice_on.png; sourceTree = "<group>"; };
+		F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = CommonToolkitBundle.bundle; path = imeeting_iphone/Resources/bundles/CommonToolkitBundle.bundle; sourceTree = "<group>"; };
 		F8ED85851592CDFE00E38F0C /* camera_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_off.png; path = imeeting_iphone/Resources/images/camera_off.png; sourceTree = "<group>"; };
 		F8ED85861592CDFE00E38F0C /* camera_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_on.png; path = imeeting_iphone/Resources/images/camera_on.png; sourceTree = "<group>"; };
 		F8ED858E15931AB800E38F0C /* gerlor_001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gerlor_001.png; path = imeeting_iphone/Resources/images/gerlor_001.png; sourceTree = "<group>"; };
@@ -386,6 +363,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F85D1F2615A434B10038D41A /* CommonToolkit.framework in Frameworks */,
 				F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */,
 				F885A670159B114500709FC7 /* libbz2.1.0.dylib in Frameworks */,
 				F885A5A3159ABE5D00709FC7 /* CoreVideo.framework in Frameworks */,
@@ -393,7 +371,6 @@
 				F885A587159AA24000709FC7 /* AVFoundation.framework in Frameworks */,
 				F8D791C61599670A00986BCD /* libicucore.dylib in Frameworks */,
 				F8E3BF08158F327700467088 /* AddressBook.framework in Frameworks */,
-				F8E3BED7158F0EAC00467088 /* CommonToolkit.framework in Frameworks */,
 				F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */,
 				F814E288157CA0CE00FBBB19 /* libz.1.2.5.dylib in Frameworks */,
 				F814E286157CA0B600FBBB19 /* CFNetwork.framework in Frameworks */,
@@ -412,16 +389,6 @@
 				F885A669159AFE4500709FC7 /* librtmp.a in Frameworks */,
 				F885A66A159AFE4500709FC7 /* libspeex.a in Frameworks */,
 				F885A66B159AFE4500709FC7 /* libx264.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F863C874157C61320045C08C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F863C87A157C61320045C08C /* SenTestingKit.framework in Frameworks */,
-				F863C87B157C61320045C08C /* UIKit.framework in Frameworks */,
-				F863C87C157C61320045C08C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +411,6 @@
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
-				F863C87F157C61320045C08C /* imeeting_iphoneTests */,
 				F863C85E157C61320045C08C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -453,7 +419,6 @@
 			isa = PBXGroup;
 			children = (
 				F863C85D157C61320045C08C /* imeeting_iphone.app */,
-				F863C878157C61320045C08C /* imeeting_iphoneTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -461,6 +426,7 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F85D1F2515A434B10038D41A /* CommonToolkit.framework */,
 				F807584515A294C1008D8656 /* MessageUI.framework */,
 				F885A66F159B114500709FC7 /* libbz2.1.0.dylib */,
 				F885A5A2159ABE5D00709FC7 /* CoreVideo.framework */,
@@ -468,7 +434,6 @@
 				F885A586159AA24000709FC7 /* AVFoundation.framework */,
 				F8D791C51599670A00986BCD /* libicucore.dylib */,
 				F8E3BF07158F327600467088 /* AddressBook.framework */,
-				F8E3BED6158F0EAC00467088 /* CommonToolkit.framework */,
 				F8E3BEC7158EC57200467088 /* QuartzCore.framework */,
 				F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */,
 				F814E285157CA0B600FBBB19 /* CFNetwork.framework */,
@@ -477,7 +442,6 @@
 				F863C861157C61320045C08C /* UIKit.framework */,
 				F863C863157C61320045C08C /* Foundation.framework */,
 				F863C865157C61320045C08C /* CoreGraphics.framework */,
-				F863C879157C61320045C08C /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -503,25 +467,6 @@
 				F863C86D157C61320045C08C /* main.m */,
 				F863C86F157C61320045C08C /* imeeting_iphone-Prefix.pch */,
 				F863C894157C65250045C08C /* Localizable.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F863C87F157C61320045C08C /* imeeting_iphoneTests */ = {
-			isa = PBXGroup;
-			children = (
-				F863C885157C61320045C08C /* imeeting_iphoneTests.h */,
-				F863C886157C61320045C08C /* imeeting_iphoneTests.m */,
-				F863C880157C61320045C08C /* Supporting Files */,
-			);
-			path = imeeting_iphoneTests;
-			sourceTree = "<group>";
-		};
-		F863C880157C61320045C08C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F863C881157C61320045C08C /* imeeting_iphoneTests-Info.plist */,
-				F863C882157C61320045C08C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1041,6 +986,7 @@
 		F8F1A743158B1292003F1EE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */,
 				F8E0C08115A14DDE00E66F27 /* Pinyin4jBundle.bundle */,
 				F8E0C07A15A14DC900E66F27 /* ContactDefault.png */,
 				F8E0C07B15A14DC900E66F27 /* ContactPreinMeeting.png */,
@@ -1059,7 +1005,6 @@
 				F8ED85861592CDFE00E38F0C /* camera_on.png */,
 				F8FA196915917A1E00947304 /* guy2.png */,
 				F8FA19651591781D00947304 /* guy.png */,
-				F8E3BF0A158F3F7C00467088 /* CommonToolkitBundle.bundle */,
 			);
 			name = Resources;
 			path = ..;
@@ -1120,25 +1065,6 @@
 			productReference = F863C85D157C61320045C08C /* imeeting_iphone.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F863C877157C61320045C08C /* imeeting_iphoneTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F863C88D157C61320045C08C /* Build configuration list for PBXNativeTarget "imeeting_iphoneTests" */;
-			buildPhases = (
-				F863C873157C61320045C08C /* Sources */,
-				F863C874157C61320045C08C /* Frameworks */,
-				F863C875157C61320045C08C /* Resources */,
-				F863C876157C61320045C08C /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F863C87E157C61320045C08C /* PBXTargetDependency */,
-			);
-			name = imeeting_iphoneTests;
-			productName = imeeting_iphoneTests;
-			productReference = F863C878157C61320045C08C /* imeeting_iphoneTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1163,7 +1089,6 @@
 			projectRoot = "";
 			targets = (
 				F863C85C157C61320045C08C /* imeeting_iphone */,
-				F863C877157C61320045C08C /* imeeting_iphoneTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1173,10 +1098,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8E3BF0B158F3F7C00467088 /* CommonToolkitBundle.bundle in Resources */,
 				F863C86C157C61320045C08C /* InfoPlist.strings in Resources */,
 				F863C896157C65250045C08C /* Localizable.strings in Resources */,
-				F8039AA7157C65B4005903AC /* imeeting_iphone-Info.plist in Resources */,
 				F8FA19661591781D00947304 /* guy.png in Resources */,
 				F8FA196A15917A1E00947304 /* guy2.png in Resources */,
 				F8ED85871592CDFE00E38F0C /* camera_off.png in Resources */,
@@ -1195,34 +1118,11 @@
 				F8E0C07E15A14DC900E66F27 /* ContactPreinMeeting.png in Resources */,
 				F8E0C07F15A14DC900E66F27 /* ContactSelected.png in Resources */,
 				F8E0C08215A14DDE00E66F27 /* Pinyin4jBundle.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F863C875157C61320045C08C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F863C884157C61320045C08C /* InfoPlist.strings in Resources */,
+				F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		F863C876157C61320045C08C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F863C859157C61320045C08C /* Sources */ = {
@@ -1262,23 +1162,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F863C873157C61320045C08C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F863C887157C61320045C08C /* imeeting_iphoneTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F863C87E157C61320045C08C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F863C85C157C61320045C08C /* imeeting_iphone */;
-			targetProxy = F863C87D157C61320045C08C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F863C86A157C61320045C08C /* InfoPlist.strings */ = {
@@ -1286,15 +1170,6 @@
 			children = (
 				F863C86B157C61320045C08C /* en */,
 				F863C892157C62170045C08C /* zh-Hans */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F863C882157C61320045C08C /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F863C883157C61320045C08C /* en */,
-				F863C893157C62170045C08C /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1364,6 +1239,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
 					"\"$(SRCROOT)/../../../../Downloads\"",
+					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "imeeting_iphone/imeeting_iphone-Prefix.pch";
@@ -1375,6 +1251,7 @@
 					"\"$(SRCROOT)/Library/rtmplib/include/librtmp\"",
 				);
 				INFOPLIST_FILE = "imeeting_iphone/imeeting_iphone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
@@ -1399,6 +1276,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
 					"\"$(SRCROOT)/../../../../Downloads\"",
+					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "imeeting_iphone/imeeting_iphone-Prefix.pch";
@@ -1410,6 +1288,7 @@
 					"\"$(SRCROOT)/Library/rtmplib/include/librtmp\"",
 				);
 				INFOPLIST_FILE = "imeeting_iphone/imeeting_iphone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
@@ -1423,40 +1302,6 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9591FBA6-0D81-4954-B742-47FEEB099BBA";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\" \"$(SRCROOT)/Library/ffmpeglib\" \"$(SRCROOT)/Library/openssllib\" \"$(SRCROOT)/Library/rtmplib\" \"$(SRCROOT)/Library/speexlib\" \"$(SRCROOT)/Library/x264lib\"";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		F863C88E157C61320045C08C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/imeeting_iphone.app/imeeting_iphone";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "imeeting_iphone/imeeting_iphone-Prefix.pch";
-				INFOPLIST_FILE = "imeeting_iphoneTests/imeeting_iphoneTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		F863C88F157C61320045C08C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/imeeting_iphone.app/imeeting_iphone";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "imeeting_iphone/imeeting_iphone-Prefix.pch";
-				INFOPLIST_FILE = "imeeting_iphoneTests/imeeting_iphoneTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -1477,15 +1322,6 @@
 			buildConfigurations = (
 				F863C88B157C61320045C08C /* Debug */,
 				F863C88C157C61320045C08C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F863C88D157C61320045C08C /* Build configuration list for PBXNativeTarget "imeeting_iphoneTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F863C88E157C61320045C08C /* Debug */,
-				F863C88F157C61320045C08C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

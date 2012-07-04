@@ -36,6 +36,7 @@
 "finishing register.." = "Finishing register..";
 "Register OK" = "Register OK";
 "OK" = "OK";
+"Cancel" = "Cancel";
 "Login" = "Login";
 "Account Setting" = "Account Setting";
 "Remember Pwd" = "Remember Password";
@@ -69,4 +70,5 @@
 "Creating Group" = "Creating New Group";
 "inviting attendees" = "Sending invitation request";
 "no attendee selected" = "No attendee selected!";
-"finishing creating group" = "正在完成创建";
+"finishing creating group" = "Creating group...";
+"Leave Group?" = "Leave Group?";

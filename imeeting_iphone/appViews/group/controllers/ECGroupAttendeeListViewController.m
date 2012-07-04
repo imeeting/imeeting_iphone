@@ -50,6 +50,7 @@
 }
 
 - (void)refreshAttendeeList {
+    NSLog(@"refresh attendee list");
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:[ECGroupManager sharedECGroupManager].currentGroupModule.groupId, GROUP_ID, nil];
     [HttpUtil postSignatureRequestWithUrl:GET_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetAttendeeList:) andFailedRespSelector:@selector(onNetworkFailed:)];
 }
@@ -61,7 +62,10 @@
     
     switch (statusCode) {
         case 200: {
-            NSMutableArray *jsonArray = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSString *responseText = [[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"json array: %@", responseText);
+
+            NSMutableArray *jsonArray = [responseText objectFromJSONString];
             if (jsonArray) {
                 ECGroupAttendeeListView *attListView = (ECGroupAttendeeListView*)self.view;
                 [attListView setAttendeeArray:jsonArray];
@@ -121,7 +125,15 @@
 }
 
 - (void)addContacts {
+    NSMutableArray *phoneNumberArray = [NSMutableArray arrayWithCapacity:10];
+    ECGroupAttendeeListView *view = (ECGroupAttendeeListView*)self.view;
+    for (NSDictionary *attendee in view.attendeeArray) {
+        NSString *username = [attendee objectForKey:USERNAME];
+        [phoneNumberArray addObject:username];
+    }
+    
     ContactsSelectViewController *csvc = [[ContactsSelectViewController alloc] init];
+    [csvc initInMeetingAttendeesPhoneNumbers:phoneNumberArray];
     csvc.isAppearedInCreateNewGroup = NO;
     [self.navigationController pushViewController:csvc animated:YES];
 }

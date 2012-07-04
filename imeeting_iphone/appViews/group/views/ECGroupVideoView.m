@@ -146,10 +146,26 @@ static CGFloat OppositeNameLabelHeight = 20;
 
 #pragma mark - button actions
 - (void)onLeaveAction {
-    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(onLeaveGroup)]) {
-        [self.viewControllerRef performSelector:@selector(onLeaveGroup)];
+    [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Leave Group?", "") delegate:self cancelButtonTitle:NSLocalizedString(@"OK", "") otherButtonTitles:NSLocalizedString(@"Cancel", ""), nil] show];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            // leave group
+            if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(onLeaveGroup)]) {
+                [self.viewControllerRef performSelector:@selector(onLeaveGroup)];
+            }
+            break;
+        case 1:
+            // stay in group
+            break;
+        default:
+            break;
     }
 }
+
 
 - (void)onSwitchToAttendeeListViewAction {
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(onSwitchToAttendeeListView)]) {

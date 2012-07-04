@@ -92,6 +92,10 @@
         NSDictionary *attendee = [notice objectForKey:ATTENDEE];
         ECGroupAttendeeListViewController *avc = (ECGroupAttendeeListViewController*)_attendeeController;
         [avc updateAttendee:attendee withMyself:NO];
+    } else if ([action isEqualToString:ACTION_UPDATE_ATTENDEE_LIST]) {
+        // update attendee list
+        ECGroupAttendeeListViewController * alvc = (ECGroupAttendeeListViewController*)_attendeeController;
+        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:alvc withObject:nil];
     }
 }
 

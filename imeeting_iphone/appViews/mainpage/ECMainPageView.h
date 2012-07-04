@@ -13,10 +13,12 @@
 @interface ECMainTableView : ECLoadMoreUITableView <UITableViewDelegate, UITableViewDataSource, AutoLoadDelegate> {
     NSMutableArray *mGroupDataSource;
 }
+@property (nonatomic, retain) NSIndexPath *currentDeletedIndexPath;
 
 - (void)setGroupDataSource:(NSArray *)groupArray;
 - (void)appendGroupDataSourceWithArray:(NSArray *)groupArray;
 - (void)hideGroup:(NSDictionary*)groupInfo;
+- (void)removeGroupFromUI:(NSIndexPath*)indexPath;
 @end
 
 
@@ -33,4 +35,6 @@
 - (void)loadMoreDataSource;
 - (void)itemSelected:(NSDictionary*)group;
 - (void)hideGroup:(NSString*)groupId;
+- (void)removeSelectedGroupFromUI;
+- (void)reloadTableViewData;
 @end

@@ -120,6 +120,7 @@ int init_quick_video_output(QuickVideoOutput *qvo, const char *filename, const c
     AVOutputFormat *fmt = av_guess_format(type, filename, NULL);
     if (!fmt) {
         fprintf(stderr, "Could not find suitable output format!\n");
+        qvo->initSuccessFlag = 0;
         return -1;
     }
     
@@ -127,6 +128,7 @@ int init_quick_video_output(QuickVideoOutput *qvo, const char *filename, const c
     AVFormatContext *oc = avformat_alloc_context();
     if (!oc) {
         fprintf(stderr, "Memory error when allocating AVFormatContext!\n");
+        qvo->initSuccessFlag = 0;
         return -1;
     }
     
@@ -138,6 +140,7 @@ int init_quick_video_output(QuickVideoOutput *qvo, const char *filename, const c
     AVStream *video_st = create_video_stream(oc, fmt->video_codec, qvo->width, qvo->height);
     if (!video_st) {
         fprintf(stderr, "Could not add video stream\n");
+        qvo->initSuccessFlag = 0;
         return -1;
     }
     qvo->video_stream = video_st;
@@ -153,6 +156,7 @@ int init_quick_video_output(QuickVideoOutput *qvo, const char *filename, const c
         printf("try to open file: %s\n", filename);
         if (avio_open(&oc->pb, filename, AVIO_FLAG_WRITE) < 0) {
             fprintf(stderr, "Could not open '%s'\n", filename);
+            qvo->initSuccessFlag = 0;
             return -1;
         } else {
             printf("file open ok\n");
@@ -164,6 +168,8 @@ int init_quick_video_output(QuickVideoOutput *qvo, const char *filename, const c
     
     /* write the stream header, if any */
     avformat_write_header(oc, NULL);
+    
+    qvo->initSuccessFlag = 1;
     
     return ret;
 }
@@ -177,7 +183,7 @@ void close_quick_video_ouput(QuickVideoOutput *qvo) {
     AVFormatContext *oc = qvo->video_output_context;
     AVStream *st = qvo->video_stream;
     
-    if (oc) {
+    if (qvo->initSuccessFlag && oc) {
         av_write_trailer(oc);
     }
      

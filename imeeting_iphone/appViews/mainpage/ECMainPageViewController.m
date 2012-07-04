@@ -20,6 +20,7 @@
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedJoinGroup:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedCreateGroup:(ASIHTTPRequest*)pRequest;
+- (void)onFinishedHideGroup:(ASIHTTPRequest*)pRequest;
 - (void)joinGroup:(NSString*)groupId;
 - (void)setupGroupModuleWithGroupId:(NSString*)groupId;
 @end
@@ -134,7 +135,27 @@
 - (void)hideGroup:(NSString *)groupId {
     NSLog(@"hide group: %@", groupId);
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:HIDE_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:nil andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:HIDE_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHideGroup:) andFailedRespSelector:nil];
+}
+
+- (void)onFinishedHideGroup:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedJoinGroup - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+        case 200: {
+            // hide group ok
+            ECMainPageView *mainView = (ECMainPageView*)self.view;
+            [mainView removeSelectedGroupFromUI];
+            break;
+        }
+        default:
+            [iToast makeText:NSLocalizedString(@"error in join group", "")];
+            
+            break;
+    }
+
 }
 
 - (void)itemSelected:(NSDictionary *)group {
