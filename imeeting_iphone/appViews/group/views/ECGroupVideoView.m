@@ -58,13 +58,13 @@ static CGFloat OppositeNameLabelHeight = 20;
     // make switch to attendee list view button
     UIButton *switchToAttenListButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [switchToAttenListButton setTitle:NSLocalizedString(@"Attendee List", "") forState:UIControlStateNormal];
-    switchToAttenListButton.frame = CGRectMake(self.frame.size.width - SwitchToAttendeeListButtonWidth - 5, padding, SwitchToAttendeeListButtonWidth, SwitchToAttendeeListButtonHeight);
+    switchToAttenListButton.frame = CGRectMake(5, padding, SwitchToAttendeeListButtonWidth, SwitchToAttendeeListButtonHeight);
     [switchToAttenListButton addTarget:self action:@selector(onSwitchToAttendeeListViewAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:switchToAttenListButton];
     
     // make switch camera button
     mCameraSwitchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    mCameraSwitchButton.frame = CGRectMake(5, padding, SwitchFBCameraButtonWidth, SwitchFBCameraButtonHeight);
+    mCameraSwitchButton.frame = CGRectMake(self.frame.size.width - SwitchFBCameraButtonWidth - 5, padding, SwitchFBCameraButtonWidth, SwitchFBCameraButtonHeight);
     [mCameraSwitchButton setBackgroundImage:[UIImage imageNamed:@"camera_switch"] forState:UIControlStateNormal];
     [mCameraSwitchButton addTarget:self action:@selector(onSwitchFBCameraAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:mCameraSwitchButton];
@@ -168,8 +168,8 @@ static CGFloat OppositeNameLabelHeight = 20;
 
 
 - (void)onSwitchToAttendeeListViewAction {
-    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(onSwitchToAttendeeListView)]) {
-        [self.viewControllerRef performSelector:@selector(onSwitchToAttendeeListView)];
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(switchToAttendeeListView)]) {
+        [self.viewControllerRef performSelector:@selector(switchToAttendeeListView)];
     }
 }
 

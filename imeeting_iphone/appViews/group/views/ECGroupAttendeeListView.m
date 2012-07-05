@@ -9,48 +9,6 @@
 #import "ECGroupAttendeeListView.h"
 #import "ECConstants.h"
 
-@implementation AddContactButton
-
-- (id)init {
-    self = [super init];
-    if (self) {
-        self.frame = CGRectMake(0, 0, 320, 60);
-        
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake((80 - 46) / 2, (60 - 50) / 2, 46, 50)];
-        imgView.contentMode = UIViewContentModeScaleAspectFit;
-        UIImage *img = [UIImage imageNamed:@"add_contact"];
-        imgView.image = img;
-        [self addSubview:imgView];
-        
-        UILabel *labelView = [[UILabel alloc] initWithFrame:CGRectMake(0, (60 - 40) / 2, 320, 40)];
-        labelView.text = NSLocalizedString(@"Invite Attendee", "");
-        labelView.textAlignment = UITextAlignmentCenter;
-        labelView.font = [UIFont boldSystemFontOfSize:18];
-        labelView.textColor = [UIColor colorWithIntegerRed:105 integerGreen:105 integerBlue:105 alpha:1];
-        labelView.backgroundColor = [UIColor clearColor];
-        [self addSubview:labelView];
-        
-        normalBG = [UIColor colorWithPatternImage:[UIImage imageNamed:@"buttonbg"]];
-        touchDownBG = [UIColor colorWithPatternImage:[UIImage imageNamed:@"buttonbg2"]];
-        self.backgroundColor = normalBG;
-        
-        [self addTarget:self action:@selector(setTouchDownBGColor) forControlEvents:UIControlEventTouchDown];
-        [self addTarget:self action:@selector(setNormalBGColor) forControlEvents:UIControlEventTouchUpInside];
-        [self addTarget:self action:@selector(setNormalBGColor) forControlEvents:UIControlEventTouchUpOutside];
-    }
-    return self;
-}
-
-- (void)setTouchDownBGColor {
-    self.backgroundColor = touchDownBG;
-}
-
-- (void)setNormalBGColor {
-    self.backgroundColor = normalBG;
-}
-
-@end
-
 static CGFloat cellHeight = 60;
 static CGFloat guyIconWidth = 50;
 static CGFloat guyIconHeight = 50;
@@ -166,7 +124,6 @@ static CGFloat padding = 4;
 @interface ECGroupAttendeeListView ()
 - (void)initUI;
 - (void)switchToVideoAction;
-- (void)leaveGroupAction;
 - (void)addContactAction;
 @end
 
@@ -186,22 +143,15 @@ static CGFloat padding = 4;
 }
 
 - (void)initUI {
-    self.title = NSLocalizedString(@"Attendee List", "");
-   // self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Video", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
-   // self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Leave", "") style:UIBarButtonItemStyleBordered target:self action:@selector(leaveGroupAction)];
-    
-    /*
-    AddContactButton *acb = [[AddContactButton alloc] init];
-    acb.frame = CGRectMake(0, 480 - StatusBarHeight - NavigationBarHeight - acb.frame.size.height, acb.frame.size.width, acb.frame.size.height);
-    [acb addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:acb];
-    */
+    //self.title = NSLocalizedString(@"Attendee List", "");
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, NavigationBarHeight)];
     toolbar.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
     toolbar.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactAction)];
     //toolbar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
-    NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], toolbar.rightBarButtonItem, nil];
+
+    UIBarButtonItem *title = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Attendee List", "") style:UIBarButtonItemStylePlain target:nil action:nil];
+    NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], toolbar.rightBarButtonItem, nil];
     [toolbar setItems:toolButtonArray];
     [self addSubview:toolbar];
     
@@ -245,14 +195,9 @@ static CGFloat padding = 4;
 
 #pragma mark - button actions
 - (void)switchToVideoAction {
-    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(switchToVideo)]) {
-        [self.viewControllerRef performSelector:@selector(switchToVideo)];
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(switchToVideoView)]) {
+        [self.viewControllerRef performSelector:@selector(switchToVideoView)];
     }
-}
-
-- (void)leaveGroupAction {
-    [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Leave Group?", "") delegate:self cancelButtonTitle:NSLocalizedString(@"OK", "") otherButtonTitles:NSLocalizedString(@"Cancel", ""), nil] show];
-    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

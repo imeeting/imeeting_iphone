@@ -13,8 +13,7 @@
 #import "ECGroupManager.h"
 #import "ECConstants.h"
 #import "ECUrlConfig.h"
-#import "ECGroupVideoViewController.h"
-#import "ECGroupAttendeeListViewController.h"
+#import "ECGroupViewController.h"
 
 @interface ECContactsSelectViewController ()
 - (void)onFinishedInviteAttendees:(ASIHTTPRequest*)pRequest;
@@ -136,11 +135,9 @@ invite_error:
 }
 
 - (void)setupGroupModuleWithGroupId:(NSString *)groupId {
-    ECGroupVideoViewController *gvc = [[ECGroupVideoViewController alloc] init];
-    ECGroupAttendeeListViewController *alvc =[[ECGroupAttendeeListViewController alloc] init];
+    ECGroupViewController *gvc = [[ECGroupViewController alloc] init];
     ECGroupModule *module = [[ECGroupModule alloc] init];
-    module.videoController = gvc;
-    module.attendeeController = alvc;
+    module.groupController = gvc;
     [ECGroupManager sharedECGroupManager].currentGroupModule = module;    
     module.groupId = groupId;
 }
@@ -152,22 +149,21 @@ invite_error:
         ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
         [module connectToNotifyServer];
         
-        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.attendeeController withObject:nil];
+        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.groupController withObject:nil];
         
-        UIViewController *videoController = module.videoController;
         NSArray *controllers = self.navigationController.viewControllers;
         UIViewController *main = [controllers objectAtIndex:1];
         [NSThread detachNewThreadSelector:@selector(refreshGroupList) toTarget:main withObject:nil];
         
         
         [self.navigationController popViewControllerAnimated:NO];
-        [main.navigationController pushViewController:videoController animated:NO];
+        [main.navigationController pushViewController:module.groupController animated:NO];
     } else {
         NSLog(@"already in group mode");
         // already in group mode, so we jump back to group view
         ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
-        ECGroupAttendeeListViewController *alvc = (ECGroupAttendeeListViewController*)module.attendeeController;
-        alvc.refreshList = YES;
+        ECGroupViewController *gc = (ECGroupViewController*)module.groupController;
+        gc.refreshList = YES;
         
         [self.navigationController popViewControllerAnimated:YES];
     }

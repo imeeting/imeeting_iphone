@@ -10,16 +10,14 @@
 #import "ECMainPageView.h"
 #import "ECUrlConfig.h"
 #import "ECConstants.h"
-#import "ECGroupVideoViewController.h"
-#import "ECGroupAttendeeListViewController.h"
 #import "ECGroupManager.h"
 #import "ECContactsSelectViewController.h"
+#import "ECGroupViewController.h"
 
 @interface ECMainPageViewController ()
 - (void)onFinishedGetGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedJoinGroup:(ASIHTTPRequest*)pRequest;
-- (void)onFinishedCreateGroup:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedHideGroup:(ASIHTTPRequest*)pRequest;
 - (void)joinGroup:(NSString*)groupId;
 - (void)setupGroupModuleWithGroupId:(NSString*)groupId;
@@ -170,11 +168,9 @@
 }
 
 - (void)setupGroupModuleWithGroupId:(NSString *)groupId {
-    ECGroupVideoViewController *gvc = [[ECGroupVideoViewController alloc] init];
-    ECGroupAttendeeListViewController *alvc =[[ECGroupAttendeeListViewController alloc] init];
+    ECGroupViewController *gvc = [[ECGroupViewController alloc] init];
     ECGroupModule *module = [[ECGroupModule alloc] init];
-    module.videoController = gvc;
-    module.attendeeController = alvc;
+    module.groupController = gvc;
     [ECGroupManager sharedECGroupManager].currentGroupModule = module;    
     module.groupId = groupId;
 }
@@ -197,10 +193,9 @@
             ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
             [module connectToNotifyServer];
           
-            [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.attendeeController withObject:nil];
+            [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.groupController withObject:nil];
           
-            UIViewController *videoController = module.videoController;
-            [self.navigationController pushViewController:videoController animated:NO];
+            [self.navigationController pushViewController:module.groupController animated:NO];
             return;
         }
         case 403:

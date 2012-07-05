@@ -11,8 +11,7 @@
 #import "ECConstants.h"
 #import "ECUrlConfig.h"
 #import "ECGroupManager.h"
-#import "ECGroupAttendeeListViewController.h"
-#import "ECGroupVideoViewController.h"
+#import "ECGroupViewController.h"
 
 @interface ECGroupModule ()
 - (void)onNetworkFailed:(ASIHTTPRequest*)request;
@@ -22,8 +21,7 @@
 
 @implementation ECGroupModule
 
-@synthesize videoController = _videoController;
-@synthesize attendeeController = _attendeeController;
+@synthesize groupController = _groupController;
 @synthesize groupId = _groupId;
 @synthesize videoManager = _videoManager;
 
@@ -90,18 +88,14 @@
     if ([action isEqualToString:ACTION_UPDATE_STATUS]) {
         // update attendee status
         NSDictionary *attendee = [notice objectForKey:ATTENDEE];
-        ECGroupAttendeeListViewController *avc = (ECGroupAttendeeListViewController*)_attendeeController;
-        [avc updateAttendee:attendee withMyself:NO];
+        ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+        [gc updateAttendee:attendee withMyself:NO];
     } else if ([action isEqualToString:ACTION_UPDATE_ATTENDEE_LIST]) {
         // update attendee list
-        ECGroupAttendeeListViewController * alvc = (ECGroupAttendeeListViewController*)_attendeeController;
-        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:alvc withObject:nil];
-    }
-}
+        ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
 
-- (void)updateMyStatus:(NSDictionary *)me {
-    ECGroupAttendeeListViewController *avc = (ECGroupAttendeeListViewController*)_attendeeController;
-    [avc updateAttendee:me withMyself:YES];
+        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:gc withObject:nil];
+    }
 }
 
 #pragma mark - notify methods
@@ -167,41 +161,41 @@
 - (void)onFetchNewImage:(UIImage *)image {
     NSLog(@"Module - onFetchNewImage");
     if (!isLeave) {
-        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
-        [videoCtrl renderOppositVideo:image];
+        ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+        [gc renderOppositVideo:image];
     }
 }
 
 - (void)onFetchFailed {
     NSLog(@"onFetchFailed");
     if (!isLeave) {
-        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
-        [videoCtrl showVideoLoadFailedInfo];
+        ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+        [gc showVideoLoadFailedInfo];
     }
 }
 
 - (void)onFetchVideoBeginToPrepare:(NSString*)name {
     NSLog(@"onFetchVideoBeginToPrepare");
     if (!isLeave) {
-        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
-        [videoCtrl setOppositeVideoName:name];
-        [videoCtrl startVideoLoadingIndicator];
+        ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+        [gc setOppositeVideoName:name];
+        [gc startVideoLoadingIndicator];
     }
 }
 
 - (void)onFetchVideoPrepared {
     NSLog(@"onFetchVideoPrepared");
     if (!isLeave) {
-        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
-        [videoCtrl stopVideoLoadingIndicator];
+        ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+        [gc stopVideoLoadingIndicator];
     }
 }
 
 - (void)onFetchEnd {
     NSLog(@"onFetchEnd");
     if (!isLeave) {
-        ECGroupVideoViewController *videoCtrl = (ECGroupVideoViewController*)self.videoController;
-        [videoCtrl resetOppositeVideoView];
+        ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+        [gc resetOppositeVideoView];
     }
 }
 @end

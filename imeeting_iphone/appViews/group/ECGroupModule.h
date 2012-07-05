@@ -18,8 +18,7 @@
     BOOL isLeave;
 }
 
-@property (nonatomic, retain) UIViewController *videoController;
-@property (nonatomic, retain) UIViewController *attendeeController;
+@property (nonatomic, retain) UIViewController *groupController;
 @property (nonatomic, retain) NSString *groupId;
 @property (nonatomic, retain) ECVideoManager *videoManager;
 
@@ -28,5 +27,4 @@
 - (void)onLeaveGroup;
 - (void)notifyWithMsg:(NSDictionary*)msg;
 - (void)broadcastAttendeeStatus:(NSDictionary*)attendee;
-- (void)updateMyStatus:(NSDictionary*)me;
 @end

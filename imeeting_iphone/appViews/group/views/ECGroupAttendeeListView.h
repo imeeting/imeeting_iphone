@@ -9,15 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ECBaseUIView.h"
 
-@interface AddContactButton : UIControl {
-    UIColor *normalBG;
-    UIColor *touchDownBG;
-    
-}
-- (void)setTouchDownBGColor;
-- (void)setNormalBGColor;
-@end
-
 @interface AttendeeCell : UITableViewCell {
     UIImageView *mGuyIcon;
     UILabel *mNameLabel;

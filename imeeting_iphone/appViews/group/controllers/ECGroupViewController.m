@@ -1,21 +1,22 @@
 //
-//  ECGroupVideoViewController.m
+//  ECGroupViewController.m
 //  imeeting_iphone
 //
-//  Created by star king on 12-6-20.
+//  Created by star king on 12-7-5.
 //  Copyright (c) 2012年 elegant cloud. All rights reserved.
 //
 
-#import "ECGroupVideoViewController.h"
-#import "ECGroupVideoView.h"
-#import "ECGroupAttendeeListViewController.h"
+#import "ECGroupViewController.h"
+#import "CommonToolkit/CommonToolkit.h"
+#import "ECGroupView.h"
 #import "ECGroupModule.h"
 #import "ECGroupManager.h"
-#import "CommonToolkit/AVCamUtilities.h"
 #import "ECUrlConfig.h"
 #import "ECConstants.h"
+#import "ECContactsSelectViewController.h"
 
-@interface ECGroupVideoViewController ()
+@interface ECGroupViewController ()
+// video view realted methods
 - (void)attachVideoPreviewLayer;
 - (void)detachVideoPreviewLayer;
 - (void)broadcastVideoOnStatus;
@@ -23,17 +24,21 @@
 - (void)updateMyVideoOnStatus;
 - (void)updateMyVideoOffStatus;
 - (void)onNetworkFailed:(ASIHTTPRequest*)request;
+
+// attendee list view related methods
+- (void)onFinishedGetAttendeeList:(ASIHTTPRequest*)pRequest;
+
 @end
 
-@implementation ECGroupVideoViewController
+@implementation ECGroupViewController
+@synthesize refreshList = _refreshList;
 
 - (id)init {
-    self = [self initWithCompatibleView:[[ECGroupVideoView alloc] init]];
-    
+    self = [self initWithCompatibleView:[[ECGroupView alloc] init]];
     if (self) {
         isFirstLoad = YES;
+         _refreshList = YES;
     }
-    
     return self;
 }
 
@@ -46,6 +51,8 @@
         ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
         [module.videoManager setupSession];
     }
+   
+
     
     [super viewWillAppear:animated];
 }
@@ -68,6 +75,11 @@
     // Release any retained subviews of the main view.
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
 #pragma mark - actions
 - (void)onLeaveGroup {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
@@ -77,14 +89,21 @@
     NSLog(@"poped view controller");
 }
 
-- (void)onSwitchToAttendeeListView {
-    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
-    [self presentModalViewController:module.attendeeController animated:YES];
-    //[self.navigationController pushViewController:module.attendeeController animated:YES];
+- (void)switchToVideoView {
+   // [[UIApplication sharedApplication] setStatusBarHidden:YES];
+
+    ECGroupView *groupView = (ECGroupView*)self.view;
+    [groupView switchToVideoView];
+}
+
+- (void)switchToAttendeeListView {
+   // [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    ECGroupView *groupView = (ECGroupView*)self.view;
+    [groupView switchToAttendeeListView];
 }
 
 - (void)attachVideoPreviewLayer {
-    ECGroupVideoView *videoView = (ECGroupVideoView*)self.view;
+    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     AVCaptureSession *session = module.videoManager.session;
     if (session) {
@@ -140,7 +159,7 @@
     ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:module.groupId, GROUP_ID, OFF, VIDEO_STATUS, nil];
     [HttpUtil postSignatureRequestWithUrl:UPDATE_ATTENDEE_STATUS_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:nil andFailedRespSelector:@selector(onNetworkFailed:)];
-
+    
 }
 
 - (void)onNetworkFailed:(ASIHTTPRequest *)request {
@@ -150,46 +169,125 @@
 - (void)updateMyVideoOnStatus {
     NSString *username = [[UserManager shareUserManager] userBean].name;
     NSDictionary *me = [NSDictionary dictionaryWithObjectsAndKeys:username, USERNAME, ON, VIDEO_STATUS, nil];
-    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
-    [module updateMyStatus:me];
+    
+    [self updateAttendee:me withMyself:YES];
 }
 
 - (void)updateMyVideoOffStatus {
     NSString *username = [[UserManager shareUserManager] userBean].name;
     NSDictionary *me = [NSDictionary dictionaryWithObjectsAndKeys:username, USERNAME, OFF, VIDEO_STATUS, nil];
-    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
-    [module updateMyStatus:me];
+    
+    [self updateAttendee:me withMyself:YES];
 }
 
 - (void)renderOppositVideo:(UIImage *)videoImage {
     NSLog(@"render opposite video");
-    ECGroupVideoView *videoView = (ECGroupVideoView*)self.view;
+    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
     UIImageView *oppositView = videoView.oppositeVideoView;
     oppositView.image = videoImage;
 }
 
 - (void)setOppositeVideoName:(NSString *)name {
-    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    ECGroupVideoView *view = ((ECGroupView*)self.view).videoView;
     [view setOppositeVideoName:name];
 }
 
 - (void)startVideoLoadingIndicator {
-    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    ECGroupVideoView *view = ((ECGroupView*)self.view).videoView;
     [view startShowLoadingVideo];
 }
 
 - (void)stopVideoLoadingIndicator {
-    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    ECGroupVideoView *view = ((ECGroupView*)self.view).videoView;
     [view stopShowLoadingVideo];
 }
 
 - (void)resetOppositeVideoView {
-    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    ECGroupVideoView *view = ((ECGroupView*)self.view).videoView;
     [view resetOppositeVideoUI];
 }
 
 - (void)showVideoLoadFailedInfo {
-    ECGroupVideoView *view = (ECGroupVideoView*)self.view;
+    ECGroupVideoView *view = ((ECGroupView*)self.view).videoView;
     [view showVideoLoadFailedInfo];
 }
+
+#pragma mark - attendee list view methods
+- (void)refreshAttendeeList {
+    NSLog(@"refresh attendee list");
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:[ECGroupManager sharedECGroupManager].currentGroupModule.groupId, GROUP_ID, nil];
+    [HttpUtil postSignatureRequestWithUrl:GET_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetAttendeeList:) andFailedRespSelector:@selector(onNetworkFailed:)];
+}
+
+- (void)onFinishedGetAttendeeList:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedGetAttendeeList - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+        case 200: {
+            NSString *responseText = [[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"json array: %@", responseText);
+            
+            NSMutableArray *jsonArray = [responseText objectFromJSONString];
+            if (jsonArray) {
+                ECGroupAttendeeListView *attListView = ((ECGroupView*)self.view).attendeeListView;
+                [attListView setAttendeeArray:jsonArray];
+                _refreshList = NO;
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+    
+    
+}
+
+// update attendee status
+- (void)updateAttendee:(NSDictionary *)attendee withMyself:(BOOL)myself {
+    NSLog(@"AttendeeListViewController - update attendee");
+    
+    ECGroupAttendeeListView *attListView = ((ECGroupView*)self.view).attendeeListView;
+    [attListView updateAttendee:attendee withMyself:myself];
+}
+
+- (void)onAttendeeSelected:(NSDictionary *)attendee {
+    NSString *username = [attendee objectForKey:USERNAME];
+    NSString *videoStatus = [attendee objectForKey:VIDEO_STATUS];
+    NSString *onlineStatus = [attendee objectForKey:ONLINE_STATUS];
+    if ([onlineStatus isEqualToString:ONLINE]) {
+        if ([videoStatus isEqualToString:ON]) {
+            ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+            [module.videoManager stopVideoFetch];
+            [module.videoManager startVideoFetchWithTargetUsername:username];
+            [self switchToVideoView];
+        } else {
+            [[iToast makeText:NSLocalizedString(@"This attendee's video is off", "")] show];
+        }
+    } else {
+        [[iToast makeText:NSLocalizedString(@"This attendee is offline", "")] show];
+    }
+}
+
+- (void)addContacts {
+    NSMutableArray *phoneNumberArray = [NSMutableArray arrayWithCapacity:10];
+    ECGroupAttendeeListView *view = ((ECGroupView*)self.view).attendeeListView;
+    for (NSDictionary *attendee in view.attendeeArray) {
+        NSString *username = [attendee objectForKey:USERNAME];
+        [phoneNumberArray addObject:username];
+    }
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
+    ECContactsSelectViewController *csvc = [[ECContactsSelectViewController alloc] init];
+    [csvc initInMeetingAttendeesPhoneNumbers:phoneNumberArray];
+    csvc.isAppearedInCreateNewGroup = NO;
+    
+    [self.navigationController pushViewController:csvc animated:YES];
+    
+}
+
+
 @end

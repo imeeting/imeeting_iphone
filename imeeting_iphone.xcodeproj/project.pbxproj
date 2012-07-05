@@ -67,6 +67,8 @@
 		F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */; };
 		F8E4B9EF15A5267700322C7A /* ECContactsSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9EE15A5267700322C7A /* ECContactsSelectViewController.m */; };
 		F8E4B9F315A526AE00322C7A /* ECContactsSelectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9F215A526AE00322C7A /* ECContactsSelectContainerView.m */; };
+		F8E4BA0015A57A2000322C7A /* ECGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9FF15A57A1F00322C7A /* ECGroupViewController.m */; };
+		F8E4BA0315A57A2700322C7A /* ECGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4BA0215A57A2700322C7A /* ECGroupView.m */; };
 		F8E58F7E1597F9A200CC2F1C /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */; };
 		F8E58F821597FA2A00CC2F1C /* ECGroupModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F811597FA2A00CC2F1C /* ECGroupModule.m */; };
 		F8E58F8715983CFA00CC2F1C /* add_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F8615983CFA00CC2F1C /* add_contact.png */; };
@@ -81,11 +83,9 @@
 		F8ED858F15931AB800E38F0C /* gerlor_001.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED858E15931AB800E38F0C /* gerlor_001.png */; };
 		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
 		F8EED883159457420072FD39 /* ECGroupAttendeeListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */; };
-		F8EED8871594575B0072FD39 /* ECGroupAttendeeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EED8861594575B0072FD39 /* ECGroupAttendeeListViewController.m */; };
 		F8FA19661591781D00947304 /* guy.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FA19651591781D00947304 /* guy.png */; };
 		F8FA196A15917A1E00947304 /* guy2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FA196915917A1E00947304 /* guy2.png */; };
 		F8FA19731591E73100947304 /* ECGroupVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FA19721591E73100947304 /* ECGroupVideoView.m */; };
-		F8FA19761591E76700947304 /* ECGroupVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FA19751591E76700947304 /* ECGroupVideoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -335,6 +335,10 @@
 		F8E4B9EE15A5267700322C7A /* ECContactsSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECContactsSelectViewController.m; path = contactselection/ECContactsSelectViewController.m; sourceTree = "<group>"; };
 		F8E4B9F115A526AE00322C7A /* ECContactsSelectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECContactsSelectContainerView.h; path = contactselection/ECContactsSelectContainerView.h; sourceTree = "<group>"; };
 		F8E4B9F215A526AE00322C7A /* ECContactsSelectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECContactsSelectContainerView.m; path = contactselection/ECContactsSelectContainerView.m; sourceTree = "<group>"; };
+		F8E4B9FE15A57A1F00322C7A /* ECGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupViewController.h; path = group/controllers/ECGroupViewController.h; sourceTree = "<group>"; };
+		F8E4B9FF15A57A1F00322C7A /* ECGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupViewController.m; path = group/controllers/ECGroupViewController.m; sourceTree = "<group>"; };
+		F8E4BA0115A57A2700322C7A /* ECGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupView.h; path = group/views/ECGroupView.h; sourceTree = "<group>"; };
+		F8E4BA0215A57A2700322C7A /* ECGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupView.m; path = group/views/ECGroupView.m; sourceTree = "<group>"; };
 		F8E58F7C1597F9A200CC2F1C /* ECGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupManager.h; path = group/ECGroupManager.h; sourceTree = "<group>"; };
 		F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupManager.m; path = group/ECGroupManager.m; sourceTree = "<group>"; };
 		F8E58F801597FA2A00CC2F1C /* ECGroupModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupModule.h; path = group/ECGroupModule.h; sourceTree = "<group>"; };
@@ -354,14 +358,10 @@
 		F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUrlConfig.h; sourceTree = "<group>"; };
 		F8EED881159457420072FD39 /* ECGroupAttendeeListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupAttendeeListView.h; path = group/views/ECGroupAttendeeListView.h; sourceTree = "<group>"; };
 		F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupAttendeeListView.m; path = group/views/ECGroupAttendeeListView.m; sourceTree = "<group>"; };
-		F8EED8851594575B0072FD39 /* ECGroupAttendeeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupAttendeeListViewController.h; path = group/controllers/ECGroupAttendeeListViewController.h; sourceTree = "<group>"; };
-		F8EED8861594575B0072FD39 /* ECGroupAttendeeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupAttendeeListViewController.m; path = group/controllers/ECGroupAttendeeListViewController.m; sourceTree = "<group>"; };
 		F8FA19651591781D00947304 /* guy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guy.png; path = imeeting_iphone/Resources/images/guy.png; sourceTree = "<group>"; };
 		F8FA196915917A1E00947304 /* guy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guy2.png; path = imeeting_iphone/Resources/images/guy2.png; sourceTree = "<group>"; };
 		F8FA19711591E73100947304 /* ECGroupVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupVideoView.h; path = group/views/ECGroupVideoView.h; sourceTree = "<group>"; };
 		F8FA19721591E73100947304 /* ECGroupVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupVideoView.m; path = group/views/ECGroupVideoView.m; sourceTree = "<group>"; };
-		F8FA19741591E76700947304 /* ECGroupVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupVideoViewController.h; path = group/controllers/ECGroupVideoViewController.h; sourceTree = "<group>"; };
-		F8FA19751591E76700947304 /* ECGroupVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupVideoViewController.m; path = group/controllers/ECGroupVideoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1023,6 +1023,10 @@
 		F8FA196B1591DFBA00947304 /* Group */ = {
 			isa = PBXGroup;
 			children = (
+				F8E4BA0115A57A2700322C7A /* ECGroupView.h */,
+				F8E4BA0215A57A2700322C7A /* ECGroupView.m */,
+				F8E4B9FE15A57A1F00322C7A /* ECGroupViewController.h */,
+				F8E4B9FF15A57A1F00322C7A /* ECGroupViewController.m */,
 				F8FA19701591E6C200947304 /* AttendeeListPage */,
 				F8FA196F1591E5FE00947304 /* VideoPage */,
 				F8E58F7C1597F9A200CC2F1C /* ECGroupManager.h */,
@@ -1038,8 +1042,6 @@
 			children = (
 				F8FA19711591E73100947304 /* ECGroupVideoView.h */,
 				F8FA19721591E73100947304 /* ECGroupVideoView.m */,
-				F8FA19741591E76700947304 /* ECGroupVideoViewController.h */,
-				F8FA19751591E76700947304 /* ECGroupVideoViewController.m */,
 			);
 			name = VideoPage;
 			sourceTree = "<group>";
@@ -1049,8 +1051,6 @@
 			children = (
 				F8EED881159457420072FD39 /* ECGroupAttendeeListView.h */,
 				F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */,
-				F8EED8851594575B0072FD39 /* ECGroupAttendeeListViewController.h */,
-				F8EED8861594575B0072FD39 /* ECGroupAttendeeListViewController.m */,
 			);
 			name = AttendeeListPage;
 			sourceTree = "<group>";
@@ -1151,9 +1151,7 @@
 				F8AD9458158872EC007B3C87 /* ECGroupCell.m in Sources */,
 				F8E3BEE8158F1F9100467088 /* UserBean+IMeeting.m in Sources */,
 				F8FA19731591E73100947304 /* ECGroupVideoView.m in Sources */,
-				F8FA19761591E76700947304 /* ECGroupVideoViewController.m in Sources */,
 				F8EED883159457420072FD39 /* ECGroupAttendeeListView.m in Sources */,
-				F8EED8871594575B0072FD39 /* ECGroupAttendeeListViewController.m in Sources */,
 				F8E58F7E1597F9A200CC2F1C /* ECGroupManager.m in Sources */,
 				F8E58F821597FA2A00CC2F1C /* ECGroupModule.m in Sources */,
 				F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */,
@@ -1171,6 +1169,8 @@
 				F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */,
 				F8E4B9EF15A5267700322C7A /* ECContactsSelectViewController.m in Sources */,
 				F8E4B9F315A526AE00322C7A /* ECContactsSelectContainerView.m in Sources */,
+				F8E4BA0015A57A2000322C7A /* ECGroupViewController.m in Sources */,
+				F8E4BA0315A57A2700322C7A /* ECGroupView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

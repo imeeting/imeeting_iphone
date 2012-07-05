@@ -1,8 +1,8 @@
 //
-//  ECGroupVideoViewController.h
+//  ECGroupViewController.h
 //  imeeting_iphone
 //
-//  Created by star king on 12-6-20.
+//  Created by star king on 12-7-5.
 //  Copyright (c) 2012年 elegant cloud. All rights reserved.
 //
 
@@ -10,14 +10,18 @@
 #import "AVFoundation/AVFoundation.h"
 #import "ECVideoManager.h"
 
-@interface ECGroupVideoViewController : UIViewController {
+@interface ECGroupViewController : UIViewController {
     AVCaptureVideoPreviewLayer *mPreviewLayer;
     
     BOOL isFirstLoad; // inidcate if the controller loads first.
+
 }
 
+@property (nonatomic) BOOL refreshList;
+
+//###### video view related methods
 - (void)onLeaveGroup;
-- (void)onSwitchToAttendeeListView;
+- (void)switchToAttendeeListView;
 - (void)switchCamera;
 - (void)startCaptureVideo;
 - (void)stopCaptureVideo;
@@ -28,4 +32,11 @@
 - (void)stopVideoLoadingIndicator;
 - (void)resetOppositeVideoView;
 - (void)showVideoLoadFailedInfo;
+
+// attendee list view related methods
+- (void)switchToVideoView;
+- (void)refreshAttendeeList;
+- (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
+- (void)onAttendeeSelected:(NSDictionary*)attendee;
+- (void)addContacts;
 @end
