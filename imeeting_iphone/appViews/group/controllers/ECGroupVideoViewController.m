@@ -79,7 +79,8 @@
 
 - (void)onSwitchToAttendeeListView {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
-    [self.navigationController pushViewController:module.attendeeController animated:YES];
+    [self presentModalViewController:module.attendeeController animated:YES];
+    //[self.navigationController pushViewController:module.attendeeController animated:YES];
 }
 
 - (void)attachVideoPreviewLayer {

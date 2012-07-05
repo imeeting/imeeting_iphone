@@ -12,7 +12,7 @@
 #import "ECGroupManager.h"
 #import "ECConstants.h"
 #import "ECUrlConfig.h"
-#import "ContactsSelectViewController.h"
+#import "ECContactsSelectViewController.h"
 
 @interface ECGroupAttendeeListViewController ()
 - (void)onFinishedGetAttendeeList:(ASIHTTPRequest*)pRequest;
@@ -87,7 +87,8 @@
 
 #pragma mark - actions
 - (void)switchToVideo {
-    [self.navigationController popViewControllerAnimated:NO];
+    //[self.navigationController popViewControllerAnimated:NO];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)leaveGroup {
@@ -132,10 +133,14 @@
         [phoneNumberArray addObject:username];
     }
     
-    ContactsSelectViewController *csvc = [[ContactsSelectViewController alloc] init];
+    ECContactsSelectViewController *csvc = [[ECContactsSelectViewController alloc] init];
     [csvc initInMeetingAttendeesPhoneNumbers:phoneNumberArray];
     csvc.isAppearedInCreateNewGroup = NO;
-    [self.navigationController pushViewController:csvc animated:YES];
+    
+    [self dismissModalViewControllerAnimated:NO];
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [module.videoController.navigationController pushViewController:csvc animated:YES];
+    
 }
 
 @end

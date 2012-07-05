@@ -25,15 +25,12 @@
 // add new contact with user input phone number to meeting contacts list table view prein meeting section
 - (void)addNewContactToMeetingWithPhoneNumber:(NSString *)pPhoneNumber;
 
-- (void)onInviteAttendeeAction;
-
 @end
 
 
 
 
 @implementation ContactsSelectContainerView
-@synthesize isAppearedInCreatingNewGroup = _isAppearedInCreatingNewGroup;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -41,11 +38,9 @@
     if (self) {
         // set background color
         self.backgroundColor = MIDDLE_SEPERATE_COLOR;
-        self.isAppearedInCreatingNewGroup = YES;
         
         // set title
         self.title = NSLocalizedString(@"select attendee", nil);
-        self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"invite", "") style:UIBarButtonItemStyleDone target:self action:@selector(onInviteAttendeeAction)];
         
         
         // get UIScreen bounds
@@ -281,29 +276,6 @@
     
     [_mMeetingContactsListView.preinMeetingContactsInfoArrayRef addObject:_newAddedContact];
     [_mMeetingContactsListView insertRowAtIndexPath:[NSIndexPath indexPathForRow:[_mMeetingContactsListView.preinMeetingContactsInfoArrayRef count] - 1 inSection:_mMeetingContactsListView.numberOfSections - 1] withRowAnimation:UITableViewRowAnimationLeft];
-}
-
-- (void)onInviteAttendeeAction {
-    NSArray *selectedAttendeeArray = [self preinMeetingContactsInfoArray];
-    NSLog(@"selected attendee count: %d", selectedAttendeeArray.count);
-    
-    if (!self.isAppearedInCreatingNewGroup) {
-        if (selectedAttendeeArray.count <= 0) {
-            [[iToast makeText:NSLocalizedString(@"no attendee selected", "")] show];
-            return;
-        }
-    }
-    
-    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(inviteAttendees:)]) {
-        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
-        
-        if (self.isAppearedInCreatingNewGroup) {
-            hud.labelText = NSLocalizedString(@"finishing creating group", "");
-        } else {
-            hud.labelText = NSLocalizedString(@"inviting attendees", "");
-        }
-        [hud showWhileExecuting:@selector(inviteAttendees:) onTarget:self.viewControllerRef withObject:selectedAttendeeArray animated:YES];
-    }
 }
 
 @end

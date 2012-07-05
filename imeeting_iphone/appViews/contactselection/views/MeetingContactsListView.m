@@ -25,8 +25,8 @@
 // MeetingContactsListView extension
 @interface MeetingContactsListView ()
 
-// remove prein meeting attendee action
-- (void)removePreinMeetingAttendeeAction:(UIButton *)pSender;
+// remove prein meeting contact action
+- (void)removePreinMeetingContactAction:(UIButton *)pSender;
 
 @end
 
@@ -61,8 +61,11 @@
     
     // init in meeting contacts info array
     for (NSInteger _index = 0; _index < [inMeetingAttendeesPhoneNumberArray count]; _index++) {
+        // generate contact in meeting attendees(get from server) phone number and add to meeting contacts list table view in meeting section
         ContactBean *_contactBean = [[ContactBean alloc] init];
+        // set his display name, selected phone number and phone number array
         _contactBean.displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:[inMeetingAttendeesPhoneNumberArray objectAtIndex:_index]] objectAtIndex:0];
+        _contactBean.selectedPhoneNumber = [inMeetingAttendeesPhoneNumberArray objectAtIndex:_index];
         _contactBean.phoneNumbers = [NSArray arrayWithObject:[inMeetingAttendeesPhoneNumberArray objectAtIndex:_index]];
         
         [_inMeetingContactsInfoArray addObject:_contactBean];
@@ -108,9 +111,9 @@
     
     cell.photoImg = (0 == indexPath.section) ? CONTACT_SELECTED_PHOTO : /*nil*/CONTACT_PREINMEETING_PHOTO;
     cell.displayName = _contactBean.displayName;
-    cell.phoneNumbersArray = [NSArray arrayWithObject:_contactBean.selectedPhoneNumber ? _contactBean.selectedPhoneNumber : [_contactBean.phoneNumbers getContactPhoneNumbersDisplayTextWithStyle:horizontal]];
+    cell.phoneNumbersArray = [NSArray arrayWithObject:_contactBean.selectedPhoneNumber];
     // add photo image button touchedDown event action
-    [cell addImgButtonTarget:self andActionSelector:@selector(removePreinMeetingAttendeeAction:)];
+    [cell addImgButtonTarget:self andActionSelector:@selector(removePreinMeetingContactAction:)];
     
     return cell;
 }
@@ -141,7 +144,7 @@
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCellEditingStyle _ret = UITableViewCellEditingStyleDelete;
     
-    // in meeting contact cann't be deleted
+    // in meeting contact can't be deleted
     if (0 == indexPath.section) {
         _ret =  UITableViewCellEditingStyleNone;
     }
@@ -154,11 +157,21 @@
     [((ContactsSelectContainerView *)self.superview) hideSoftKeyboardWhenBeginScroll];
 }
 
-- (void)removePreinMeetingAttendeeAction:(UIButton *)pSender{
+- (NSArray *)preparedForJoiningMeetingContactsPhoneNumberArray{
+    NSMutableArray *_ret = [[NSMutableArray alloc] init];
+    
+    for (ContactBean *_contact in _preinMeetingContactsInfoArrayRef) {
+        [_ret addObject:_contact.selectedPhoneNumber];
+    }
+    
+    return _ret;
+}
+
+- (void)removePreinMeetingContactAction:(UIButton *)pSender{
     // get select cell indexPath
     NSIndexPath *_indexPath = [self indexPathForCell:(ContactsListTableViewCell *)pSender./*UITableViewCellContentView*/superview./*ContactsListTableViewCell*/superview];
     
-    // check attendee is in prein meeting section
+    // check the contact is in prein meeting section
     if (0 != _indexPath.section) {
         [(ContactsSelectContainerView *)self.superview removeSelectedContactFromMeetingWithIndexPath:_indexPath];
     }

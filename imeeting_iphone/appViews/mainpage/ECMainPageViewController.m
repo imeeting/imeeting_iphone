@@ -13,7 +13,7 @@
 #import "ECGroupVideoViewController.h"
 #import "ECGroupAttendeeListViewController.h"
 #import "ECGroupManager.h"
-#import "ContactsSelectViewController.h"
+#import "ECContactsSelectViewController.h"
 
 @interface ECMainPageViewController ()
 - (void)onFinishedGetGroupList:(ASIHTTPRequest*)pRequest;
@@ -218,8 +218,12 @@
 }
 
 - (void)createNewGroup {    
-    ContactsSelectViewController *csvc = [[ContactsSelectViewController alloc] init];
+    ECContactsSelectViewController *csvc = [[ECContactsSelectViewController alloc] init];
     csvc.isAppearedInCreateNewGroup = YES;
+    
+    NSMutableArray *attendeeArray = [NSMutableArray arrayWithCapacity:1];
+    [attendeeArray addObject:[UserManager shareUserManager].userBean.name];
+    [csvc initInMeetingAttendeesPhoneNumbers:attendeeArray];
     [self.navigationController pushViewController:csvc animated:YES];
 }
 

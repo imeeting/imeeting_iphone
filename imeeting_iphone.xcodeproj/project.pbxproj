@@ -65,6 +65,8 @@
 		F8E3BF08158F327700467088 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BF07158F327600467088 /* AddressBook.framework */; };
 		F8E49FDB1580B74300E8B2C0 /* ECLoginUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */; };
 		F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */; };
+		F8E4B9EF15A5267700322C7A /* ECContactsSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9EE15A5267700322C7A /* ECContactsSelectViewController.m */; };
+		F8E4B9F315A526AE00322C7A /* ECContactsSelectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9F215A526AE00322C7A /* ECContactsSelectContainerView.m */; };
 		F8E58F7E1597F9A200CC2F1C /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */; };
 		F8E58F821597FA2A00CC2F1C /* ECGroupModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F811597FA2A00CC2F1C /* ECGroupModule.m */; };
 		F8E58F8715983CFA00CC2F1C /* add_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F8615983CFA00CC2F1C /* add_contact.png */; };
@@ -329,6 +331,10 @@
 		F8E49FDA1580B74300E8B2C0 /* ECLoginUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECLoginUIView.m; path = system/views/ECLoginUIView.m; sourceTree = "<group>"; };
 		F8E49FDC1580B76B00E8B2C0 /* ECLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECLoginViewController.h; path = system/controller/ECLoginViewController.h; sourceTree = "<group>"; };
 		F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECLoginViewController.m; path = system/controller/ECLoginViewController.m; sourceTree = "<group>"; };
+		F8E4B9ED15A5267700322C7A /* ECContactsSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECContactsSelectViewController.h; path = contactselection/ECContactsSelectViewController.h; sourceTree = "<group>"; };
+		F8E4B9EE15A5267700322C7A /* ECContactsSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECContactsSelectViewController.m; path = contactselection/ECContactsSelectViewController.m; sourceTree = "<group>"; };
+		F8E4B9F115A526AE00322C7A /* ECContactsSelectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECContactsSelectContainerView.h; path = contactselection/ECContactsSelectContainerView.h; sourceTree = "<group>"; };
+		F8E4B9F215A526AE00322C7A /* ECContactsSelectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECContactsSelectContainerView.m; path = contactselection/ECContactsSelectContainerView.m; sourceTree = "<group>"; };
 		F8E58F7C1597F9A200CC2F1C /* ECGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupManager.h; path = group/ECGroupManager.h; sourceTree = "<group>"; };
 		F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupManager.m; path = group/ECGroupManager.m; sourceTree = "<group>"; };
 		F8E58F801597FA2A00CC2F1C /* ECGroupModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupModule.h; path = group/ECGroupModule.h; sourceTree = "<group>"; };
@@ -930,6 +936,10 @@
 				F8E0C0A215A14F2500E66F27 /* ContactsSelectViewController.h */,
 				F8E0C0A315A14F2500E66F27 /* ContactsSelectViewController.m */,
 				F8E0C0A415A14F2500E66F27 /* In_PreinMeetingContactList */,
+				F8E4B9ED15A5267700322C7A /* ECContactsSelectViewController.h */,
+				F8E4B9EE15A5267700322C7A /* ECContactsSelectViewController.m */,
+				F8E4B9F115A526AE00322C7A /* ECContactsSelectContainerView.h */,
+				F8E4B9F215A526AE00322C7A /* ECContactsSelectContainerView.m */,
 			);
 			name = ContactSelection;
 			sourceTree = "<group>";
@@ -1159,6 +1169,8 @@
 				F8E0C0B615A14F2500E66F27 /* ContactsProcessToolbar.m in Sources */,
 				F8E0C0B715A14F2500E66F27 /* ContactsSelectContainerView.m in Sources */,
 				F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */,
+				F8E4B9EF15A5267700322C7A /* ECContactsSelectViewController.m in Sources */,
+				F8E4B9F315A526AE00322C7A /* ECContactsSelectContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

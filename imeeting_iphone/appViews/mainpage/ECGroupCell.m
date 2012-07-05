@@ -200,7 +200,8 @@ static CGFloat Padding = 3;
     [cell addSubview:iconView];
     
     UILabel *nameLabel =[[UILabel alloc] initWithFrame:CGRectMake(Padding, iconView.frame.origin.y + iconView.frame.size.height + Padding, NameLabelWidth, NameLabelHeight)];
-    nameLabel.text = name;
+    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:name] objectAtIndex:0];
+    nameLabel.text = displayName;
     [nameLabel setTextAlignment:UITextAlignmentCenter];
     [nameLabel setFont:[UIFont systemFontOfSize:12]];
     nameLabel.backgroundColor = [UIColor clearColor];

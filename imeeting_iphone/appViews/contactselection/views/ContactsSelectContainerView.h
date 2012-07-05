@@ -25,7 +25,6 @@
 }
 
 @property (nonatomic, readonly) NSMutableArray *preinMeetingContactsInfoArray;
-@property (nonatomic) BOOL isAppearedInCreatingNewGroup;
 
 // init subview meeting contacts list table view in meeting contacts info array
 - (void)initInMeetingAttendeesPhoneNumbers:(NSArray *)pPhoneNumbers; 

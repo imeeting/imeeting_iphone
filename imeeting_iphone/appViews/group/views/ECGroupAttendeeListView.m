@@ -124,7 +124,9 @@ static CGFloat padding = 4;
     NSString *videoStatus = [attendee objectForKey:VIDEO_STATUS];
     NSString *telephoneStatus = [attendee objectForKey:TELEPHONE_STATUS];
     
-    mNameLabel.text = @"Username";
+    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+    
+    mNameLabel.text = displayName;
     mNumberLabel.text = username;
     
     if ([onlineStatus isEqualToString:ONLINE]) {
@@ -185,17 +187,26 @@ static CGFloat padding = 4;
 
 - (void)initUI {
     self.title = NSLocalizedString(@"Attendee List", "");
-    self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Video", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
-    self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Leave", "") style:UIBarButtonItemStyleBordered target:self action:@selector(leaveGroupAction)];
+   // self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Video", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
+   // self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Leave", "") style:UIBarButtonItemStyleBordered target:self action:@selector(leaveGroupAction)];
     
-    
+    /*
     AddContactButton *acb = [[AddContactButton alloc] init];
     acb.frame = CGRectMake(0, 480 - StatusBarHeight - NavigationBarHeight - acb.frame.size.height, acb.frame.size.width, acb.frame.size.height);
     [acb addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:acb];
+    */
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, NavigationBarHeight)];
+    toolbar.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
+    toolbar.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactAction)];
+    //toolbar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
+    NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], toolbar.rightBarButtonItem, nil];
+    [toolbar setItems:toolButtonArray];
+    [self addSubview:toolbar];
     
     
-    mAttendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480 - acb.frame.size.height - NavigationBarHeight - StatusBarHeight)];
+    mAttendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, toolbar.frame.size.height, 320, 480 - toolbar.frame.size.height - StatusBarHeight)];
     mAttendeeListTableView.backgroundColor = self.backgroundColor;
     mAttendeeListTableView.dataSource = self;
     mAttendeeListTableView.delegate = self;
