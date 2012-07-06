@@ -32,15 +32,6 @@
 }
 
 - (void)switchToVideoView {    
-    /*
-    [UIView beginAnimations:@"animationID" context:nil];
-    [UIView setAnimationDuration:0.8f];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationRepeatAutoreverses:NO];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.attendeeListView cache:YES];
-    [self.attendeeListView exchangeSubviewAtIndex:1 withSubviewAtIndex:0];
-    [UIView commitAnimations];
-    */
     CATransition *animation = [CATransition animation];
     animation.duration = 0.4f;
     animation.timingFunction = UIViewAnimationCurveEaseInOut;
@@ -55,16 +46,6 @@
 
 - (void)switchToAttendeeListView {
     [self.attendeeListView setHidden:NO];
-  
-    /*
-    [UIView beginAnimations:@"animationID" context:nil];
-    [UIView setAnimationDuration:0.8f];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationRepeatAutoreverses:NO];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.attendeeListView cache:YES];
-    [self.attendeeListView exchangeSubviewAtIndex:1 withSubviewAtIndex:0];
-    [UIView commitAnimations];
-     */
     
     CATransition *animation = [CATransition animation];
     animation.duration = 0.4f;

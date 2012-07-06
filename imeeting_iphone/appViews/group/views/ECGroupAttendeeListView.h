@@ -24,14 +24,19 @@
     
     UIColor *normalBGColor;
     UIColor *selectedBGColor;
+    
 }
 + (CGFloat)cellHeight;
 - (id)initWithAttendee:(NSDictionary*)attendee;
 - (void)updateAttendeeStatus:(NSDictionary*)attendee;
 @end
 
-@interface ECGroupAttendeeListView : ECBaseUIView <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>{
+@interface ECGroupAttendeeListView : ECBaseUIView <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, EGORefreshTableHeaderDelegate>{
     UITableView *mAttendeeListTableView;
+    
+    EGORefreshTableHeaderView *mRefreshHeaderView;
+    BOOL _reloading;
+
 }
 
 @property (nonatomic, retain) NSMutableArray *attendeeArray;
@@ -40,4 +45,6 @@
 // if myself flag is YES, attendee will be updated, else not.
 - (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
 - (void)appendAttendee:(NSDictionary*)attendee;
+- (void)setReloadingFlag:(BOOL)flag;
+
 @end

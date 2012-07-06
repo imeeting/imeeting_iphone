@@ -23,7 +23,7 @@
         
         // set title
         self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"invite", "") style:UIBarButtonItemStyleDone target:self action:@selector(onInviteAttendeeAction)];
-
+        self.rightBarButtonItem.tintColor = [UIColor colorWithIntegerRed:70 integerGreen:130 integerBlue:180 alpha:1];
     }
     
     return self;

@@ -52,6 +52,9 @@
         [module.videoManager setupSession];
     }
    
+    if (_refreshList) {
+        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:self withObject:nil];
+    }
 
     
     [super viewWillAppear:animated];
@@ -233,6 +236,7 @@
             if (jsonArray) {
                 ECGroupAttendeeListView *attListView = ((ECGroupView*)self.view).attendeeListView;
                 [attListView setAttendeeArray:jsonArray];
+                [attListView setReloadingFlag:NO];
                 _refreshList = NO;
             }
             

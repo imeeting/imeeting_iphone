@@ -164,6 +164,7 @@ invite_error:
         ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
         ECGroupViewController *gc = (ECGroupViewController*)module.groupController;
         gc.refreshList = YES;
+        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:gc withObject:nil];
         
         [self.navigationController popViewControllerAnimated:YES];
     }

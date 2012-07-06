@@ -8,6 +8,7 @@
 
 #import "ECGroupAttendeeListView.h"
 #import "ECConstants.h"
+#import "AddressBookManager+Avatar.h"
 
 static CGFloat cellHeight = 60;
 static CGFloat guyIconWidth = 50;
@@ -34,10 +35,9 @@ static CGFloat padding = 4;
         self.selectionStyle = UITableViewCellSelectionStyleGray;
         
         mGuyIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, (cellHeight - guyIconHeight) / 2, guyIconWidth, guyIconHeight)];
-        mGuyIcon.contentMode = UIViewContentModeScaleAspectFit;
-        mGuyIcon.backgroundColor = [UIColor clearColor];
+        mGuyIcon.contentMode = UIViewContentModeScaleAspectFill;
+       // mGuyIcon.backgroundColor = [UIColor clearColor];
         mGuyIcon.layer.masksToBounds = YES;
-        mGuyIcon.image = [UIImage imageNamed:@"guydefault"];
         [mGuyIcon.layer setCornerRadius:5.0];
         [self.contentView addSubview:mGuyIcon];
         
@@ -61,7 +61,6 @@ static CGFloat padding = 4;
         mVideoStatusIcon.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:mVideoStatusIcon];
         
-        guyIconImg = [UIImage imageNamed:@"guy2"];
         phoneInTalkingImg = [UIImage imageNamed:@"voice_on"];
         phoneMutedImg = [UIImage imageNamed:@"voice_off"];
         videoOnImg = [UIImage imageNamed:@"video_on"];
@@ -87,8 +86,9 @@ static CGFloat padding = 4;
     mNameLabel.text = displayName;
     mNumberLabel.text = username;
     
+    
     if ([onlineStatus isEqualToString:ONLINE]) {
-        mGuyIcon.image = guyIconImg;
+        mGuyIcon.image = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:username];
         
         if ([videoStatus isEqualToString:ON]) {
             NSLog(@"set video on image");
@@ -99,7 +99,7 @@ static CGFloat padding = 4;
         }
         
     } else {
-        mGuyIcon.image = [guyIconImg grayImage];
+        mGuyIcon.image = [[AddressBookManager shareAddressBookManager] grayAvatarByPhoneNumber:username];
     }
     
    
@@ -137,18 +137,18 @@ static CGFloat padding = 4;
     if (self) {
         _attendeeArray = [[NSMutableArray alloc] initWithCapacity:10];
         [self initUI];
-
     }
     return self;
 }
 
-- (void)initUI {
-    //self.title = NSLocalizedString(@"Attendee List", "");
-    
+- (void)initUI {    
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, NavigationBarHeight)];
     toolbar.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
     toolbar.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactAction)];
-    //toolbar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
+    toolbar.rightBarButtonItem.tintColor = [UIColor colorWithIntegerRed:107 integerGreen:147 integerBlue:35 alpha:1];
+    [toolbar.rightBarButtonItem setStyle:UIBarButtonItemStyleBordered];
+    
+    toolbar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
 
     UIBarButtonItem *title = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Attendee List", "") style:UIBarButtonItemStylePlain target:nil action:nil];
     NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], toolbar.rightBarButtonItem, nil];
@@ -162,6 +162,12 @@ static CGFloat padding = 4;
     mAttendeeListTableView.delegate = self;
     [self addSubview:mAttendeeListTableView];
     
+    
+    mRefreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0.5 - mAttendeeListTableView.frame.size.height, mAttendeeListTableView.frame.size.width, mAttendeeListTableView.frame.size.height)];
+    mRefreshHeaderView.delegate = self;
+    [mAttendeeListTableView addSubview:mRefreshHeaderView];
+    
+    [mRefreshHeaderView refreshLastUpdatedDate];
 }
 
 - (void)updateAttendee:(NSDictionary *)attendee withMyself:(BOOL)myself {
@@ -190,6 +196,13 @@ static CGFloat padding = 4;
             [foundAttendee setValuesForKeysWithDictionary:attendee];
             [mAttendeeListTableView reloadData];
         }
+    }
+}
+
+- (void)setReloadingFlag:(BOOL)flag {
+    _reloading = flag;
+    if (!_reloading) {
+        [mRefreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:mAttendeeListTableView];
     }
 }
 
@@ -278,4 +291,30 @@ static CGFloat padding = 4;
     }
 }
 
+#pragma mark - EGORefreshTableHeaderDelegate methods implemetation
+-(void) egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view{
+    // egoRefreshTableHeader did trigger refresh
+    NSLog(@"begin to reload data.");
+    
+    // update reloading flag
+    _reloading = YES;
+    // init table dataSource
+    [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:self.viewControllerRef withObject:nil];
+}
+
+-(BOOL) egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view{
+    return  _reloading;
+}
+
+-(NSDate*) egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view{
+    return [NSDate date];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [mRefreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+-(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [mRefreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
 @end

@@ -149,8 +149,9 @@
             break;
         }
         default:
-            [iToast makeText:NSLocalizedString(@"error in join group", "")];
-            
+            [iToast makeText:NSLocalizedString(@"error in hide group", "")];
+            ECMainPageView *mainView = (ECMainPageView*)self.view;
+            [mainView reloadTableViewData];
             break;
     }
 
@@ -192,10 +193,9 @@
             // switch to group view
             ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
             [module connectToNotifyServer];
-          
-            [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.groupController withObject:nil];
-          
+            
             [self.navigationController pushViewController:module.groupController animated:NO];
+
             return;
         }
         case 403:

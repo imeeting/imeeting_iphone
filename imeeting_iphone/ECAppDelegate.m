@@ -19,6 +19,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
     // load address book
     [[AddressBookManager shareAddressBookManager] traversalAddressBook];
     

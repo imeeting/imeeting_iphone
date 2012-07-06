@@ -8,6 +8,7 @@
 
 #import "ECGroupCell.h"
 #import "ECConstants.h"
+#import "AddressBookManager+Avatar.h"
 
 static CGFloat TitleLabelHeight = 18;
 static CGFloat TitleLabelWidth = 140;
@@ -122,10 +123,8 @@ static CGFloat Padding = 3;
         self.attendeeArray = attendeeArray;
         self.expansible = NO;
         self.state = shrinked;
-        
         [self initUI];
         
-
     }
     
     return self;
@@ -143,8 +142,11 @@ static CGFloat Padding = 3;
             
             for (NSUInteger i = 0; i < 5; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];
-                UIImage *icon = [UIImage imageNamed:@"guy2"];
-                UIView *cell = [self makeCellWithName:name Icon:icon];
+                
+                UIImage *avatar = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:name];
+                NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:name] objectAtIndex:0];
+
+                UIView *cell = [self makeCellWithName:displayName Icon:avatar];
                 CGRect frame = CGRectMake(i * cellWidth, 0, cellWidth, cellHeight);
                 cell.frame = frame;
                 [line1 addSubview:cell];
@@ -154,8 +156,12 @@ static CGFloat Padding = 3;
             int len = self.attendeeArray.count > 10 ? 10 : self.attendeeArray.count;
             for (NSUInteger i = 5; i < len; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];
-                UIImage *icon = [UIImage imageNamed:@"guy"];
-                UIView *cell = [self makeCellWithName:name Icon:icon];
+                
+                UIImage *avatar = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:name];
+                NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:name] objectAtIndex:0];
+
+                
+                UIView *cell = [self makeCellWithName:displayName Icon:avatar];
                 CGRect frame = CGRectMake((i - 5) * cellWidth, 0, cellWidth, cellHeight);
                 cell.frame = frame;
                 [line2 addSubview:cell];
@@ -166,8 +172,12 @@ static CGFloat Padding = 3;
         } else {
             for (NSUInteger i = 0; i < self.attendeeArray.count; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];
-                UIImage *icon = [UIImage imageNamed:@"guy2"];
-                UIView *cell = [self makeCellWithName:name Icon:icon];
+                
+                UIImage *avatar = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:name];                
+                
+                NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:name] objectAtIndex:0];
+                
+                UIView *cell = [self makeCellWithName:displayName Icon:avatar];
                 CGRect frame = CGRectMake(i * cellWidth, 0, cellWidth, cellHeight);
                 cell.frame = frame;
                 [line1 addSubview:cell];
@@ -191,17 +201,16 @@ static CGFloat Padding = 3;
 
 - (UIView *)makeCellWithName:(NSString *)name Icon:(UIImage *)icon {
     UIView *cell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cellWidth, cellHeight)];
+    
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(Padding + (NameLabelWidth - IconWidth) / 2, Padding, IconWidth, IconHeight)];
-    iconView.contentMode = UIViewContentModeScaleAspectFit;
+    iconView.contentMode = UIViewContentModeScaleAspectFill;
     iconView.image = icon;
-    iconView.backgroundColor = [UIColor clearColor];
     iconView.layer.masksToBounds = YES;
     [iconView.layer setCornerRadius:5.0];
     [cell addSubview:iconView];
     
     UILabel *nameLabel =[[UILabel alloc] initWithFrame:CGRectMake(Padding, iconView.frame.origin.y + iconView.frame.size.height + Padding, NameLabelWidth, NameLabelHeight)];
-    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:name] objectAtIndex:0];
-    nameLabel.text = displayName;
+    nameLabel.text = name;
     [nameLabel setTextAlignment:UITextAlignmentCenter];
     [nameLabel setFont:[UIFont systemFontOfSize:12]];
     nameLabel.backgroundColor = [UIColor clearColor];
@@ -265,7 +274,8 @@ static CGFloat Padding = 3;
             
             mTitle = [[UILabel alloc] initWithFrame:CGRectMake(Margin, MarginTop, TitleLabelWidth, TitleLabelHeight)];
             mTitle.text = title;
-            mTitle.font = [UIFont systemFontOfSize:18];
+            mTitle.font = [UIFont systemFontOfSize:13];
+            mTitle.textColor = [UIColor colorWithIntegerRed:105 integerGreen:105 integerBlue:105 alpha:1];
             mTitle.backgroundColor = [UIColor clearColor];
             [self.contentView addSubview:mTitle];
             

@@ -14,7 +14,6 @@
 		F814E284157CA0AB00FBBB19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E282157CA09600FBBB19 /* SystemConfiguration.framework */; };
 		F814E286157CA0B600FBBB19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E285157CA0B600FBBB19 /* CFNetwork.framework */; };
 		F814E288157CA0CE00FBBB19 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */; };
-		F85D1F2615A434B10038D41A /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F85D1F2515A434B10038D41A /* CommonToolkit.framework */; };
 		F863C862157C61320045C08C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C861157C61320045C08C /* UIKit.framework */; };
 		F863C864157C61320045C08C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C863157C61320045C08C /* Foundation.framework */; };
 		F863C866157C61320045C08C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C865157C61320045C08C /* CoreGraphics.framework */; };
@@ -74,14 +73,15 @@
 		F8E58F8715983CFA00CC2F1C /* add_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F8615983CFA00CC2F1C /* add_contact.png */; };
 		F8E58F891598440900CC2F1C /* buttonbg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F881598440900CC2F1C /* buttonbg.png */; };
 		F8E58F8B159849C800CC2F1C /* buttonbg2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F8A159849C700CC2F1C /* buttonbg2.png */; };
-		F8E58F8D15985AE300CC2F1C /* guydefault.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F8C15985AE300CC2F1C /* guydefault.png */; };
 		F8E58F951598695300CC2F1C /* voice_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F931598695300CC2F1C /* voice_off.png */; };
 		F8E58F961598695300CC2F1C /* voice_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F941598695300CC2F1C /* voice_on.png */; };
 		F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */; };
 		F8ED85871592CDFE00E38F0C /* camera_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85851592CDFE00E38F0C /* camera_off.png */; };
 		F8ED85881592CDFE00E38F0C /* camera_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85861592CDFE00E38F0C /* camera_on.png */; };
-		F8ED858F15931AB800E38F0C /* gerlor_001.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED858E15931AB800E38F0C /* gerlor_001.png */; };
 		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
+		F8EDF12615A682C3003DF47F /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EDF12515A682C3003DF47F /* CommonToolkit.framework */; };
+		F8EDF12815A68FE4003DF47F /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F8EDF12715A68FE4003DF47F /* default_avatar.png */; };
+		F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */; };
 		F8EED883159457420072FD39 /* ECGroupAttendeeListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */; };
 		F8FA19661591781D00947304 /* guy.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FA19651591781D00947304 /* guy.png */; };
 		F8FA196A15917A1E00947304 /* guy2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FA196915917A1E00947304 /* guy2.png */; };
@@ -101,7 +101,6 @@
 		F814E282157CA09600FBBB19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F814E285157CA0B600FBBB19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		F85D1F2515A434B10038D41A /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphonesimulator/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F863C85D157C61320045C08C /* imeeting_iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imeeting_iphone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F863C861157C61320045C08C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F863C863157C61320045C08C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -346,16 +345,18 @@
 		F8E58F8615983CFA00CC2F1C /* add_contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_contact.png; path = imeeting_iphone/Resources/images/add_contact.png; sourceTree = "<group>"; };
 		F8E58F881598440900CC2F1C /* buttonbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = buttonbg.png; path = imeeting_iphone/Resources/images/buttonbg.png; sourceTree = "<group>"; };
 		F8E58F8A159849C700CC2F1C /* buttonbg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = buttonbg2.png; path = imeeting_iphone/Resources/images/buttonbg2.png; sourceTree = "<group>"; };
-		F8E58F8C15985AE300CC2F1C /* guydefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guydefault.png; path = imeeting_iphone/Resources/images/guydefault.png; sourceTree = "<group>"; };
 		F8E58F931598695300CC2F1C /* voice_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_off.png; path = imeeting_iphone/Resources/images/voice_off.png; sourceTree = "<group>"; };
 		F8E58F941598695300CC2F1C /* voice_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_on.png; path = imeeting_iphone/Resources/images/voice_on.png; sourceTree = "<group>"; };
 		F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = CommonToolkitBundle.bundle; path = imeeting_iphone/Resources/bundles/CommonToolkitBundle.bundle; sourceTree = "<group>"; };
 		F8ED85851592CDFE00E38F0C /* camera_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_off.png; path = imeeting_iphone/Resources/images/camera_off.png; sourceTree = "<group>"; };
 		F8ED85861592CDFE00E38F0C /* camera_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_on.png; path = imeeting_iphone/Resources/images/camera_on.png; sourceTree = "<group>"; };
-		F8ED858E15931AB800E38F0C /* gerlor_001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gerlor_001.png; path = imeeting_iphone/Resources/images/gerlor_001.png; sourceTree = "<group>"; };
 		F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECBaseUIView.h; sourceTree = "<group>"; };
 		F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECBaseUIView.m; sourceTree = "<group>"; };
 		F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUrlConfig.h; sourceTree = "<group>"; };
+		F8EDF12515A682C3003DF47F /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
+		F8EDF12715A68FE4003DF47F /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = imeeting_iphone/Resources/images/default_avatar.png; sourceTree = "<group>"; };
+		F8EDF12B15A6B462003DF47F /* AddressBookManager+Avatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AddressBookManager+Avatar.h"; path = "Util/AddressBookManager+Avatar.h"; sourceTree = "<group>"; };
+		F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AddressBookManager+Avatar.m"; path = "Util/AddressBookManager+Avatar.m"; sourceTree = "<group>"; };
 		F8EED881159457420072FD39 /* ECGroupAttendeeListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupAttendeeListView.h; path = group/views/ECGroupAttendeeListView.h; sourceTree = "<group>"; };
 		F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupAttendeeListView.m; path = group/views/ECGroupAttendeeListView.m; sourceTree = "<group>"; };
 		F8FA19651591781D00947304 /* guy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guy.png; path = imeeting_iphone/Resources/images/guy.png; sourceTree = "<group>"; };
@@ -369,7 +370,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F85D1F2615A434B10038D41A /* CommonToolkit.framework in Frameworks */,
+				F8EDF12615A682C3003DF47F /* CommonToolkit.framework in Frameworks */,
 				F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */,
 				F885A670159B114500709FC7 /* libbz2.1.0.dylib in Frameworks */,
 				F885A5A3159ABE5D00709FC7 /* CoreVideo.framework in Frameworks */,
@@ -414,9 +415,9 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
+				F863C867157C61320045C08C /* imeeting_iphone */,
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,
-				F863C867157C61320045C08C /* imeeting_iphone */,
 				F863C85E157C61320045C08C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -432,7 +433,7 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F85D1F2515A434B10038D41A /* CommonToolkit.framework */,
+				F8EDF12515A682C3003DF47F /* CommonToolkit.framework */,
 				F807584515A294C1008D8656 /* MessageUI.framework */,
 				F885A66F159B114500709FC7 /* libbz2.1.0.dylib */,
 				F885A5A2159ABE5D00709FC7 /* CoreVideo.framework */,
@@ -455,6 +456,7 @@
 		F863C867157C61320045C08C /* imeeting_iphone */ = {
 			isa = PBXGroup;
 			children = (
+				F8EDF12A15A6B41A003DF47F /* Util */,
 				F8F1A743158B1292003F1EE8 /* Resources */,
 				F8E49FD41580555400E8B2C0 /* Config */,
 				F863C870157C61320045C08C /* ECAppDelegate.h */,
@@ -993,9 +995,19 @@
 			path = imeeting_iphone/config;
 			sourceTree = SOURCE_ROOT;
 		};
+		F8EDF12A15A6B41A003DF47F /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				F8EDF12B15A6B462003DF47F /* AddressBookManager+Avatar.h */,
+				F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		F8F1A743158B1292003F1EE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8EDF12715A68FE4003DF47F /* default_avatar.png */,
 				F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */,
 				F8E0C08115A14DDE00E66F27 /* Pinyin4jBundle.bundle */,
 				F8E0C07A15A14DC900E66F27 /* ContactDefault.png */,
@@ -1006,11 +1018,9 @@
 				F8D791B01599603800986BCD /* video_on.png */,
 				F8E58F931598695300CC2F1C /* voice_off.png */,
 				F8E58F941598695300CC2F1C /* voice_on.png */,
-				F8E58F8C15985AE300CC2F1C /* guydefault.png */,
 				F8E58F8A159849C700CC2F1C /* buttonbg2.png */,
 				F8E58F881598440900CC2F1C /* buttonbg.png */,
 				F8E58F8615983CFA00CC2F1C /* add_contact.png */,
-				F8ED858E15931AB800E38F0C /* gerlor_001.png */,
 				F8ED85851592CDFE00E38F0C /* camera_off.png */,
 				F8ED85861592CDFE00E38F0C /* camera_on.png */,
 				F8FA196915917A1E00947304 /* guy2.png */,
@@ -1114,11 +1124,9 @@
 				F8FA196A15917A1E00947304 /* guy2.png in Resources */,
 				F8ED85871592CDFE00E38F0C /* camera_off.png in Resources */,
 				F8ED85881592CDFE00E38F0C /* camera_on.png in Resources */,
-				F8ED858F15931AB800E38F0C /* gerlor_001.png in Resources */,
 				F8E58F8715983CFA00CC2F1C /* add_contact.png in Resources */,
 				F8E58F891598440900CC2F1C /* buttonbg.png in Resources */,
 				F8E58F8B159849C800CC2F1C /* buttonbg2.png in Resources */,
-				F8E58F8D15985AE300CC2F1C /* guydefault.png in Resources */,
 				F8E58F951598695300CC2F1C /* voice_off.png in Resources */,
 				F8E58F961598695300CC2F1C /* voice_on.png in Resources */,
 				F8D791B11599603800986BCD /* video_off.png in Resources */,
@@ -1129,6 +1137,7 @@
 				F8E0C07F15A14DC900E66F27 /* ContactSelected.png in Resources */,
 				F8E0C08215A14DDE00E66F27 /* Pinyin4jBundle.bundle in Resources */,
 				F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */,
+				F8EDF12815A68FE4003DF47F /* default_avatar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,6 +1180,7 @@
 				F8E4B9F315A526AE00322C7A /* ECContactsSelectContainerView.m in Sources */,
 				F8E4BA0015A57A2000322C7A /* ECGroupViewController.m in Sources */,
 				F8E4BA0315A57A2700322C7A /* ECGroupView.m in Sources */,
+				F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1252,6 +1262,7 @@
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
 					"\"$(SRCROOT)/../../../../Downloads\"",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)/../Build/Products/Debug-iphoneos\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "imeeting_iphone/imeeting_iphone-Prefix.pch";
@@ -1289,6 +1300,7 @@
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
 					"\"$(SRCROOT)/../../../../Downloads\"",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)/../Build/Products/Debug-iphoneos\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "imeeting_iphone/imeeting_iphone-Prefix.pch";
