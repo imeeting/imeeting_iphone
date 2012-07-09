@@ -118,12 +118,13 @@
                 img_convert_ctx = sws_getCachedContext(img_convert_ctx, videoCodecContext->width, videoCodecContext->height, videoCodecContext->pix_fmt, self.imgWidth, self.imgHeight, dst_pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
                 // convert YUV420 to RGB32
                 sws_scale(img_convert_ctx, videoFrame->data, videoFrame->linesize, 0, videoCodecContext->height, videoPicture->data, videoPicture->linesize);
-                
-                UIImage *img = [self imageFromAVPicture:videoPicture width:self.imgWidth height:self.imgHeight];
-            //    NSLog(@"delegate: %@", self.delegate);
-                if (self.delegate && [self.delegate respondsToSelector:@selector(onFetchNewImage:)]) {
-                    NSLog(@"have delegate - perform selector");
-                    [self.delegate performSelectorOnMainThread:@selector(onFetchNewImage:) withObject:img waitUntilDone:NO];
+                @autoreleasepool {
+                    UIImage *img = [self imageFromAVPicture:videoPicture width:self.imgWidth height:self.imgHeight];
+                    //    NSLog(@"delegate: %@", self.delegate);
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(onFetchNewImage:)]) {
+                        NSLog(@"have delegate - perform selector");
+                        [self.delegate performSelectorOnMainThread:@selector(onFetchNewImage:) withObject:img waitUntilDone:NO];
+                    }
                 }
             }
         }

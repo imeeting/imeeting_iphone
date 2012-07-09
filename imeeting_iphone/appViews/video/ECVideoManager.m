@@ -224,17 +224,18 @@
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
     NSLog(@"capture output");
     
-    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-    CVPixelBufferLockBaseAddress(imageBuffer, 0);
-    
-    // get information about image
-    uint8_t *imgBaseAddress = (uint8_t*)CVPixelBufferGetBaseAddress(imageBuffer);
-    size_t width = CVPixelBufferGetWidth(imageBuffer);
-    size_t height = CVPixelBufferGetHeight(imageBuffer);
-    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-    
-    [self.videoEncode processRawFrame:imgBaseAddress andWidth:width andHeight:height];
-    
+    @autoreleasepool {
+        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+        CVPixelBufferLockBaseAddress(imageBuffer, 0);
+        
+        // get information about image
+        uint8_t *imgBaseAddress = (uint8_t*)CVPixelBufferGetBaseAddress(imageBuffer);
+        size_t width = CVPixelBufferGetWidth(imageBuffer);
+        size_t height = CVPixelBufferGetHeight(imageBuffer);
+        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+      
+        [self.videoEncode processRawFrame:imgBaseAddress andWidth:width andHeight:height];
+    }
 }
 
 @end

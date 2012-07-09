@@ -211,7 +211,8 @@ static CGFloat OppositeNameLabelHeight = 20;
 }
 
 - (void)setOppositeVideoName:(NSString *)name {
-    mOppositeVideoNameLabel.text = name;
+    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:name] objectAtIndex:0];
+    mOppositeVideoNameLabel.text = displayName;
     [mOppositeVideoNameLabel setHidden:NO];
 }
 

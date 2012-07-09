@@ -12,9 +12,9 @@
 #define CONTACTSPROCESS_SOFTKEYBOARD_HEIGHT 215.0
 
 // contacts process softKeyboard background color
-#define CONTACTSPROCESS_SOFTKEYBOARD_BACKGROUND_COLOR   [UIColor colorWithIntegerRed:45 integerGreen:54 integerBlue:66 alpha:1.0]
+#define CONTACTSPROCESS_SOFTKEYBOARD_BACKGROUND_COLOR   [UIColor colorWithIntegerRed:64 integerGreen:64 integerBlue:64 alpha:1.0]
 // contacts process softKeyboard front color
-#define CONTACTSPROCESS_SOFTKEYBOARD_FRONT_COLOR    [UIColor colorWithIntegerRed:136 integerGreen:155 integerBlue:179 alpha:1.0]
+#define CONTACTSPROCESS_SOFTKEYBOARD_FRONT_COLOR    [UIColor colorWithIntegerRed:96 integerGreen:103 integerBlue:116 alpha:1.0]
 
 @interface ContactsProcessSoftKeyboard : UISoftKeyboard <UISoftKeyboardDataSource>
 

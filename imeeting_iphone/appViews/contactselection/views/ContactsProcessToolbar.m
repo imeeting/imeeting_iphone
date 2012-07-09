@@ -158,14 +158,12 @@
 
 // UISoftKeyboardDelegate methods implemetation
 - (void)softKeyboard:(UISoftKeyboard *)pSoftKeyboard didSelectCellAtIndexPath:(NSIndexPath *)indexPath{
-    // get selected cell text
-    NSString *_selectedCellFrontViewText = ((UILabel *)[[pSoftKeyboard cellForRowAtIndexPath:indexPath] frontView]).text;
     
     // check softKeyboard cell function according to cell indexPath
     // numeric
     if (indexPath.skb_row < 3 || (indexPath.skb_row == 3 && indexPath.skb_cell == 1)) {
         // set inputDiaplayLabel text for user input with custom softKeyboard
-        _mUserInputTextField.text = [NSString stringWithFormat:@"%@%@", nil == _mUserInputTextField.text ? @"" : _mUserInputTextField.text, _selectedCellFrontViewText];
+        _mUserInputTextField.text = [NSString stringWithFormat:@"%@%@", nil == _mUserInputTextField.text ? @"" : _mUserInputTextField.text, [pSoftKeyboard cellForRowAtIndexPath:indexPath].coreData.stringValue];
         // manual call method:(void)userInputTextDidChanged:
         [self userInputTextDidChanged:_mUserInputTextField];
     }
