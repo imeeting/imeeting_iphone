@@ -14,6 +14,8 @@
 #import "ECUrlConfig.h"
 #import "ECConstants.h"
 #import "ECContactsSelectViewController.h"
+#import "ECOwnerModeStatusFilter.h"
+#import "ECAttendeeModeStatusFilter.h"
 
 @interface ECGroupViewController ()
 // video view realted methods
@@ -28,6 +30,9 @@
 // attendee list view related methods
 - (void)onFinishedGetAttendeeList:(ASIHTTPRequest*)pRequest;
 
+- (void)doActionForSelectedMemberInOwnerMode:(NSDictionary*)attendee;
+- (void)selectedActionInActionSheet:(UIActionSheet *)pActionSheet clickedButtonAtIndex:(NSInteger)pButtonIndex;
+- (void)doActionForSelectedMemberInAttendeeMode:(NSDictionary*)attendee;
 @end
 
 @implementation ECGroupViewController
@@ -49,6 +54,15 @@
     if (isFirstLoad) {
         isFirstLoad = NO;
         ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+        ECGroupAttendeeListView *alv = ((ECGroupView*)self.view).attendeeListView;
+        if (module.ownerMode) {
+            [alv setOwnerUI];
+            alv.statusFilter = [[ECOwnerModeStatusFilter alloc] init];
+        } else {
+            [alv setAttendeeUI];
+            alv.statusFilter = [[ECAttendeeModeStatusFilter alloc] init];
+        }
+        
         [module.videoManager setupSession];
     }
    
@@ -90,6 +104,24 @@
     NSLog(@"module onLeaveGroup ok");
     [self.navigationController popViewControllerAnimated:YES];
     NSLog(@"poped view controller");
+}
+
+- (void)addContacts {
+    NSMutableArray *phoneNumberArray = [NSMutableArray arrayWithCapacity:10];
+    ECGroupAttendeeListView *view = ((ECGroupView*)self.view).attendeeListView;
+    for (NSDictionary *attendee in view.attendeeArray) {
+        NSString *username = [attendee objectForKey:USERNAME];
+        [phoneNumberArray addObject:username];
+    }
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+    ECContactsSelectViewController *csvc = [[ECContactsSelectViewController alloc] init];
+    [csvc initInMeetingAttendeesPhoneNumbers:phoneNumberArray];
+    csvc.isAppearedInCreateNewGroup = NO;
+    
+    [self.navigationController pushViewController:csvc animated:YES];
+    
 }
 
 - (void)switchToVideoView {
@@ -168,6 +200,8 @@
 - (void)onNetworkFailed:(ASIHTTPRequest *)request {
     // do nothing
 }
+
+#pragma mark - video related
 
 - (void)updateMyVideoOnStatus {
     NSString *username = [[UserManager shareUserManager] userBean].name;
@@ -257,10 +291,57 @@
     [attListView updateAttendee:attendee withMyself:myself];
 }
 
+#pragma mark - on member selected action
 - (void)onAttendeeSelected:(NSDictionary *)attendee {
+    mSelectedAttendee = attendee;
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    
+    if (module.ownerMode) {
+        // owner mode
+        [self doActionForSelectedMemberInOwnerMode:attendee];
+    } else {
+        // normal attendee mode
+        [self doActionForSelectedMemberInAttendeeMode:attendee];
+    }
+}
+
+- (void)doActionForSelectedMemberInOwnerMode:(NSDictionary *)attendee {
+    NSString *username = [attendee objectForKey:USERNAME];
+    NSString *videoStatus = [attendee objectForKey:VIDEO_STATUS];
+    NSString *phoneStatus = [attendee objectForKey:TELEPHONE_STATUS];
+    
+    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+    NSMutableArray *actions = [NSMutableArray arrayWithCapacity:5];
+    // generate action items
+    if ([videoStatus isEqualToString:ON]) {
+        [actions addObject:NSLocalizedString(@"Watch Video", "")];
+    }
+    if ([phoneStatus isEqualToString:TERMINATED] || [phoneStatus isEqualToString:FAILED]) {
+        [actions addObject:NSLocalizedString(@"Call", "")];
+    } else if ([phoneStatus isEqualToString:CALL_WAIT] || [phoneStatus isEqualToString:ESTABLISHED]) {
+        [actions addObject:NSLocalizedString(@"Hang Up", "")];
+    }
+
+    [actions addObject:NSLocalizedString(@"Kick", "")];
+    
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithContent:actions andTitleFormat:NSLocalizedString(@"Operation on %@", ""), displayName];
+    [actionSheet setDestructiveButtonIndex:[actions count] - 1];
+    actionSheet.processor = self;
+    actionSheet.buttonClickedEventSelector = @selector(selectedActionInActionSheet:clickedButtonAtIndex:);
+    ECGroupAttendeeListView *alv = ((ECGroupView*)self.view).attendeeListView;
+    [actionSheet showInView:alv];
+
+}
+
+- (void)selectedActionInActionSheet:(UIActionSheet *)pActionSheet clickedButtonAtIndex:(NSInteger)pButtonIndex {
+    
+}
+
+- (void)doActionForSelectedMemberInAttendeeMode:(NSDictionary *)attendee {
     NSString *username = [attendee objectForKey:USERNAME];
     NSString *videoStatus = [attendee objectForKey:VIDEO_STATUS];
     NSString *onlineStatus = [attendee objectForKey:ONLINE_STATUS];
+
     if ([onlineStatus isEqualToString:ONLINE]) {
         if ([videoStatus isEqualToString:ON]) {
             ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
@@ -273,25 +354,9 @@
     } else {
         [[iToast makeText:NSLocalizedString(@"This attendee is offline", "")] show];
     }
+
 }
 
-- (void)addContacts {
-    NSMutableArray *phoneNumberArray = [NSMutableArray arrayWithCapacity:10];
-    ECGroupAttendeeListView *view = ((ECGroupView*)self.view).attendeeListView;
-    for (NSDictionary *attendee in view.attendeeArray) {
-        NSString *username = [attendee objectForKey:USERNAME];
-        [phoneNumberArray addObject:username];
-    }
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-
-    ECContactsSelectViewController *csvc = [[ECContactsSelectViewController alloc] init];
-    [csvc initInMeetingAttendeesPhoneNumbers:phoneNumberArray];
-    csvc.isAppearedInCreateNewGroup = NO;
-    
-    [self.navigationController pushViewController:csvc animated:YES];
-    
-}
 
 
 @end

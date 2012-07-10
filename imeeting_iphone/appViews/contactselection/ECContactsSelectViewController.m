@@ -97,6 +97,10 @@
                 NSString *groupId = [jsonData objectForKey:GROUP_ID];
                 [self setupGroupModuleWithGroupId:groupId];
                 
+                ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+                module.audioConfId = [jsonData objectForKey:AUDIO_CONF_ID];
+                module.owner = [jsonData objectForKey:OWNER];
+                
                 if ([MFMessageComposeViewController canSendText] && mCurrentInviteArray.count > 0) {
                     [self sendSMS];
                 } else {
@@ -127,8 +131,8 @@ invite_error:
     
     mMsgViewController.recipients = mCurrentInviteArray;
     
-    NSString *groupId = [[ECGroupManager sharedECGroupManager] currentGroupModule].groupId;
-    NSString *msgBody = [NSString stringWithFormat:@"%@邀请您加入讨论组(%@)。[iMeeting]", [UserManager shareUserManager].userBean.name, groupId];
+    NSString *audioConfId = [[ECGroupManager sharedECGroupManager] currentGroupModule].audioConfId;
+    NSString *msgBody = [NSString stringWithFormat:@"%@邀请您加入讨论组,电话呼入号：%@。[iMeeting]", [UserManager shareUserManager].userBean.name, audioConfId];
     mMsgViewController.body = msgBody;
     mMsgViewController.messageComposeDelegate = self;
     [self presentModalViewController:mMsgViewController animated:YES];

@@ -72,6 +72,8 @@
 		F8E0C0B615A14F2500E66F27 /* ContactsProcessToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AC15A14F2500E66F27 /* ContactsProcessToolbar.m */; };
 		F8E0C0B715A14F2500E66F27 /* ContactsSelectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */; };
 		F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */; };
+		F8E19E5115AC27C5001F6BBC /* ECOwnerModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E19E5015AC27C5001F6BBC /* ECOwnerModeStatusFilter.m */; };
+		F8E19E5415AC3553001F6BBC /* ECAttendeeModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E19E5315AC3553001F6BBC /* ECAttendeeModeStatusFilter.m */; };
 		F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BEC7158EC57200467088 /* QuartzCore.framework */; };
 		F8E3BEE8158F1F9100467088 /* UserBean+IMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */; };
 		F8E3BF08158F327700467088 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BF07158F327600467088 /* AddressBook.framework */; };
@@ -83,11 +85,6 @@
 		F8E4BA0315A57A2700322C7A /* ECGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4BA0215A57A2700322C7A /* ECGroupView.m */; };
 		F8E58F7E1597F9A200CC2F1C /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */; };
 		F8E58F821597FA2A00CC2F1C /* ECGroupModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F811597FA2A00CC2F1C /* ECGroupModule.m */; };
-		F8E58F8715983CFA00CC2F1C /* add_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F8615983CFA00CC2F1C /* add_contact.png */; };
-		F8E58F891598440900CC2F1C /* buttonbg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F881598440900CC2F1C /* buttonbg.png */; };
-		F8E58F8B159849C800CC2F1C /* buttonbg2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F8A159849C700CC2F1C /* buttonbg2.png */; };
-		F8E58F951598695300CC2F1C /* voice_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F931598695300CC2F1C /* voice_off.png */; };
-		F8E58F961598695300CC2F1C /* voice_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E58F941598695300CC2F1C /* voice_on.png */; };
 		F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */; };
 		F8ED85871592CDFE00E38F0C /* camera_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85851592CDFE00E38F0C /* camera_off.png */; };
 		F8ED85881592CDFE00E38F0C /* camera_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85861592CDFE00E38F0C /* camera_on.png */; };
@@ -95,8 +92,6 @@
 		F8EDF12815A68FE4003DF47F /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F8EDF12715A68FE4003DF47F /* default_avatar.png */; };
 		F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */; };
 		F8EED883159457420072FD39 /* ECGroupAttendeeListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */; };
-		F8FA19661591781D00947304 /* guy.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FA19651591781D00947304 /* guy.png */; };
-		F8FA196A15917A1E00947304 /* guy2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FA196915917A1E00947304 /* guy2.png */; };
 		F8FA19731591E73100947304 /* ECGroupVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FA19721591E73100947304 /* ECGroupVideoView.m */; };
 /* End PBXBuildFile section */
 
@@ -347,6 +342,11 @@
 		F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsSelectContainerView.m; path = contactselection/views/ContactsSelectContainerView.m; sourceTree = "<group>"; };
 		F8E0C0AF15A14F2500E66F27 /* MeetingContactsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingContactsListView.h; sourceTree = "<group>"; };
 		F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingContactsListView.m; sourceTree = "<group>"; };
+		F8E19E4E15AC2634001F6BBC /* ECStatusFilterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ECStatusFilterDelegate.h; path = group/statusfilter/ECStatusFilterDelegate.h; sourceTree = "<group>"; };
+		F8E19E4F15AC27C5001F6BBC /* ECOwnerModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECOwnerModeStatusFilter.h; path = group/statusfilter/ECOwnerModeStatusFilter.h; sourceTree = "<group>"; };
+		F8E19E5015AC27C5001F6BBC /* ECOwnerModeStatusFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECOwnerModeStatusFilter.m; path = group/statusfilter/ECOwnerModeStatusFilter.m; sourceTree = "<group>"; };
+		F8E19E5215AC3553001F6BBC /* ECAttendeeModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECAttendeeModeStatusFilter.h; path = group/statusfilter/ECAttendeeModeStatusFilter.h; sourceTree = "<group>"; };
+		F8E19E5315AC3553001F6BBC /* ECAttendeeModeStatusFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECAttendeeModeStatusFilter.m; path = group/statusfilter/ECAttendeeModeStatusFilter.m; sourceTree = "<group>"; };
 		F8E3BEC7158EC57200467088 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F8E3BEE6158F1F9100467088 /* UserBean+IMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UserBean+IMeeting.h"; path = "system/user/UserBean+IMeeting.h"; sourceTree = "<group>"; };
 		F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UserBean+IMeeting.m"; path = "system/user/UserBean+IMeeting.m"; sourceTree = "<group>"; };
@@ -367,11 +367,6 @@
 		F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupManager.m; path = group/ECGroupManager.m; sourceTree = "<group>"; };
 		F8E58F801597FA2A00CC2F1C /* ECGroupModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupModule.h; path = group/ECGroupModule.h; sourceTree = "<group>"; };
 		F8E58F811597FA2A00CC2F1C /* ECGroupModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupModule.m; path = group/ECGroupModule.m; sourceTree = "<group>"; };
-		F8E58F8615983CFA00CC2F1C /* add_contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_contact.png; path = imeeting_iphone/Resources/images/add_contact.png; sourceTree = "<group>"; };
-		F8E58F881598440900CC2F1C /* buttonbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = buttonbg.png; path = imeeting_iphone/Resources/images/buttonbg.png; sourceTree = "<group>"; };
-		F8E58F8A159849C700CC2F1C /* buttonbg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = buttonbg2.png; path = imeeting_iphone/Resources/images/buttonbg2.png; sourceTree = "<group>"; };
-		F8E58F931598695300CC2F1C /* voice_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_off.png; path = imeeting_iphone/Resources/images/voice_off.png; sourceTree = "<group>"; };
-		F8E58F941598695300CC2F1C /* voice_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_on.png; path = imeeting_iphone/Resources/images/voice_on.png; sourceTree = "<group>"; };
 		F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = CommonToolkitBundle.bundle; path = imeeting_iphone/Resources/bundles/CommonToolkitBundle.bundle; sourceTree = "<group>"; };
 		F8ED85851592CDFE00E38F0C /* camera_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_off.png; path = imeeting_iphone/Resources/images/camera_off.png; sourceTree = "<group>"; };
 		F8ED85861592CDFE00E38F0C /* camera_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_on.png; path = imeeting_iphone/Resources/images/camera_on.png; sourceTree = "<group>"; };
@@ -383,8 +378,6 @@
 		F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AddressBookManager+Avatar.m"; path = "Util/AddressBookManager+Avatar.m"; sourceTree = "<group>"; };
 		F8EED881159457420072FD39 /* ECGroupAttendeeListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupAttendeeListView.h; path = group/views/ECGroupAttendeeListView.h; sourceTree = "<group>"; };
 		F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupAttendeeListView.m; path = group/views/ECGroupAttendeeListView.m; sourceTree = "<group>"; };
-		F8FA19651591781D00947304 /* guy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guy.png; path = imeeting_iphone/Resources/images/guy.png; sourceTree = "<group>"; };
-		F8FA196915917A1E00947304 /* guy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guy2.png; path = imeeting_iphone/Resources/images/guy2.png; sourceTree = "<group>"; };
 		F8FA19711591E73100947304 /* ECGroupVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupVideoView.h; path = group/views/ECGroupVideoView.h; sourceTree = "<group>"; };
 		F8FA19721591E73100947304 /* ECGroupVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupVideoView.m; path = group/views/ECGroupVideoView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1020,6 +1013,18 @@
 			name = ContactProcessToolbar;
 			sourceTree = "<group>";
 		};
+		F8E19E4C15AC24AC001F6BBC /* StatusFilter */ = {
+			isa = PBXGroup;
+			children = (
+				F8E19E4E15AC2634001F6BBC /* ECStatusFilterDelegate.h */,
+				F8E19E4F15AC27C5001F6BBC /* ECOwnerModeStatusFilter.h */,
+				F8E19E5015AC27C5001F6BBC /* ECOwnerModeStatusFilter.m */,
+				F8E19E5215AC3553001F6BBC /* ECAttendeeModeStatusFilter.h */,
+				F8E19E5315AC3553001F6BBC /* ECAttendeeModeStatusFilter.m */,
+			);
+			name = StatusFilter;
+			sourceTree = "<group>";
+		};
 		F8E3BEE5158F1F4B00467088 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,15 +1066,8 @@
 				F885A583159A9DDA00709FC7 /* camera_switch.png */,
 				F8D791AF1599603800986BCD /* video_off.png */,
 				F8D791B01599603800986BCD /* video_on.png */,
-				F8E58F931598695300CC2F1C /* voice_off.png */,
-				F8E58F941598695300CC2F1C /* voice_on.png */,
-				F8E58F8A159849C700CC2F1C /* buttonbg2.png */,
-				F8E58F881598440900CC2F1C /* buttonbg.png */,
-				F8E58F8615983CFA00CC2F1C /* add_contact.png */,
 				F8ED85851592CDFE00E38F0C /* camera_off.png */,
 				F8ED85861592CDFE00E38F0C /* camera_on.png */,
-				F8FA196915917A1E00947304 /* guy2.png */,
-				F8FA19651591781D00947304 /* guy.png */,
 			);
 			name = Resources;
 			path = ..;
@@ -1078,6 +1076,7 @@
 		F8FA196B1591DFBA00947304 /* Group */ = {
 			isa = PBXGroup;
 			children = (
+				F8E19E4C15AC24AC001F6BBC /* StatusFilter */,
 				F8E4BA0115A57A2700322C7A /* ECGroupView.h */,
 				F8E4BA0215A57A2700322C7A /* ECGroupView.m */,
 				F8E4B9FE15A57A1F00322C7A /* ECGroupViewController.h */,
@@ -1165,15 +1164,8 @@
 			files = (
 				F863C86C157C61320045C08C /* InfoPlist.strings in Resources */,
 				F863C896157C65250045C08C /* Localizable.strings in Resources */,
-				F8FA19661591781D00947304 /* guy.png in Resources */,
-				F8FA196A15917A1E00947304 /* guy2.png in Resources */,
 				F8ED85871592CDFE00E38F0C /* camera_off.png in Resources */,
 				F8ED85881592CDFE00E38F0C /* camera_on.png in Resources */,
-				F8E58F8715983CFA00CC2F1C /* add_contact.png in Resources */,
-				F8E58F891598440900CC2F1C /* buttonbg.png in Resources */,
-				F8E58F8B159849C800CC2F1C /* buttonbg2.png in Resources */,
-				F8E58F951598695300CC2F1C /* voice_off.png in Resources */,
-				F8E58F961598695300CC2F1C /* voice_on.png in Resources */,
 				F8D791B11599603800986BCD /* video_off.png in Resources */,
 				F8D791B21599603800986BCD /* video_on.png in Resources */,
 				F885A584159A9DDA00709FC7 /* camera_switch.png in Resources */,
@@ -1238,6 +1230,8 @@
 				F8E4BA0015A57A2000322C7A /* ECGroupViewController.m in Sources */,
 				F8E4BA0315A57A2700322C7A /* ECGroupView.m in Sources */,
 				F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */,
+				F8E19E5115AC27C5001F6BBC /* ECOwnerModeStatusFilter.m in Sources */,
+				F8E19E5415AC3553001F6BBC /* ECAttendeeModeStatusFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

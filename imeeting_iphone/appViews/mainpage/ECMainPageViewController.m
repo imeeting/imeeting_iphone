@@ -33,7 +33,7 @@
     return self;
 }
 
--(void) viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [self.view performSelector:@selector(refreshGroupList)];
     [super viewWillAppear:animated];
 }
@@ -191,12 +191,21 @@
         case 200: {
             // join group ok
             // switch to group view
-            ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
-            [module connectToNotifyServer];
-            
-            [self.navigationController pushViewController:module.groupController animated:NO];
-
-            return;
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            if (jsonData) {
+                ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
+                module.audioConfId = [jsonData objectForKey:AUDIO_CONF_ID];
+                module.owner = [jsonData objectForKey:OWNER];
+                
+                [module connectToNotifyServer];
+                
+                [self.navigationController pushViewController:module.groupController animated:NO];
+                
+                return;
+            } else {
+                [iToast makeText:NSLocalizedString(@"error in join group", "")];
+            }
+        
         }
         case 403:
             [[iToast makeText:NSLocalizedString(@"you'are prohibited to join the group", "")] show];

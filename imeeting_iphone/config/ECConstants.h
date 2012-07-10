@@ -18,6 +18,8 @@ static NSString *GROUP_TITLE = @"title";
 static NSString *GROUP_ATTENDEES = @"attendees";
 static NSString *GROUP_CREATED_TIME = @"created_time";
 static NSString *GROUP_STATUS = @"status";
+static NSString *AUDIO_CONF_ID = @"audioConfId";
+static NSString *OWNER = @"owner";
 
 // Attendee Constants
 static NSString *ATTENDEE = @"attendee";
@@ -35,9 +37,10 @@ static NSString *OFFLINE = @"offline";
 static NSString *ON = @"on";
 static NSString *OFF = @"off";
 // telephone status
-static NSString *IDLE = @"idle";
-static NSString *CALLING = @"calling";
-
+static NSString *CALL_WAIT = @"CallWait";
+static NSString *ESTABLISHED = @"Established";
+static NSString *FAILED = @"Failed";
+static NSString *TERMINATED = @"Terminated";
 
 // Notify Constants
 static NSString *TOPIC = @"topic";

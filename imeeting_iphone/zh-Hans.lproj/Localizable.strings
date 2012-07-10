@@ -63,7 +63,7 @@
 "contact phone number select actionSheet title" = "选择 %@ 加入讨论组的号码";
 "contact has been in meeting" = "已经在讨论组中";
 "contact with user input phone number has been existed in prein meeting" = "待加入列表已存在此号码";
-"new added phone number is nil" = "操作已被拒绝，新添加的电话号码为空";
+"new added phone number is nil" = "新添加号码不能为空";
 "invite" = "确定";
 "inviting attendees" = "正在发送邀请请求";
 "new added contact with user input phone number has been existed in prein meeting" = "待加入列表已存在此号码";

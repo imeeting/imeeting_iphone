@@ -15,6 +15,7 @@
     
     BOOL isFirstLoad; // inidcate if the controller loads first.
 
+    NSDictionary *mSelectedAttendee;
 }
 
 @property (nonatomic) BOOL refreshList;

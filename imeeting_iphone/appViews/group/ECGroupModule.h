@@ -20,7 +20,10 @@
 
 @property (nonatomic, retain) UIViewController *groupController;
 @property (nonatomic, retain) NSString *groupId;
+@property (nonatomic, retain) NSString *audioConfId;
+@property (nonatomic, retain) NSString *owner;
 @property (nonatomic, retain) ECVideoManager *videoManager;
+@property (nonatomic) BOOL ownerMode;
 
 - (void)connectToNotifyServer;
 - (void)stopGetNoticeFromNotifyServer;

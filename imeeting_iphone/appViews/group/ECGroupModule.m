@@ -23,7 +23,10 @@
 
 @synthesize groupController = _groupController;
 @synthesize groupId = _groupId;
+@synthesize owner = _owner;
+@synthesize audioConfId = _audioConfId;
 @synthesize videoManager = _videoManager;
+@synthesize ownerMode = _ownerMode;
 
 - (id)init {
     self = [super init];
@@ -89,7 +92,7 @@
         // update attendee status
         NSDictionary *attendee = [notice objectForKey:ATTENDEE];
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
-        [gc updateAttendee:attendee withMyself:NO];
+        [gc updateAttendee:attendee withMyself:YES];
     } else if ([action isEqualToString:ACTION_UPDATE_ATTENDEE_LIST]) {
         // update attendee list
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
@@ -197,5 +200,17 @@
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
         [gc resetOppositeVideoView];
     }
+}
+
+- (BOOL)ownerMode {
+    BOOL isOwner = YES;
+    NSString *myAccountName = [[UserManager shareUserManager] userBean].name;
+    NSString *ownerName = self.owner;
+    if ([myAccountName isEqualToString:ownerName]) {
+        isOwner = YES;
+    } else {
+        isOwner = NO;
+    }
+    return isOwner;
 }
 @end

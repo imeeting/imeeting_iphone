@@ -121,7 +121,7 @@ static CGFloat padding = 4;
 
 @end
 
-@interface ECGroupAttendeeListView ()
+@interface ECGroupAttendeeListView () 
 - (void)initUI;
 - (void)switchToVideoAction;
 - (void)addContactAction;
@@ -130,6 +130,7 @@ static CGFloat padding = 4;
 @implementation ECGroupAttendeeListView
 
 @synthesize attendeeArray = _attendeeArray;
+@synthesize statusFilter = _statusFilter;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -142,7 +143,7 @@ static CGFloat padding = 4;
 }
 
 - (void)initUI {    
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, NavigationBarHeight)];
+    toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, NavigationBarHeight)];
     toolbar.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
     toolbar.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactAction)];
     toolbar.rightBarButtonItem.tintColor = [UIColor colorWithIntegerRed:107 integerGreen:147 integerBlue:35 alpha:1];
@@ -150,9 +151,9 @@ static CGFloat padding = 4;
     
     toolbar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
 
-    UIBarButtonItem *title = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Attendee List", "") style:UIBarButtonItemStylePlain target:nil action:nil];
-    NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], toolbar.rightBarButtonItem, nil];
-    [toolbar setItems:toolButtonArray];
+    title = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Attendee List", "") style:UIBarButtonItemStylePlain target:nil action:nil];
+  //  NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], toolbar.rightBarButtonItem, nil];
+   // [toolbar setItems:toolButtonArray];
     [self addSubview:toolbar];
     
     
@@ -193,7 +194,14 @@ static CGFloat padding = 4;
         if (i < _attendeeArray.count) {
             NSLog(@"refresh attendee at index %d", i);
             NSMutableDictionary *foundAttendee = [_attendeeArray objectAtIndex:i];
-            [foundAttendee setValuesForKeysWithDictionary:attendee];
+            
+            if (self.statusFilter) {
+                NSMutableDictionary *filteredAttendee = [self.statusFilter filterStatusOfNew:attendee withOld:foundAttendee];
+                [foundAttendee setValuesForKeysWithDictionary:filteredAttendee];
+            } else {
+                [foundAttendee setValuesForKeysWithDictionary:attendee];                
+            }
+            
             [mAttendeeListTableView reloadData];
         }
     }
@@ -316,5 +324,18 @@ static CGFloat padding = 4;
 
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     [mRefreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+#pragma mark - set UI
+
+- (void)setAttendeeUI {
+    NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], nil];
+    [toolbar setItems:toolButtonArray];
+    
+}
+
+- (void)setOwnerUI {
+    NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], toolbar.rightBarButtonItem, nil];
+    [toolbar setItems:toolButtonArray];
 }
 @end

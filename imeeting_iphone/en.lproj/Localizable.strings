@@ -63,7 +63,7 @@
 "contact phone number select actionSheet title" = "Select %@'s phone number to join group";
 "contact has been in meeting" = "Existed in group";
 "contact with user input phone number has been existed in prein meeting" = "Phone number is existed in the invitation list";
-"new added phone number is nil" = "Rejected, new added phone number is empty";
+"new added phone number is nil" = "New added phone number can't be null";
 "invite" = "Invite";
 "new added contact with user input phone number has been existed in prein meeting" = "Phone number is existed in the invite list";
 "error in inviting attendees" = "Fail to invite attendees";
