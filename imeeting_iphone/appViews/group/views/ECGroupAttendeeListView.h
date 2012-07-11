@@ -17,8 +17,6 @@
     UIImageView *mPhoneStatusIcon;
     UIImageView *mVideoStatusIcon;
     
-    UIImage *phoneInTalkingImg;
-    UIImage *phoneMutedImg;
     UIImage *videoOnImg;
     UIImage *videoOffImg;
     UIImage *guyIconImg;

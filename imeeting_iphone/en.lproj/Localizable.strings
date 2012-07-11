@@ -74,3 +74,13 @@
 "Leave Group?" = "Leave Group?";
 "Back" = "Back";
 "error in hide group" = "Fail to delete group";
+"Watch Video" = "Watch Video";
+"Call" = "Call";
+"Hang Up" = "Hang Up";
+"Kick" = "Kick Out";
+"Operation on %@" = "Operation on %@";
+"Call is forbidden for %@" = "Call is forbidden for %@";
+"Call failed, maybe %@ is in calling or talking" = "Call failed, maybe %@ is in calling or talking";
+"Hanup is forbidden for %@" = "Hangup is forbidden for %@";
+"Hangup failed, maybe %@ is already hung up" = "Hangup failed, maybe %@ is already hung up";
+"Hangup failed" = "Hangup failed";

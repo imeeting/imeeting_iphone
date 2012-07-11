@@ -153,12 +153,12 @@ invite_error:
         ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
         [module connectToNotifyServer];
         
-        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.groupController withObject:nil];
+      //  [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.groupController withObject:nil];
+        [module.groupController performSelector:@selector(refreshAttendeeList)];
         
         NSArray *controllers = self.navigationController.viewControllers;
         UIViewController *main = [controllers objectAtIndex:1];
         [NSThread detachNewThreadSelector:@selector(refreshGroupList) toTarget:main withObject:nil];
-        
         
         [self.navigationController popViewControllerAnimated:NO];
         [main.navigationController pushViewController:module.groupController animated:NO];
@@ -168,7 +168,8 @@ invite_error:
         ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
         ECGroupViewController *gc = (ECGroupViewController*)module.groupController;
         gc.refreshList = YES;
-        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:gc withObject:nil];
+        //[NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:gc withObject:nil];
+        [gc refreshAttendeeList];
         
         [self.navigationController popViewControllerAnimated:YES];
     }

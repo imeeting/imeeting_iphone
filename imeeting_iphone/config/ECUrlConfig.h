@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-//#define SERVER_ADDR                 @"http://www.walkwork.net/imeeting"
-#define SERVER_ADDR                 @"http://192.168.1.13/imeeting"
+#define SERVER_ADDR                 @"http://www.walkwork.net/imeeting"
+//#define SERVER_ADDR                 @"http://192.168.1.13/imeeting"
 #define RETRIEVE_PHONE_CODE_URL     [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/getPhoneCode"]
 #define CHECK_PHONE_CODE_URL        [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/checkPhoneCode"]
 #define USER_REGISTER_URL           [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/regUser"]
@@ -22,6 +22,9 @@
 #define GET_ATTENDEE_LIST_URL       [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/attendeeList"]
 #define UPDATE_ATTENDEE_STATUS_URL  [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/updateAttendeeStatus"]
 #define INVITE_ATTENDEE_LIST_URL    [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/invite"]
+#define CALL_ATTENDEE_URL           [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/call"]
+#define HANGUP_ATTENDEE_URL         [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/hangup"]
+
 
 
 #define NOTIFY_SERVER_HOST          @"msg.walkwork.net"

@@ -89,6 +89,7 @@
 - (void)processOneNotice:(NSDictionary *)notice {
     NSString *action = [notice objectForKey:ACTION];
     if ([action isEqualToString:ACTION_UPDATE_STATUS]) {
+        NSLog(@"processOneNotice - update attendee status");
         // update attendee status
         NSDictionary *attendee = [notice objectForKey:ATTENDEE];
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
@@ -97,7 +98,8 @@
         // update attendee list
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
 
-        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:gc withObject:nil];
+       // [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:gc withObject:nil];
+        [gc refreshAttendeeList];
     }
 }
 

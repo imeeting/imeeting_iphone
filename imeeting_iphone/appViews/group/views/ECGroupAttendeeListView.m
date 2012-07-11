@@ -13,14 +13,14 @@
 static CGFloat cellHeight = 60;
 static CGFloat guyIconWidth = 50;
 static CGFloat guyIconHeight = 50;
-static CGFloat nameLabelWidth = 150;
+static CGFloat nameLabelWidth = 160;
 static CGFloat nameLabelHeight = 30;
 static CGFloat numberLabelWidth = 150;
 static CGFloat numberLabelHeight = 20;
-static CGFloat phoneStatusIconWidth = 30;
-static CGFloat phoneStatusIconHeight = 30;
-static CGFloat videoStatusIconWidth = 30;
-static CGFloat videoStatusIconHeight = 30;
+static CGFloat phoneStatusIconWidth = 20;
+static CGFloat phoneStatusIconHeight = 20;
+static CGFloat videoStatusIconWidth = 20;
+static CGFloat videoStatusIconHeight = 20;
 static CGFloat padding = 4;
 
 @implementation AttendeeCell
@@ -31,6 +31,7 @@ static CGFloat padding = 4;
 - (id)initWithAttendee:(NSDictionary *)attendee {
     self = [super init];
     if (self) {
+        NSLog(@"initWithAttendee - %@", attendee);
         // init UI
         self.selectionStyle = UITableViewCellSelectionStyleGray;
         
@@ -53,18 +54,16 @@ static CGFloat padding = 4;
         mNumberLabel.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:mNumberLabel];
         
-        mPhoneStatusIcon = [[UIImageView alloc] initWithFrame:CGRectMake(mNameLabel.frame.origin.x + mNameLabel.frame.size.width + padding, (cellHeight - phoneStatusIconHeight) / 2, phoneStatusIconWidth, phoneStatusIconHeight)];
+        mPhoneStatusIcon = [[UIImageView alloc] initWithFrame:CGRectMake(mNameLabel.frame.origin.x + mNameLabel.frame.size.width + padding*4, (cellHeight - phoneStatusIconHeight) / 2, phoneStatusIconWidth, phoneStatusIconHeight)];
         mPhoneStatusIcon.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:mPhoneStatusIcon];
         
-        mVideoStatusIcon = [[UIImageView alloc] initWithFrame:CGRectMake(mPhoneStatusIcon.frame.origin.x + mPhoneStatusIcon.frame.size.width + padding, (cellHeight - videoStatusIconWidth) / 2, videoStatusIconWidth, videoStatusIconHeight)];
+        mVideoStatusIcon = [[UIImageView alloc] initWithFrame:CGRectMake(mPhoneStatusIcon.frame.origin.x + mPhoneStatusIcon.frame.size.width + padding*2, (cellHeight - videoStatusIconWidth) / 2, videoStatusIconWidth, videoStatusIconHeight)];
         mVideoStatusIcon.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:mVideoStatusIcon];
         
-        phoneInTalkingImg = [UIImage imageNamed:@"voice_on"];
-        phoneMutedImg = [UIImage imageNamed:@"voice_off"];
         videoOnImg = [UIImage imageNamed:@"video_on"];
-        videoOffImg = [UIImage imageNamed:@"video_off"];
+       // videoOffImg = [UIImage imageNamed:@"video_off"];
 
         normalBGColor = [UIColor colorWithIntegerRed:232 integerGreen:232 integerBlue:232 alpha:0.9];
         selectedBGColor = [UIColor colorWithIntegerRed:139 integerGreen:119 integerBlue:101 alpha:0.9];
@@ -91,21 +90,36 @@ static CGFloat padding = 4;
         mGuyIcon.image = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:username];
         
         if ([videoStatus isEqualToString:ON]) {
-            NSLog(@"set video on image");
+            NSLog(@"set video on image - username: %@", username);
             mVideoStatusIcon.image = videoOnImg;
         } else {
-            NSLog(@"set video off image");
-            mVideoStatusIcon.image = videoOffImg;
+            NSLog(@"set video off image - username: %@", username);
+            mVideoStatusIcon.image = nil;
         }
         
     } else {
         mGuyIcon.image = [[AddressBookManager shareAddressBookManager] grayAvatarByPhoneNumber:username];
+        mVideoStatusIcon.image = nil;
     }
     
-   
-    
-    // for test UI
-//    mPhoneStatusIcon.image = phoneInTalkingImg;
+    // set phone status
+    if ([telephoneStatus isEqualToString:TERMINATED]) {
+        NSLog(@"set phone terminated status");
+        mPhoneStatusIcon.image = nil;
+    } else if ([telephoneStatus isEqualToString:CALL_WAIT]) {
+        NSLog(@"set phone call wait status");
+
+        mPhoneStatusIcon.image = [UIImage imageNamed:@"voice_talkconnect"];
+    } else if ([telephoneStatus isEqualToString:ESTABLISHED]) {
+        NSLog(@"set phone established status");
+
+        mPhoneStatusIcon.image = [UIImage imageNamed:@"voice_talking"];
+    } else if ([telephoneStatus isEqualToString:FAILED]) {
+        NSLog(@"set phone call failed status");
+
+        mPhoneStatusIcon.image = [UIImage imageNamed:@"voice_talkfail"];
+    }
+
 }
 
 
@@ -201,8 +215,9 @@ static CGFloat padding = 4;
             } else {
                 [foundAttendee setValuesForKeysWithDictionary:attendee];                
             }
+            AttendeeCell *cell = (AttendeeCell*)[mAttendeeListTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             
-            [mAttendeeListTableView reloadData];
+            [cell updateAttendeeStatus:foundAttendee];
         }
     }
 }
@@ -252,6 +267,7 @@ static CGFloat padding = 4;
         [_attendeeArray addObject:newAtt];
     }
      NSLog(@"attendee size: %d", _attendeeArray.count);
+
     [mAttendeeListTableView reloadData];
 }
 
@@ -270,6 +286,7 @@ static CGFloat padding = 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"tableview - cell for row: %d", indexPath.row);
     static NSString *CellName = @"Attendee_Cell";
     
     AttendeeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellName];
@@ -307,7 +324,10 @@ static CGFloat padding = 4;
     // update reloading flag
     _reloading = YES;
     // init table dataSource
-    [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:self.viewControllerRef withObject:nil];
+    //[NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:self.viewControllerRef withObject:nil];
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(refreshAttendeeList)]) {
+        [self.viewControllerRef performSelector:@selector(refreshAttendeeList)];
+    }
 }
 
 -(BOOL) egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view{

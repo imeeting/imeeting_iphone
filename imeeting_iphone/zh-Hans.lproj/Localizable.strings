@@ -74,3 +74,13 @@
 "Leave Group?" = "确定要离开讨论组?";
 "Back" = "返回";
 "error in hide group" = "删除讨论组失败";
+"Watch Video" = "观看视频";
+"Call" = "呼叫";
+"Hang Up" = "挂断";
+"Kick" = "移出讨论组";
+"Operation on %@" = "选择对 %@ 的操作";
+"Call is forbidden for %@" = "对 %@ 的呼叫不被允许";
+"Call failed, maybe %@ is in calling or talking" = "呼叫失败，%@ 可能正在呼叫或通话中";
+"Hanup is forbidden for %@" = "对 %@ 的挂断不被允许";
+"Hangup failed, maybe %@ is already hung up" = "挂断失败，%@ 可能已经挂断";
+"Hangup failed" = "挂断失败";

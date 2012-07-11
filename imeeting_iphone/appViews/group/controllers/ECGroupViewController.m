@@ -30,9 +30,17 @@
 // attendee list view related methods
 - (void)onFinishedGetAttendeeList:(ASIHTTPRequest*)pRequest;
 
+- (void)startVideoWatch:(NSString*)targetUsername;
+
 - (void)doActionForSelectedMemberInOwnerMode:(NSDictionary*)attendee;
 - (void)selectedActionInActionSheet:(UIActionSheet *)pActionSheet clickedButtonAtIndex:(NSInteger)pButtonIndex;
 - (void)doActionForSelectedMemberInAttendeeMode:(NSDictionary*)attendee;
+
+#pragma mark - owner mode operations - phone related
+- (void)call:(NSString*)targetUsername;
+- (void)onFinishedCall:(ASIHTTPRequest*)pRequest;
+- (void)hangup:(NSString*)targetUsername;
+- (void)onFinishedHangup:(ASIHTTPRequest*)pRequest;
 @end
 
 @implementation ECGroupViewController
@@ -67,7 +75,8 @@
     }
    
     if (_refreshList) {
-        [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:self withObject:nil];
+        //[NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:self withObject:nil];
+        [self refreshAttendeeList];
     }
 
     
@@ -253,7 +262,7 @@
 - (void)refreshAttendeeList {
     NSLog(@"refresh attendee list");
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:[ECGroupManager sharedECGroupManager].currentGroupModule.groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:GET_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetAttendeeList:) andFailedRespSelector:@selector(onNetworkFailed:)];
+    [HttpUtil postSignatureRequestWithUrl:GET_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetAttendeeList:) andFailedRespSelector:@selector(onNetworkFailed:)];
 }
 
 - (void)onFinishedGetAttendeeList:(ASIHTTPRequest *)pRequest {
@@ -321,9 +330,11 @@
     } else if ([phoneStatus isEqualToString:CALL_WAIT] || [phoneStatus isEqualToString:ESTABLISHED]) {
         [actions addObject:NSLocalizedString(@"Hang Up", "")];
     }
-
-    [actions addObject:NSLocalizedString(@"Kick", "")];
     
+    NSString *accountName = [[UserManager shareUserManager] userBean].name;
+    if (![accountName isEqualToString:username]) {
+        [actions addObject:NSLocalizedString(@"Kick", "")];
+    }
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithContent:actions andTitleFormat:NSLocalizedString(@"Operation on %@", ""), displayName];
     [actionSheet setDestructiveButtonIndex:[actions count] - 1];
     actionSheet.processor = self;
@@ -334,7 +345,19 @@
 }
 
 - (void)selectedActionInActionSheet:(UIActionSheet *)pActionSheet clickedButtonAtIndex:(NSInteger)pButtonIndex {
-    
+    NSString *buttonTitle = [pActionSheet buttonTitleAtIndex:pButtonIndex];
+    NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+    if ([buttonTitle isEqualToString:NSLocalizedString(@"Watch Video", "")]) {
+        [self startVideoWatch:username];
+    } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Call", "")]) {
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
+        [hud showWhileExecuting:@selector(call:) onTarget:self withObject:username animated:YES];
+    } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Hang Up", "")]) {
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
+        [hud showWhileExecuting:@selector(hangup:) onTarget:self withObject:username animated:YES];
+    } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Kick", "")]) {
+        
+    }
 }
 
 - (void)doActionForSelectedMemberInAttendeeMode:(NSDictionary *)attendee {
@@ -344,10 +367,7 @@
 
     if ([onlineStatus isEqualToString:ONLINE]) {
         if ([videoStatus isEqualToString:ON]) {
-            ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
-            [module.videoManager stopVideoFetch];
-            [module.videoManager startVideoFetchWithTargetUsername:username];
-            [self switchToVideoView];
+            [self startVideoWatch:username];
         } else {
             [[iToast makeText:NSLocalizedString(@"This attendee's video is off", "")] show];
         }
@@ -357,6 +377,99 @@
 
 }
 
+- (void)startVideoWatch:(NSString *)targetUsername {
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    [module.videoManager stopVideoFetch];
+    [module.videoManager startVideoFetchWithTargetUsername:targetUsername];
+    [self switchToVideoView];
+}
 
+#pragma mark - owner operations - phone related
+- (void)call:(NSString *)targetUsername {
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:targetUsername, @"dstUserName", module.groupId, GROUP_ID, nil];
+    [HttpUtil postSignatureRequestWithUrl:CALL_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedCall:) andFailedRespSelector:nil];
+}
 
+- (void)onFinishedCall:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedCall - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+
+    NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+    switch (statusCode) {
+        case 200: {
+            // call command is accepted by server, update UI
+            NSDictionary *attendee = [NSDictionary dictionaryWithObjectsAndKeys:username, USERNAME, CALL_WAIT, TELEPHONE_STATUS, nil];
+            [self updateAttendee:attendee withMyself:YES];
+
+            break;
+        }
+        case 403: {
+            // call is forbidden
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call is forbidden for %@", nil), displayName];
+            [[iToast makeText:msg] show];
+            break;
+        }
+        case 409: {
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call failed, maybe %@ is in calling or talking", nil), displayName];
+            [[iToast makeText:msg] show];
+            break;
+        }
+        case 500: {
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call failed", nil)];
+            [[iToast makeText:msg] show];
+            break;
+        }
+        default:
+            [[iToast makeText:NSLocalizedString(@"Call Failed", "")] show];
+            break;
+    }
+
+}
+
+- (void)hangup:(NSString *)targetUsername {
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:targetUsername, @"dstUserName", module.groupId, GROUP_ID, nil];
+    [HttpUtil postSignatureRequestWithUrl:HANGUP_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHangup::) andFailedRespSelector:nil];
+
+}
+
+- (void)onFinishedHangup:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedHangup - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+    
+    NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+    switch (statusCode) {
+        case 200: {
+            // hangup command is accepted by server, update UI
+            NSDictionary *attendee = [NSDictionary dictionaryWithObjectsAndKeys:username, USERNAME, TERMINATED, TELEPHONE_STATUS, nil];
+            [self updateAttendee:attendee withMyself:YES];
+            
+            break;
+        }
+        case 403: {
+            // hangup is forbidden
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hanup is forbidden for %@", nil), displayName];
+            [[iToast makeText:msg] show];
+            break;
+        }
+        case 409: {
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup failed, maybe %@ is already hung up", nil), displayName];
+            [[iToast makeText:msg] show];
+            break;
+        }
+        case 500: {
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup failed", nil)];
+            [[iToast makeText:msg] show];
+            break;
+        }
+        default:
+            [[iToast makeText:NSLocalizedString(@"Hangup Failed", "")] show];
+            break;
+    }
+}
 @end

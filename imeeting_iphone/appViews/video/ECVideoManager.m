@@ -222,7 +222,7 @@
 
 #pragma mark - capture output
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    NSLog(@"capture output");
+   // NSLog(@"capture output");
     
     @autoreleasepool {
         CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);

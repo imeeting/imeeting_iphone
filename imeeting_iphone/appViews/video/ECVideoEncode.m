@@ -72,7 +72,7 @@
 }
 
 - (void)processRawFrame: (uint8_t *)buffer_base_address andWidth: (int)width andHeight: (int)height{
-    NSLog(@"origin image width: %d height: %d", width, height);    
+   // NSLog(@"origin image width: %d height: %d", width, height);    
     
     if (!qvo) {
         return;
@@ -81,7 +81,7 @@
     AVCodecContext *c = qvo->video_stream->codec;
     
     avpicture_fill((AVPicture *)tmp_picture, buffer_base_address, src_pix_fmt, width, height);
-    NSLog(@"raw picture to encode width: %d height: %d", c->width, c->height);
+    //NSLog(@"raw picture to encode width: %d height: %d", c->width, c->height);
     
     img_convert_ctx = sws_getCachedContext(img_convert_ctx, width, height, src_pix_fmt, qvo->width, qvo->height, c->pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
     
@@ -91,8 +91,8 @@
     int out_size = write_video_frame(qvo, raw_picture);
     
     // NSLog(@"stream pts val: %lld time base: %d / %d",qvo->video_stream->pts.val, qvo->video_stream->time_base.num, qvo->video_stream->time_base.den);
-    double video_pts = (double)qvo->video_stream->pts.val * qvo->video_stream->time_base.num / qvo->video_stream->time_base.den;
-    NSLog(@"write video frame - size: %d video pts: %f", out_size, video_pts);
+    //double video_pts = (double)qvo->video_stream->pts.val * qvo->video_stream->time_base.num / qvo->video_stream->time_base.den;
+   // NSLog(@"write video frame - size: %d video pts: %f", out_size, video_pts);
     
     raw_picture->pts++;
     

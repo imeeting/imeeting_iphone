@@ -16,15 +16,17 @@
 
 @implementation ECOwnerModeStatusFilter 
 - (NSMutableDictionary*)filterStatusOfNew:(NSDictionary*)newAttendee withOld:(NSDictionary*)oldAttendee {
+    NSLog(@"filterStatus");
     NSMutableDictionary *filtered = [NSMutableDictionary dictionaryWithDictionary:newAttendee];
     NSString *newPhoneStatus = [filtered objectForKey:TELEPHONE_STATUS];
     NSString *oldPhoneStatus = [oldAttendee objectForKey:TELEPHONE_STATUS];
+    NSLog(@"new attendee: %@, old attendee: %@", newAttendee, oldAttendee);
     if (newPhoneStatus && oldPhoneStatus) {
         // filter the phone status
         NSString *checkPhoneStatus = [self checkNewPhoneStatus:newPhoneStatus withOld:oldPhoneStatus];
         [filtered setObject:checkPhoneStatus forKey:TELEPHONE_STATUS];
     }
-    
+    NSLog(@"filtered attendee: %@", filtered);
     return filtered;
 }
 
@@ -60,7 +62,7 @@
 }
 
 - (void)alert:(NSString *)newPhoneStatus old:(NSString *)oldPhoneStatus {
-    NSString *msg = [NSString stringWithFormat:@"Invalid status transiformation from %@ to %@", oldPhoneStatus, newPhoneStatus];
+    NSString *msg = [NSString stringWithFormat:@"Invalid status transformation from %@ to %@", oldPhoneStatus, newPhoneStatus];
     [[[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show]; 
 }
 @end
