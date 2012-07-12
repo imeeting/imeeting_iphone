@@ -95,6 +95,8 @@
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
         [gc updateAttendee:attendee withMyself:YES];
     } else if ([action isEqualToString:ACTION_UPDATE_ATTENDEE_LIST]) {
+        NSLog(@"processOneNotice - update attendee list");
+
         // update attendee list
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
 

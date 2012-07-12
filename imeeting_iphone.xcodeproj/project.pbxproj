@@ -1352,7 +1352,7 @@
 					"\"$(SRCROOT)/Library/x264lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9591FBA6-0D81-4954-B742-47FEEB099BBA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93BDB588-6859-43FA-8F7E-7FC010D698B0";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\" \"$(SRCROOT)/Library/ffmpeglib\" \"$(SRCROOT)/Library/openssllib\" \"$(SRCROOT)/Library/rtmplib\" \"$(SRCROOT)/Library/speexlib\" \"$(SRCROOT)/Library/x264lib\"";
 				WRAPPER_EXTENSION = app;
 			};

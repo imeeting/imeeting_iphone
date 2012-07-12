@@ -14,6 +14,8 @@
 #import "ECContactsSelectViewController.h"
 #import "ECGroupViewController.h"
 
+static ECMainPageViewController *instance;
+
 @interface ECMainPageViewController ()
 - (void)onFinishedGetGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest;
@@ -25,16 +27,27 @@
 
 @implementation ECMainPageViewController
 
++ (ECMainPageViewController *)shareViewController {
+    return instance;
+}
+
++ (void)setShareViewController:(ECMainPageViewController *)viewController {
+    instance = viewController;
+}
 
 - (id)init
 {
     self = [self initWithCompatibleView:[[ECMainPageView alloc] init]];
-   
+    if (self) {
+        mSocketIO = [[SocketIO alloc] initWithDelegate:self];
+        needConnectToNotifyServer = YES;
+    }
     return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    [self.view performSelector:@selector(refreshGroupList)];
+    ECMainPageView *mainPageView = (ECMainPageView*)self.view;
+    [mainPageView refreshGroupList];
     [super viewWillAppear:animated];
 }
 
@@ -230,5 +243,75 @@
     [csvc initInMeetingAttendeesPhoneNumbers:attendeeArray];
     [self.navigationController pushViewController:csvc animated:YES];
 }
+
+#pragma mark - socket io
+- (void)connectToNotifyServer {
+    NSLog(@"connect to notify server..");
+    [mSocketIO connectToHost:NOTIFY_SERVER_HOST onPort:80];
+}
+
+- (void)stopGetNoticeFromNotifyServer {
+    needConnectToNotifyServer = NO;
+    [mSocketIO disconnect];
+}
+
+- (void) socketIODidConnect:(SocketIO *)socket {
+    // subscribe to notify server to get user related notifications
+    NSString *username = [[UserManager shareUserManager] userBean].name;
+    
+    NSDictionary *msg = [NSDictionary dictionaryWithObjectsAndKeys:username, TOPIC, username, SUBSCRIBER_ID, nil];
+    [mSocketIO sendEvent:SUBSCRIBE withData:msg];
+}
+
+- (void) socketIODidDisconnect:(SocketIO *)socket {
+    NSLog(@"socket io disconnected");
+    if (needConnectToNotifyServer) {
+        [self connectToNotifyServer];
+    }
+}
+
+- (void) socketIODidConnectError:(NSString *) errorMsg {
+    NSLog(@"socket io connect error");
+    if (needConnectToNotifyServer) {
+        [self connectToNotifyServer];
+    }
+}
+
+- (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet {
+    if ([packet.name isEqualToString:NOTICE]) {
+        NSDictionary *jsonData = [packet.data objectFromJSONString];
+        NSArray *args = [jsonData objectForKey:@"args"];
+        if (args.count > 0) {
+            NSDictionary *noticeData = [args objectAtIndex:0];
+            [self processNotices:noticeData];
+        }
+    }
+}
+
+- (void)processNotices:(NSDictionary*)noticeData {
+    if (!noticeData) {
+        return;
+    }
+    
+    NSLog(@"process notices");
+    
+    NSString *cmd = [noticeData objectForKey:CMD];
+    NSArray *noticeList = [noticeData objectForKey:NOTICE_LIST];
+    NSLog(@"cmd: %@", cmd);
+    if (cmd && ([cmd isEqualToString:NOTIFY] || [cmd isEqualToString:CACHE])) {
+        NSLog(@"notice list size: %d", noticeList.count);
+        if (noticeList && noticeList.count > 0) {
+            for (NSDictionary *notice in noticeList) {
+                [self processOneNotice:notice];
+            }
+        }
+    }
+}
+
+- (void)processOneNotice:(NSDictionary *)notice {
+    NSString *action = [notice objectForKey:ACTION];
+    NSLog(@"main page - process one notice, action: %@", action);
+}
+
 
 @end

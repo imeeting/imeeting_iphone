@@ -41,6 +41,8 @@
 - (void)onFinishedCall:(ASIHTTPRequest*)pRequest;
 - (void)hangup:(NSString*)targetUsername;
 - (void)onFinishedHangup:(ASIHTTPRequest*)pRequest;
+- (void)kickout:(NSString*)targetUsername;
+- (void)onFinishedKickout:(ASIHTTPRequest*)pRequest;
 @end
 
 @implementation ECGroupViewController
@@ -356,7 +358,8 @@
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
         [hud showWhileExecuting:@selector(hangup:) onTarget:self withObject:username animated:YES];
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Kick", "")]) {
-        
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
+        [hud showWhileExecuting:@selector(kickout:) onTarget:self withObject:username animated:YES];
     }
 }
 
@@ -432,7 +435,7 @@
 - (void)hangup:(NSString *)targetUsername {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:targetUsername, @"dstUserName", module.groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:HANGUP_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHangup::) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:HANGUP_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHangup:) andFailedRespSelector:nil];
 
 }
 
@@ -444,6 +447,10 @@
     NSString *username = [mSelectedAttendee objectForKey:USERNAME];
     NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
     switch (statusCode) {
+        case 409: {
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup failed, maybe %@ is already hung up", nil), displayName];
+            [[iToast makeText:msg] show];
+        }
         case 200: {
             // hangup command is accepted by server, update UI
             NSDictionary *attendee = [NSDictionary dictionaryWithObjectsAndKeys:username, USERNAME, TERMINATED, TELEPHONE_STATUS, nil];
@@ -457,11 +464,6 @@
             [[iToast makeText:msg] show];
             break;
         }
-        case 409: {
-            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup failed, maybe %@ is already hung up", nil), displayName];
-            [[iToast makeText:msg] show];
-            break;
-        }
         case 500: {
             NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup failed", nil)];
             [[iToast makeText:msg] show];
@@ -472,4 +474,40 @@
             break;
     }
 }
+
+- (void)kickout:(NSString *)targetUsername {
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:targetUsername, @"dstUserName", module.groupId, GROUP_ID, nil];
+    [HttpUtil postSignatureRequestWithUrl:KICKOUT_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedKickout:) andFailedRespSelector:nil];
+}
+
+- (void)onFinishedKickout:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedKickout - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+    
+    NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+    switch (statusCode) {
+        case 200: {
+            // kickout command is accepted by server, update UI
+            // remove attendee from list
+            ECGroupAttendeeListView *alv = ((ECGroupView*)self.view).attendeeListView;
+            [alv removeSelectedAttendee];
+            
+            break;
+        }
+        case 403: {
+            // kickout is forbidden
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Kickout is forbidden for %@", nil), displayName];
+            [[iToast makeText:msg] show];
+            break;
+        }
+        default:
+            [[iToast makeText:NSLocalizedString(@"Kickout Failed", "")] show];
+            break;
+    }
+
+}
+
 @end

@@ -139,12 +139,15 @@ static CGFloat padding = 4;
 - (void)initUI;
 - (void)switchToVideoAction;
 - (void)addContactAction;
+
+@property (nonatomic, retain) NSIndexPath *selectedIndexPath;
 @end
 
 @implementation ECGroupAttendeeListView
 
 @synthesize attendeeArray = _attendeeArray;
 @synthesize statusFilter = _statusFilter;
+@synthesize selectedIndexPath = _selectedIndexPath;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -280,6 +283,12 @@ static CGFloat padding = 4;
     [mAttendeeListTableView reloadData];
 }
 
+- (void)removeSelectedAttendee {
+    [_attendeeArray removeObjectAtIndex:self.selectedIndexPath.row];
+    [mAttendeeListTableView deleteRowAtIndexPath:self.selectedIndexPath withRowAnimation:UITableViewRowAnimationTop];
+    
+}
+
 #pragma mark - data source implementation
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _attendeeArray.count;
@@ -310,6 +319,7 @@ static CGFloat padding = 4;
 
 // row selected action
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedIndexPath = indexPath;
     NSDictionary *attendee = [_attendeeArray objectAtIndex:indexPath.row];
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(onAttendeeSelected:)]) {
         [self.viewControllerRef performSelector:@selector(onAttendeeSelected:) withObject:attendee];

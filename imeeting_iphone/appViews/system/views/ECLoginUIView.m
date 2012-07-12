@@ -38,7 +38,7 @@
     
     // user phone number input
     _mUserNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "") frame:CGRectMake(0, 0, 280, 30) keyboardType:UIKeyboardTypeNumbersAndPunctuation];
-    [_mUserNameInput addTarget:self action:@selector(textFieldValueChanged) forControlEvents:UIControlEventValueChanged];
+    [_mUserNameInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     
     // user password input
     _mPwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(0, 0, 280, 30) keyboardType:UIKeyboardTypeDefault];

@@ -84,3 +84,5 @@
 "Hanup is forbidden for %@" = "Hangup is forbidden for %@";
 "Hangup failed, maybe %@ is already hung up" = "Hangup failed, maybe %@ is already hung up";
 "Hangup failed" = "Hangup failed";
+"Kickout is forbidden for %@" = "Cannot kick out, maybe %@ is already out of group";
+"Kickout Failed" = "Kickout failed";

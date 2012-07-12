@@ -340,8 +340,8 @@ static CGFloat Padding = 3;
     if (self) {
         // Initialization code
         
-        openBackgroundColor = [UIColor colorWithIntegerRed:154 integerGreen:255 integerBlue:154 alpha:0.9];
-        closeBackgroundColor = [UIColor colorWithIntegerRed:207 integerGreen:207 integerBlue:207 alpha:0.9];
+        openBackgroundColor = [UIColor colorWithIntegerRed:255 integerGreen:106 integerBlue:106 alpha:0.9];
+        closeBackgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -354,9 +354,9 @@ static CGFloat Padding = 3;
 
 - (void)refreshCellBgColor {
     if (mStatus && [mStatus isEqualToString:@"OPEN"]) {
-        self.backgroundColor = openBackgroundColor;
+        self.contentView.backgroundColor = openBackgroundColor;
     } else {
-        self.backgroundColor = closeBackgroundColor;
+        self.contentView.backgroundColor = closeBackgroundColor;
     }
 }
 

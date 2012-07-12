@@ -48,6 +48,7 @@
 // if myself flag is YES, attendee will be updated, else not.
 - (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
 - (void)appendAttendee:(NSDictionary*)attendee;
+- (void)removeSelectedAttendee;
 - (void)setReloadingFlag:(BOOL)flag;
 - (void)setAttendeeUI;
 - (void)setOwnerUI;

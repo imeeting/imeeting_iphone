@@ -125,7 +125,9 @@
                     userBean.userKey = userkey;
                     
                     // jump to main view
-                    [self.navigationController pushViewController:[[ECMainPageViewController alloc] init] animated:YES];
+                    ECMainPageViewController * mpvc = [[ECMainPageViewController alloc] init];
+                    [ECMainPageViewController setShareViewController:mpvc];
+                    [self.navigationController pushViewController:[ECMainPageViewController shareViewController] animated:YES];
                 } else if ([result isEqualToString:@"1"] || [result isEqualToString:@"2"]) {
                     // login failed
                     [[iToast makeText:NSLocalizedString(@"Wrong phone number or password", "")] show];

@@ -9,14 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "CommonToolkit/CommonToolkit.h"
 
-@interface ECMainPageViewController : UIViewController {
+@interface ECMainPageViewController : UIViewController <SocketIODelegate> {
     NSNumber *mOffset;
+    SocketIO *mSocketIO;
+    BOOL needConnectToNotifyServer;
 }
-
++ (ECMainPageViewController*)shareViewController;
++ (void)setShareViewController:(ECMainPageViewController*)viewController;
 
 - (void)refreshGroupList;
 - (void)loadMoreGroupList;
 - (void)hideGroup:(NSString*)groupId;
 - (void)createNewGroup;
 - (void)itemSelected:(NSDictionary*)group;
+- (void)connectToNotifyServer;
+- (void)stopGetNoticeFromNotifyServer;
+
 @end

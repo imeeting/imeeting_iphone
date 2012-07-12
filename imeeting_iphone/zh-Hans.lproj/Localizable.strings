@@ -84,3 +84,5 @@
 "Hanup is forbidden for %@" = "对 %@ 的挂断不被允许";
 "Hangup failed, maybe %@ is already hung up" = "挂断失败，%@ 可能已经挂断";
 "Hangup failed" = "挂断失败";
+"Kickout is forbidden for %@" = "无法移出 %@ ，可能已经不在讨论组";
+"Kickout Failed" = "移出操作失败";
