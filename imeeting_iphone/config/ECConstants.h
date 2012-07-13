@@ -11,6 +11,10 @@
 static CGFloat StatusBarHeight = 20;
 static CGFloat NavigationBarHeight = 44;
 
+// Account CONSTANTS
+static NSString *PASSWORD = @"password";
+static NSString *USERKEY = @"userkey";
+static NSString *AUTOLOGIN = @"autologin";
 
 // GROUP CONSTANTS
 static NSString *GROUP_ID = @"groupId";

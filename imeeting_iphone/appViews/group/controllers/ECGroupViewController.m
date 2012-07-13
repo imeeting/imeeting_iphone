@@ -16,6 +16,7 @@
 #import "ECContactsSelectViewController.h"
 #import "ECOwnerModeStatusFilter.h"
 #import "ECAttendeeModeStatusFilter.h"
+#import "UIViewController+AuthFailHandler.h"
 
 @interface ECGroupViewController ()
 // video view realted methods
@@ -272,6 +273,8 @@
     
     int statusCode = pRequest.responseStatusCode;
     
+    ECGroupAttendeeListView *attListView = ((ECGroupView*)self.view).attendeeListView;
+
     switch (statusCode) {
         case 200: {
             NSString *responseText = [[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding];
@@ -279,9 +282,7 @@
             
             NSMutableArray *jsonArray = [responseText objectFromJSONString];
             if (jsonArray) {
-                ECGroupAttendeeListView *attListView = ((ECGroupView*)self.view).attendeeListView;
                 [attListView setAttendeeArray:jsonArray];
-                [attListView setReloadingFlag:NO];
                 _refreshList = NO;
             }
             
@@ -291,7 +292,7 @@
             break;
     }
     
-    
+    [attListView setReloadingFlag:NO];
 }
 
 // update attendee status

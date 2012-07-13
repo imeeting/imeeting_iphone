@@ -169,12 +169,10 @@ static CGFloat padding = 4;
     toolbar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
 
     title = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Attendee List", "") style:UIBarButtonItemStylePlain target:nil action:nil];
-  //  NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], toolbar.rightBarButtonItem, nil];
-   // [toolbar setItems:toolButtonArray];
     [self addSubview:toolbar];
     
     
-    mAttendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, toolbar.frame.size.height, 320, 480 - toolbar.frame.size.height - StatusBarHeight)];
+    mAttendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, toolbar.frame.size.height, 320, 480 - toolbar.frame.size.height)];
     mAttendeeListTableView.backgroundColor = self.backgroundColor;
     mAttendeeListTableView.dataSource = self;
     mAttendeeListTableView.delegate = self;

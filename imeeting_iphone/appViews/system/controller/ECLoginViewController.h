@@ -11,6 +11,8 @@
 
 @interface ECLoginViewController : UIViewController
 
+@property (nonatomic) BOOL isForLogin; // indicate whether the login view is for login or account setting
+
 - (void)jumpToRegisterView;
 
 - (void)login;

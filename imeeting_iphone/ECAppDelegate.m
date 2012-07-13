@@ -7,8 +7,17 @@
 //
 
 #import "ECAppDelegate.h"
-#import "CommonToolkit/AppRootViewController.h"
+#import "CommonToolkit/CommonToolkit.h"
 #import "ECLoginViewController.h"
+#import "ECConstants.h"
+#import "UserBean+IMeeting.h"
+#import "ECMainPageViewController.h"
+
+@interface ECAppDelegate ()
+- (void)loadAccount;
+- (BOOL)isNeedLogin;
+- (BOOL)isAccountValid;
+@end
 
 @implementation ECAppDelegate
 
@@ -21,6 +30,8 @@
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
+    [self loadAccount];
+    
     // register push notification
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeSound];
     
@@ -28,7 +39,14 @@
     [[AddressBookManager shareAddressBookManager] traversalAddressBook];
     
     // Override point for customization after application launch.
-    self.window.rootViewController = [[AppRootViewController alloc] initWithPresentViewController:[[ECLoginViewController alloc] init] andMode:navigationController];
+    BOOL needLogin = [self isNeedLogin];
+    if (needLogin) {
+        self.window.rootViewController = [[AppRootViewController alloc] initWithPresentViewController:[[ECLoginViewController alloc] init] andMode:navigationController];
+    } else {
+        ECMainPageViewController *mpvc = [[ECMainPageViewController alloc] init];
+        [ECMainPageViewController setShareViewController:mpvc];
+        self.window.rootViewController = [[AppRootViewController alloc] initWithPresentViewController:mpvc andMode:navigationController];
+    }
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -73,4 +91,44 @@
     
 }
 
+#pragma mark - account operations
+
+- (void)loadAccount {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [userDefaults objectForKey:USERNAME];
+    NSString *password = [userDefaults objectForKey:PASSWORD];
+    NSNumber *autologin = [userDefaults objectForKey:AUTOLOGIN];
+    NSString *userkey = [userDefaults objectForKey:USERKEY];
+    
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
+    userBean.name = username;
+    userBean.password = password;
+    if (password) {
+        userBean.rememberPwd = YES;
+    } else {
+        userBean.rememberPwd = NO;
+    }
+    userBean.autoLogin = autologin.boolValue;
+    userBean.userKey = userkey;
+}
+
+- (BOOL)isNeedLogin {
+    BOOL flag = NO;
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
+    if (!userBean.name || !userBean.password || !userBean.userKey || !userBean.autoLogin) {
+        flag = YES;
+    }
+    
+    return flag;
+}
+
+- (BOOL)isAccountValid {
+    BOOL flag = YES;
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
+    if (!userBean.name || !userBean.password || !userBean.userKey) {
+        flag = NO;
+    }
+    return flag;
+
+}
 @end

@@ -13,12 +13,16 @@
 #import "ECGroupManager.h"
 #import "ECContactsSelectViewController.h"
 #import "ECGroupViewController.h"
+#import "UIViewController+AuthFailHandler.h"
+#import "ECSettingViewController.h"
 
 static ECMainPageViewController *instance;
 
 @interface ECMainPageViewController ()
 - (void)onFinishedGetGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest;
+- (void)onGetGroupListFailed:(ASIHTTPRequest*)pRequest;
+- (void)onLoadingMoreGroupListFailed:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedJoinGroup:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedHideGroup:(ASIHTTPRequest*)pRequest;
 - (void)joinGroup:(NSString*)groupId;
@@ -71,7 +75,7 @@ static ECMainPageViewController *instance;
 // get the newest group list from server
 - (void)refreshGroupList {
     NSLog(@"ECMainPageViewController - refresh Group List");
-    [HttpUtil postSignatureRequestWithUrl:GET_GROUP_LIST_URL andPostFormat:urlEncoded andParameter:nil andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetGroupList:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:GET_GROUP_LIST_URL andPostFormat:urlEncoded andParameter:nil andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetGroupList:) andFailedRespSelector:@selector(onGetGroupListFailed:)];
 }
 
 - (void)onFinishedGetGroupList:(ASIHTTPRequest *)pRequest {
@@ -79,6 +83,8 @@ static ECMainPageViewController *instance;
     
     int statusCode = pRequest.responseStatusCode;
     
+    ECMainPageView *mainPageView = (ECMainPageView*)self.view;
+
     switch (statusCode) {
         case 200: {
             NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
@@ -92,8 +98,7 @@ static ECMainPageViewController *instance;
                 
                 NSArray *groupArray = [jsonData objectForKey:@"list"];
                 NSLog(@"group array size: %d", groupArray.count);
-                [self.view performSelector:@selector(setGroupDataSource:) withObject:groupArray];
-                
+                [mainPageView setGroupDataSource:groupArray];
             }
             
             break;
@@ -101,7 +106,12 @@ static ECMainPageViewController *instance;
         default:
             break;
     }
-    
+    [mainPageView stopReloadTableView];
+}
+
+- (void)onGetGroupListFailed:(ASIHTTPRequest *)pRequest {
+    ECMainPageView *mainPageView = (ECMainPageView*)self.view;
+    [mainPageView stopReloadTableView];
 }
 
 - (void)loadMoreGroupList {
@@ -110,14 +120,16 @@ static ECMainPageViewController *instance;
     NSLog(@"current offset: %d, next offset: %d", mOffset.integerValue, nextOffset.integerValue);
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:nextOffset, @"offset", nil];
-    [HttpUtil postSignatureRequestWithUrl:GET_GROUP_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedLoadingMoreGroupList:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:GET_GROUP_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedLoadingMoreGroupList:) andFailedRespSelector:@selector(onLoadingMoreGroupListFailed:)];
 }
 
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest {
     NSLog(@"onFinishedLoadingMoreGroupList - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
     
     int statusCode = pRequest.responseStatusCode;
-    
+
+    ECMainPageView *mainPageView = (ECMainPageView*)self.view;
+
     switch (statusCode) {
         case 200: {
             NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
@@ -131,8 +143,7 @@ static ECMainPageViewController *instance;
                 
                 NSArray *groupArray = [jsonData objectForKey:@"list"];
                 NSLog(@"group array size: %d", groupArray.count);
-                [self.view performSelector:@selector(appendGroupDataSourceWithArray:) withObject:groupArray];
-                
+                [mainPageView appendGroupDataSourceWithArray:groupArray];
             }
             
             break;
@@ -140,7 +151,12 @@ static ECMainPageViewController *instance;
         default:
             break;
     }
+    [mainPageView stopLoadMoreTableView];
+}
 
+- (void)onLoadingMoreGroupListFailed:(ASIHTTPRequest *)pRequest {
+    ECMainPageView *mainPageView = (ECMainPageView*)self.view;
+    [mainPageView stopLoadMoreTableView];
 }
 
 - (void)hideGroup:(NSString *)groupId {
@@ -244,6 +260,10 @@ static ECMainPageViewController *instance;
     [self.navigationController pushViewController:csvc animated:YES];
 }
 
+- (void)showSettingView {
+    [self.navigationController pushViewController:[[ECSettingViewController alloc] init] animated:YES];
+}
+
 #pragma mark - socket io
 - (void)connectToNotifyServer {
     NSLog(@"connect to notify server..");
@@ -312,6 +332,7 @@ static ECMainPageViewController *instance;
     NSString *action = [notice objectForKey:ACTION];
     NSLog(@"main page - process one notice, action: %@", action);
 }
+
 
 
 @end

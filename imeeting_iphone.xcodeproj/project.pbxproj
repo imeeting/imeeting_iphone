@@ -59,6 +59,9 @@
 		F8D791B11599603800986BCD /* video_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D791AF1599603800986BCD /* video_off.png */; };
 		F8D791B21599603800986BCD /* video_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D791B01599603800986BCD /* video_on.png */; };
 		F8D791C61599670A00986BCD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D791C51599670A00986BCD /* libicucore.dylib */; };
+		F8DC714615AFC82600146A73 /* UIViewController+AuthFailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DC714515AFC82600146A73 /* UIViewController+AuthFailHandler.m */; };
+		F8DC714B15B0081600146A73 /* ECSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DC714A15B0081600146A73 /* ECSettingView.m */; };
+		F8DC714E15B0082C00146A73 /* ECSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DC714D15B0082C00146A73 /* ECSettingViewController.m */; };
 		F8E0C07D15A14DC900E66F27 /* ContactDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C07A15A14DC900E66F27 /* ContactDefault.png */; };
 		F8E0C07E15A14DC900E66F27 /* ContactPreinMeeting.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C07B15A14DC900E66F27 /* ContactPreinMeeting.png */; };
 		F8E0C07F15A14DC900E66F27 /* ContactSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C07C15A14DC900E66F27 /* ContactSelected.png */; };
@@ -325,6 +328,12 @@
 		F8D791AF1599603800986BCD /* video_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_off.png; path = imeeting_iphone/Resources/images/video_off.png; sourceTree = "<group>"; };
 		F8D791B01599603800986BCD /* video_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_on.png; path = imeeting_iphone/Resources/images/video_on.png; sourceTree = "<group>"; };
 		F8D791C51599670A00986BCD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		F8DC714415AFC82600146A73 /* UIViewController+AuthFailHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AuthFailHandler.h"; sourceTree = "<group>"; };
+		F8DC714515AFC82600146A73 /* UIViewController+AuthFailHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AuthFailHandler.m"; sourceTree = "<group>"; };
+		F8DC714915B0081600146A73 /* ECSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSettingView.h; path = system/views/ECSettingView.h; sourceTree = "<group>"; };
+		F8DC714A15B0081600146A73 /* ECSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSettingView.m; path = system/views/ECSettingView.m; sourceTree = "<group>"; };
+		F8DC714C15B0082C00146A73 /* ECSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSettingViewController.h; path = system/controller/ECSettingViewController.h; sourceTree = "<group>"; };
+		F8DC714D15B0082C00146A73 /* ECSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSettingViewController.m; path = system/controller/ECSettingViewController.m; sourceTree = "<group>"; };
 		F8E0C07A15A14DC900E66F27 /* ContactDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactDefault.png; path = imeeting_iphone/Resources/images/ContactDefault.png; sourceTree = "<group>"; };
 		F8E0C07B15A14DC900E66F27 /* ContactPreinMeeting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactPreinMeeting.png; path = imeeting_iphone/Resources/images/ContactPreinMeeting.png; sourceTree = "<group>"; };
 		F8E0C07C15A14DC900E66F27 /* ContactSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactSelected.png; path = imeeting_iphone/Resources/images/ContactSelected.png; sourceTree = "<group>"; };
@@ -430,6 +439,7 @@
 		F814E289157CA16200FBBB19 /* System */ = {
 			isa = PBXGroup;
 			children = (
+				F8DC714815B007ED00146A73 /* Setting */,
 				F8E3BEE5158F1F4B00467088 /* User */,
 				F8C9564E157DAC41008FDFD3 /* Register */,
 				F8C9564D157DAC2F008FDFD3 /* Login */,
@@ -949,8 +959,21 @@
 			children = (
 				F8D791AA15995AB700986BCD /* UINavigationController+CustomNavigation.h */,
 				F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */,
+				F8DC714415AFC82600146A73 /* UIViewController+AuthFailHandler.h */,
+				F8DC714515AFC82600146A73 /* UIViewController+AuthFailHandler.m */,
 			);
 			name = Custom;
+			sourceTree = "<group>";
+		};
+		F8DC714815B007ED00146A73 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				F8DC714915B0081600146A73 /* ECSettingView.h */,
+				F8DC714A15B0081600146A73 /* ECSettingView.m */,
+				F8DC714C15B0082C00146A73 /* ECSettingViewController.h */,
+				F8DC714D15B0082C00146A73 /* ECSettingViewController.m */,
+			);
+			name = Setting;
 			sourceTree = "<group>";
 		};
 		F8DECFA0157C6F9600BED245 /* AppViews */ = {
@@ -1248,6 +1271,9 @@
 				F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */,
 				F8E19E5115AC27C5001F6BBC /* ECOwnerModeStatusFilter.m in Sources */,
 				F8E19E5415AC3553001F6BBC /* ECAttendeeModeStatusFilter.m in Sources */,
+				F8DC714615AFC82600146A73 /* UIViewController+AuthFailHandler.m in Sources */,
+				F8DC714B15B0081600146A73 /* ECSettingView.m in Sources */,
+				F8DC714E15B0082C00146A73 /* ECSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

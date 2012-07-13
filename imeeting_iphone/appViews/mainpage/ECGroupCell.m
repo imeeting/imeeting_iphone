@@ -340,7 +340,7 @@ static CGFloat Padding = 3;
     if (self) {
         // Initialization code
         
-        openBackgroundColor = [UIColor colorWithIntegerRed:255 integerGreen:106 integerBlue:106 alpha:0.9];
+        openBackgroundColor = [UIColor colorWithIntegerRed:143 integerGreen:188 integerBlue:143 alpha:1];
         closeBackgroundColor = [UIColor whiteColor];
     }
     return self;

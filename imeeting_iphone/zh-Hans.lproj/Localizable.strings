@@ -38,7 +38,7 @@
 "OK" = "确定";
 "Cancel" = "取消";
 "Login" = "登录";
-"Account Setting" = "账号设置";
+"Account Setting" = "账户设置";
 "Remember Pwd" = "记住密码";
 "Auto Login" = "自动登录";
 "Logining" = "正在登录中..";
@@ -86,3 +86,6 @@
 "Hangup failed" = "挂断失败";
 "Kickout is forbidden for %@" = "无法移出 %@ ，可能已经不在讨论组";
 "Kickout Failed" = "移出操作失败";
+"Setting" = "设置";
+"Account" = "账户";
+"Set Account" = "设置账户";

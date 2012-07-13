@@ -16,6 +16,7 @@
     UISwitch *_mAutoLoginSwitch;
     
     UIButton *_mLoginButton;
+    BOOL useSavedPwd;
 }
 
 @end

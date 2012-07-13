@@ -12,6 +12,7 @@
 #import "ECUrlConfig.h"
 #import "ECMainPageViewController.h"
 #import "UserBean+IMeeting.h"
+#import "ECConstants.h"
 
 @interface ECLoginViewController ()
 // check if need automatic login
@@ -19,19 +20,23 @@
 @end
 
 @implementation ECLoginViewController
+@synthesize isForLogin = _isForLogin;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.isForLogin = YES;
         
         [self initLogin];
         self = [self initWithCompatibleView:[[ECLoginUIView alloc] init]];
-        
+       
+        /*
         UserBean *userBean = [[UserManager shareUserManager] userBean];
         if (userBean.autoLogin && userBean.password) {
             [self.view performSelector:@selector(loginAction)];
         }
+         */
         
     }
     return self;
@@ -39,9 +44,9 @@
 
 - (void)initLogin {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *username = [userDefaults objectForKey:@"username"];
-    NSString *password = [userDefaults objectForKey:@"password"];
-    NSNumber *autologin = [userDefaults objectForKey:@"autologin"];
+    NSString *username = [userDefaults objectForKey:USERNAME];
+    NSString *password = [userDefaults objectForKey:PASSWORD];
+    NSNumber *autologin = [userDefaults objectForKey:AUTOLOGIN];
     
     UserBean *userBean = [[UserManager shareUserManager] userBean];
     userBean.name = username;
@@ -52,6 +57,12 @@
         userBean.rememberPwd = NO;
     }
     userBean.autoLogin = autologin.boolValue;
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     
 }
 
@@ -111,23 +122,31 @@
                     // save the account info
                     UserBean *userBean = [[UserManager shareUserManager] userBean];
                     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                    [userDefaults setObject:userBean.name forKey:@"username"];
+                    [userDefaults setObject:userBean.name forKey:USERNAME];
                     if (userBean.rememberPwd) {
-                        [userDefaults setObject:userBean.password forKey:@"password"];
+                        [userDefaults setObject:userBean.password forKey:PASSWORD];
                     } else {
-                        [userDefaults removeObjectForKey:@"password"];
+                        [userDefaults removeObjectForKey:PASSWORD];
                     }
-                    [userDefaults setObject:[NSNumber numberWithBool:userBean.autoLogin] forKey:@"autologin"];
+                    [userDefaults setObject:[NSNumber numberWithBool:userBean.autoLogin] forKey:AUTOLOGIN];
                     
-                    NSString *userkey = [jsonData objectForKey:@"userkey"];
+                    NSString *userkey = [jsonData objectForKey:USERKEY];
                     NSLog(@"userkey: %@", userkey);
                     
                     userBean.userKey = userkey;
+                    // save user key
+                    [userDefaults setObject:userkey forKey:USERKEY];
                     
                     // jump to main view
-                    ECMainPageViewController * mpvc = [[ECMainPageViewController alloc] init];
-                    [ECMainPageViewController setShareViewController:mpvc];
-                    [self.navigationController pushViewController:[ECMainPageViewController shareViewController] animated:YES];
+                    if (self.isForLogin) {
+                        // it's first login
+                        ECMainPageViewController * mpvc = [[ECMainPageViewController alloc] init];
+                        [ECMainPageViewController setShareViewController:mpvc];
+                        [self.navigationController pushViewController:[ECMainPageViewController shareViewController] animated:YES];                        
+                    } else {
+                        // it's in account setting
+                        [self.navigationController popToViewController:[ECMainPageViewController shareViewController] animated:YES];
+                    }
                 } else if ([result isEqualToString:@"1"] || [result isEqualToString:@"2"]) {
                     // login failed
                     [[iToast makeText:NSLocalizedString(@"Wrong phone number or password", "")] show];

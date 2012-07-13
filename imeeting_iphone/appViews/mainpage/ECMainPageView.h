@@ -37,4 +37,6 @@
 - (void)hideGroup:(NSString*)groupId;
 - (void)removeSelectedGroupFromUI;
 - (void)reloadTableViewData;
+- (void)stopReloadTableView;
+- (void)stopLoadMoreTableView;
 @end

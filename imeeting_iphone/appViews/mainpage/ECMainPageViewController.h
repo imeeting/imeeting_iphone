@@ -24,5 +24,5 @@
 - (void)itemSelected:(NSDictionary*)group;
 - (void)connectToNotifyServer;
 - (void)stopGetNoticeFromNotifyServer;
-
+- (void)showSettingView;
 @end

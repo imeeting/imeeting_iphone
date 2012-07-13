@@ -108,6 +108,7 @@
 - (void)initUI;
 - (void)hideGroup:(NSString*)groupId;
 - (void)onCreateNewGroupAction;
+- (void)onSystemSettingAction;
 @end
 
 @implementation ECMainPageView
@@ -115,7 +116,9 @@
 - (void)initUI {
     
     self.title = NSLocalizedString(@"Talking Group", "");
-    self.leftBarButtonItem = nil;
+    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [settingButton addTarget:self action:@selector(onSystemSettingAction) forControlEvents:UIControlEventTouchUpInside];
+    self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: settingButton];
     self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onCreateNewGroupAction)];
     self.rightBarButtonItem.tintColor = [UIColor colorWithIntegerRed:107 integerGreen:147 integerBlue:35 alpha:1];
     
@@ -143,14 +146,20 @@
 - (void)setGroupDataSource:(NSArray *)groupArray {
     NSLog(@"ECMainPageView - setGroupDataSource");
     [mGroupTableView setGroupDataSource:groupArray];
-    [mGroupTableView setReloadingFlag:NO];
     [mGroupTableView reloadData];
+}
+
+- (void)stopReloadTableView {
+    [mGroupTableView setReloadingFlag:NO];
 }
 
 - (void)appendGroupDataSourceWithArray:(NSArray *)groupArray {
     [mGroupTableView appendGroupDataSourceWithArray:groupArray];
     [mGroupTableView reloadData];
-    [mGroupTableView setAppendingDataFlag:NO];
+}
+
+- (void)stopLoadMoreTableView {
+    [mGroupTableView setAppendingDataFlag:NO];    
 }
 
 - (void)refreshGroupList {
@@ -206,4 +215,10 @@
     }
 }
 
+- (void)onSystemSettingAction {
+    NSLog(@"system setting");
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(showSettingView)]) {
+        [self.viewControllerRef performSelector:@selector(showSettingView)];
+    }
+}
 @end

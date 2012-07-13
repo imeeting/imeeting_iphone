@@ -22,6 +22,7 @@
     self = [super init];
     if (self) {
         // init UI
+        useSavedPwd = YES;
         [self initUI];
 
     }
@@ -73,8 +74,7 @@
 
 - (void)textFieldValueChanged:(UITextField*)textField {
     NSLog(@"text field value changed");
-    UserBean *ub = [[UserManager shareUserManager] userBean];
-    ub.autoLogin = NO;
+    useSavedPwd = NO;
 }
 
 #pragma mark - UITextFieldDelegate methods implementation
@@ -130,7 +130,7 @@
     }
     
     UserBean *ub = [[UserManager shareUserManager] userBean];
-    if (!ub.autoLogin) {
+    if (!useSavedPwd) {
         [[UserManager shareUserManager] setUser:phoneNumber andPassword:pwd];
     }
     ub.rememberPwd = rememberPwd;
@@ -148,7 +148,7 @@
 #pragma mark - UITableView Datasource Implementation
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 4;
 }
 
 // render table cell UI
@@ -166,10 +166,12 @@
             case 2:
                 cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:NSLocalizedString(@"Remember Pwd", "") andControl:_mRememberPwdSwitch];
                 break;
+                /*
             case 3:
                 cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:NSLocalizedString(@"Auto Login", "") andControl:_mAutoLoginSwitch];
                 break;
-            case 4:
+                 */
+            case 3:
                 cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_mLoginButton];
                 break;
             default:

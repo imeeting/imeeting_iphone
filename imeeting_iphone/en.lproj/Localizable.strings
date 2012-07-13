@@ -86,3 +86,6 @@
 "Hangup failed" = "Hangup failed";
 "Kickout is forbidden for %@" = "Cannot kick out, maybe %@ is already out of group";
 "Kickout Failed" = "Kickout failed";
+"Setting" = "Settings";
+"Account" = "Account";
+"Set Account" = "Set Account";
