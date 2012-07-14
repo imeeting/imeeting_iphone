@@ -14,6 +14,7 @@
 #import "ECConstants.h"
 #import "ECUrlConfig.h"
 #import "ECGroupViewController.h"
+#import "ECMainPageViewController.h"
 
 @interface ECContactsSelectViewController ()
 - (void)onFinishedInviteAttendees:(ASIHTTPRequest*)pRequest;
@@ -156,12 +157,11 @@ invite_error:
       //  [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:module.groupController withObject:nil];
         [module.groupController performSelector:@selector(refreshAttendeeList)];
         
-        NSArray *controllers = self.navigationController.viewControllers;
-        UIViewController *main = [controllers objectAtIndex:1];
-        [NSThread detachNewThreadSelector:@selector(refreshGroupList) toTarget:main withObject:nil];
-        
+        ECMainPageViewController *mainController = [ECMainPageViewController shareViewController];
+        [NSThread detachNewThreadSelector:@selector(refreshGroupList) toTarget:mainController withObject:nil];
+
         [self.navigationController popViewControllerAnimated:NO];
-        [main.navigationController pushViewController:module.groupController animated:NO];
+        [mainController.navigationController pushViewController:module.groupController animated:NO];
     } else {
         NSLog(@"already in group mode");
         // already in group mode, so we jump back to group view

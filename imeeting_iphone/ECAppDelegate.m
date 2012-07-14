@@ -115,7 +115,7 @@
 - (BOOL)isNeedLogin {
     BOOL flag = NO;
     UserBean *userBean = [[UserManager shareUserManager] userBean];
-    if (!userBean.name || !userBean.password || !userBean.userKey || !userBean.autoLogin) {
+    if (!userBean.name || !userBean.password || !userBean.userKey /*|| !userBean.autoLogin*/) {
         flag = YES;
     }
     

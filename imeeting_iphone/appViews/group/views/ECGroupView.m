@@ -45,14 +45,14 @@
 }
 
 - (void)switchToAttendeeListView {
-    [self.attendeeListView setHidden:NO];
-    
     CATransition *animation = [CATransition animation];
     animation.duration = 0.4f;
     animation.timingFunction = UIViewAnimationCurveEaseInOut;
     animation.type = kCATransitionPush;
     animation.subtype = kCATransitionFromBottom;
     [self.attendeeListView.layer addAnimation:animation forKey:@"animationID"];
+
+    [self.attendeeListView setHidden:NO];
 
 }
 
