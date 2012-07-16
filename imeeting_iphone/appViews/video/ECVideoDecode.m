@@ -16,6 +16,7 @@
 @synthesize imgWidth = _imgWidth;
 @synthesize imgHeight = _imgHeight;
 @synthesize rtmpUrl = _rtmpUrl;
+@synthesize groupId = _groupId;
 
 - (id)init {
     self = [super init];
@@ -153,7 +154,7 @@
     
     NSMutableString *playPath = [[NSMutableString alloc] initWithCapacity:20];
     NSString *myName = [[UserManager shareUserManager] userBean].name;
-    [playPath appendFormat:@"%@/%@ live=1 conn=S:%@", self.rtmpUrl, username, myName];
+    [playPath appendFormat:@"%@/%@/%@ live=1 conn=S:%@", self.rtmpUrl, self.groupId, username, myName];
     NSLog(@"Video play path: %@", playPath);
     
     int ret = [self openVideoInputStream:[playPath cStringUsingEncoding:NSUTF8StringEncoding]];    
@@ -225,6 +226,7 @@
 @synthesize dstImgWidth = _dstImgWidth;
 @synthesize dstImgHeight = _dstImgHeight;
 @synthesize delegate = _delegate;
+@synthesize groupId = _groupId;
 
 - (id)init {
     self = [super init];
@@ -256,6 +258,7 @@
     executor.imgHeight = self.dstImgHeight;
     executor.rtmpUrl = self.rtmpUrl;
     executor.delegate = self.delegate;
+    executor.groupId = self.groupId;
     
     exeThread = [[NSThread alloc] initWithTarget:executor selector:@selector(startFetchVideoPictureWithUsername:) object:username];
     [exeThread start];

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UINavigationController+CustomNavigation.h"
+
 
 @class ECRootViewController;
 

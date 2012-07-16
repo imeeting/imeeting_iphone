@@ -45,6 +45,11 @@
     return self;
 }
 
+- (void)setGroupId:(NSString *)groupId {
+    _groupId = groupId;
+    [self.videoManager setGroupId:groupId];
+}
+
 - (void)onLeaveGroup {
     isLeave = YES;
     [self.videoManager releaseSession];
@@ -102,7 +107,32 @@
 
        // [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:gc withObject:nil];
         [gc refreshAttendeeList];
+    } else if ([action isEqualToString:ACTION_KICKOUT]) {
+        NSLog(@"processOneNotice - kickout attendee");
+        
+        NSString *accountName = [[UserManager shareUserManager] userBean].name;
+        NSString *attendeeName = [notice objectForKey:USERNAME];
+        if ([accountName isEqualToString:attendeeName]) {
+            // kick myself
+            ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+            [gc stopCaptureVideo];
+            
+            [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"You have been removed from the group by host", "") delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
+        } else {
+            // update attendee list
+            NSString *toastMsg = [NSString stringWithFormat:NSLocalizedString(@"%@ has been removed from the group", nil), attendeeName];
+            [[iToast makeText:toastMsg] show];
+            
+            ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+            [gc refreshAttendeeList];
+        }
     }
+}
+
+#pragma mark - Delegate of kickout alert
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+    [gc onLeaveGroup];
 }
 
 #pragma mark - notify methods

@@ -14,9 +14,14 @@
 #import "UserBean+IMeeting.h"
 #import "ECConstants.h"
 
-@interface ECLoginViewController ()
+@interface ECLoginViewController () {
+    NSInteger tryTimes; // used for register token
+}
 // check if need automatic login
 - (void)initLogin;
+- (void)registerToken;
+- (void)onFinishedRegToken:(ASIHTTPRequest*)pRequest;
+- (void)onRegTokenFailed:(ASIHTTPRequest*)pRequest;
 @end
 
 @implementation ECLoginViewController
@@ -27,6 +32,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.isForLogin = YES;
+        tryTimes = 3;
         
         [self initLogin];
         self = [self initWithCompatibleView:[[ECLoginUIView alloc] init]];
@@ -169,4 +175,54 @@ login_error:
     [[iToast makeText:NSLocalizedString(@"Error in login, please retry.", "")] show];
 
 }
+
+- (void)registerToken {
+    if (tryTimes > 0) {
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+        if (deviceToken) {
+            [params setObject:deviceToken forKey:TOKEN];
+            [params setObject:[UserManager shareUserManager].userBean.name forKey:USERNAME]; 
+            [HttpUtil postRequestWithUrl:USER_REG_TOKEN andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedRegToken:) andFailedRespSelector:@selector(onRegTokenFailed:)];
+        }
+    }
+}
+
+- (void)onFinishedRegToken:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedRegToken - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+        case 200: {
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            if (jsonData) {
+                NSString *result = [jsonData objectForKey:@"result"];
+                NSLog(@"result: %@", result);
+            
+                if ([result isEqualToString:@"0"]) {
+                    // reg token successfully
+                    NSLog(@"register token successfully");
+                } else {
+                    // reg token failed, re do it
+                    tryTimes--;
+                    sleep(2);
+                    [self registerToken];
+                }
+            }
+            break;
+        }
+        default:
+            tryTimes--;
+            sleep(2);
+            [self registerToken];
+            break;
+    }
+}
+
+- (void)onRegTokenFailed:(ASIHTTPRequest *)pRequest {
+    tryTimes--;
+    sleep(2);
+    [self registerToken];
+}
+
 @end

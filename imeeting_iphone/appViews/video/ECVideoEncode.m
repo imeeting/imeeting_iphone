@@ -12,6 +12,7 @@
 @synthesize outImgWidth = _outImgWidth;
 @synthesize outImgHeight = _outImgHeight;
 @synthesize liveName = _liveName;
+@synthesize groupId = _groupId;
 @synthesize rtmpUrl = _rtmpUrl;
 
 - (id)init {
@@ -30,7 +31,7 @@
     qvo->height = self.outImgHeight;
     
     NSMutableString *rtmpFullPath = [[NSMutableString alloc] initWithCapacity:20];
-    [rtmpFullPath appendFormat:@"%@/%@ live=1 conn=S:%@", self.rtmpUrl, self.liveName, self.liveName];
+    [rtmpFullPath appendFormat:@"%@/%@/%@ live=1 conn=S:%@", self.rtmpUrl, self.groupId, self.liveName, self.liveName];
     NSLog(@"rtmp path: %@", rtmpFullPath);
     int ret = init_quick_video_output(qvo, [rtmpFullPath cStringUsingEncoding:NSUTF8StringEncoding], "flv");
     if (ret < 0) {

@@ -19,6 +19,7 @@
 }
 @property (nonatomic,retain) NSString *rtmpUrl;
 @property (nonatomic,retain) NSString *liveName;
+@property (nonatomic,retain) NSString *groupId;
 
 @property (readwrite) int outImgWidth;
 @property (readwrite) int outImgHeight;

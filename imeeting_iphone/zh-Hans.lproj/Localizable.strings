@@ -89,3 +89,6 @@
 "Setting" = "设置";
 "Account" = "账户";
 "Set Account" = "设置账户";
+"You have been removed from the group by host" = "您被主持人移出讨论组";
+"%@ has been removed from the group" = "%@已被移出讨论组";
+"Unable to load video" = "加载视频失败";

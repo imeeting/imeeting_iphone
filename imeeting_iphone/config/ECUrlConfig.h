@@ -14,6 +14,8 @@
 #define CHECK_PHONE_CODE_URL        [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/checkPhoneCode"]
 #define USER_REGISTER_URL           [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/regUser"]
 #define USER_LOGIN_URL              [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/login"]
+#define USER_REG_TOKEN              [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/regToken"]
+
 #define GET_GROUP_LIST_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/list"]
 #define CREATE_GROUP_URL            [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/create"]
 #define HIDE_GROUP_URL              [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/hide"]

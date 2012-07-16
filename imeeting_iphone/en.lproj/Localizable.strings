@@ -89,3 +89,6 @@
 "Setting" = "Settings";
 "Account" = "Account";
 "Set Account" = "Set Account";
+"You have been removed from the group by host" = "You have been removed from the group by host";
+"%@ has been removed from the group" = "%@ has been removed from the group";
+"Unable to load video" = "Unable to load video";

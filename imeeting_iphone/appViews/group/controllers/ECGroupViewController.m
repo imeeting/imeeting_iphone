@@ -22,8 +22,6 @@
 // video view realted methods
 - (void)attachVideoPreviewLayer;
 - (void)detachVideoPreviewLayer;
-- (void)broadcastVideoOnStatus;
-- (void)broadcastVideoOffStatus;
 - (void)updateMyVideoOnStatus;
 - (void)updateMyVideoOffStatus;
 - (void)onNetworkFailed:(ASIHTTPRequest*)request;
@@ -181,13 +179,11 @@
     [self attachVideoPreviewLayer];
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     [module.videoManager startVideoCapture];
-    [self broadcastVideoOnStatus];
     [self updateMyVideoOnStatus];
 }
 
 // close camera, stop video capture
 - (void)stopCaptureVideo {
-    [self broadcastVideoOffStatus];
     [self detachVideoPreviewLayer];
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     [module.videoManager stopVideoCapture];
@@ -195,19 +191,6 @@
 }
 
 #pragma mark - broadcast status
-
--  (void)broadcastVideoOnStatus {
-    ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:module.groupId, GROUP_ID, ON, VIDEO_STATUS, nil];
-    [HttpUtil postSignatureRequestWithUrl:UPDATE_ATTENDEE_STATUS_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:nil andFailedRespSelector:@selector(onNetworkFailed:)];
-}
-
-- (void)broadcastVideoOffStatus {
-    ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:module.groupId, GROUP_ID, OFF, VIDEO_STATUS, nil];
-    [HttpUtil postSignatureRequestWithUrl:UPDATE_ATTENDEE_STATUS_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:nil andFailedRespSelector:@selector(onNetworkFailed:)];
-    
-}
 
 - (void)onNetworkFailed:(ASIHTTPRequest *)request {
     // do nothing
@@ -384,6 +367,7 @@
 - (void)startVideoWatch:(NSString *)targetUsername {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     [module.videoManager stopVideoFetch];
+    sleep(0.5);
     [module.videoManager startVideoFetchWithTargetUsername:targetUsername];
     [self switchToVideoView];
 }
@@ -494,8 +478,7 @@
             // kickout command is accepted by server, update UI
             // remove attendee from list
             ECGroupAttendeeListView *alv = ((ECGroupView*)self.view).attendeeListView;
-            [alv removeSelectedAttendee];
-            
+            [alv removeSelectedAttendee];            
             break;
         }
         case 403: {

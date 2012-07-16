@@ -12,11 +12,16 @@
 #import "ECConstants.h"
 #import "UserBean+IMeeting.h"
 #import "ECMainPageViewController.h"
+#import "UINavigationController+CustomNavigation.h"
+#import "ECUrlConfig.h"
 
-@interface ECAppDelegate ()
+@interface ECAppDelegate () {
+    NSInteger tryTimes;
+}
 - (void)loadAccount;
 - (BOOL)isNeedLogin;
-- (BOOL)isAccountValid;
+- (void)onFinishedRegToken:(ASIHTTPRequest *)pRequest;
+- (void)onRegTokenFailed:(ASIHTTPRequest *)pRequest;
 @end
 
 @implementation ECAppDelegate
@@ -79,9 +84,66 @@
 }
 
 #pragma mark - notification
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"device token: %@", deviceToken);
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)_deviceToken {
+    NSLog(@"device token: %@", _deviceToken);
+    NSString *token = [[NSString alloc] initWithFormat:@"%@", _deviceToken];
+    deviceToken = [token stringByTrimmingCharactersInString:@"<> "];
+    NSLog(@"token: %@", deviceToken);
+    tryTimes = 3;
+    if (![self isNeedLogin]) {
+        [self registerToken];
+    }
 }
+
+- (void)registerToken {
+    if (tryTimes > 0) {
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+        if (deviceToken) {
+            [params setObject:deviceToken forKey:TOKEN];
+            [params setObject:[UserManager shareUserManager].userBean.name forKey:USERNAME]; 
+            [HttpUtil postRequestWithUrl:USER_REG_TOKEN andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedRegToken:) andFailedRespSelector:@selector(onRegTokenFailed:)];
+        }
+    }
+}
+
+- (void)onFinishedRegToken:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedRegToken - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+        case 200: {
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            if (jsonData) {
+                NSString *result = [jsonData objectForKey:@"result"];
+                NSLog(@"result: %@", result);
+                
+                if ([result isEqualToString:@"0"]) {
+                    // reg token successfully
+                    NSLog(@"register token successfully");
+                } else {
+                    // reg token failed, re do it
+                    tryTimes--;
+                    sleep(2);
+                    [self registerToken];
+                }
+            }
+            break;
+        }
+        default:
+            tryTimes--;
+            sleep(2);
+            [self registerToken];
+            break;
+    }
+}
+
+- (void)onRegTokenFailed:(ASIHTTPRequest *)pRequest {
+    tryTimes--;
+    sleep(2);
+    [self registerToken];
+}
+
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"Failed to get device token - error: %@", error);
@@ -122,13 +184,4 @@
     return flag;
 }
 
-- (BOOL)isAccountValid {
-    BOOL flag = YES;
-    UserBean *userBean = [[UserManager shareUserManager] userBean];
-    if (!userBean.name || !userBean.password || !userBean.userKey) {
-        flag = NO;
-    }
-    return flag;
-
-}
 @end

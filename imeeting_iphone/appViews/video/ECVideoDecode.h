@@ -30,6 +30,7 @@
 @property (nonatomic) int imgWidth;
 @property (nonatomic) int imgHeight;
 @property (nonatomic, retain) NSString *rtmpUrl;
+@property (nonatomic, retain) NSString *groupId;
 
 - (void)startFetchVideoPictureWithUsername:(NSString*)username;
 - (void)stopFetchVideoPicture;
@@ -47,6 +48,7 @@
 
 }
 @property (nonatomic,retain) NSString *rtmpUrl;
+@property (nonatomic,retain) NSString *groupId;
 @property (nonatomic) int dstImgWidth;
 @property (nonatomic) int dstImgHeight;
 @property (nonatomic,retain) id delegate;

@@ -38,13 +38,18 @@
     return self;
 }
 
-- (void)setLiveName:(NSString *)liveName {
+- (void)setLiveName:(NSString*)liveName {
     self.videoEncode.liveName = liveName;
 }
 
-- (void)setRtmpUrl:(NSString *)rtmpUrl {
+- (void)setRtmpUrl:(NSString*)rtmpUrl {
     self.videoEncode.rtmpUrl = rtmpUrl;
     self.videoDecode.rtmpUrl = rtmpUrl;
+}
+
+- (void)setGroupId:(NSString*)groupId {
+    self.videoEncode.groupId = groupId;
+    self.videoDecode.groupId = groupId;
 }
 
 - (void)setOutImgWidth:(int)outImgWidth {

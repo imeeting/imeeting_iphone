@@ -11,6 +11,11 @@
 static CGFloat StatusBarHeight = 20;
 static CGFloat NavigationBarHeight = 44;
 
+// IOS push notification device token
+static NSString *deviceToken = nil; 
+
+static NSString *TOKEN = @"token";
+
 // Account CONSTANTS
 static NSString *PASSWORD = @"password";
 static NSString *USERKEY = @"userkey";
@@ -61,3 +66,4 @@ static NSString *CACHE = @"cache";
 static NSString *ACTION = @"action";
 static NSString *ACTION_UPDATE_STATUS = @"update_status";
 static NSString *ACTION_UPDATE_ATTENDEE_LIST = @"update_attendee_list";
+static NSString *ACTION_KICKOUT = @"kickout";

@@ -12,7 +12,7 @@
 #import "CommonToolkit/CommonToolkit.h"
 #import "ECVideoManager.h"
 
-@interface ECGroupModule : NSObject <SocketIODelegate, ECVideoFetchDelegate> {
+@interface ECGroupModule : NSObject <SocketIODelegate, ECVideoFetchDelegate, UIAlertViewDelegate> {
     SocketIO *mSocketIO;
     BOOL needConnectToNotifyServer;
     BOOL isLeave;

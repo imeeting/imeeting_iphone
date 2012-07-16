@@ -27,7 +27,6 @@
 
 @property (nonatomic,retain) NSString *rtmpUrl;
 @property (nonatomic,retain) NSString *liveName;
-
 @property (nonatomic) int outImgWidth;
 @property (nonatomic) int outImgHeight;
 
@@ -43,4 +42,5 @@
 - (void)setVideoFetchDelegate:(id)delegate;
 - (void)startVideoFetchWithTargetUsername:(NSString*)username;
 - (void)stopVideoFetch;
+- (void)setGroupId:(NSString*)groupId;
 @end

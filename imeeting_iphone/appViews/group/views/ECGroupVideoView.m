@@ -225,7 +225,7 @@ static CGFloat OppositeNameLabelHeight = 20;
 - (void)showVideoLoadFailedInfo {
     [loadVideoIndicator stopAnimating];
     [[iToast makeText:NSLocalizedString(@"Unable to load video", "")] show];
-    sleep(1);
+    sleep(2);
     [self resetOppositeVideoUI];
 }
 @end
