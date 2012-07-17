@@ -25,8 +25,6 @@ static ECMainPageViewController *instance;
 - (void)onLoadingMoreGroupListFailed:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedJoinGroup:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedHideGroup:(ASIHTTPRequest*)pRequest;
-- (void)joinGroup:(NSString*)groupId;
-- (void)setupGroupModuleWithGroupId:(NSString*)groupId;
 @end
 
 @implementation ECMainPageViewController
@@ -221,6 +219,7 @@ static ECMainPageViewController *instance;
             // join group ok
             // switch to group view
             NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"json data: %@", jsonData);
             if (jsonData) {
                 ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
                 module.audioConfId = [jsonData objectForKey:AUDIO_CONF_ID];

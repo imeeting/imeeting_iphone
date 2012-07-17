@@ -15,7 +15,6 @@
 @interface ECGroupModule : NSObject <SocketIODelegate, ECVideoFetchDelegate, UIAlertViewDelegate> {
     SocketIO *mSocketIO;
     BOOL needConnectToNotifyServer;
-    BOOL isLeave;
 }
 
 @property (nonatomic, retain) UIViewController *groupController;
@@ -24,6 +23,7 @@
 @property (nonatomic, retain) NSString *owner;
 @property (nonatomic, retain) ECVideoManager *videoManager;
 @property (nonatomic) BOOL ownerMode;
+@property (nonatomic) BOOL inGroup;
 
 - (void)connectToNotifyServer;
 - (void)stopGetNoticeFromNotifyServer;

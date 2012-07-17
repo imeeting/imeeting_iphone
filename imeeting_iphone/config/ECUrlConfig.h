@@ -26,7 +26,7 @@
 #define INVITE_ATTENDEE_LIST_URL    [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/invite"]
 #define CALL_ATTENDEE_URL           [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/call"]
 #define HANGUP_ATTENDEE_URL         [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/hangup"]
-#define KICKOUT_ATTENDEE_URL         [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/kickout"]
+#define KICKOUT_ATTENDEE_URL        [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/group/kickout"]
 
 
 

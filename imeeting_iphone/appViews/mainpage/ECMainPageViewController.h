@@ -25,4 +25,7 @@
 - (void)connectToNotifyServer;
 - (void)stopGetNoticeFromNotifyServer;
 - (void)showSettingView;
+- (void)joinGroup:(NSString*)groupId;
+- (void)setupGroupModuleWithGroupId:(NSString*)groupId;
+
 @end

@@ -27,11 +27,12 @@
 @synthesize audioConfId = _audioConfId;
 @synthesize videoManager = _videoManager;
 @synthesize ownerMode = _ownerMode;
+@synthesize inGroup = _inGroup;
 
 - (id)init {
     self = [super init];
     if (self) {
-        isLeave = NO;
+        self.inGroup = YES;
         mSocketIO = [[SocketIO alloc] initWithDelegate:self];
         needConnectToNotifyServer = YES;
         self.videoManager = [[ECVideoManager alloc] init];
@@ -51,7 +52,7 @@
 }
 
 - (void)onLeaveGroup {
-    isLeave = YES;
+    self.inGroup = NO;
     [self.videoManager releaseSession];
     
     [self stopGetNoticeFromNotifyServer];
@@ -72,7 +73,7 @@
 
 // process notices from notify server
 - (void)processNotices:(NSDictionary*)noticeData {
-    if (!noticeData) {
+    if (!noticeData || !self.inGroup) {
         return;
     }
     
@@ -197,7 +198,7 @@
 #pragma mark - video fetch delegate
 - (void)onFetchNewImage:(UIImage *)image {
     NSLog(@"Module - onFetchNewImage");
-    if (!isLeave) {
+    if (self.inGroup) {
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
         [gc renderOppositVideo:image];
     }
@@ -205,7 +206,7 @@
 
 - (void)onFetchFailed {
     NSLog(@"onFetchFailed");
-    if (!isLeave) {
+    if (self.inGroup) {
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
         [gc showVideoLoadFailedInfo];
     }
@@ -213,7 +214,7 @@
 
 - (void)onFetchVideoBeginToPrepare:(NSString*)name {
     NSLog(@"onFetchVideoBeginToPrepare");
-    if (!isLeave) {
+    if (self.inGroup) {
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
         [gc setOppositeVideoName:name];
         [gc startVideoLoadingIndicator];
@@ -222,7 +223,7 @@
 
 - (void)onFetchVideoPrepared {
     NSLog(@"onFetchVideoPrepared");
-    if (!isLeave) {
+    if (self.inGroup) {
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
         [gc stopVideoLoadingIndicator];
     }
@@ -230,7 +231,7 @@
 
 - (void)onFetchEnd {
     NSLog(@"onFetchEnd");
-    if (!isLeave) {
+    if (self.inGroup) {
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
         [gc resetOppositeVideoView];
     }

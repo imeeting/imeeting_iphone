@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F807584515A294C1008D8656 /* MessageUI.framework */; };
+		F809862715B4FA8600098A0C /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F809862615B4FA8600098A0C /* CommonToolkit.framework */; };
+		F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F809862815B5076F00098A0C /* AudioToolbox.framework */; };
+		F809862C15B566F500098A0C /* office_phone.caf in Resources */ = {isa = PBXBuildFile; fileRef = F809862B15B566F500098A0C /* office_phone.caf */; };
+		F809862F15B5741A00098A0C /* ECDeviceTokenPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = F809862E15B5741A00098A0C /* ECDeviceTokenPoster.m */; };
 		F80BD3ED159C29A900A83C81 /* ECVideoEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3EC159C29A900A83C81 /* ECVideoEncode.m */; };
 		F80BD3F1159C3FF400A83C81 /* ECVideoDecode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3F0159C3FF400A83C81 /* ECVideoDecode.m */; };
 		F814E281157CA08B00FBBB19 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E27F157CA07800FBBB19 /* MobileCoreServices.framework */; };
@@ -88,7 +92,6 @@
 		F8E58F7E1597F9A200CC2F1C /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */; };
 		F8E58F821597FA2A00CC2F1C /* ECGroupModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F811597FA2A00CC2F1C /* ECGroupModule.m */; };
 		F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */; };
-		F8E86BE615B4378700FF115F /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E86BE515B4378600FF115F /* CommonToolkit.framework */; };
 		F8ED85871592CDFE00E38F0C /* camera_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85851592CDFE00E38F0C /* camera_off.png */; };
 		F8ED85881592CDFE00E38F0C /* camera_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85861592CDFE00E38F0C /* camera_on.png */; };
 		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
@@ -106,6 +109,11 @@
 		F8039AA6157C65B4005903AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F8050CD11589852E00024951 /* ECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstants.h; sourceTree = "<group>"; };
 		F807584515A294C1008D8656 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		F809862615B4FA8600098A0C /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
+		F809862815B5076F00098A0C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F809862B15B566F500098A0C /* office_phone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = office_phone.caf; sourceTree = "<group>"; };
+		F809862D15B5741A00098A0C /* ECDeviceTokenPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDeviceTokenPoster.h; path = Util/ECDeviceTokenPoster.h; sourceTree = "<group>"; };
+		F809862E15B5741A00098A0C /* ECDeviceTokenPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDeviceTokenPoster.m; path = Util/ECDeviceTokenPoster.m; sourceTree = "<group>"; };
 		F80BD3EB159C29A900A83C81 /* ECVideoEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECVideoEncode.h; path = video/ECVideoEncode.h; sourceTree = "<group>"; };
 		F80BD3EC159C29A900A83C81 /* ECVideoEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECVideoEncode.m; path = video/ECVideoEncode.m; sourceTree = "<group>"; };
 		F80BD3EF159C3FF400A83C81 /* ECVideoDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECVideoDecode.h; path = video/ECVideoDecode.h; sourceTree = "<group>"; };
@@ -380,7 +388,6 @@
 		F8E58F801597FA2A00CC2F1C /* ECGroupModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupModule.h; path = group/ECGroupModule.h; sourceTree = "<group>"; };
 		F8E58F811597FA2A00CC2F1C /* ECGroupModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupModule.m; path = group/ECGroupModule.m; sourceTree = "<group>"; };
 		F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = CommonToolkitBundle.bundle; path = imeeting_iphone/Resources/bundles/CommonToolkitBundle.bundle; sourceTree = "<group>"; };
-		F8E86BE515B4378600FF115F /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = Frameworks/CommonToolkit.framework; sourceTree = "<group>"; };
 		F8ED85851592CDFE00E38F0C /* camera_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_off.png; path = imeeting_iphone/Resources/images/camera_off.png; sourceTree = "<group>"; };
 		F8ED85861592CDFE00E38F0C /* camera_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_on.png; path = imeeting_iphone/Resources/images/camera_on.png; sourceTree = "<group>"; };
 		F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECBaseUIView.h; sourceTree = "<group>"; };
@@ -404,7 +411,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8E86BE615B4378700FF115F /* CommonToolkit.framework in Frameworks */,
+				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
+				F809862715B4FA8600098A0C /* CommonToolkit.framework in Frameworks */,
 				F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */,
 				F885A670159B114500709FC7 /* libbz2.1.0.dylib in Frameworks */,
 				F885A5A3159ABE5D00709FC7 /* CoreVideo.framework in Frameworks */,
@@ -436,6 +444,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F809862A15B566F500098A0C /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				F809862B15B566F500098A0C /* office_phone.caf */,
+			);
+			name = audio;
+			path = imeeting_iphone/Resources/audio;
+			sourceTree = "<group>";
+		};
 		F814E289157CA16200FBBB19 /* System */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,7 +467,6 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
-				F8E86BE515B4378600FF115F /* CommonToolkit.framework */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,
@@ -469,6 +485,8 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F809862815B5076F00098A0C /* AudioToolbox.framework */,
+				F809862615B4FA8600098A0C /* CommonToolkit.framework */,
 				F807584515A294C1008D8656 /* MessageUI.framework */,
 				F885A66F159B114500709FC7 /* libbz2.1.0.dylib */,
 				F885A5A2159ABE5D00709FC7 /* CoreVideo.framework */,
@@ -1078,6 +1096,8 @@
 		F8EDF12A15A6B41A003DF47F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F809862D15B5741A00098A0C /* ECDeviceTokenPoster.h */,
+				F809862E15B5741A00098A0C /* ECDeviceTokenPoster.m */,
 				F8EDF12B15A6B462003DF47F /* AddressBookManager+Avatar.h */,
 				F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */,
 			);
@@ -1087,6 +1107,7 @@
 		F8F1A743158B1292003F1EE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F809862A15B566F500098A0C /* audio */,
 				F8F45B6215AD67EC000A9285 /* video_hangup_50X50.png */,
 				F8F45B6315AD67EC000A9285 /* voice_talkconnect.png */,
 				F8F45B6415AD67EC000A9285 /* voice_talkfail.png */,
@@ -1226,6 +1247,7 @@
 				F8F45B6715AD67EC000A9285 /* voice_talkconnect.png in Resources */,
 				F8F45B6815AD67EC000A9285 /* voice_talkfail.png in Resources */,
 				F8F45B6915AD67EC000A9285 /* voice_talking.png in Resources */,
+				F809862C15B566F500098A0C /* office_phone.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1274,6 +1296,7 @@
 				F8DC714615AFC82600146A73 /* UIViewController+AuthFailHandler.m in Sources */,
 				F8DC714B15B0081600146A73 /* ECSettingView.m in Sources */,
 				F8DC714E15B0082C00146A73 /* ECSettingViewController.m in Sources */,
+				F809862F15B5741A00098A0C /* ECDeviceTokenPoster.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -261,9 +261,10 @@
     switch (statusCode) {
         case 200: {
             NSString *responseText = [[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding];
-            NSLog(@"json array: %@", responseText);
             
             NSMutableArray *jsonArray = [responseText objectFromJSONString];
+            NSLog(@"json array: %@", jsonArray);
+
             if (jsonArray) {
                 [attListView setAttendeeArray:jsonArray];
                 _refreshList = NO;

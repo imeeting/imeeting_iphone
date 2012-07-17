@@ -11,7 +11,7 @@
 
 @class ECRootViewController;
 
-@interface ECAppDelegate : UIResponder <UIApplicationDelegate>
+@interface ECAppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ECRootViewController *rootViewController;

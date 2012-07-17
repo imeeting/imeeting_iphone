@@ -6,6 +6,8 @@
 //  Copyright (c) 2012年 elegant cloud. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "ECAppDelegate.h"
 #import "CommonToolkit/CommonToolkit.h"
 #import "ECLoginViewController.h"
@@ -14,14 +16,19 @@
 #import "ECMainPageViewController.h"
 #import "UINavigationController+CustomNavigation.h"
 #import "ECUrlConfig.h"
+#import "ECGroupModule.h"
+#import "ECGroupManager.h"
+#import "ECDeviceTokenPoster.h"
 
 @interface ECAppDelegate () {
     NSInteger tryTimes;
+    NSDictionary *currentNotification;
+    AVAudioPlayer *player;
 }
+- (void)initSystemSound;
 - (void)loadAccount;
 - (BOOL)isNeedLogin;
-- (void)onFinishedRegToken:(ASIHTTPRequest *)pRequest;
-- (void)onRegTokenFailed:(ASIHTTPRequest *)pRequest;
+- (void)processRemoteNotification:(NSDictionary*)notification;
 @end
 
 @implementation ECAppDelegate
@@ -29,8 +36,19 @@
 @synthesize window = _window;
 @synthesize rootViewController = _rootViewController;
 
+- (void)initSystemSound {
+    NSURL *filePath   = [[NSBundle mainBundle] URLForResource:@"office_phone" withExtension: @"caf"];
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+    [player prepareToPlay];
+    player.numberOfLoops = 1;
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog(@"didFinishLaunchingWithOptions - %@", launchOptions);
+    [self initSystemSound];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -51,6 +69,13 @@
         ECMainPageViewController *mpvc = [[ECMainPageViewController alloc] init];
         [ECMainPageViewController setShareViewController:mpvc];
         self.window.rootViewController = [[AppRootViewController alloc] initWithPresentViewController:mpvc andMode:navigationController];
+        
+        if (launchOptions) {
+            NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+            if (userInfo) {
+                [self processRemoteNotification:userInfo];
+            }
+        }
     }
     [self.window makeKeyAndVisible];
     return YES;
@@ -87,71 +112,80 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)_deviceToken {
     NSLog(@"device token: %@", _deviceToken);
     NSString *token = [[NSString alloc] initWithFormat:@"%@", _deviceToken];
-    deviceToken = [token stringByTrimmingCharactersInString:@"<> "];
-    NSLog(@"token: %@", deviceToken);
-    tryTimes = 3;
+    ECDeviceTokenPoster *poster = [ECDeviceTokenPoster shareDeviceTokenPoster];
+    poster.deviceToken = [token stringByTrimmingCharactersInString:@"<> "];
+    NSLog(@"token: %@", poster.deviceToken);
     if (![self isNeedLogin]) {
-        [self registerToken];
+        [poster registerToken];
     }
 }
-
-- (void)registerToken {
-    if (tryTimes > 0) {
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-        if (deviceToken) {
-            [params setObject:deviceToken forKey:TOKEN];
-            [params setObject:[UserManager shareUserManager].userBean.name forKey:USERNAME]; 
-            [HttpUtil postRequestWithUrl:USER_REG_TOKEN andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedRegToken:) andFailedRespSelector:@selector(onRegTokenFailed:)];
-        }
-    }
-}
-
-- (void)onFinishedRegToken:(ASIHTTPRequest *)pRequest {
-    NSLog(@"onFinishedRegToken - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
-    
-    int statusCode = pRequest.responseStatusCode;
-    
-    switch (statusCode) {
-        case 200: {
-            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
-            if (jsonData) {
-                NSString *result = [jsonData objectForKey:@"result"];
-                NSLog(@"result: %@", result);
-                
-                if ([result isEqualToString:@"0"]) {
-                    // reg token successfully
-                    NSLog(@"register token successfully");
-                } else {
-                    // reg token failed, re do it
-                    tryTimes--;
-                    sleep(2);
-                    [self registerToken];
-                }
-            }
-            break;
-        }
-        default:
-            tryTimes--;
-            sleep(2);
-            [self registerToken];
-            break;
-    }
-}
-
-- (void)onRegTokenFailed:(ASIHTTPRequest *)pRequest {
-    tryTimes--;
-    sleep(2);
-    [self registerToken];
-}
-
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"Failed to get device token - error: %@", error);
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    NSLog(@"didReceiveLocalNotification: %@", notification);
     
 }
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"didReceiveRemoteNotification: %@", userInfo);
+    currentNotification = userInfo;
+    if (userInfo) {
+        NSDictionary *aps = [userInfo objectForKey:@"aps"];
+        NSString *alert = [aps objectForKey:@"alert"];
+        ECGroupModule *module = [[ECGroupManager sharedECGroupManager] currentGroupModule];
+        if (!(module && module.inGroup)) {
+            NSLog(@"application state: %d", [application applicationState]);
+            if ([application applicationState] == UIApplicationStateActive) {
+                // show invited dialog & play sound
+                [player play];
+                [[[UIAlertView alloc] initWithTitle:nil message:alert delegate:self cancelButtonTitle:NSLocalizedString(@"Join", nil) otherButtonTitles:NSLocalizedString(@"Cancel", nil), nil] show];
+            } else {
+                // process directly
+                [self processRemoteNotification:currentNotification];
+            }
+        }
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [player stop];
+    [player prepareToPlay];
+    switch (buttonIndex) {
+        case 0: {
+            ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+            if (!(module && module.inGroup)) {
+                // join group
+                [self processRemoteNotification:currentNotification];
+            }
+            break;
+        }
+        case 1:
+            // cancel
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)processRemoteNotification:(NSDictionary *)notification {
+    ECMainPageViewController *mainCtrl = [ECMainPageViewController shareViewController];
+    if (mainCtrl) {
+        NSString *groupId = [notification objectForKey:GROUP_ID];
+        NSString *action = [notification objectForKey:ACTION];
+        if ([action isEqualToString:ACTION_INVITED]) {
+            // process invited notification
+            if (groupId) {
+                [mainCtrl setupGroupModuleWithGroupId:groupId];
+                [mainCtrl joinGroup:groupId];
+            }
+        }
+        
+    }
+}
+
 
 #pragma mark - account operations
 
@@ -183,5 +217,6 @@
     
     return flag;
 }
+
 
 @end
