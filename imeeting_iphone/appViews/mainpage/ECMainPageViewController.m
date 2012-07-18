@@ -176,7 +176,7 @@ static ECMainPageViewController *instance;
             break;
         }
         default:
-            [iToast makeText:NSLocalizedString(@"error in hide group", "")];
+            [[[iToast makeText:NSLocalizedString(@"error in hide group", "")] setDuration:iToastDurationLong] show];
             ECMainPageView *mainView = (ECMainPageView*)self.view;
             [mainView reloadTableViewData];
             break;
@@ -231,18 +231,18 @@ static ECMainPageViewController *instance;
                 
                 return;
             } else {
-                [iToast makeText:NSLocalizedString(@"error in join group", "")];
+                [[[iToast makeText:NSLocalizedString(@"error in join group", "")] setDuration:iToastDurationLong] show];
             }
         
         }
         case 403:
-            [[iToast makeText:NSLocalizedString(@"you'are prohibited to join the group", "")] show];
+            [[[iToast makeText:NSLocalizedString(@"you'are prohibited to join the group", "")] setDuration:iToastDurationLong] show];
             break;
         case 404:
-            [[iToast makeText:NSLocalizedString(@"group doesn't exist", "")] show];
+            [[[iToast makeText:NSLocalizedString(@"group doesn't exist", "")] setDuration:iToastDurationLong] show];
             break;
         default:
-            [iToast makeText:NSLocalizedString(@"error in join group", "")];
+            [[[iToast makeText:NSLocalizedString(@"error in join group", "")] setDuration:iToastDurationLong] show];
             break;
     }
     

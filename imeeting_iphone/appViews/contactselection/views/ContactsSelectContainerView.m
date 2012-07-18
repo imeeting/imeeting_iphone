@@ -84,26 +84,31 @@
 }
 
 - (void)addSelectedContactToMeetingWithIndexPath:(NSIndexPath *)pIndexPath andSelectedPhoneNumber:(NSString *)pSelectedPhoneNumber{
-    // if the select contact not existed in meeting contacts list table view in meeting section
-    if (![self.inMeetingContactsPhoneNumberArray containsObject:pSelectedPhoneNumber]) {
-        // update selected cell photo image
-        ((ContactsListTableViewCell *)[_mABContactsListView cellForRowAtIndexPath:pIndexPath]).photoImg = CONTACT_SELECTED_PHOTO;
-        
-        // update selected contact select status image
-        ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:pIndexPath.row]).selectStatusImg = CONTACT_SELECTED_PHOTO;
-        
-        // set selected contact selected phone number
-        ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:pIndexPath.row]).selectedPhoneNumber = pSelectedPhoneNumber;
-        
-        // add selected contact to meeting contacts list table view prein meeting section
-        [_mMeetingContactsListView.preinMeetingContactsInfoArrayRef addObject:[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:pIndexPath.row]];
-        [_mMeetingContactsListView insertRowAtIndexPath:[NSIndexPath indexPathForRow:[_mMeetingContactsListView.preinMeetingContactsInfoArrayRef count] - 1 inSection:_mMeetingContactsListView.numberOfSections - 1] withRowAnimation:UITableViewRowAnimationLeft];
-    }
-    else {
-        NSLog(@"Error: the contact had been in the meeting, mustn't add twice");
-        
-        // show toast
-        [[iToast makeText:[NSString stringWithFormat:@"%@ %@", ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:pIndexPath.row]).displayName, NSLocalizedString(@"contact has been in meeting", nil)]] show];
+    NSInteger totalNumber = _mMeetingContactsListView.preinMeetingContactsInfoArrayRef.count + _mMeetingContactsListView.inMeetingContactsInfoArrayRef.count;
+    if (totalNumber < 5) {
+        // if the select contact not existed in meeting contacts list table view in meeting section
+        if (![self.inMeetingContactsPhoneNumberArray containsObject:pSelectedPhoneNumber]) {
+            // update selected cell photo image
+            ((ContactsListTableViewCell *)[_mABContactsListView cellForRowAtIndexPath:pIndexPath]).photoImg = CONTACT_SELECTED_PHOTO;
+            
+            // update selected contact select status image
+            ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:pIndexPath.row]).selectStatusImg = CONTACT_SELECTED_PHOTO;
+            
+            // set selected contact selected phone number
+            ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:pIndexPath.row]).selectedPhoneNumber = pSelectedPhoneNumber;
+            
+            // add selected contact to meeting contacts list table view prein meeting section
+            [_mMeetingContactsListView.preinMeetingContactsInfoArrayRef addObject:[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:pIndexPath.row]];
+            [_mMeetingContactsListView insertRowAtIndexPath:[NSIndexPath indexPathForRow:[_mMeetingContactsListView.preinMeetingContactsInfoArrayRef count] - 1 inSection:_mMeetingContactsListView.numberOfSections - 1] withRowAnimation:UITableViewRowAnimationLeft];
+        }
+        else {
+            NSLog(@"Error: the contact had been in the meeting, mustn't add twice");
+            
+            // show toast
+            [[[iToast makeText:[NSString stringWithFormat:@"%@ %@", ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:pIndexPath.row]).displayName, NSLocalizedString(@"contact has been in meeting", nil)]] setDuration:iToastDurationLong] show];
+        }
+    } else {
+        [[[iToast makeText:NSLocalizedString(@"Reach the maximum number of members", nil)] setDuration:iToastDurationLong] show];
     }
 }
 
@@ -152,7 +157,7 @@
         NSLog(@"Error: %@ - addContactToMeetingWithPhoneNumber - phone number is nil", NSStringFromClass(self.class));
         
         // show toast
-        [[iToast makeText:NSLocalizedString(@"new added phone number is nil", nil)] show];
+        [[[iToast makeText:NSLocalizedString(@"new added phone number is nil", nil)] setDuration:iToastDurationLong] show];
     }
     else {
         // has searched result
@@ -168,7 +173,7 @@
                     NSLog(@"Error: has a contact with user input phone number has been existed in prein meeting");
                     
                     // show toast
-                    [[iToast makeText:[NSString stringWithFormat:@"%@ %@", ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:_index]).displayName, NSLocalizedString(@"contact with user input phone number has been existed in prein meeting", nil)]] show];
+                    [[[iToast makeText:[NSString stringWithFormat:@"%@ %@", ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:_index]).displayName, NSLocalizedString(@"contact with user input phone number has been existed in prein meeting", nil)]] setDuration:iToastDurationLong] show];
                 }
                 // add the user input phone number to meeting contacts list table view prein meeting section
                 else {
@@ -259,7 +264,7 @@
             NSLog(@"new added contact with the phone number has added in meeting contacts list table view in meeting section");
             
             // show toast
-            [[iToast makeText:NSLocalizedString(@"new added contact with user input phone number has been existed in prein meeting", nil)] show];
+            [[[iToast makeText:NSLocalizedString(@"new added contact with user input phone number has been existed in prein meeting", nil)] setDuration:iToastDurationLong] show];
             
             // return immediately
             return;

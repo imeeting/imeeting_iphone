@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonToolkit/CommonToolkit.h"
 
-@interface ABContactsListView : UITableView <UITableViewDataSource, UITableViewDelegate> {
+@interface ABContactsListView : UITableView <UITableViewDataSource, UITableViewDelegate, AddressBookChangedDelegate> {
     // all contacts info array in addressBook reference
     NSArray *_mAllContactsInfoArrayInABRef;
     

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012年 richitec. All rights reserved.
 //
 
+#import <AudioToolbox/AudioToolbox.h>
 #import "ContactsProcessSoftKeyboard.h"
 
 // contacts process softKeyboard contents
@@ -18,6 +19,7 @@
 @implementation ECKeyButton
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    AudioServicesPlaySystemSound(1104);
     [self.superview touchesBegan:touches withEvent:event];
     [super touchesBegan:touches withEvent:event];
 }

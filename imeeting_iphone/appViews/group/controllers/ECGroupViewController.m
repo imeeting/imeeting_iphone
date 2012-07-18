@@ -73,6 +73,9 @@
         }
         
         [module.videoManager setupSession];
+        // start video capturing
+        ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+        [videoView onOpenCameraButtonClickAction];
     }
    
     if (_refreshList) {
@@ -357,10 +360,10 @@
         if ([videoStatus isEqualToString:ON]) {
             [self startVideoWatch:username];
         } else {
-            [[iToast makeText:NSLocalizedString(@"This attendee's video is off", "")] show];
+            [[[iToast makeText:NSLocalizedString(@"This attendee's video is off", "")] setDuration:iToastDurationLong] show];
         }
     } else {
-        [[iToast makeText:NSLocalizedString(@"This attendee is offline", "")] show];
+        [[[iToast makeText:NSLocalizedString(@"This attendee is offline", "")] setDuration:iToastDurationLong] show];
     }
 
 }
@@ -398,21 +401,21 @@
         case 403: {
             // call is forbidden
             NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call is forbidden for %@", nil), displayName];
-            [[iToast makeText:msg] show];
+            [[[iToast makeText:msg] setDuration:iToastDurationLong] show];
             break;
         }
         case 409: {
             NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call failed, maybe %@ is in calling or talking", nil), displayName];
-            [[iToast makeText:msg] show];
+            [[[iToast makeText:msg] setDuration:iToastDurationLong] show];
             break;
         }
         case 500: {
             NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call failed", nil)];
-            [[iToast makeText:msg] show];
+            [[[iToast makeText:msg] setDuration:iToastDurationLong] show];
             break;
         }
         default:
-            [[iToast makeText:NSLocalizedString(@"Call Failed", "")] show];
+            [[[iToast makeText:NSLocalizedString(@"Call Failed", "")] setDuration:iToastDurationLong] show];
             break;
     }
 
@@ -435,7 +438,7 @@
     switch (statusCode) {
         case 409: {
             NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup failed, maybe %@ is already hung up", nil), displayName];
-            [[iToast makeText:msg] show];
+            [[[iToast makeText:msg] setDuration:iToastDurationLong] show];
         }
         case 200: {
             // hangup command is accepted by server, update UI
@@ -447,16 +450,16 @@
         case 403: {
             // hangup is forbidden
             NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hanup is forbidden for %@", nil), displayName];
-            [[iToast makeText:msg] show];
+            [[[iToast makeText:msg] setDuration:iToastDurationLong] show];
             break;
         }
         case 500: {
             NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup failed", nil)];
-            [[iToast makeText:msg] show];
+            [[[iToast makeText:msg] setDuration:iToastDurationLong] show];
             break;
         }
         default:
-            [[iToast makeText:NSLocalizedString(@"Hangup Failed", "")] show];
+            [[[iToast makeText:NSLocalizedString(@"Hangup Failed", "")] setDuration:iToastDurationLong] show];
             break;
     }
 }
@@ -485,11 +488,11 @@
         case 403: {
             // kickout is forbidden
             NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Kickout is forbidden for %@", nil), displayName];
-            [[iToast makeText:msg] show];
+            [[[iToast makeText:msg] setDuration:iToastDurationLong] show];
             break;
         }
         default:
-            [[iToast makeText:NSLocalizedString(@"Kickout Failed", "")] show];
+            [[[iToast makeText:NSLocalizedString(@"Kickout Failed", "")] setDuration:iToastDurationLong] show];
             break;
     }
 

@@ -122,7 +122,7 @@
         } else {
             // update attendee list
             NSString *toastMsg = [NSString stringWithFormat:NSLocalizedString(@"%@ has been removed from the group", nil), attendeeName];
-            [[iToast makeText:toastMsg] show];
+            [[[iToast makeText:toastMsg] setDuration:iToastDurationLong] show];
             
             ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
             [gc refreshAttendeeList];

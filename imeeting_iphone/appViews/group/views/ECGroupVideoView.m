@@ -30,7 +30,6 @@ static CGFloat OppositeNameLabelHeight = 20;
 - (void)onLeaveAction;
 - (void)onSwitchToAttendeeListViewAction;
 
-- (void)onOpenCameraButtonClickAction;
 - (void)onSwitchFBCameraAction;
 @end
 
@@ -224,7 +223,7 @@ static CGFloat OppositeNameLabelHeight = 20;
 
 - (void)showVideoLoadFailedInfo {
     [loadVideoIndicator stopAnimating];
-    [[iToast makeText:NSLocalizedString(@"Unable to load video", "")] show];
+    [[[iToast makeText:NSLocalizedString(@"Unable to load video", "")] setDuration:iToastDurationLong] show];
     sleep(2);
     [self resetOppositeVideoUI];
 }

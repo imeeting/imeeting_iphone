@@ -155,7 +155,7 @@
                     }
                 } else if ([result isEqualToString:@"1"] || [result isEqualToString:@"2"]) {
                     // login failed
-                    [[iToast makeText:NSLocalizedString(@"Wrong phone number or password", "")] show];
+                    [[[iToast makeText:NSLocalizedString(@"Wrong phone number or password", "")] setDuration:iToastDurationLong] show];
                 } else {
                     goto login_error;
                 }
@@ -172,7 +172,7 @@
     return;
     
 login_error:
-    [[iToast makeText:NSLocalizedString(@"Error in login, please retry.", "")] show];
+    [[[iToast makeText:NSLocalizedString(@"Error in login, please retry.", "")] setDuration:iToastDurationLong] show];
 
 }
 

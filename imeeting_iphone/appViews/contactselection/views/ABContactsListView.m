@@ -38,6 +38,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [[AddressBookManager shareAddressBookManager] addABChangedObserver:self];
+        
         // get all contacts info array from addressBook
         _mAllContactsInfoArrayInABRef = _mPresentContactsInfoArrayRef = [AddressBookManager shareAddressBookManager].allContactsInfoArray;
         
@@ -155,6 +157,32 @@
 - (void)phoneNumbersSelectActionSheet:(UIActionSheet *)pActionSheet clickedButtonAtIndex:(NSInteger)pButtonIndex{
     // add the selected contact with selected phone number to meeting contacts list table view prein meeting section
     [(ContactsSelectContainerView *)self.superview addSelectedContactToMeetingWithIndexPath:_mSelectedCellIndexPath andSelectedPhoneNumber:[pActionSheet buttonTitleAtIndex:pButtonIndex]];
+}
+
+- (void)addressBookChanged:(ABAddressBookRef)pAddressBook info:(NSDictionary*)pInfo context:(void *)pContext {
+    if (pInfo && 0 != [pInfo count]) {
+        // get changed contact id array
+        NSArray *_changedContactIdArr = [pInfo allKeys];
+        
+        for (NSNumber *_contactId in _changedContactIdArr) {
+            // get action
+            switch (((NSNumber *)[[pInfo objectForKey:_contactId] objectForKey:CONTACT_ACTION]).intValue) {
+                case contactAdd:
+                    [self insertRowAtIndexPath:[NSIndexPath indexPathForRow:[_mPresentContactsInfoArrayRef count] - 1 inSection:0] withRowAnimation:UITableViewRowAnimationLeft];
+                    break;
+                    
+                case contactModify:
+                    [self reloadRowAtIndexPath:[NSIndexPath indexPathForRow:[_mPresentContactsInfoArrayRef indexOfObject:[[AddressBookManager shareAddressBookManager] getContactInfoById:_contactId.intValue]] inSection:0] withRowAnimation:UITableViewRowAnimationMiddle];
+                    break;
+                    
+                case contactDelete:
+                    [self reloadData];
+                    break;
+            }
+        }
+    }
+
+    
 }
 
 @end

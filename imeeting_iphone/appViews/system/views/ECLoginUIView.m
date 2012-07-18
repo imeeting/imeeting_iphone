@@ -119,12 +119,12 @@
     
     if (!phoneNumber || [phoneNumber isEqualToString:@""]) {
         NSLog(@"phone number is null");
-        [[iToast makeText:NSLocalizedString(@"please input phone number first", "")] show];
+        [[[iToast makeText:NSLocalizedString(@"please input phone number first", "")] setDuration:iToastDurationLong] show];
         return;
     }
     
     if (!pwd || [pwd isEqualToString:@""]) {
-        [[iToast makeText:NSLocalizedString(@"please input password", "")] show];
+        [[[iToast makeText:NSLocalizedString(@"please input password", "")] setDuration:iToastDurationLong] show];
         return;
         
     }

@@ -35,7 +35,7 @@
     
     if (!self.isAppearedInCreatingNewGroup) {
         if (selectedAttendeeArray.count <= 0) {
-            [[iToast makeText:NSLocalizedString(@"no attendee selected", "")] show];
+            [[[iToast makeText:NSLocalizedString(@"no attendee selected", "")] setDuration:iToastDurationLong] show];
             return;
         }
     }

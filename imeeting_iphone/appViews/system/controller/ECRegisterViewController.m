@@ -92,9 +92,9 @@
                     // get phone code successfully, jump to step 2
                     [self.view performSelector:@selector(switchToStep2View)];
                 } else if ([result isEqualToString:@"2"]) {
-                    [[iToast makeText:NSLocalizedString(@"Invalid Phone Number!", "")] show];
+                    [[[iToast makeText:NSLocalizedString(@"Invalid Phone Number!", "")] setDuration:iToastDurationLong] show];
                 } else if ([result isEqualToString:@"3"]) {
-                    [[iToast makeText:NSLocalizedString(@"Existed Phone Number!", "")] show];
+                    [[[iToast makeText:NSLocalizedString(@"Existed Phone Number!", "")] setDuration:iToastDurationLong] show];
                 } else {
                     goto get_phone_code_error;
                 }
@@ -111,7 +111,7 @@
     return;
     
 get_phone_code_error:
-    [[iToast makeText:NSLocalizedString(@"Error in retrieving validation code, please retry.", "")] show];
+    [[[iToast makeText:NSLocalizedString(@"Error in retrieving validation code, please retry.", "")] setDuration:iToastDurationLong] show];
 }
 
 - (void)onFinishedCheckPhoneCode:(ASIHTTPRequest *)pRequest {
@@ -130,9 +130,9 @@ get_phone_code_error:
                     // check phone code successfully, jump to step 3 to fill password
                     [self.view performSelector:@selector(switchToStep3View)];
                 } else if ([result isEqualToString:@"2"]) {
-                    [[iToast makeText:NSLocalizedString(@"Wrong Validation Code!", "")] show];
+                    [[[iToast makeText:NSLocalizedString(@"Wrong Validation Code!", "")] setDuration:iToastDurationLong] show];
                 } else if ([result isEqualToString:@"6"]) {
-                    [[iToast makeText:NSLocalizedString(@"code check session timeout", "")] show];
+                    [[[iToast makeText:NSLocalizedString(@"code check session timeout", "")] setDuration:iToastDurationLong] show];
                     [self.view performSelector:@selector(switchToStep1View)];
 
                 }
@@ -149,7 +149,7 @@ get_phone_code_error:
     return;
     
 check_phone_code_error:
-    [[iToast makeText:NSLocalizedString(@"Error in checking validation code, please retry.", "")] show];
+    [[[iToast makeText:NSLocalizedString(@"Error in checking validation code, please retry.", "")] setDuration:iToastDurationLong] show];
 }
 
 - (void)onFinishedRegister:(ASIHTTPRequest *)pRequest {
@@ -169,7 +169,7 @@ check_phone_code_error:
                     [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Register OK", "") delegate:self cancelButtonTitle:NSLocalizedString(@"OK", "") otherButtonTitles:nil, nil] show];
 
                 } else if ([result isEqualToString:@"6"]) {
-                    [[iToast makeText:NSLocalizedString(@"register session timeout", "")] show];
+                    [[[iToast makeText:NSLocalizedString(@"register session timeout", "")] setDuration:iToastDurationLong] show];
                     [self.view performSelector:@selector(switchToStep1View)];
                     
                 }
@@ -186,7 +186,7 @@ check_phone_code_error:
     return;
 
 finish_register_error:
-    [[iToast makeText:NSLocalizedString(@"Error in finishing register, please retry.", "")] show];
+    [[[iToast makeText:NSLocalizedString(@"Error in finishing register, please retry.", "")] setDuration:iToastDurationLong] show];
     
 }
 

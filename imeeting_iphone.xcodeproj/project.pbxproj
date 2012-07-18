@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F800185715B66C5800745A8F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F800185615B66C5800745A8F /* CoreText.framework */; };
 		F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F807584515A294C1008D8656 /* MessageUI.framework */; };
 		F809862715B4FA8600098A0C /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F809862615B4FA8600098A0C /* CommonToolkit.framework */; };
 		F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F809862815B5076F00098A0C /* AudioToolbox.framework */; };
@@ -106,6 +107,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F800185615B66C5800745A8F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		F8039AA6157C65B4005903AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F8050CD11589852E00024951 /* ECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstants.h; sourceTree = "<group>"; };
 		F807584515A294C1008D8656 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -411,6 +413,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F800185715B66C5800745A8F /* CoreText.framework in Frameworks */,
 				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
 				F809862715B4FA8600098A0C /* CommonToolkit.framework in Frameworks */,
 				F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */,
@@ -485,6 +488,7 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F800185615B66C5800745A8F /* CoreText.framework */,
 				F809862815B5076F00098A0C /* AudioToolbox.framework */,
 				F809862615B4FA8600098A0C /* CommonToolkit.framework */,
 				F807584515A294C1008D8656 /* MessageUI.framework */,

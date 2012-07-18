@@ -158,7 +158,7 @@
     if(!phoneNumber || [phoneNumber isEqualToString:@""]) {
         NSLog(@"user input phone number is nil.");
                 
-        [[iToast makeText:NSLocalizedString(@"please input phone number first", "")] show];
+        [[[iToast makeText:NSLocalizedString(@"please input phone number first", "")] setDuration:iToastDurationLong] show];
         return;
     }
 
@@ -177,7 +177,7 @@
     // check phone code
     if (!code || [code isEqualToString:@""]) {
         NSLog(@"user input code is nil");
-        [[iToast makeText:NSLocalizedString(@"please input code", "")] show];
+        [[[iToast makeText:NSLocalizedString(@"please input code", "")] setDuration:iToastDurationLong] show];
         return;
     }
     
@@ -198,17 +198,17 @@
     
     // check passwords
     if (!pwd1 || [pwd1 isEqualToString:@""]) {
-        [[iToast makeText:NSLocalizedString(@"please input password", "")] show];
+        [[[iToast makeText:NSLocalizedString(@"please input password", "")] setDuration:iToastDurationLong] show];
         return;
     }
     
     if (!pwd2 || [pwd2 isEqualToString:@""]) {
-        [[iToast makeText:NSLocalizedString(@"please input confirm password", "")] show];
+        [[[iToast makeText:NSLocalizedString(@"please input confirm password", "")] setDuration:iToastDurationLong] show];
         return;
     }
     
     if (![pwd1 isEqualToString:pwd2]) {
-        [[iToast makeText:NSLocalizedString(@"pwd1 is different to pwd2", "")] show];
+        [[[iToast makeText:NSLocalizedString(@"pwd1 is different to pwd2", "")] setDuration:iToastDurationLong] show];
         return;
     }
     

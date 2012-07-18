@@ -34,4 +34,6 @@
 - (void)setOppositeVideoName:(NSString*)name;
 - (void)resetOppositeVideoUI;
 - (void)showVideoLoadFailedInfo;
+- (void)onOpenCameraButtonClickAction;
+
 @end

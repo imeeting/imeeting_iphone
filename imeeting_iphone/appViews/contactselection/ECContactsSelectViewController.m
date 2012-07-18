@@ -122,7 +122,7 @@
     return;
     
 invite_error:
-    [iToast makeText:NSLocalizedString(@"error in inviting attendees", "")];
+    [[[iToast makeText:NSLocalizedString(@"error in inviting attendees", "")] setDuration:iToastDurationLong] show];
     [self.navigationController popViewControllerAnimated:YES];
     
 }

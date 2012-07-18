@@ -6,13 +6,14 @@
 //  Copyright (c) 2012年 richitec. All rights reserved.
 //
 
+#import <AudioToolbox/AudioToolbox.h>
 #import "ContactsProcessToolbar.h"
 
 #import "ContactsSelectContainerView.h"
 
 // user input text diaplay max font size
-#define MAX_CUSTOMBOARD_DISPLAYFONTSIZE    48.0
-#define MAX_SYSTEMBOARD_DISPLAYFONTSIZE    32.0
+#define MAX_CUSTOMBOARD_DISPLAYFONTSIZE    30.0
+#define MAX_SYSTEMBOARD_DISPLAYFONTSIZE    30.0
 
 // softKeyboard indicate button and type switch button width
 #define INDICATE_TYPESWITCH_BUTTON_WIDTH  40.0
@@ -25,6 +26,19 @@
 #define INDICATEBUTTON_TITLE    [NSArray arrayWithObjects:@"▼", @"▲", nil]
 // softKeyboard type switch button title array
 #define TYPESWITCHBUTTON_TITLE  [NSArray arrayWithObjects:@"ABC ▼", @"123 ▲", nil]
+
+
+@interface ToolbarButton : UIButton
+@end
+
+@implementation ToolbarButton
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    AudioServicesPlaySystemSound(1104);
+}
+
+@end
 
 // ContactsSearchToolbar extension
 @interface ContactsProcessToolbar ()
@@ -70,7 +84,7 @@
         
         // init subviews and set their attributes
         // iit softKeyboard show or hide indicate button
-        _mSoftKeyboardIndicateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _mSoftKeyboardIndicateBtn = [ToolbarButton buttonWithType:UIButtonTypeCustom];
         // set frame
         _mSoftKeyboardIndicateBtn.frame = CGRectMake(self.bounds.origin.x + MARGIN, self.bounds.origin.y + MARGIN, INDICATE_TYPESWITCH_BUTTON_WIDTH, _originFrameHeight - 2 * MARGIN);
         // set background color
@@ -83,7 +97,7 @@
         [_mSoftKeyboardIndicateBtn addTarget:self action:@selector(indicateSoftKeyboard) forControlEvents:UIControlEventTouchUpInside];
         
         // init softKeyboard type switch button
-        _mSoftKeyboardTypeSwitchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _mSoftKeyboardTypeSwitchBtn = [ToolbarButton buttonWithType:UIButtonTypeCustom];
         // set frame
         _mSoftKeyboardTypeSwitchBtn.frame = CGRectMake(self.frame.size.width - _mSoftKeyboardIndicateBtn.frame.size.width - MARGIN, _mSoftKeyboardIndicateBtn.frame.origin.y, _mSoftKeyboardIndicateBtn.frame.size.width, _mSoftKeyboardIndicateBtn.frame.size.height);
         // set background color
@@ -291,8 +305,7 @@
                 
                 // show ios system softKeyboard, and set user input display label font
                 [_mUserInputTextField becomeFirstResponder];
-                _mInputDiaplayLabel.font = [UIFont boldSystemFontOfSize:MAX_SYSTEMBOARD_DISPLAYFONTSIZE];
-                
+                _mInputDiaplayLabel.font = [UIFont boldSystemFontOfSize:MAX_CUSTOMBOARD_DISPLAYFONTSIZE];
                 // set inputDiaplayLabel text for user input with ios system softKeyboard
                 _mUserInputTextField.text = [_mPreviousInputTextDic objectForKey:[NSNumber numberWithInt:iosSystem]];
                 
@@ -307,8 +320,7 @@
                 
                 // hide ios system softKeyboard, and set user input display label font
                 [_mUserInputTextField resignFirstResponder];
-                _mInputDiaplayLabel.font = [UIFont boldSystemFontOfSize:MAX_CUSTOMBOARD_DISPLAYFONTSIZE];
-                
+                _mInputDiaplayLabel.font = [UIFont boldSystemFontOfSize:MAX_SYSTEMBOARD_DISPLAYFONTSIZE];
                 // set inputDiaplayLabel text for user input with custom softKeyboard
                 _mUserInputTextField.text = [_mPreviousInputTextDic objectForKey:[NSNumber numberWithInt:custom]];
                 // manual call method:(void)userInputTextDidChanged:
