@@ -40,6 +40,12 @@
         }
     }
     
+    int totalNumber = _mMeetingContactsListView.preinMeetingContactsInfoArrayRef.count + _mMeetingContactsListView.inMeetingContactsInfoArrayRef.count;
+    if (totalNumber > 5) {
+        [[[iToast makeText:NSLocalizedString(@"Only 5 members in all are allowed", nil)] setDuration:iToastDurationLong] show];
+        return;
+    }
+    
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(inviteAttendees:)]) {
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
         

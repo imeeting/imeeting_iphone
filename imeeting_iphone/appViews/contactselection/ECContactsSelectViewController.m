@@ -65,7 +65,7 @@
     if (self.isAppearedInCreateNewGroup) {
         // begin to create new group
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:attendeesJsonString, GROUP_ATTENDEES, nil];
-        [HttpUtil postSignatureRequestWithUrl:CREATE_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedInviteAttendees:) andFailedRespSelector:nil];
+        [HttpUtil postSignatureRequestWithUrl:CREATE_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedInviteAttendees:) andFailedRespSelector:nil];
     } else {
         // already in group
         

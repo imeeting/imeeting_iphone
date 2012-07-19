@@ -20,7 +20,7 @@ static NSString *USERKEY = @"userkey";
 static NSString *AUTOLOGIN = @"autologin";
 
 // GROUP CONSTANTS
-static NSString *GROUP_ID = @"groupId";
+static NSString *GROUP_ID = @"conferenceId";
 static NSString *GROUP_TITLE = @"title";
 static NSString *GROUP_ATTENDEES = @"attendees";
 static NSString *GROUP_CREATED_TIME = @"created_time";

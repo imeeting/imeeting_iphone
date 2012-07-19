@@ -18,7 +18,9 @@
 
 static ECMainPageViewController *instance;
 
-@interface ECMainPageViewController ()
+@interface ECMainPageViewController () {
+    NSDictionary *selectedGroupInfo;
+}
 - (void)onFinishedGetGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest;
 - (void)onGetGroupListFailed:(ASIHTTPRequest*)pRequest;
@@ -73,7 +75,7 @@ static ECMainPageViewController *instance;
 // get the newest group list from server
 - (void)refreshGroupList {
     NSLog(@"ECMainPageViewController - refresh Group List");
-    [HttpUtil postSignatureRequestWithUrl:GET_GROUP_LIST_URL andPostFormat:urlEncoded andParameter:nil andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetGroupList:) andFailedRespSelector:@selector(onGetGroupListFailed:)];
+    [HttpUtil postSignatureRequestWithUrl:GET_CONF_LIST_URL andPostFormat:urlEncoded andParameter:nil andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedGetGroupList:) andFailedRespSelector:@selector(onGetGroupListFailed:)];
 }
 
 - (void)onFinishedGetGroupList:(ASIHTTPRequest *)pRequest {
@@ -118,7 +120,7 @@ static ECMainPageViewController *instance;
     NSLog(@"current offset: %d, next offset: %d", mOffset.integerValue, nextOffset.integerValue);
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:nextOffset, @"offset", nil];
-    [HttpUtil postSignatureRequestWithUrl:GET_GROUP_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedLoadingMoreGroupList:) andFailedRespSelector:@selector(onLoadingMoreGroupListFailed:)];
+    [HttpUtil postSignatureRequestWithUrl:GET_CONF_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedLoadingMoreGroupList:) andFailedRespSelector:@selector(onLoadingMoreGroupListFailed:)];
 }
 
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest {
@@ -160,7 +162,7 @@ static ECMainPageViewController *instance;
 - (void)hideGroup:(NSString *)groupId {
     NSLog(@"hide group: %@", groupId);
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:HIDE_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHideGroup:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:HIDE_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHideGroup:) andFailedRespSelector:nil];
 }
 
 - (void)onFinishedHideGroup:(ASIHTTPRequest *)pRequest {
@@ -185,7 +187,8 @@ static ECMainPageViewController *instance;
 }
 
 - (void)itemSelected:(NSDictionary *)group {
-    NSString *groupId = [group objectForKey:@"groupId"];
+    selectedGroupInfo = group;
+    NSString *groupId = [group objectForKey:GROUP_ID];
     
     [self setupGroupModuleWithGroupId:groupId];
     
@@ -205,7 +208,7 @@ static ECMainPageViewController *instance;
 
 - (void)joinGroup:(NSString*)groupId {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:JOIN_GROUP_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedJoinGroup:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:JOIN_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedJoinGroup:) andFailedRespSelector:nil];
 
 }
 
@@ -217,6 +220,7 @@ static ECMainPageViewController *instance;
     switch (statusCode) {
         case 200: {
             // join group ok
+            selectedGroupInfo = nil;
             // switch to group view
             NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
             NSLog(@"json data: %@", jsonData);
@@ -233,19 +237,45 @@ static ECMainPageViewController *instance;
             } else {
                 [[[iToast makeText:NSLocalizedString(@"error in join group", "")] setDuration:iToastDurationLong] show];
             }
-        
+            break;
         }
         case 403:
             [[[iToast makeText:NSLocalizedString(@"you'are prohibited to join the group", "")] setDuration:iToastDurationLong] show];
             break;
-        case 404:
-            [[[iToast makeText:NSLocalizedString(@"group doesn't exist", "")] setDuration:iToastDurationLong] show];
-            break;
+        case 404: {
+            // conference donesn't exist, start to create a new one
+            ECContactsSelectViewController *csvc = [[ECContactsSelectViewController alloc] init];
+            csvc.isAppearedInCreateNewGroup = YES;
+            
+            NSString *accountName = [UserManager shareUserManager].userBean.name;
+            NSMutableArray *inConferenceAttendeeArray = [NSMutableArray arrayWithCapacity:1];
+            [inConferenceAttendeeArray addObject:accountName];
+            [csvc initInMeetingAttendeesPhoneNumbers:inConferenceAttendeeArray];
+            
+            // set pre-in conference attendees
+            NSLog(@"selected group: %@", selectedGroupInfo);
+            if (selectedGroupInfo) {
+                NSArray *attendees = [selectedGroupInfo objectForKey:GROUP_ATTENDEES];
+                if (attendees) {
+                    NSMutableArray *preInConferenceAttendeeArray = [NSMutableArray arrayWithCapacity:5];
+                    for (NSString *name in attendees) {
+                        if (![accountName isEqualToString:name]) {
+                            [preInConferenceAttendeeArray addObject:name];
+                        }
+                    }
+                    NSLog(@"pre in attendees: %@", preInConferenceAttendeeArray);
+                    [csvc initPreinMeetingAttendeesPhoneNumbers:preInConferenceAttendeeArray];
+                }
+                selectedGroupInfo = nil;
+            }
+            [self.navigationController pushViewController:csvc animated:YES];
+            return;
+        }
         default:
             [[[iToast makeText:NSLocalizedString(@"error in join group", "")] setDuration:iToastDurationLong] show];
             break;
     }
-    
+    selectedGroupInfo = nil;
     [[ECGroupManager sharedECGroupManager] setCurrentGroupModule:nil];
 }
 

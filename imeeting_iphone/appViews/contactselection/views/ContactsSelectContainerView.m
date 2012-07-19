@@ -7,8 +7,11 @@
 //
 
 #import "ContactsSelectContainerView.h"
+
 #import "CommonToolkit/CommonToolkit.h"
+
 #import "ContactsListTableViewCell.h"
+
 #import "ContactBean+IMeeting.h"
 
 // middle seperate padding
@@ -81,6 +84,41 @@
 - (void)initInMeetingAttendeesPhoneNumbers:(NSArray *)pPhoneNumbers{
     // set meeting contacts list table view in meeting attedees phone number array
     _mMeetingContactsListView.inMeetingAttendeesPhoneNumberArray = [NSMutableArray arrayWithArray:pPhoneNumbers];
+}
+
+- (void)initPreinMeetingAttendeesPhoneNumbers:(NSArray *)pPhoneNumbers{
+    // set meeting contacts list table view prein meeting attedees phone number array
+    for (NSString *_phoneNumber in pPhoneNumbers) {
+        // generate contact prein meeting attendees(get from server) phone number and add to meeting contacts list table view prein meeting section
+        ContactBean *_contact = nil;
+        
+        // get contacts from addressBook by phone number
+        NSArray *_contacts = [[AddressBookManager shareAddressBookManager] getContactByPhoneNumber:_phoneNumber];        
+        if ([_contacts count] > 0) {
+            // get first
+            _contact = [_contacts objectAtIndex:0];
+            
+            // set contact selected phone number
+            _contact.selectedPhoneNumber = _phoneNumber;
+            
+            // set contact select status image
+            _contact.selectStatusImg = CONTACT_SELECTED_PHOTO;
+        }
+        else {
+            // create and init an new contact bean object
+            _contact = [[ContactBean alloc] init];
+            // set his display name, selected phone number and phone number array
+            _contact.displayName = _phoneNumber;
+            _contact.selectedPhoneNumber = _phoneNumber;
+            _contact.phoneNumbers = [NSArray arrayWithObject:_phoneNumber];
+        }
+        
+        // add contact in meeting contacts list table view prein meeting section
+        [_mMeetingContactsListView.preinMeetingContactsInfoArrayRef addObject:_contact];
+    }
+    
+    // meeting contacts list table view reload data
+    [_mMeetingContactsListView reloadData];
 }
 
 - (void)addSelectedContactToMeetingWithIndexPath:(NSIndexPath *)pIndexPath andSelectedPhoneNumber:(NSString *)pSelectedPhoneNumber{
@@ -270,10 +308,15 @@
             return;
         }
     }
+    NSInteger totalNumber = _mMeetingContactsListView.preinMeetingContactsInfoArrayRef.count + _mMeetingContactsListView.inMeetingContactsInfoArrayRef.count;
+    if (totalNumber >= 5) {
+        [[[iToast makeText:NSLocalizedString(@"Reach the maximum number of members", nil)] setDuration:iToastDurationLong] show];
+        return;
+    }
     
     // generate contact with user input phone number and add to meeting contacts list table view prein meeting section
     ContactBean *_newAddedContact = [[ContactBean alloc] init];
-    // set id, display name and phone number array
+    // set his id, display name, selected phone number and phone number array
     _newAddedContact.id = -1/*tempelate contact*/;
     _newAddedContact.displayName = pPhoneNumber;
     _newAddedContact.phoneNumbers = [NSArray arrayWithObject:pPhoneNumber];
@@ -281,6 +324,7 @@
     
     [_mMeetingContactsListView.preinMeetingContactsInfoArrayRef addObject:_newAddedContact];
     [_mMeetingContactsListView insertRowAtIndexPath:[NSIndexPath indexPathForRow:[_mMeetingContactsListView.preinMeetingContactsInfoArrayRef count] - 1 inSection:_mMeetingContactsListView.numberOfSections - 1] withRowAnimation:UITableViewRowAnimationLeft];
+        
 }
 
 @end

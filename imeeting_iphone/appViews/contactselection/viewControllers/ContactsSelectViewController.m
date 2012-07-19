@@ -6,7 +6,6 @@
 //  Copyright (c) 2012年 richitec. All rights reserved.
 //
 
-
 #import "ContactsSelectViewController.h"
 
 #import "CommonToolkit/CommonToolkit.h"
@@ -55,6 +54,10 @@
 
 - (void)initInMeetingAttendeesPhoneNumbers:(NSArray *)pPhoneNumbers{
     [((ContactsSelectContainerView *)self.view) initInMeetingAttendeesPhoneNumbers:pPhoneNumbers];
+}
+
+- (void)initPreinMeetingAttendeesPhoneNumbers:(NSArray *)pPhoneNumbers{
+    [((ContactsSelectContainerView *)self.view) initPreinMeetingAttendeesPhoneNumbers:pPhoneNumbers];
 }
 
 @end
