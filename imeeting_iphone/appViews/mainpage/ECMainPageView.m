@@ -8,6 +8,7 @@
 
 #import "ECMainPageView.h"
 #import "ECGroupCell.h"
+#import "ECConstants.h"
 
 @implementation ECMainTableView
 @synthesize currentDeletedIndexPath = _currentDeletedIndexPath;
@@ -83,7 +84,7 @@
 }
 
 - (void)hideGroup:(NSDictionary *)groupInfo {
-    NSString *groupId = [groupInfo objectForKey:@"groupId"];
+    NSString *groupId = [groupInfo objectForKey:GROUP_ID];
     ECMainPageView *mainPage = (ECMainPageView*)self.superview;
     [mainPage hideGroup:groupId];
 }

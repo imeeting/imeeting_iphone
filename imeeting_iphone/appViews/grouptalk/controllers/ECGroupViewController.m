@@ -346,8 +346,22 @@
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
         [hud showWhileExecuting:@selector(hangup:) onTarget:self withObject:username animated:YES];
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Kick", "")]) {
-        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
-        [hud showWhileExecuting:@selector(kickout:) onTarget:self withObject:username animated:YES];
+        NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+        NSString *alertMsg = [NSString stringWithFormat:NSLocalizedString(@"Remove %@ ?", nil), displayName];
+        [[[UIAlertView alloc] initWithTitle:nil message:alertMsg delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:NSLocalizedString(@"Cancel", nil), nil] show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0: {
+            NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+            MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
+            [hud showWhileExecuting:@selector(kickout:) onTarget:self withObject:username animated:YES];
+            break;
+        }
+        default:
+            break;
     }
 }
 

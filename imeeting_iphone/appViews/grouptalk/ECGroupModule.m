@@ -121,7 +121,8 @@
             [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"You have been removed from the group by host", "") delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
         } else {
             // update attendee list
-            NSString *toastMsg = [NSString stringWithFormat:NSLocalizedString(@"%@ has been removed from the group", nil), attendeeName];
+            NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:attendeeName] objectAtIndex:0];
+            NSString *toastMsg = [NSString stringWithFormat:NSLocalizedString(@"%@ has been removed from the group", nil), displayName];
             [[[iToast makeText:toastMsg] setDuration:iToastDurationLong] show];
             
             ECGroupViewController *gc = (ECGroupViewController*)self.groupController;

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F800185715B66C5800745A8F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F800185615B66C5800745A8F /* CoreText.framework */; };
 		F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F807584515A294C1008D8656 /* MessageUI.framework */; };
-		F809862715B4FA8600098A0C /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F809862615B4FA8600098A0C /* CommonToolkit.framework */; };
 		F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F809862815B5076F00098A0C /* AudioToolbox.framework */; };
 		F809862C15B566F500098A0C /* office_phone.caf in Resources */ = {isa = PBXBuildFile; fileRef = F809862B15B566F500098A0C /* office_phone.caf */; };
 		F809862F15B5741A00098A0C /* ECDeviceTokenPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = F809862E15B5741A00098A0C /* ECDeviceTokenPoster.m */; };
@@ -66,6 +65,7 @@
 		F8C11F4115B8015600B30BD5 /* ECGroupVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4015B8015600B30BD5 /* ECGroupVideoView.m */; };
 		F8C11F4615B8016100B30BD5 /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4315B8016100B30BD5 /* ECGroupManager.m */; };
 		F8C11F4715B8016100B30BD5 /* ECGroupModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4515B8016100B30BD5 /* ECGroupModule.m */; };
+		F8C11F4E15B8086600B30BD5 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C11F4D15B8086600B30BD5 /* CommonToolkit.framework */; };
 		F8D5E35C157EEF30005B5581 /* ECRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */; };
 		F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */; };
 		F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */; };
@@ -111,7 +111,6 @@
 		F8039AA6157C65B4005903AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F8050CD11589852E00024951 /* ECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstants.h; sourceTree = "<group>"; };
 		F807584515A294C1008D8656 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		F809862615B4FA8600098A0C /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F809862815B5076F00098A0C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F809862B15B566F500098A0C /* office_phone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = office_phone.caf; sourceTree = "<group>"; };
 		F809862D15B5741A00098A0C /* ECDeviceTokenPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDeviceTokenPoster.h; path = Util/ECDeviceTokenPoster.h; sourceTree = "<group>"; };
@@ -346,6 +345,7 @@
 		F8C11F4315B8016100B30BD5 /* ECGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupManager.m; path = grouptalk/ECGroupManager.m; sourceTree = "<group>"; };
 		F8C11F4415B8016100B30BD5 /* ECGroupModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupModule.h; path = grouptalk/ECGroupModule.h; sourceTree = "<group>"; };
 		F8C11F4515B8016100B30BD5 /* ECGroupModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupModule.m; path = grouptalk/ECGroupModule.m; sourceTree = "<group>"; };
+		F8C11F4D15B8086600B30BD5 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F8D5E35A157EEF30005B5581 /* ECRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterViewController.h; path = system/controller/ECRegisterViewController.h; sourceTree = "<group>"; };
 		F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterViewController.m; path = system/controller/ECRegisterViewController.m; sourceTree = "<group>"; };
 		F8D5E35D157EEF3A005B5581 /* ECRegisterUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterUIView.h; path = system/views/ECRegisterUIView.h; sourceTree = "<group>"; };
@@ -413,9 +413,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8C11F4E15B8086600B30BD5 /* CommonToolkit.framework in Frameworks */,
 				F800185715B66C5800745A8F /* CoreText.framework in Frameworks */,
 				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
-				F809862715B4FA8600098A0C /* CommonToolkit.framework in Frameworks */,
 				F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */,
 				F885A670159B114500709FC7 /* libbz2.1.0.dylib in Frameworks */,
 				F885A5A3159ABE5D00709FC7 /* CoreVideo.framework in Frameworks */,
@@ -488,9 +488,9 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8C11F4D15B8086600B30BD5 /* CommonToolkit.framework */,
 				F800185615B66C5800745A8F /* CoreText.framework */,
 				F809862815B5076F00098A0C /* AudioToolbox.framework */,
-				F809862615B4FA8600098A0C /* CommonToolkit.framework */,
 				F807584515A294C1008D8656 /* MessageUI.framework */,
 				F885A66F159B114500709FC7 /* libbz2.1.0.dylib */,
 				F885A5A2159ABE5D00709FC7 /* CoreVideo.framework */,

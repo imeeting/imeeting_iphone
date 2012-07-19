@@ -10,7 +10,7 @@
 #import "AVFoundation/AVFoundation.h"
 #import "ECVideoManager.h"
 
-@interface ECGroupViewController : UIViewController {
+@interface ECGroupViewController : UIViewController <UIAlertViewDelegate> {
     AVCaptureVideoPreviewLayer *mPreviewLayer;
     
     BOOL isFirstLoad; // inidcate if the controller loads first.
