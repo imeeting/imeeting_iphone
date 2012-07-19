@@ -58,6 +58,14 @@
 		F8B5F45E15AABA0B005A8C09 /* k7.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B5F45215AABA0B005A8C09 /* k7.png */; };
 		F8B5F45F15AABA0B005A8C09 /* k8.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B5F45315AABA0B005A8C09 /* k8.png */; };
 		F8B5F46015AABA0B005A8C09 /* k9.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B5F45415AABA0B005A8C09 /* k9.png */; };
+		F8C11F3415B8011400B30BD5 /* ECAttendeeModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3015B8011400B30BD5 /* ECAttendeeModeStatusFilter.m */; };
+		F8C11F3515B8011400B30BD5 /* ECOwnerModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3215B8011400B30BD5 /* ECOwnerModeStatusFilter.m */; };
+		F8C11F3815B8012C00B30BD5 /* ECGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3715B8012C00B30BD5 /* ECGroupView.m */; };
+		F8C11F3B15B8013A00B30BD5 /* ECGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3A15B8013A00B30BD5 /* ECGroupViewController.m */; };
+		F8C11F3E15B8014C00B30BD5 /* ECGroupAttendeeListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3D15B8014C00B30BD5 /* ECGroupAttendeeListView.m */; };
+		F8C11F4115B8015600B30BD5 /* ECGroupVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4015B8015600B30BD5 /* ECGroupVideoView.m */; };
+		F8C11F4615B8016100B30BD5 /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4315B8016100B30BD5 /* ECGroupManager.m */; };
+		F8C11F4715B8016100B30BD5 /* ECGroupModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4515B8016100B30BD5 /* ECGroupModule.m */; };
 		F8D5E35C157EEF30005B5581 /* ECRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */; };
 		F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */; };
 		F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */; };
@@ -79,8 +87,6 @@
 		F8E0C0B615A14F2500E66F27 /* ContactsProcessToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AC15A14F2500E66F27 /* ContactsProcessToolbar.m */; };
 		F8E0C0B715A14F2500E66F27 /* ContactsSelectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */; };
 		F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */; };
-		F8E19E5115AC27C5001F6BBC /* ECOwnerModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E19E5015AC27C5001F6BBC /* ECOwnerModeStatusFilter.m */; };
-		F8E19E5415AC3553001F6BBC /* ECAttendeeModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E19E5315AC3553001F6BBC /* ECAttendeeModeStatusFilter.m */; };
 		F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BEC7158EC57200467088 /* QuartzCore.framework */; };
 		F8E3BEE8158F1F9100467088 /* UserBean+IMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */; };
 		F8E3BF08158F327700467088 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BF07158F327600467088 /* AddressBook.framework */; };
@@ -88,22 +94,16 @@
 		F8E49FDE1580B76B00E8B2C0 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E49FDD1580B76B00E8B2C0 /* ECLoginViewController.m */; };
 		F8E4B9EF15A5267700322C7A /* ECContactsSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9EE15A5267700322C7A /* ECContactsSelectViewController.m */; };
 		F8E4B9F315A526AE00322C7A /* ECContactsSelectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9F215A526AE00322C7A /* ECContactsSelectContainerView.m */; };
-		F8E4BA0015A57A2000322C7A /* ECGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9FF15A57A1F00322C7A /* ECGroupViewController.m */; };
-		F8E4BA0315A57A2700322C7A /* ECGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4BA0215A57A2700322C7A /* ECGroupView.m */; };
-		F8E58F7E1597F9A200CC2F1C /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */; };
-		F8E58F821597FA2A00CC2F1C /* ECGroupModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E58F811597FA2A00CC2F1C /* ECGroupModule.m */; };
 		F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */; };
 		F8ED85871592CDFE00E38F0C /* camera_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85851592CDFE00E38F0C /* camera_off.png */; };
 		F8ED85881592CDFE00E38F0C /* camera_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F8ED85861592CDFE00E38F0C /* camera_on.png */; };
 		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
 		F8EDF12815A68FE4003DF47F /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F8EDF12715A68FE4003DF47F /* default_avatar.png */; };
 		F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */; };
-		F8EED883159457420072FD39 /* ECGroupAttendeeListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */; };
 		F8F45B6615AD67EC000A9285 /* video_hangup_50X50.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6215AD67EC000A9285 /* video_hangup_50X50.png */; };
 		F8F45B6715AD67EC000A9285 /* voice_talkconnect.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6315AD67EC000A9285 /* voice_talkconnect.png */; };
 		F8F45B6815AD67EC000A9285 /* voice_talkfail.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6415AD67EC000A9285 /* voice_talkfail.png */; };
 		F8F45B6915AD67EC000A9285 /* voice_talking.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6515AD67EC000A9285 /* voice_talking.png */; };
-		F8FA19731591E73100947304 /* ECGroupVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FA19721591E73100947304 /* ECGroupVideoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -329,6 +329,23 @@
 		F8B5F45215AABA0B005A8C09 /* k7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = k7.png; sourceTree = "<group>"; };
 		F8B5F45315AABA0B005A8C09 /* k8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = k8.png; sourceTree = "<group>"; };
 		F8B5F45415AABA0B005A8C09 /* k9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = k9.png; sourceTree = "<group>"; };
+		F8C11F2F15B8011400B30BD5 /* ECAttendeeModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECAttendeeModeStatusFilter.h; path = grouptalk/statusfilter/ECAttendeeModeStatusFilter.h; sourceTree = "<group>"; };
+		F8C11F3015B8011400B30BD5 /* ECAttendeeModeStatusFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECAttendeeModeStatusFilter.m; path = grouptalk/statusfilter/ECAttendeeModeStatusFilter.m; sourceTree = "<group>"; };
+		F8C11F3115B8011400B30BD5 /* ECOwnerModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECOwnerModeStatusFilter.h; path = grouptalk/statusfilter/ECOwnerModeStatusFilter.h; sourceTree = "<group>"; };
+		F8C11F3215B8011400B30BD5 /* ECOwnerModeStatusFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECOwnerModeStatusFilter.m; path = grouptalk/statusfilter/ECOwnerModeStatusFilter.m; sourceTree = "<group>"; };
+		F8C11F3315B8011400B30BD5 /* ECStatusFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECStatusFilterDelegate.h; path = grouptalk/statusfilter/ECStatusFilterDelegate.h; sourceTree = "<group>"; };
+		F8C11F3615B8012C00B30BD5 /* ECGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupView.h; path = grouptalk/views/ECGroupView.h; sourceTree = "<group>"; };
+		F8C11F3715B8012C00B30BD5 /* ECGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupView.m; path = grouptalk/views/ECGroupView.m; sourceTree = "<group>"; };
+		F8C11F3915B8013A00B30BD5 /* ECGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupViewController.h; path = grouptalk/controllers/ECGroupViewController.h; sourceTree = "<group>"; };
+		F8C11F3A15B8013A00B30BD5 /* ECGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupViewController.m; path = grouptalk/controllers/ECGroupViewController.m; sourceTree = "<group>"; };
+		F8C11F3C15B8014C00B30BD5 /* ECGroupAttendeeListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupAttendeeListView.h; path = grouptalk/views/ECGroupAttendeeListView.h; sourceTree = "<group>"; };
+		F8C11F3D15B8014C00B30BD5 /* ECGroupAttendeeListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupAttendeeListView.m; path = grouptalk/views/ECGroupAttendeeListView.m; sourceTree = "<group>"; };
+		F8C11F3F15B8015600B30BD5 /* ECGroupVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupVideoView.h; path = grouptalk/views/ECGroupVideoView.h; sourceTree = "<group>"; };
+		F8C11F4015B8015600B30BD5 /* ECGroupVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupVideoView.m; path = grouptalk/views/ECGroupVideoView.m; sourceTree = "<group>"; };
+		F8C11F4215B8016100B30BD5 /* ECGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupManager.h; path = grouptalk/ECGroupManager.h; sourceTree = "<group>"; };
+		F8C11F4315B8016100B30BD5 /* ECGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupManager.m; path = grouptalk/ECGroupManager.m; sourceTree = "<group>"; };
+		F8C11F4415B8016100B30BD5 /* ECGroupModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupModule.h; path = grouptalk/ECGroupModule.h; sourceTree = "<group>"; };
+		F8C11F4515B8016100B30BD5 /* ECGroupModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupModule.m; path = grouptalk/ECGroupModule.m; sourceTree = "<group>"; };
 		F8D5E35A157EEF30005B5581 /* ECRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterViewController.h; path = system/controller/ECRegisterViewController.h; sourceTree = "<group>"; };
 		F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterViewController.m; path = system/controller/ECRegisterViewController.m; sourceTree = "<group>"; };
 		F8D5E35D157EEF3A005B5581 /* ECRegisterUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterUIView.h; path = system/views/ECRegisterUIView.h; sourceTree = "<group>"; };
@@ -364,11 +381,6 @@
 		F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsSelectContainerView.m; path = contactselection/views/ContactsSelectContainerView.m; sourceTree = "<group>"; };
 		F8E0C0AF15A14F2500E66F27 /* MeetingContactsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingContactsListView.h; sourceTree = "<group>"; };
 		F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingContactsListView.m; sourceTree = "<group>"; };
-		F8E19E4E15AC2634001F6BBC /* ECStatusFilterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ECStatusFilterDelegate.h; path = group/statusfilter/ECStatusFilterDelegate.h; sourceTree = "<group>"; };
-		F8E19E4F15AC27C5001F6BBC /* ECOwnerModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECOwnerModeStatusFilter.h; path = group/statusfilter/ECOwnerModeStatusFilter.h; sourceTree = "<group>"; };
-		F8E19E5015AC27C5001F6BBC /* ECOwnerModeStatusFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECOwnerModeStatusFilter.m; path = group/statusfilter/ECOwnerModeStatusFilter.m; sourceTree = "<group>"; };
-		F8E19E5215AC3553001F6BBC /* ECAttendeeModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECAttendeeModeStatusFilter.h; path = group/statusfilter/ECAttendeeModeStatusFilter.h; sourceTree = "<group>"; };
-		F8E19E5315AC3553001F6BBC /* ECAttendeeModeStatusFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECAttendeeModeStatusFilter.m; path = group/statusfilter/ECAttendeeModeStatusFilter.m; sourceTree = "<group>"; };
 		F8E3BEC7158EC57200467088 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F8E3BEE6158F1F9100467088 /* UserBean+IMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UserBean+IMeeting.h"; path = "system/user/UserBean+IMeeting.h"; sourceTree = "<group>"; };
 		F8E3BEE7158F1F9100467088 /* UserBean+IMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UserBean+IMeeting.m"; path = "system/user/UserBean+IMeeting.m"; sourceTree = "<group>"; };
@@ -381,14 +393,6 @@
 		F8E4B9EE15A5267700322C7A /* ECContactsSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ECContactsSelectViewController.m; path = contactselection/ECContactsSelectViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F8E4B9F115A526AE00322C7A /* ECContactsSelectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECContactsSelectContainerView.h; path = contactselection/ECContactsSelectContainerView.h; sourceTree = "<group>"; };
 		F8E4B9F215A526AE00322C7A /* ECContactsSelectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECContactsSelectContainerView.m; path = contactselection/ECContactsSelectContainerView.m; sourceTree = "<group>"; };
-		F8E4B9FE15A57A1F00322C7A /* ECGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupViewController.h; path = group/controllers/ECGroupViewController.h; sourceTree = "<group>"; };
-		F8E4B9FF15A57A1F00322C7A /* ECGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupViewController.m; path = group/controllers/ECGroupViewController.m; sourceTree = "<group>"; };
-		F8E4BA0115A57A2700322C7A /* ECGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupView.h; path = group/views/ECGroupView.h; sourceTree = "<group>"; };
-		F8E4BA0215A57A2700322C7A /* ECGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupView.m; path = group/views/ECGroupView.m; sourceTree = "<group>"; };
-		F8E58F7C1597F9A200CC2F1C /* ECGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupManager.h; path = group/ECGroupManager.h; sourceTree = "<group>"; };
-		F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupManager.m; path = group/ECGroupManager.m; sourceTree = "<group>"; };
-		F8E58F801597FA2A00CC2F1C /* ECGroupModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupModule.h; path = group/ECGroupModule.h; sourceTree = "<group>"; };
-		F8E58F811597FA2A00CC2F1C /* ECGroupModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ECGroupModule.m; path = group/ECGroupModule.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = CommonToolkitBundle.bundle; path = imeeting_iphone/Resources/bundles/CommonToolkitBundle.bundle; sourceTree = "<group>"; };
 		F8ED85851592CDFE00E38F0C /* camera_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_off.png; path = imeeting_iphone/Resources/images/camera_off.png; sourceTree = "<group>"; };
 		F8ED85861592CDFE00E38F0C /* camera_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_on.png; path = imeeting_iphone/Resources/images/camera_on.png; sourceTree = "<group>"; };
@@ -398,14 +402,10 @@
 		F8EDF12715A68FE4003DF47F /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = imeeting_iphone/Resources/images/default_avatar.png; sourceTree = "<group>"; };
 		F8EDF12B15A6B462003DF47F /* AddressBookManager+Avatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AddressBookManager+Avatar.h"; path = "Util/AddressBookManager+Avatar.h"; sourceTree = "<group>"; };
 		F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AddressBookManager+Avatar.m"; path = "Util/AddressBookManager+Avatar.m"; sourceTree = "<group>"; };
-		F8EED881159457420072FD39 /* ECGroupAttendeeListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupAttendeeListView.h; path = group/views/ECGroupAttendeeListView.h; sourceTree = "<group>"; };
-		F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupAttendeeListView.m; path = group/views/ECGroupAttendeeListView.m; sourceTree = "<group>"; };
 		F8F45B6215AD67EC000A9285 /* video_hangup_50X50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_hangup_50X50.png; path = imeeting_iphone/Resources/images/video_hangup_50X50.png; sourceTree = "<group>"; };
 		F8F45B6315AD67EC000A9285 /* voice_talkconnect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_talkconnect.png; path = imeeting_iphone/Resources/images/voice_talkconnect.png; sourceTree = "<group>"; };
 		F8F45B6415AD67EC000A9285 /* voice_talkfail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_talkfail.png; path = imeeting_iphone/Resources/images/voice_talkfail.png; sourceTree = "<group>"; };
 		F8F45B6515AD67EC000A9285 /* voice_talking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_talking.png; path = imeeting_iphone/Resources/images/voice_talking.png; sourceTree = "<group>"; };
-		F8FA19711591E73100947304 /* ECGroupVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupVideoView.h; path = group/views/ECGroupVideoView.h; sourceTree = "<group>"; };
-		F8FA19721591E73100947304 /* ECGroupVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupVideoView.m; path = group/views/ECGroupVideoView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1004,7 +1004,7 @@
 				F8E0C08315A14F0200E66F27 /* ContactSelection */,
 				F885A591159AB02E00709FC7 /* Video */,
 				F8D791AE15995B2400986BCD /* Custom */,
-				F8FA196B1591DFBA00947304 /* Group */,
+				F8FA196B1591DFBA00947304 /* GroupTalk */,
 				F87BF5DE1585DD9A00339C0C /* MainPage */,
 				F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */,
 				F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */,
@@ -1069,11 +1069,11 @@
 		F8E19E4C15AC24AC001F6BBC /* StatusFilter */ = {
 			isa = PBXGroup;
 			children = (
-				F8E19E4E15AC2634001F6BBC /* ECStatusFilterDelegate.h */,
-				F8E19E4F15AC27C5001F6BBC /* ECOwnerModeStatusFilter.h */,
-				F8E19E5015AC27C5001F6BBC /* ECOwnerModeStatusFilter.m */,
-				F8E19E5215AC3553001F6BBC /* ECAttendeeModeStatusFilter.h */,
-				F8E19E5315AC3553001F6BBC /* ECAttendeeModeStatusFilter.m */,
+				F8C11F2F15B8011400B30BD5 /* ECAttendeeModeStatusFilter.h */,
+				F8C11F3015B8011400B30BD5 /* ECAttendeeModeStatusFilter.m */,
+				F8C11F3115B8011400B30BD5 /* ECOwnerModeStatusFilter.h */,
+				F8C11F3215B8011400B30BD5 /* ECOwnerModeStatusFilter.m */,
+				F8C11F3315B8011400B30BD5 /* ECStatusFilterDelegate.h */,
 			);
 			name = StatusFilter;
 			sourceTree = "<group>";
@@ -1133,29 +1133,29 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		F8FA196B1591DFBA00947304 /* Group */ = {
+		F8FA196B1591DFBA00947304 /* GroupTalk */ = {
 			isa = PBXGroup;
 			children = (
+				F8C11F4215B8016100B30BD5 /* ECGroupManager.h */,
+				F8C11F4315B8016100B30BD5 /* ECGroupManager.m */,
+				F8C11F4415B8016100B30BD5 /* ECGroupModule.h */,
+				F8C11F4515B8016100B30BD5 /* ECGroupModule.m */,
+				F8C11F3915B8013A00B30BD5 /* ECGroupViewController.h */,
+				F8C11F3A15B8013A00B30BD5 /* ECGroupViewController.m */,
+				F8C11F3615B8012C00B30BD5 /* ECGroupView.h */,
+				F8C11F3715B8012C00B30BD5 /* ECGroupView.m */,
 				F8E19E4C15AC24AC001F6BBC /* StatusFilter */,
-				F8E4BA0115A57A2700322C7A /* ECGroupView.h */,
-				F8E4BA0215A57A2700322C7A /* ECGroupView.m */,
-				F8E4B9FE15A57A1F00322C7A /* ECGroupViewController.h */,
-				F8E4B9FF15A57A1F00322C7A /* ECGroupViewController.m */,
 				F8FA19701591E6C200947304 /* AttendeeListPage */,
 				F8FA196F1591E5FE00947304 /* VideoPage */,
-				F8E58F7C1597F9A200CC2F1C /* ECGroupManager.h */,
-				F8E58F7D1597F9A200CC2F1C /* ECGroupManager.m */,
-				F8E58F801597FA2A00CC2F1C /* ECGroupModule.h */,
-				F8E58F811597FA2A00CC2F1C /* ECGroupModule.m */,
 			);
-			name = Group;
+			name = GroupTalk;
 			sourceTree = "<group>";
 		};
 		F8FA196F1591E5FE00947304 /* VideoPage */ = {
 			isa = PBXGroup;
 			children = (
-				F8FA19711591E73100947304 /* ECGroupVideoView.h */,
-				F8FA19721591E73100947304 /* ECGroupVideoView.m */,
+				F8C11F3F15B8015600B30BD5 /* ECGroupVideoView.h */,
+				F8C11F4015B8015600B30BD5 /* ECGroupVideoView.m */,
 			);
 			name = VideoPage;
 			sourceTree = "<group>";
@@ -1163,8 +1163,8 @@
 		F8FA19701591E6C200947304 /* AttendeeListPage */ = {
 			isa = PBXGroup;
 			children = (
-				F8EED881159457420072FD39 /* ECGroupAttendeeListView.h */,
-				F8EED882159457420072FD39 /* ECGroupAttendeeListView.m */,
+				F8C11F3C15B8014C00B30BD5 /* ECGroupAttendeeListView.h */,
+				F8C11F3D15B8014C00B30BD5 /* ECGroupAttendeeListView.m */,
 			);
 			name = AttendeeListPage;
 			sourceTree = "<group>";
@@ -1273,10 +1273,6 @@
 				F87BF5E41585DE6500339C0C /* ECMainPageViewController.m in Sources */,
 				F8AD9458158872EC007B3C87 /* ECGroupCell.m in Sources */,
 				F8E3BEE8158F1F9100467088 /* UserBean+IMeeting.m in Sources */,
-				F8FA19731591E73100947304 /* ECGroupVideoView.m in Sources */,
-				F8EED883159457420072FD39 /* ECGroupAttendeeListView.m in Sources */,
-				F8E58F7E1597F9A200CC2F1C /* ECGroupManager.m in Sources */,
-				F8E58F821597FA2A00CC2F1C /* ECGroupModule.m in Sources */,
 				F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */,
 				F885A594159AB07800709FC7 /* ECVideoManager.m in Sources */,
 				F885A66E159AFFB500709FC7 /* quicklibav.c in Sources */,
@@ -1292,15 +1288,19 @@
 				F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */,
 				F8E4B9EF15A5267700322C7A /* ECContactsSelectViewController.m in Sources */,
 				F8E4B9F315A526AE00322C7A /* ECContactsSelectContainerView.m in Sources */,
-				F8E4BA0015A57A2000322C7A /* ECGroupViewController.m in Sources */,
-				F8E4BA0315A57A2700322C7A /* ECGroupView.m in Sources */,
 				F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */,
-				F8E19E5115AC27C5001F6BBC /* ECOwnerModeStatusFilter.m in Sources */,
-				F8E19E5415AC3553001F6BBC /* ECAttendeeModeStatusFilter.m in Sources */,
 				F8DC714615AFC82600146A73 /* UIViewController+AuthFailHandler.m in Sources */,
 				F8DC714B15B0081600146A73 /* ECSettingView.m in Sources */,
 				F8DC714E15B0082C00146A73 /* ECSettingViewController.m in Sources */,
 				F809862F15B5741A00098A0C /* ECDeviceTokenPoster.m in Sources */,
+				F8C11F3415B8011400B30BD5 /* ECAttendeeModeStatusFilter.m in Sources */,
+				F8C11F3515B8011400B30BD5 /* ECOwnerModeStatusFilter.m in Sources */,
+				F8C11F3815B8012C00B30BD5 /* ECGroupView.m in Sources */,
+				F8C11F3B15B8013A00B30BD5 /* ECGroupViewController.m in Sources */,
+				F8C11F3E15B8014C00B30BD5 /* ECGroupAttendeeListView.m in Sources */,
+				F8C11F4115B8015600B30BD5 /* ECGroupVideoView.m in Sources */,
+				F8C11F4615B8016100B30BD5 /* ECGroupManager.m in Sources */,
+				F8C11F4715B8016100B30BD5 /* ECGroupModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
