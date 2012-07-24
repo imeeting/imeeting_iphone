@@ -11,13 +11,7 @@
 #import "ECVideoEncode.h"
 #import "ECVideoDecode.h"
 
-@interface ECVideoManager : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate> {
-    QuickVideoOutput *qvo;
-    AVFrame *raw_picture;
-    AVFrame *tmp_picture;
-    struct SwsContext *img_convert_ctx;    
-    enum PixelFormat src_pix_fmt;
-}
+@interface ECVideoManager : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (nonatomic,retain) AVCaptureSession *session;
 @property (nonatomic,retain) AVCaptureDeviceInput *currentVideoInput;

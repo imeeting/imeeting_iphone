@@ -28,8 +28,8 @@
 - (void)initUI {
     self.title = NSLocalizedString(@"Setting", "");
     
-    accountSettingButton = [self makeButtonWithTitle:NSLocalizedString(@"Set Account", nil) frame:CGRectMake(0, 0, 300, 45)];
-    [accountSettingButton addTarget:self action:@selector(showAccountSettingView) forControlEvents:UIControlEventTouchUpInside];
+    _accountSettingButton = [self makeButtonWithTitle:NSLocalizedString(@"Set Account", nil) frame:CGRectMake(0, 0, 300, 45)];
+    [_accountSettingButton addTarget:self action:@selector(showAccountSettingView) forControlEvents:UIControlEventTouchUpInside];
     
     UITableView *settingTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStyleGrouped];
     settingTableView.backgroundColor = self.backgroundColor;
@@ -86,7 +86,7 @@
     if (cell == nil) {
         switch (indexPath.row) {
             case 0:
-                cell = [[ECUIControlTableViewCell alloc] initWithControls:[NSArray arrayWithObject:accountSettingButton]];
+                cell = [[ECUIControlTableViewCell alloc] initWithControls:[NSArray arrayWithObject:_accountSettingButton]];
                 break;
             default:
                 break;

@@ -9,14 +9,14 @@
 #import "ECBaseUIView.h"
 
 @interface ECLoginUIView : ECBaseUIView <UITableViewDataSource> {
-    UITextField *_mUserNameInput;
-    UITextField *_mPwdInput;
+    UITextField *_userNameInput;
+    UITextField *_pwdInput;
     
-    UISwitch *_mRememberPwdSwitch;
-    UISwitch *_mAutoLoginSwitch;
+    UISwitch *_rememberPwdSwitch;
+    UISwitch *_autoLoginSwitch;
     
-    UIButton *_mLoginButton;
-    BOOL useSavedPwd;
+    UIButton *_loginButton;
+    BOOL _useSavedPwd; // YES: use stored password to login, NO: use inputed password to login
 }
 
 @end

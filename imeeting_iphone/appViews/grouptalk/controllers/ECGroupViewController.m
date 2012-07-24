@@ -50,8 +50,8 @@
 - (id)init {
     self = [self initWithCompatibleView:[[ECGroupView alloc] init]];
     if (self) {
-        isFirstLoad = YES;
-         _refreshList = YES;
+        _isFirstLoad = YES;
+        _refreshList = YES;
     }
     return self;
 }
@@ -60,8 +60,8 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
-    if (isFirstLoad) {
-        isFirstLoad = NO;
+    if (_isFirstLoad) {
+        _isFirstLoad = NO;
         ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
         ECGroupAttendeeListView *alv = ((ECGroupView*)self.view).attendeeListView;
         if (module.ownerMode) {
@@ -156,17 +156,17 @@
     AVCaptureSession *session = module.videoManager.session;
     if (session) {
         UIView *myVideoView = videoView.myVideoView;
-        if (!mPreviewLayer) {
-            mPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:session];
-            mPreviewLayer.frame = myVideoView.bounds;
-            mPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;    
+        if (!_previewLayer) {
+            _previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:session];
+            _previewLayer.frame = myVideoView.bounds;
+            _previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;    
         }
-        [myVideoView.layer addSublayer:mPreviewLayer];
+        [myVideoView.layer addSublayer:_previewLayer];
     }
 }
 
 - (void)detachVideoPreviewLayer {
-    [mPreviewLayer removeFromSuperlayer];
+    [_previewLayer removeFromSuperlayer];
 }
 
 #pragma mark - camera related methods
@@ -292,7 +292,7 @@
 
 #pragma mark - on member selected action
 - (void)onAttendeeSelected:(NSDictionary *)attendee {
-    mSelectedAttendee = attendee;
+    _selectedAttendee = attendee;
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     
     if (module.ownerMode) {
@@ -336,7 +336,7 @@
 
 - (void)selectedActionInActionSheet:(UIActionSheet *)pActionSheet clickedButtonAtIndex:(NSInteger)pButtonIndex {
     NSString *buttonTitle = [pActionSheet buttonTitleAtIndex:pButtonIndex];
-    NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+    NSString *username = [_selectedAttendee objectForKey:USERNAME];
     if ([buttonTitle isEqualToString:NSLocalizedString(@"Watch Video", "")]) {
         [self startVideoWatch:username];
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Call", "")]) {
@@ -355,7 +355,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0: {
-            NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+            NSString *username = [_selectedAttendee objectForKey:USERNAME];
             MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
             [hud showWhileExecuting:@selector(kickout:) onTarget:self withObject:username animated:YES];
             break;
@@ -402,7 +402,7 @@
     
     int statusCode = pRequest.responseStatusCode;
 
-    NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+    NSString *username = [_selectedAttendee objectForKey:USERNAME];
     NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
     switch (statusCode) {
         case 200: {
@@ -447,7 +447,7 @@
     
     int statusCode = pRequest.responseStatusCode;
     
-    NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+    NSString *username = [_selectedAttendee objectForKey:USERNAME];
     NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
     switch (statusCode) {
         case 409: {
@@ -489,7 +489,7 @@
     
     int statusCode = pRequest.responseStatusCode;
     
-    NSString *username = [mSelectedAttendee objectForKey:USERNAME];
+    NSString *username = [_selectedAttendee objectForKey:USERNAME];
     NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
     switch (statusCode) {
         case 200: {

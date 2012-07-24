@@ -13,7 +13,7 @@
 MFMessageComposeViewController *mMsgViewController;
 
 @interface ECContactsSelectViewController : ContactsSelectViewController <MFMessageComposeViewControllerDelegate> {
-     NSMutableArray *mCurrentInviteArray;
+     NSMutableArray *_currentInviteArray;
 }
 
 // if it's appeared in creating new group.

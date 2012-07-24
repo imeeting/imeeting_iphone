@@ -11,11 +11,11 @@
 #import "ECVideoManager.h"
 
 @interface ECGroupViewController : UIViewController <UIAlertViewDelegate> {
-    AVCaptureVideoPreviewLayer *mPreviewLayer;
+    AVCaptureVideoPreviewLayer *_previewLayer;
     
-    BOOL isFirstLoad; // inidcate if the controller loads first.
+    BOOL _isFirstLoad; // inidcate if the controller loads first.
 
-    NSDictionary *mSelectedAttendee;
+    NSDictionary *_selectedAttendee;
 }
 
 @property (nonatomic) BOOL refreshList;

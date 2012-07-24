@@ -33,8 +33,8 @@
     self = [super init];
     if (self) {
         self.inGroup = YES;
-        mSocketIO = [[SocketIO alloc] initWithDelegate:self];
-        needConnectToNotifyServer = YES;
+        _socketIO = [[SocketIO alloc] initWithDelegate:self];
+        _needConnectToNotifyServer = YES;
         self.videoManager = [[ECVideoManager alloc] init];
         self.videoManager.liveName = [[UserManager shareUserManager] userBean].name;
         self.videoManager.rtmpUrl = RTMP_SERVER_URL;
@@ -68,7 +68,7 @@
 
 - (void)connectToNotifyServer {
     NSLog(@"connect to notify server..");
-    [mSocketIO connectToHost:NOTIFY_SERVER_HOST onPort:80];
+    [_socketIO connectToHost:NOTIFY_SERVER_HOST onPort:80];
 }
 
 // process notices from notify server
@@ -142,7 +142,7 @@
 - (void)notifyWithMsg:(NSDictionary *)msg {
     if (msg) {
         NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:self.groupId, TOPIC, msg, MSG, nil];
-        [mSocketIO sendEvent:NOTIFY withData:data];
+        [_socketIO sendEvent:NOTIFY withData:data];
     }
 }
 
@@ -163,19 +163,19 @@
     NSString *username = [[UserManager shareUserManager] userBean].name;
     
     NSDictionary *msg = [NSDictionary dictionaryWithObjectsAndKeys:groupId, TOPIC, username, SUBSCRIBER_ID, nil];
-    [mSocketIO sendEvent:SUBSCRIBE withData:msg];
+    [_socketIO sendEvent:SUBSCRIBE withData:msg];
 }
 
 - (void) socketIODidDisconnect:(SocketIO *)socket {
     NSLog(@"socket io disconnected");
-    if (needConnectToNotifyServer) {
+    if (_needConnectToNotifyServer) {
         [self connectToNotifyServer];
     }
 }
 
 - (void)stopGetNoticeFromNotifyServer {
-    needConnectToNotifyServer = NO;
-    [mSocketIO disconnect];
+    _needConnectToNotifyServer = NO;
+    [_socketIO disconnect];
 }
 
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet {
@@ -191,7 +191,7 @@
 
 - (void) socketIODidConnectError:(NSString *) errorMsg {
     NSLog(@"socket io connect error");
-    if (needConnectToNotifyServer) {
+    if (_needConnectToNotifyServer) {
         [self connectToNotifyServer];
     }
 }

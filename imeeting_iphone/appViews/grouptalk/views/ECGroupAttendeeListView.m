@@ -35,39 +35,39 @@ static CGFloat padding = 4;
         // init UI
         self.selectionStyle = UITableViewCellSelectionStyleGray;
         
-        mGuyIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, (cellHeight - guyIconHeight) / 2, guyIconWidth, guyIconHeight)];
-        mGuyIcon.contentMode = UIViewContentModeScaleAspectFill;
+        _guyIconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (cellHeight - guyIconHeight) / 2, guyIconWidth, guyIconHeight)];
+        _guyIconView.contentMode = UIViewContentModeScaleAspectFill;
        // mGuyIcon.backgroundColor = [UIColor clearColor];
-        mGuyIcon.layer.masksToBounds = YES;
-        [mGuyIcon.layer setCornerRadius:5.0];
-        [self.contentView addSubview:mGuyIcon];
+        _guyIconView.layer.masksToBounds = YES;
+        [_guyIconView.layer setCornerRadius:5.0];
+        [self.contentView addSubview:_guyIconView];
         
-        mNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(mGuyIcon.frame.origin.x + guyIconWidth + padding * 2, padding, nameLabelWidth, nameLabelHeight)];
-        mNameLabel.textColor = [UIColor blackColor];
-        mNameLabel.backgroundColor = [UIColor clearColor];
-        mNameLabel.font = [UIFont boldSystemFontOfSize:16];
-        [self.contentView addSubview:mNameLabel];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_guyIconView.frame.origin.x + guyIconWidth + padding * 2, padding, nameLabelWidth, nameLabelHeight)];
+        _nameLabel.textColor = [UIColor blackColor];
+        _nameLabel.backgroundColor = [UIColor clearColor];
+        _nameLabel.font = [UIFont boldSystemFontOfSize:16];
+        [self.contentView addSubview:_nameLabel];
         
-        mNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(mNameLabel.frame.origin.x, mNameLabel.frame.origin.y + mNameLabel.frame.size.height, numberLabelWidth, numberLabelHeight)];
-        mNumberLabel.textColor = [UIColor colorWithIntegerRed:105 integerGreen:105 integerBlue:105 alpha:1];
-        mNumberLabel.backgroundColor = [UIColor clearColor];
-        mNumberLabel.font = [UIFont systemFontOfSize:12];
-        [self.contentView addSubview:mNumberLabel];
+        _numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(_nameLabel.frame.origin.x, _nameLabel.frame.origin.y + _nameLabel.frame.size.height, numberLabelWidth, numberLabelHeight)];
+        _numberLabel.textColor = [UIColor colorWithIntegerRed:105 integerGreen:105 integerBlue:105 alpha:1];
+        _numberLabel.backgroundColor = [UIColor clearColor];
+        _numberLabel.font = [UIFont systemFontOfSize:12];
+        [self.contentView addSubview:_numberLabel];
         
-        mPhoneStatusIcon = [[UIImageView alloc] initWithFrame:CGRectMake(mNameLabel.frame.origin.x + mNameLabel.frame.size.width + padding*4, (cellHeight - phoneStatusIconHeight) / 2, phoneStatusIconWidth, phoneStatusIconHeight)];
-        mPhoneStatusIcon.contentMode = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:mPhoneStatusIcon];
+        _phoneStatusIconView = [[UIImageView alloc] initWithFrame:CGRectMake(_nameLabel.frame.origin.x + _nameLabel.frame.size.width + padding*4, (cellHeight - phoneStatusIconHeight) / 2, phoneStatusIconWidth, phoneStatusIconHeight)];
+        _phoneStatusIconView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:_phoneStatusIconView];
         
-        mVideoStatusIcon = [[UIImageView alloc] initWithFrame:CGRectMake(mPhoneStatusIcon.frame.origin.x + mPhoneStatusIcon.frame.size.width + padding*2, (cellHeight - videoStatusIconWidth) / 2, videoStatusIconWidth, videoStatusIconHeight)];
-        mVideoStatusIcon.contentMode = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:mVideoStatusIcon];
+        _videoStatusIconView = [[UIImageView alloc] initWithFrame:CGRectMake(_phoneStatusIconView.frame.origin.x + _phoneStatusIconView.frame.size.width + padding*2, (cellHeight - videoStatusIconWidth) / 2, videoStatusIconWidth, videoStatusIconHeight)];
+        _videoStatusIconView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:_videoStatusIconView];
         
-        videoOnImg = [UIImage imageNamed:@"video_on"];
+        _videoOnImg = [UIImage imageNamed:@"video_on"];
        // videoOffImg = [UIImage imageNamed:@"video_off"];
 
-        normalBGColor = [UIColor colorWithIntegerRed:232 integerGreen:232 integerBlue:232 alpha:0.9];
-        selectedBGColor = [UIColor colorWithIntegerRed:139 integerGreen:119 integerBlue:101 alpha:0.9];
-        self.contentView.backgroundColor = normalBGColor;
+        _normalBGColor = [UIColor colorWithIntegerRed:232 integerGreen:232 integerBlue:232 alpha:0.9];
+        _selectedBGColor = [UIColor colorWithIntegerRed:139 integerGreen:119 integerBlue:101 alpha:0.9];
+        self.contentView.backgroundColor = _normalBGColor;
 
         [self updateAttendeeStatus:attendee];
     }
@@ -82,42 +82,42 @@ static CGFloat padding = 4;
     
     NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
     
-    mNameLabel.text = displayName;
-    mNumberLabel.text = username;
+    _nameLabel.text = displayName;
+    _numberLabel.text = username;
     
     
     if ([onlineStatus isEqualToString:ONLINE]) {
-        mGuyIcon.image = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:username];
+        _guyIconView.image = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:username];
         
         if ([videoStatus isEqualToString:ON]) {
             NSLog(@"set video on image - username: %@", username);
-            mVideoStatusIcon.image = videoOnImg;
+            _videoStatusIconView.image = _videoOnImg;
         } else {
             NSLog(@"set video off image - username: %@", username);
-            mVideoStatusIcon.image = nil;
+            _videoStatusIconView.image = nil;
         }
         
     } else {
-        mGuyIcon.image = [[AddressBookManager shareAddressBookManager] grayAvatarByPhoneNumber:username];
-        mVideoStatusIcon.image = nil;
+        _guyIconView.image = [[AddressBookManager shareAddressBookManager] grayAvatarByPhoneNumber:username];
+        _videoStatusIconView.image = nil;
     }
     
     // set phone status
     if ([telephoneStatus isEqualToString:TERMINATED]) {
         NSLog(@"set phone terminated status");
-        mPhoneStatusIcon.image = nil;
+        _phoneStatusIconView.image = nil;
     } else if ([telephoneStatus isEqualToString:CALL_WAIT]) {
         NSLog(@"set phone call wait status");
 
-        mPhoneStatusIcon.image = [UIImage imageNamed:@"voice_talkconnect"];
+        _phoneStatusIconView.image = [UIImage imageNamed:@"voice_talkconnect"];
     } else if ([telephoneStatus isEqualToString:ESTABLISHED]) {
         NSLog(@"set phone established status");
 
-        mPhoneStatusIcon.image = [UIImage imageNamed:@"voice_talking"];
+        _phoneStatusIconView.image = [UIImage imageNamed:@"voice_talking"];
     } else if ([telephoneStatus isEqualToString:FAILED]) {
         NSLog(@"set phone call failed status");
 
-        mPhoneStatusIcon.image = [UIImage imageNamed:@"voice_talkfail"];
+        _phoneStatusIconView.image = [UIImage imageNamed:@"voice_talkfail"];
     }
 
 }
@@ -127,9 +127,9 @@ static CGFloat padding = 4;
 {
     [super setSelected:selected animated:animated];
     if (selected) {
-        self.contentView.backgroundColor = selectedBGColor;
+        self.contentView.backgroundColor = _selectedBGColor;
     } else {
-        self.contentView.backgroundColor = normalBGColor;
+        self.contentView.backgroundColor = _normalBGColor;
     }
 }
 
@@ -160,30 +160,30 @@ static CGFloat padding = 4;
 }
 
 - (void)initUI {    
-    toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, NavigationBarHeight)];
-    toolbar.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
-    toolbar.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactAction)];
-    toolbar.rightBarButtonItem.tintColor = [UIColor colorWithIntegerRed:107 integerGreen:147 integerBlue:35 alpha:1];
-    [toolbar.rightBarButtonItem setStyle:UIBarButtonItemStyleBordered];
+    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, NavigationBarHeight)];
+    _toolbar.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
+    _toolbar.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactAction)];
+    _toolbar.rightBarButtonItem.tintColor = [UIColor colorWithIntegerRed:107 integerGreen:147 integerBlue:35 alpha:1];
+    [_toolbar.rightBarButtonItem setStyle:UIBarButtonItemStyleBordered];
     
-    toolbar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
+    _toolbar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
 
-    title = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Attendee List", "") style:UIBarButtonItemStylePlain target:nil action:nil];
-    [self addSubview:toolbar];
+    _title = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Attendee List", "") style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self addSubview:_toolbar];
     
     
-    mAttendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, toolbar.frame.size.height, 320, 480 - toolbar.frame.size.height)];
-    mAttendeeListTableView.backgroundColor = self.backgroundColor;
-    mAttendeeListTableView.dataSource = self;
-    mAttendeeListTableView.delegate = self;
-    [self addSubview:mAttendeeListTableView];
+    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _toolbar.frame.size.height, 320, 480 - _toolbar.frame.size.height)];
+    _attendeeListTableView.backgroundColor = self.backgroundColor;
+    _attendeeListTableView.dataSource = self;
+    _attendeeListTableView.delegate = self;
+    [self addSubview:_attendeeListTableView];
     
     
-    mRefreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0.5 - mAttendeeListTableView.frame.size.height, mAttendeeListTableView.frame.size.width, mAttendeeListTableView.frame.size.height)];
-    mRefreshHeaderView.delegate = self;
-    [mAttendeeListTableView addSubview:mRefreshHeaderView];
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0.5 - _attendeeListTableView.frame.size.height, _attendeeListTableView.frame.size.width, _attendeeListTableView.frame.size.height)];
+    _refreshHeaderView.delegate = self;
+    [_attendeeListTableView addSubview:_refreshHeaderView];
     
-    [mRefreshHeaderView refreshLastUpdatedDate];
+    [_refreshHeaderView refreshLastUpdatedDate];
 }
 
 - (void)updateAttendee:(NSDictionary *)attendee withMyself:(BOOL)myself {
@@ -216,7 +216,7 @@ static CGFloat padding = 4;
             } else {
                 [foundAttendee setValuesForKeysWithDictionary:attendee];                
             }
-            AttendeeCell *cell = (AttendeeCell*)[mAttendeeListTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            AttendeeCell *cell = (AttendeeCell*)[_attendeeListTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             
             [cell updateAttendeeStatus:foundAttendee];
         }
@@ -226,7 +226,7 @@ static CGFloat padding = 4;
 - (void)setReloadingFlag:(BOOL)flag {
     _reloading = flag;
     if (!_reloading) {
-        [mRefreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:mAttendeeListTableView];
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:_attendeeListTableView];
     }
 }
 
@@ -269,7 +269,7 @@ static CGFloat padding = 4;
     }
      NSLog(@"attendee size: %d", _attendeeArray.count);
 
-    [mAttendeeListTableView reloadData];
+    [_attendeeListTableView reloadData];
 }
 
 - (void)appendAttendee:(NSDictionary *)attendee {
@@ -278,12 +278,12 @@ static CGFloat padding = 4;
     }
     NSMutableDictionary *newAtt = [[NSMutableDictionary alloc] initWithDictionary:attendee];
     [_attendeeArray addObject:newAtt];
-    [mAttendeeListTableView reloadData];
+    [_attendeeListTableView reloadData];
 }
 
 - (void)removeSelectedAttendee {
     [_attendeeArray removeObjectAtIndex:self.selectedIndexPath.row];
-    [mAttendeeListTableView deleteRowAtIndexPath:self.selectedIndexPath withRowAnimation:UITableViewRowAnimationTop];
+    [_attendeeListTableView deleteRowAtIndexPath:self.selectedIndexPath withRowAnimation:UITableViewRowAnimationTop];
     
 }
 
@@ -347,23 +347,23 @@ static CGFloat padding = 4;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [mRefreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
 }
 
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    [mRefreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 
 #pragma mark - set UI
 
 - (void)setAttendeeUI {
-    NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], nil];
-    [toolbar setItems:toolButtonArray];
+    NSArray *toolButtonArray = [NSArray arrayWithObjects:_toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], nil];
+    [_toolbar setItems:toolButtonArray];
     
 }
 
 - (void)setOwnerUI {
-    NSArray *toolButtonArray = [NSArray arrayWithObjects:toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], toolbar.rightBarButtonItem, nil];
-    [toolbar setItems:toolButtonArray];
+    NSArray *toolButtonArray = [NSArray arrayWithObjects:_toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _toolbar.rightBarButtonItem, nil];
+    [_toolbar setItems:toolButtonArray];
 }
 @end

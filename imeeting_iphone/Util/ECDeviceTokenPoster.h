@@ -12,7 +12,7 @@
 #import "CommonToolkit/CommonToolkit.h"
 
 @interface ECDeviceTokenPoster : NSObject {
-    NSInteger tryTimes;
+    NSInteger _tryTimes;
 }
 @property (nonatomic, retain) NSString *deviceToken;
 + (ECDeviceTokenPoster*)shareDeviceTokenPoster;

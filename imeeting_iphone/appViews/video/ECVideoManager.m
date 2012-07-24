@@ -193,8 +193,8 @@
 - (void)startVideoCapture {
     if (self.session) {
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES]; // keep screen always light
-        [self.videoEncode setupVideoEncode];
         [self.session startRunning];
+        [NSThread detachNewThreadSelector:@selector(setupVideoEncode) toTarget:self.videoEncode withObject:nil];
     }
 }
 

@@ -13,18 +13,15 @@
 #import "ECVideoFetchDelegate.h"
 
 @interface VideoFetchExecutor : NSObject {
-    AVFormatContext *inputFormatContext;
-    AVCodecContext *videoCodecContext;
-    AVCodec *videoCodec;
-    int videoStream;
-    AVFrame *videoFrame;
-    AVFrame *videoPicture;
+    AVFormatContext *_inputFormatContext;
+    AVCodecContext *_videoCodecContext;
+    AVCodec *_videoCodec;
+    int _videoStream;
+    AVFrame *_videoFrame;
+    AVFrame *_videoPicture;
     
-    struct SwsContext *img_convert_ctx;    
-    enum PixelFormat dst_pix_fmt;
-    
-    BOOL readFrame;
-    
+    struct SwsContext *_img_convert_ctx;    
+    enum PixelFormat _dst_pix_fmt;
 }
 @property (nonatomic, retain) id delegate;
 @property (nonatomic) int imgWidth;
@@ -33,7 +30,6 @@
 @property (nonatomic, retain) NSString *groupId;
 
 - (void)startFetchVideoPictureWithUsername:(NSString*)username;
-- (void)stopFetchVideoPicture;
 - (void)handleError;
 - (int)openVideoInputStream:(const char*)playPath;
 - (void)readVideoFrame;
@@ -43,8 +39,8 @@
 @end
 
 @interface ECVideoDecode : NSObject {
-    VideoFetchExecutor *executor;
-    NSThread *exeThread;
+    VideoFetchExecutor *_executor;
+    NSThread *_exeThread;
 
 }
 @property (nonatomic,retain) NSString *rtmpUrl;

@@ -22,7 +22,7 @@
     self = [super init];
     if (self) {
         // init UI
-        useSavedPwd = YES;
+        _useSavedPwd = YES;
         [self initUI];
 
     }
@@ -38,24 +38,24 @@
     self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"register", "") style:UIBarButtonItemStyleBordered target:self action:@selector(jumpToRegisterAction)];
     
     // user phone number input
-    _mUserNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "") frame:CGRectMake(0, 0, 280, 30) keyboardType:UIKeyboardTypeNumbersAndPunctuation];
-    [_mUserNameInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+    _userNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "") frame:CGRectMake(0, 0, 280, 30) keyboardType:UIKeyboardTypeNumbersAndPunctuation];
+    [_userNameInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     
     // user password input
-    _mPwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(0, 0, 280, 30) keyboardType:UIKeyboardTypeDefault];
-    _mPwdInput.secureTextEntry = YES;
-    [_mPwdInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+    _pwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(0, 0, 280, 30) keyboardType:UIKeyboardTypeDefault];
+    _pwdInput.secureTextEntry = YES;
+    [_pwdInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
 
     
-    _mRememberPwdSwitch = [[UISwitch alloc] init];
-    _mRememberPwdSwitch.on = YES;
+    _rememberPwdSwitch = [[UISwitch alloc] init];
+    _rememberPwdSwitch.on = YES;
     
-    _mAutoLoginSwitch = [[UISwitch alloc] init];
-    [_mAutoLoginSwitch addTarget:self action:@selector(switchAutoLoginAction:) forControlEvents:UIControlEventValueChanged];
+    _autoLoginSwitch = [[UISwitch alloc] init];
+    [_autoLoginSwitch addTarget:self action:@selector(switchAutoLoginAction:) forControlEvents:UIControlEventValueChanged];
     
     // login button
-    _mLoginButton = [self makeButtonWithTitle:NSLocalizedString(@"Login", "") frame:CGRectMake(0, 0, 140, 30)];
-    [_mLoginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
+    _loginButton = [self makeButtonWithTitle:NSLocalizedString(@"Login", "") frame:CGRectMake(0, 0, 140, 30)];
+    [_loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     
     UITableView *loginTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStyleGrouped];
     loginTableView.backgroundColor = self.backgroundColor;
@@ -65,16 +65,16 @@
         
     //##### set user info in the view
     UserBean *userBean = [[UserManager shareUserManager] userBean];
-    _mUserNameInput.text = userBean.name;
-    _mPwdInput.text = userBean.password;
-    _mRememberPwdSwitch.on = userBean.rememberPwd;
-    _mAutoLoginSwitch.on = userBean.autoLogin;
+    _userNameInput.text = userBean.name;
+    _pwdInput.text = userBean.password;
+    _rememberPwdSwitch.on = userBean.rememberPwd;
+    _autoLoginSwitch.on = userBean.autoLogin;
     
 }
 
 - (void)textFieldValueChanged:(UITextField*)textField {
     NSLog(@"text field value changed");
-    useSavedPwd = NO;
+    _useSavedPwd = NO;
 }
 
 #pragma mark - UITextFieldDelegate methods implementation
@@ -88,10 +88,10 @@
 #pragma mark - Switch Actions
 - (void)switchAutoLoginAction:(UISwitch*)pSwitch {
     if(pSwitch.on) {
-        [_mRememberPwdSwitch setOn:YES animated:YES];
-        _mRememberPwdSwitch.enabled = NO;
+        [_rememberPwdSwitch setOn:YES animated:YES];
+        _rememberPwdSwitch.enabled = NO;
     } else {
-        _mRememberPwdSwitch.enabled = YES;
+        _rememberPwdSwitch.enabled = YES;
     }
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -109,13 +109,13 @@
 }
 
 - (void)loginAction {
-    NSString *phoneNumber = [_mUserNameInput.text trimWhitespaceAndNewline];
-    NSString *pwd = [_mPwdInput.text trimWhitespaceAndNewline];
-    BOOL rememberPwd = _mRememberPwdSwitch.on;
-    BOOL autoLogin = _mAutoLoginSwitch.on;
+    NSString *phoneNumber = [_userNameInput.text trimWhitespaceAndNewline];
+    NSString *pwd = [_pwdInput.text trimWhitespaceAndNewline];
+    BOOL rememberPwd = _rememberPwdSwitch.on;
+    BOOL autoLogin = _autoLoginSwitch.on;
     
-    [_mUserNameInput resignFirstResponder];
-    [_mPwdInput resignFirstResponder];
+    [_userNameInput resignFirstResponder];
+    [_pwdInput resignFirstResponder];
     
     if (!phoneNumber || [phoneNumber isEqualToString:@""]) {
         NSLog(@"phone number is null");
@@ -130,7 +130,7 @@
     }
     
     UserBean *ub = [[UserManager shareUserManager] userBean];
-    if (!useSavedPwd) {
+    if (!_useSavedPwd) {
         [[UserManager shareUserManager] setUser:phoneNumber andPassword:pwd];
     }
     ub.rememberPwd = rememberPwd;
@@ -158,21 +158,21 @@
     if (cell == nil) {
         switch (indexPath.row) {
             case 0:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_mUserNameInput];
+                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_userNameInput];
                 break;
             case 1:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_mPwdInput];
+                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_pwdInput];
                 break;
             case 2:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:NSLocalizedString(@"Remember Pwd", "") andControl:_mRememberPwdSwitch];
+                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:NSLocalizedString(@"Remember Pwd", "") andControl:_rememberPwdSwitch];
                 break;
                 /*
             case 3:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:NSLocalizedString(@"Auto Login", "") andControl:_mAutoLoginSwitch];
+                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:NSLocalizedString(@"Auto Login", "") andControl:_autoLoginSwitch];
                 break;
                  */
             case 3:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_mLoginButton];
+                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_loginButton];
                 break;
             default:
                 break;

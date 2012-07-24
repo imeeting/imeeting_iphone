@@ -55,11 +55,11 @@
 
 #pragma mark - actions
 - (void)inviteAttendees:(NSArray *)attendeeArray {
-    mCurrentInviteArray = [NSMutableArray arrayWithCapacity:10];
+    _currentInviteArray = [NSMutableArray arrayWithCapacity:10];
     for (ContactBean *contact in attendeeArray) {
-        [mCurrentInviteArray addObject:contact.selectedPhoneNumber];
+        [_currentInviteArray addObject:contact.selectedPhoneNumber];
     }
-    NSString *attendeesJsonString = [mCurrentInviteArray JSONString];
+    NSString *attendeesJsonString = [_currentInviteArray JSONString];
     NSLog(@"attendees json string: %@", attendeesJsonString);
     
     if (self.isAppearedInCreateNewGroup) {
@@ -71,7 +71,7 @@
         
         NSString *groupId = [[ECGroupManager sharedECGroupManager] currentGroupModule].groupId;
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:groupId, GROUP_ID, attendeesJsonString, GROUP_ATTENDEES, nil];
-        [HttpUtil postRequestWithUrl:INVITE_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedInviteAttendees:) andFailedRespSelector:nil];
+        [HttpUtil postSignatureRequestWithUrl:INVITE_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedInviteAttendees:) andFailedRespSelector:nil];
     }
 }
 
@@ -102,7 +102,7 @@
                 module.audioConfId = [jsonData objectForKey:AUDIO_CONF_ID];
                 module.owner = [jsonData objectForKey:OWNER];
                 
-                if ([MFMessageComposeViewController canSendText] && mCurrentInviteArray.count > 0) {
+                if ([MFMessageComposeViewController canSendText] && _currentInviteArray.count > 0) {
                     [self sendSMS];
                 } else {
                     [self doJump];
@@ -130,7 +130,7 @@ invite_error:
 - (void)sendSMS {
     mMsgViewController= [[MFMessageComposeViewController alloc] init];
     
-    mMsgViewController.recipients = mCurrentInviteArray;
+    mMsgViewController.recipients = _currentInviteArray;
     
     NSString *audioConfId = [[ECGroupManager sharedECGroupManager] currentGroupModule].audioConfId;
     NSString *msgBody = [NSString stringWithFormat:@"%@邀请您加入讨论组,电话呼入号：%@。[iMeeting]", [UserManager shareUserManager].userBean.name, audioConfId];

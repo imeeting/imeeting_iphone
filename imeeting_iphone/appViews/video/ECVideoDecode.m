@@ -21,53 +21,53 @@
 - (id)init {
     self = [super init];
     if (self) {
-        dst_pix_fmt = PIX_FMT_RGB24;
+        _dst_pix_fmt = PIX_FMT_RGB24;
     }
     return self;
 }
 
 - (int)openVideoInputStream:(const char *)playPath {
-    int err = avformat_open_input(&inputFormatContext, playPath, NULL, NULL);
+    int err = avformat_open_input(&_inputFormatContext, playPath, NULL, NULL);
     if (err < 0) {
         NSLog(@"ffmpeg: unable to open input");
         return -1;
     }
     
-    err = avformat_find_stream_info(inputFormatContext, NULL);
+    err = avformat_find_stream_info(_inputFormatContext, NULL);
     if (err < 0) {
         NSLog(@"ffmpeg: unable to find stream info");
         return -1;
     }
     
-    av_dump_format(inputFormatContext, 0, playPath, 0);
+    av_dump_format(_inputFormatContext, 0, playPath, 0);
     
-    videoStream = -1;
+    _videoStream = -1;
     
-    for (int index = 0; index < inputFormatContext->nb_streams; index++) {
-        if (inputFormatContext->streams[index]->codec->codec_type == AVMEDIA_TYPE_VIDEO && videoStream < 0) {
-            videoStream = index;
+    for (int index = 0; index < _inputFormatContext->nb_streams; index++) {
+        if (_inputFormatContext->streams[index]->codec->codec_type == AVMEDIA_TYPE_VIDEO && _videoStream < 0) {
+            _videoStream = index;
         }
     }
     
-    if (videoStream == -1) {
+    if (_videoStream == -1) {
         NSLog(@"ffmpeg: unable to find video stream");
         return -1;
     }
     
-    videoCodecContext = inputFormatContext->streams[videoStream]->codec;
-    if (!videoCodecContext) {
+    _videoCodecContext = _inputFormatContext->streams[_videoStream]->codec;
+    if (!_videoCodecContext) {
         NSLog(@"ffmpeg: no video codec context found");
         return -1;
     }
     // find the decoder for video stream
-    videoCodec = avcodec_find_decoder(videoCodecContext->codec_id);
-    if (!videoCodec) {
-        NSLog(@"ffmpeg: unable to find the decoder(%d) for video stream", videoCodecContext->codec_id);
+    _videoCodec = avcodec_find_decoder(_videoCodecContext->codec_id);
+    if (!_videoCodec) {
+        NSLog(@"ffmpeg: unable to find the decoder(%d) for video stream", _videoCodecContext->codec_id);
         return -1;
     }
     
     // open video stream codec
-    if (avcodec_open2(videoCodecContext, videoCodec, NULL) < 0) {
+    if (avcodec_open2(_videoCodecContext, _videoCodec, NULL) < 0) {
         NSLog(@"ffmpeg: unable to open video codec");
         return -1;
     }
@@ -77,31 +77,29 @@
 
 - (void)readVideoFrame {
     NSLog(@"### read video frame start");
-    if (!inputFormatContext) {
+    if (!_inputFormatContext) {
         return;
     }
     
     AVPacket packet;
     
     // allocate a video frame to store the decoded image
-    videoFrame = avcodec_alloc_frame();
-    if (!videoFrame) {
+    _videoFrame = avcodec_alloc_frame();
+    if (!_videoFrame) {
         NSLog(@"cannot allocate video frame");
         [self handleError];
         return;
     }
     
-    videoPicture = alloc_picture(dst_pix_fmt, self.imgWidth, self.imgHeight);
-    if (!videoPicture) {
+    _videoPicture = alloc_picture(_dst_pix_fmt, self.imgWidth, self.imgHeight);
+    if (!_videoPicture) {
         NSLog(@"failed to alloc video picture");
         [self handleError];
         return;
     }
-    
-    readFrame = YES;
-    
+        
     int gotPicture;
-    while (readFrame && av_read_frame(inputFormatContext, &packet) >= 0) {
+    while (av_read_frame(_inputFormatContext, &packet) >= 0) {
         NSThread *currentThread = [NSThread currentThread];
         if (currentThread.isCancelled) {
             NSLog(@"video frame read thread is cancelled");
@@ -109,18 +107,18 @@
         }
         NSLog(@"read video frame");
         // check if the packet is from video stream
-        if (packet.stream_index == videoStream) {
+        if (packet.stream_index == _videoStream) {
             // Decode video frame
-            avcodec_decode_video2(videoCodecContext, videoFrame, &gotPicture, &packet);
+            avcodec_decode_video2(_videoCodecContext, _videoFrame, &gotPicture, &packet);
             
             if (gotPicture) {
                 NSLog(@"got video picture");
                 // get a video frame
-                img_convert_ctx = sws_getCachedContext(img_convert_ctx, videoCodecContext->width, videoCodecContext->height, videoCodecContext->pix_fmt, self.imgWidth, self.imgHeight, dst_pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
+                _img_convert_ctx = sws_getCachedContext(_img_convert_ctx, _videoCodecContext->width, _videoCodecContext->height, _videoCodecContext->pix_fmt, self.imgWidth, self.imgHeight, _dst_pix_fmt, SWS_BILINEAR, NULL, NULL, NULL);
                 // convert YUV420 to RGB24
-                sws_scale(img_convert_ctx, videoFrame->data, videoFrame->linesize, 0, videoCodecContext->height, videoPicture->data, videoPicture->linesize);
+                sws_scale(_img_convert_ctx, _videoFrame->data, _videoFrame->linesize, 0, _videoCodecContext->height, _videoPicture->data, _videoPicture->linesize);
                 @autoreleasepool {
-                    UIImage *img = [self imageFromAVPicture:videoPicture width:self.imgWidth height:self.imgHeight];
+                    UIImage *img = [self imageFromAVPicture:_videoPicture width:self.imgWidth height:self.imgHeight];
                     //    NSLog(@"delegate: %@", self.delegate);
                     if (self.delegate && [self.delegate respondsToSelector:@selector(onFetchNewImage:)]) {
                         NSLog(@"have delegate - perform selector");
@@ -179,30 +177,26 @@
     [self closeVideoInputStream];
 }
 
-- (void)stopFetchVideoPicture {
-    readFrame = NO;
-}
-
 - (void)closeVideoInputStream {
     NSLog(@"close video input stream");
-    if (videoCodecContext) {
-        avcodec_close(videoCodecContext);
-        videoCodecContext = NULL;
+    if (_videoCodecContext) {
+        avcodec_close(_videoCodecContext);
+        _videoCodecContext = NULL;
     }
-    if (inputFormatContext) {
-        avformat_close_input(&inputFormatContext);
-        inputFormatContext = NULL;
+    if (_inputFormatContext) {
+        avformat_close_input(&_inputFormatContext);
+        _inputFormatContext = NULL;
     }
-    if (videoFrame) {
-        av_free(videoFrame);
-        videoFrame = NULL;
+    if (_videoFrame) {
+        av_free(_videoFrame);
+        _videoFrame = NULL;
     }
-    if (videoPicture) {
-        if (videoPicture->data[0]) {
-            av_free(videoPicture->data[0]);
+    if (_videoPicture) {
+        if (_videoPicture->data[0]) {
+            av_free(_videoPicture->data[0]);
         }
-        av_free(videoPicture);
-        videoPicture = NULL;
+        av_free(_videoPicture);
+        _videoPicture = NULL;
     }
     NSLog(@"video input stream closed");
 
@@ -253,22 +247,21 @@
 
 
 - (void)startFetchVideoPictureWithUsername:(NSString *)username {
-    executor = [[VideoFetchExecutor alloc] init];
-    executor.imgWidth = self.dstImgWidth;
-    executor.imgHeight = self.dstImgHeight;
-    executor.rtmpUrl = self.rtmpUrl;
-    executor.delegate = self.delegate;
-    executor.groupId = self.groupId;
+    _executor = [[VideoFetchExecutor alloc] init];
+    _executor.imgWidth = self.dstImgWidth;
+    _executor.imgHeight = self.dstImgHeight;
+    _executor.rtmpUrl = self.rtmpUrl;
+    _executor.delegate = self.delegate;
+    _executor.groupId = self.groupId;
     
-    exeThread = [[NSThread alloc] initWithTarget:executor selector:@selector(startFetchVideoPictureWithUsername:) object:username];
-    [exeThread start];
+    _exeThread = [[NSThread alloc] initWithTarget:_executor selector:@selector(startFetchVideoPictureWithUsername:) object:username];
+    [_exeThread start];
     
 }
 
 - (void)stopFetchVideoPicture {
-    executor.delegate = nil;
-    //[executor stopFetchVideoPicture];
-    [exeThread cancel];
+    _executor.delegate = nil;
+    [_exeThread cancel];
 }
 
 @end

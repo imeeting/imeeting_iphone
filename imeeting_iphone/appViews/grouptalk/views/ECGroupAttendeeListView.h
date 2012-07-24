@@ -11,18 +11,18 @@
 #import "ECStatusFilterDelegate.h"
 
 @interface AttendeeCell : UITableViewCell {
-    UIImageView *mGuyIcon;
-    UILabel *mNameLabel;
-    UILabel *mNumberLabel;
-    UIImageView *mPhoneStatusIcon;
-    UIImageView *mVideoStatusIcon;
+    UIImageView *_guyIconView;
+    UILabel *_nameLabel;
+    UILabel *_numberLabel;
+    UIImageView *_phoneStatusIconView;
+    UIImageView *_videoStatusIconView;
     
-    UIImage *videoOnImg;
-    UIImage *videoOffImg;
-    UIImage *guyIconImg;
+    UIImage *_videoOnImg;
+    UIImage *_videoOffImg;
+    UIImage *_guyIconImg;
     
-    UIColor *normalBGColor;
-    UIColor *selectedBGColor;
+    UIColor *_normalBGColor;
+    UIColor *_selectedBGColor;
     
 }
 + (CGFloat)cellHeight;
@@ -31,11 +31,11 @@
 @end
 
 @interface ECGroupAttendeeListView : ECBaseUIView <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, EGORefreshTableHeaderDelegate>{
-    UITableView *mAttendeeListTableView;
-    UIToolbar *toolbar;
-    UIBarButtonItem *title;
+    UITableView *_attendeeListTableView;
+    UIToolbar *_toolbar;
+    UIBarButtonItem *_title;
     
-    EGORefreshTableHeaderView *mRefreshHeaderView;
+    EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
 
 }

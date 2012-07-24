@@ -11,19 +11,19 @@
 
 @interface ECGroupVideoView : ECBaseUIView <UIAlertViewDelegate> {
     
-    UIImageView *mOppositeVideoView;
+    UIImageView *_oppositeVideoView;
     
-    UIButton *mLeaveGroupButton;
-    UIButton *mOpenCameraButton;
-    UIButton *mCameraSwitchButton;
+    UIButton *_leaveGroupButton;
+    UIButton *_openCameraButton;
+    UIButton *_cameraSwitchButton;
     
-    BOOL isCameraOpen;
+    BOOL _isCameraOpen;
     
-    UIImage *cameraOnImg;
-    UIImage *cameraOffImg;
+    UIImage *_cameraOnImg;
+    UIImage *_cameraOffImg;
     
-    UILabel *mOppositeVideoNameLabel;
-    UIActivityIndicatorView *loadVideoIndicator;
+    UILabel *_oppositeVideoNameLabel;
+    UIActivityIndicatorView *_loadVideoIndicator;
 }
 
 @property (nonatomic,retain) UIView *myVideoView;

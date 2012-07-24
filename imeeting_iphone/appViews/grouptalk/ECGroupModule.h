@@ -13,8 +13,8 @@
 #import "ECVideoManager.h"
 
 @interface ECGroupModule : NSObject <SocketIODelegate, ECVideoFetchDelegate, UIAlertViewDelegate> {
-    SocketIO *mSocketIO;
-    BOOL needConnectToNotifyServer;
+    SocketIO *_socketIO;
+    BOOL _needConnectToNotifyServer;
 }
 
 @property (nonatomic, retain) UIViewController *groupController;

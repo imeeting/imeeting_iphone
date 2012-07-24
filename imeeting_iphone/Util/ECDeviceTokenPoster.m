@@ -25,13 +25,13 @@ static ECDeviceTokenPoster *instance;
 - (id)init {
     self = [super init];
     if (self) {
-        tryTimes = 3;
+        _tryTimes = 3;
     }
     return self;
 }
 
 - (void)registerToken {
-    if (tryTimes > 0) {
+    if (_tryTimes > 0) {
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
         if (self.deviceToken) {
             [params setObject:self.deviceToken forKey:TOKEN];
@@ -58,7 +58,7 @@ static ECDeviceTokenPoster *instance;
                     NSLog(@"register token successfully");
                 } else {
                     // reg token failed, re do it
-                    tryTimes--;
+                    _tryTimes--;
                     sleep(2);
                     [self registerToken];
                 }
@@ -66,7 +66,7 @@ static ECDeviceTokenPoster *instance;
             break;
         }
         default:
-            tryTimes--;
+            _tryTimes--;
             sleep(2);
             [self registerToken];
             break;
@@ -74,7 +74,7 @@ static ECDeviceTokenPoster *instance;
 }
 
 - (void)onRegTokenFailed:(ASIHTTPRequest *)pRequest {
-    tryTimes--;
+    _tryTimes--;
     sleep(2);
     [self registerToken];
 }

@@ -10,7 +10,7 @@
 #import "ECBaseUIView.h"
 
 @interface ECSettingView : ECBaseUIView <UITableViewDataSource> {
-    UIButton *accountSettingButton;
+    UIButton *_accountSettingButton;
 }
 
 @end

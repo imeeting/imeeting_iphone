@@ -11,11 +11,13 @@
 #import "libswscale/swscale.h"
 
 @interface ECVideoEncode : NSObject {
-    QuickVideoOutput *qvo;
-    AVFrame *raw_picture;
-    AVFrame *tmp_picture;
-    struct SwsContext *img_convert_ctx;    
-    enum PixelFormat src_pix_fmt;
+    QuickVideoOutput *_qvo;
+    AVFrame *_raw_picture;
+    AVFrame *_tmp_picture;
+    struct SwsContext *_img_convert_ctx;    
+    enum PixelFormat _src_pix_fmt;
+    
+    BOOL _videoEncodeReady;
 }
 @property (nonatomic,retain) NSString *rtmpUrl;
 @property (nonatomic,retain) NSString *liveName;
