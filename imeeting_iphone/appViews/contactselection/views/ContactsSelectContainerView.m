@@ -13,6 +13,7 @@
 #import "ContactsListTableViewCell.h"
 
 #import "ContactBean+IMeeting.h"
+#import "ECConstants.h"
 
 // middle seperate padding
 #define MIDDLE_SEPERATE_PADDING   1.0
@@ -71,7 +72,7 @@
         UILabel *addressBookListTitle = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, ABCONTACT_TABLEVIEW_WIDTH - 14, LIST_TITLE_BAR_HEIGHT)];
         addressBookListTitle.text = NSLocalizedString(@"contacts list table view section header title", nil);
         addressBookListTitle.textAlignment = UITextAlignmentLeft;
-        addressBookListTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:14];
+        addressBookListTitle.font = [UIFont fontWithName:CHINESE_FONT size:15];
         addressBookListTitle.textColor = [UIColor whiteColor];
         addressBookListTitle.backgroundColor = [UIColor clearColor];
         [listTitleBar addSubview:addressBookListTitle];
@@ -95,16 +96,16 @@
         searchFieldView.backgroundColor = [UIColor clearColor];
         
         //-- search field border
-        UIImageView *searchBGView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 162, 25)];
+        UIImageView *searchBGView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 162, 30)];
         searchBGView.image = [UIImage imageNamed:@"searchbg"];
         searchBGView.backgroundColor = [UIColor clearColor];
         [searchFieldView addSubview:searchBGView];
         
         //-- search text field
-        _mSearchField = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"Search Contacts", nil) frame:CGRectMake(searchBGView.frame.origin.x + 32, searchBGView.frame.origin.y + 3, 135, 20) keyboardType:UIKeyboardTypeASCIICapable];
+        _mSearchField = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"Search Contacts", nil) frame:CGRectMake(searchBGView.frame.origin.x + 32, searchBGView.frame.origin.y + 5, 135, 20) keyboardType:UIKeyboardTypeASCIICapable];
         _mSearchField.backgroundColor = [UIColor clearColor];
         _mSearchField.borderStyle = UITextBorderStyleNone;
-        _mSearchField.font = [UIFont fontWithName:@"Arial" size:13];
+        _mSearchField.font = [UIFont fontWithName:CHINESE_FONT size:13];
         _mSearchField.autocorrectionType = UITextAutocorrectionTypeNo;
         _mSearchField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _mSearchField.textColor = [UIColor colorWithIntegerRed:181 integerGreen:181 integerBlue:181 alpha:1];

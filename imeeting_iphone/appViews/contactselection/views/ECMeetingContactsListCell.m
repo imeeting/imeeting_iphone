@@ -7,15 +7,16 @@
 //
 
 #import "ECMeetingContactsListCell.h"
+#import "ECConstants.h"
 
 // tableViewCell margin
 #define MARGIN  6.0
 // tableViewCell padding
 #define PADDING 1.0
 
-#define PHOTOIMGVIEW_WIDTH   35.0
+#define PHOTOIMGVIEW_WIDTH   36.0
 // photo image view height
-#define PHOTOIMGVIEW_HEIGHT  20.0
+#define PHOTOIMGVIEW_HEIGHT  11.0
 // full name label height
 #define DISPLAYNAMELABEL_HEIGHT 22.0
 
@@ -39,7 +40,7 @@
         
         _mDisplayNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_mCheckButton.frame.origin.x + _mCheckButton.frame.size.width, MARGIN, INMEETING_CONTACT_TABLEVIEW_WIDTH - _mCheckButton.frame.origin.x - _mCheckButton.frame.size.width, DISPLAYNAMELABEL_HEIGHT)];
         _mDisplayNameLabel.textColor = [UIColor colorWithIntegerRed:74 integerGreen:74 integerBlue:74 alpha:1];
-        _mDisplayNameLabel.font = [UIFont fontWithName:@"Arial" size:18];
+        _mDisplayNameLabel.font = [UIFont fontWithName:CHINESE_FONT size:17];
         _mDisplayNameLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_mDisplayNameLabel];
 
@@ -58,12 +59,13 @@
 {
     [super setSelected:selected animated:animated];
     
-    // Configure the view for the selected state
+    /*
     if (selected) {
         self.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"right_region_selected"]];
     } else {
         self.contentView.backgroundColor = [UIColor clearColor];
     }
+     */
 }
 
 - (void)setPhotoImg:(UIImage *)photoImg{

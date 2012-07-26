@@ -53,6 +53,18 @@ static ECMainPageViewController *instance;
     ECMainPageView *mainPageView = (ECMainPageView*)self.view;
     [mainPageView refreshGroupList];
     [super viewWillAppear:animated];
+   
+    /*
+    // test - find the font name
+    NSArray *familyNames = [UIFont familyNames];  
+    for( NSString *familyName in familyNames ){  
+        NSLog(@"Family: %@", familyName);  
+        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];  
+        for( NSString *fontName in fontNames ){  
+            NSLog(@"\tFont: %@", fontName);  
+        }  
+    }
+     */
 }
 
 - (void)viewDidLoad

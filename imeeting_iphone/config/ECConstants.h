@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define CHINESE_FONT    @"MicrosoftYaHei"
+#define CHARACTER_FONT  @"Arial"
+#define CHARACTER_BOLD_FONT   @"Arial-BoldMT"
+
 static CGFloat StatusBarHeight = 20;
 static CGFloat NavigationBarHeight = 44;
 

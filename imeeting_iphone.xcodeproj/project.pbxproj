@@ -59,6 +59,9 @@
 		F88B7CB615C13E3500B58AD1 /* right_sep_line.png in Resources */ = {isa = PBXBuildFile; fileRef = F88B7CB515C13E3500B58AD1 /* right_sep_line.png */; };
 		F88B7CB915C140F300B58AD1 /* right_region_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F88B7CB715C140F300B58AD1 /* right_region_selected.png */; };
 		F88B7CBA15C140F300B58AD1 /* right_region_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F88B7CB815C140F300B58AD1 /* right_region_selected@2x.png */; };
+		F88B7CBC15C1502500B58AD1 /* left_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F88B7CBB15C1502500B58AD1 /* left_arrow@2x.png */; };
+		F88B7CC315C1577900B58AD1 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F88B7CC215C1577900B58AD1 /* CommonToolkit.framework */; };
+		F88B7CC615C1599E00B58AD1 /* msyh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F88B7CC515C1599E00B58AD1 /* msyh.ttf */; };
 		F8A4C6E015BFE9CE00C35C93 /* navigationbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8A4C6DF15BFE9CE00C35C93 /* navigationbar@2x.png */; };
 		F8A4C6E215BFECE600C35C93 /* navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = F8A4C6E115BFECE600C35C93 /* navigationbar.png */; };
 		F8AD9458158872EC007B3C87 /* ECGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AD9457158872EC007B3C87 /* ECGroupCell.m */; };
@@ -86,7 +89,6 @@
 		F8C11F4115B8015600B30BD5 /* ECGroupVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4015B8015600B30BD5 /* ECGroupVideoView.m */; };
 		F8C11F4615B8016100B30BD5 /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4315B8016100B30BD5 /* ECGroupManager.m */; };
 		F8C11F4715B8016100B30BD5 /* ECGroupModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4515B8016100B30BD5 /* ECGroupModule.m */; };
-		F8C11F4E15B8086600B30BD5 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C11F4D15B8086600B30BD5 /* CommonToolkit.framework */; };
 		F8D5E35C157EEF30005B5581 /* ECRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */; };
 		F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */; };
 		F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */; };
@@ -96,9 +98,6 @@
 		F8DC714615AFC82600146A73 /* UIViewController+AuthFailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DC714515AFC82600146A73 /* UIViewController+AuthFailHandler.m */; };
 		F8DC714B15B0081600146A73 /* ECSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DC714A15B0081600146A73 /* ECSettingView.m */; };
 		F8DC714E15B0082C00146A73 /* ECSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DC714D15B0082C00146A73 /* ECSettingViewController.m */; };
-		F8E0C07D15A14DC900E66F27 /* ContactDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C07A15A14DC900E66F27 /* ContactDefault.png */; };
-		F8E0C07E15A14DC900E66F27 /* ContactPreinMeeting.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C07B15A14DC900E66F27 /* ContactPreinMeeting.png */; };
-		F8E0C07F15A14DC900E66F27 /* ContactSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C07C15A14DC900E66F27 /* ContactSelected.png */; };
 		F8E0C08215A14DDE00E66F27 /* Pinyin4jBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E0C08115A14DDE00E66F27 /* Pinyin4jBundle.bundle */; };
 		F8E0C0B115A14F2500E66F27 /* ContactBean+IMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0A015A14F2500E66F27 /* ContactBean+IMeeting.m */; };
 		F8E0C0B215A14F2500E66F27 /* ContactsSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0A315A14F2500E66F27 /* ContactsSelectViewController.m */; };
@@ -349,6 +348,9 @@
 		F88B7CB515C13E3500B58AD1 /* right_sep_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_sep_line.png; sourceTree = "<group>"; };
 		F88B7CB715C140F300B58AD1 /* right_region_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_region_selected.png; sourceTree = "<group>"; };
 		F88B7CB815C140F300B58AD1 /* right_region_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_region_selected@2x.png"; sourceTree = "<group>"; };
+		F88B7CBB15C1502500B58AD1 /* left_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_arrow@2x.png"; sourceTree = "<group>"; };
+		F88B7CC215C1577900B58AD1 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
+		F88B7CC515C1599E00B58AD1 /* msyh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = msyh.ttf; sourceTree = "<group>"; };
 		F8A4C6DF15BFE9CE00C35C93 /* navigationbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar@2x.png"; sourceTree = "<group>"; };
 		F8A4C6E115BFECE600C35C93 /* navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationbar.png; sourceTree = "<group>"; };
 		F8AD9456158872EC007B3C87 /* ECGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupCell.h; path = mainpage/ECGroupCell.h; sourceTree = "<group>"; };
@@ -386,7 +388,6 @@
 		F8C11F4315B8016100B30BD5 /* ECGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupManager.m; path = grouptalk/ECGroupManager.m; sourceTree = "<group>"; };
 		F8C11F4415B8016100B30BD5 /* ECGroupModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupModule.h; path = grouptalk/ECGroupModule.h; sourceTree = "<group>"; };
 		F8C11F4515B8016100B30BD5 /* ECGroupModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupModule.m; path = grouptalk/ECGroupModule.m; sourceTree = "<group>"; };
-		F8C11F4D15B8086600B30BD5 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F8D5E35A157EEF30005B5581 /* ECRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterViewController.h; path = system/controller/ECRegisterViewController.h; sourceTree = "<group>"; };
 		F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterViewController.m; path = system/controller/ECRegisterViewController.m; sourceTree = "<group>"; };
 		F8D5E35D157EEF3A005B5581 /* ECRegisterUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterUIView.h; path = system/views/ECRegisterUIView.h; sourceTree = "<group>"; };
@@ -402,9 +403,6 @@
 		F8DC714A15B0081600146A73 /* ECSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSettingView.m; path = system/views/ECSettingView.m; sourceTree = "<group>"; };
 		F8DC714C15B0082C00146A73 /* ECSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSettingViewController.h; path = system/controller/ECSettingViewController.h; sourceTree = "<group>"; };
 		F8DC714D15B0082C00146A73 /* ECSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSettingViewController.m; path = system/controller/ECSettingViewController.m; sourceTree = "<group>"; };
-		F8E0C07A15A14DC900E66F27 /* ContactDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactDefault.png; path = imeeting_iphone/Resources/images/ContactDefault.png; sourceTree = "<group>"; };
-		F8E0C07B15A14DC900E66F27 /* ContactPreinMeeting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactPreinMeeting.png; path = imeeting_iphone/Resources/images/ContactPreinMeeting.png; sourceTree = "<group>"; };
-		F8E0C07C15A14DC900E66F27 /* ContactSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactSelected.png; path = imeeting_iphone/Resources/images/ContactSelected.png; sourceTree = "<group>"; };
 		F8E0C08115A14DDE00E66F27 /* Pinyin4jBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Pinyin4jBundle.bundle; path = imeeting_iphone/Resources/bundles/Pinyin4jBundle.bundle; sourceTree = "<group>"; };
 		F8E0C09F15A14F2500E66F27 /* ContactBean+IMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ContactBean+IMeeting.h"; path = "contactselection/ContactBean+IMeeting.h"; sourceTree = "<group>"; };
 		F8E0C0A015A14F2500E66F27 /* ContactBean+IMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ContactBean+IMeeting.m"; path = "contactselection/ContactBean+IMeeting.m"; sourceTree = "<group>"; };
@@ -450,7 +448,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8C11F4E15B8086600B30BD5 /* CommonToolkit.framework in Frameworks */,
+				F88B7CC315C1577900B58AD1 /* CommonToolkit.framework in Frameworks */,
 				F800185715B66C5800745A8F /* CoreText.framework in Frameworks */,
 				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
 				F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */,
@@ -525,7 +523,7 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F8C11F4D15B8086600B30BD5 /* CommonToolkit.framework */,
+				F88B7CC215C1577900B58AD1 /* CommonToolkit.framework */,
 				F800185615B66C5800745A8F /* CoreText.framework */,
 				F809862815B5076F00098A0C /* AudioToolbox.framework */,
 				F807584515A294C1008D8656 /* MessageUI.framework */,
@@ -971,6 +969,15 @@
 			path = libx264;
 			sourceTree = "<group>";
 		};
+		F88B7CC415C1599E00B58AD1 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F88B7CC515C1599E00B58AD1 /* msyh.ttf */,
+			);
+			name = fonts;
+			path = imeeting_iphone/Resources/fonts;
+			sourceTree = "<group>";
+		};
 		F8A4C6DE15BFE9CE00C35C93 /* common */ = {
 			isa = PBXGroup;
 			children = (
@@ -984,6 +991,7 @@
 		F8B291E815C003B900DB5047 /* contactselect */ = {
 			isa = PBXGroup;
 			children = (
+				F88B7CBB15C1502500B58AD1 /* left_arrow@2x.png */,
 				F88B7CB715C140F300B58AD1 /* right_region_selected.png */,
 				F88B7CB815C140F300B58AD1 /* right_region_selected@2x.png */,
 				F88B7CB515C13E3500B58AD1 /* right_sep_line.png */,
@@ -1174,6 +1182,7 @@
 		F8F1A743158B1292003F1EE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F88B7CC415C1599E00B58AD1 /* fonts */,
 				F8B291E815C003B900DB5047 /* contactselect */,
 				F8A4C6DE15BFE9CE00C35C93 /* common */,
 				F809862A15B566F500098A0C /* audio */,
@@ -1185,9 +1194,6 @@
 				F8EDF12715A68FE4003DF47F /* default_avatar.png */,
 				F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */,
 				F8E0C08115A14DDE00E66F27 /* Pinyin4jBundle.bundle */,
-				F8E0C07A15A14DC900E66F27 /* ContactDefault.png */,
-				F8E0C07B15A14DC900E66F27 /* ContactPreinMeeting.png */,
-				F8E0C07C15A14DC900E66F27 /* ContactSelected.png */,
 				F885A583159A9DDA00709FC7 /* camera_switch.png */,
 				F8D791AF1599603800986BCD /* video_off.png */,
 				F8D791B01599603800986BCD /* video_on.png */,
@@ -1294,9 +1300,6 @@
 				F8D791B11599603800986BCD /* video_off.png in Resources */,
 				F8D791B21599603800986BCD /* video_on.png in Resources */,
 				F885A584159A9DDA00709FC7 /* camera_switch.png in Resources */,
-				F8E0C07D15A14DC900E66F27 /* ContactDefault.png in Resources */,
-				F8E0C07E15A14DC900E66F27 /* ContactPreinMeeting.png in Resources */,
-				F8E0C07F15A14DC900E66F27 /* ContactSelected.png in Resources */,
 				F8E0C08215A14DDE00E66F27 /* Pinyin4jBundle.bundle in Resources */,
 				F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */,
 				F8EDF12815A68FE4003DF47F /* default_avatar.png in Resources */,
@@ -1337,6 +1340,8 @@
 				F88B7CB615C13E3500B58AD1 /* right_sep_line.png in Resources */,
 				F88B7CB915C140F300B58AD1 /* right_region_selected.png in Resources */,
 				F88B7CBA15C140F300B58AD1 /* right_region_selected@2x.png in Resources */,
+				F88B7CBC15C1502500B58AD1 /* left_arrow@2x.png in Resources */,
+				F88B7CC615C1599E00B58AD1 /* msyh.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

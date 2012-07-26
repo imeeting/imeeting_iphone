@@ -7,6 +7,7 @@
 //
 
 #import "ContactsListTableViewCell.h"
+#import "ECConstants.h"
 
 // tableViewCell margin
 #define MARGIN  6.0
@@ -42,13 +43,13 @@
         
         _mDisplayNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_mCheckButton.frame.origin.x + _mCheckButton.frame.size.width + PADDING + PHOTOIMAGEVIEW_MARGIN + MARGIN, MARGIN, self.frame.size.width / 2 - MARGIN - (_mCheckButton.frame.size.width + PADDING), DISPLAYNAMELABEL_HEIGHT)];
         _mDisplayNameLabel.textColor = [UIColor colorWithIntegerRed:122 integerGreen:122 integerBlue:122 alpha:1];
-        _mDisplayNameLabel.font = [UIFont fontWithName:@"Arial" size:15];
+        _mDisplayNameLabel.font = [UIFont fontWithName:CHINESE_FONT size:15];
         _mDisplayNameLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_mDisplayNameLabel];
         
         _mPhoneNumbersLabel = [[UILabel alloc] initWithFrame:CGRectMake(_mDisplayNameLabel.frame.origin.x, _mDisplayNameLabel.frame.origin.y + _mDisplayNameLabel.frame.size.height + PADDING, _mDisplayNameLabel.frame.size.width, PHONENUMBERSLABEL_DEFAULTHEIGHT)];
         _mPhoneNumbersLabel.textColor = [UIColor colorWithIntegerRed:181 integerGreen:181 integerBlue:181 alpha:1];
-        _mPhoneNumbersLabel.font = [UIFont fontWithName:@"Arial" size:14];
+        _mPhoneNumbersLabel.font = [UIFont fontWithName:CHARACTER_FONT size:14];
         _mPhoneNumbersLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_mPhoneNumbersLabel];
         
