@@ -10,7 +10,6 @@
 
 #import "ABContactsListView.h"
 #import "MeetingContactsListView.h"
-#import "ContactsProcessToolbar.h"
 #import "ECBaseUIView.h"
 
 @interface ContactsSelectContainerView : ECBaseUIView {

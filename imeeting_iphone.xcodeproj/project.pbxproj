@@ -104,8 +104,6 @@
 		F8E0C0B215A14F2500E66F27 /* ContactsSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0A315A14F2500E66F27 /* ContactsSelectViewController.m */; };
 		F8E0C0B315A14F2500E66F27 /* ABContactsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0A615A14F2500E66F27 /* ABContactsListView.m */; };
 		F8E0C0B415A14F2500E66F27 /* ContactsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0A815A14F2500E66F27 /* ContactsListTableViewCell.m */; };
-		F8E0C0B515A14F2500E66F27 /* ContactsProcessSoftKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AA15A14F2500E66F27 /* ContactsProcessSoftKeyboard.m */; };
-		F8E0C0B615A14F2500E66F27 /* ContactsProcessToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AC15A14F2500E66F27 /* ContactsProcessToolbar.m */; };
 		F8E0C0B715A14F2500E66F27 /* ContactsSelectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */; };
 		F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E0C0B015A14F2500E66F27 /* MeetingContactsListView.m */; };
 		F8E3BEC8158EC57200467088 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E3BEC7158EC57200467088 /* QuartzCore.framework */; };
@@ -416,10 +414,6 @@
 		F8E0C0A615A14F2500E66F27 /* ABContactsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABContactsListView.m; path = contactselection/views/ABContactsListView.m; sourceTree = "<group>"; };
 		F8E0C0A715A14F2500E66F27 /* ContactsListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsListTableViewCell.h; path = contactselection/views/ContactsListTableViewCell.h; sourceTree = "<group>"; };
 		F8E0C0A815A14F2500E66F27 /* ContactsListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsListTableViewCell.m; path = contactselection/views/ContactsListTableViewCell.m; sourceTree = "<group>"; };
-		F8E0C0A915A14F2500E66F27 /* ContactsProcessSoftKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsProcessSoftKeyboard.h; path = contactselection/views/ContactsProcessSoftKeyboard.h; sourceTree = "<group>"; };
-		F8E0C0AA15A14F2500E66F27 /* ContactsProcessSoftKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsProcessSoftKeyboard.m; path = contactselection/views/ContactsProcessSoftKeyboard.m; sourceTree = "<group>"; };
-		F8E0C0AB15A14F2500E66F27 /* ContactsProcessToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsProcessToolbar.h; path = contactselection/views/ContactsProcessToolbar.h; sourceTree = "<group>"; };
-		F8E0C0AC15A14F2500E66F27 /* ContactsProcessToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsProcessToolbar.m; path = contactselection/views/ContactsProcessToolbar.m; sourceTree = "<group>"; };
 		F8E0C0AD15A14F2500E66F27 /* ContactsSelectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsSelectContainerView.h; path = contactselection/views/ContactsSelectContainerView.h; sourceTree = "<group>"; };
 		F8E0C0AE15A14F2500E66F27 /* ContactsSelectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsSelectContainerView.m; path = contactselection/views/ContactsSelectContainerView.m; sourceTree = "<group>"; };
 		F8E0C0AF15A14F2500E66F27 /* MeetingContactsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingContactsListView.h; sourceTree = "<group>"; };
@@ -1099,7 +1093,6 @@
 				F8E0C09F15A14F2500E66F27 /* ContactBean+IMeeting.h */,
 				F8E0C0A015A14F2500E66F27 /* ContactBean+IMeeting.m */,
 				F8E0C0B915A176B000E66F27 /* ContactList */,
-				F8E0C0BA15A176EC00E66F27 /* ContactProcessToolbar */,
 				F8E0C0A715A14F2500E66F27 /* ContactsListTableViewCell.h */,
 				F8E0C0A815A14F2500E66F27 /* ContactsListTableViewCell.m */,
 				F8E0C0AD15A14F2500E66F27 /* ContactsSelectContainerView.h */,
@@ -1134,17 +1127,6 @@
 				F8E0C0A615A14F2500E66F27 /* ABContactsListView.m */,
 			);
 			name = ContactList;
-			sourceTree = "<group>";
-		};
-		F8E0C0BA15A176EC00E66F27 /* ContactProcessToolbar */ = {
-			isa = PBXGroup;
-			children = (
-				F8E0C0A915A14F2500E66F27 /* ContactsProcessSoftKeyboard.h */,
-				F8E0C0AA15A14F2500E66F27 /* ContactsProcessSoftKeyboard.m */,
-				F8E0C0AB15A14F2500E66F27 /* ContactsProcessToolbar.h */,
-				F8E0C0AC15A14F2500E66F27 /* ContactsProcessToolbar.m */,
-			);
-			name = ContactProcessToolbar;
 			sourceTree = "<group>";
 		};
 		F8E19E4C15AC24AC001F6BBC /* StatusFilter */ = {
@@ -1385,8 +1367,6 @@
 				F8E0C0B215A14F2500E66F27 /* ContactsSelectViewController.m in Sources */,
 				F8E0C0B315A14F2500E66F27 /* ABContactsListView.m in Sources */,
 				F8E0C0B415A14F2500E66F27 /* ContactsListTableViewCell.m in Sources */,
-				F8E0C0B515A14F2500E66F27 /* ContactsProcessSoftKeyboard.m in Sources */,
-				F8E0C0B615A14F2500E66F27 /* ContactsProcessToolbar.m in Sources */,
 				F8E0C0B715A14F2500E66F27 /* ContactsSelectContainerView.m in Sources */,
 				F8E0C0B815A14F2500E66F27 /* MeetingContactsListView.m in Sources */,
 				F8E4B9EF15A5267700322C7A /* ECContactsSelectViewController.m in Sources */,
