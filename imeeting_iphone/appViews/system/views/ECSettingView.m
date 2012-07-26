@@ -26,7 +26,8 @@
 }
 
 - (void)initUI {
-    self.title = NSLocalizedString(@"Setting", "");
+    _titleView.text = NSLocalizedString(@"Setting", "");
+    self.titleView = _titleView;
     
     _accountSettingButton = [self makeButtonWithTitle:NSLocalizedString(@"Set Account", nil) frame:CGRectMake(0, 0, 300, 45)];
     [_accountSettingButton addTarget:self action:@selector(showAccountSettingView) forControlEvents:UIControlEventTouchUpInside];

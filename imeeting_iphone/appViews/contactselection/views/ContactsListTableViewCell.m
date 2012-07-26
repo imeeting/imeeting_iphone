@@ -9,18 +9,19 @@
 #import "ContactsListTableViewCell.h"
 
 // tableViewCell margin
-#define MARGIN  2.0
+#define MARGIN  6.0
 // tableViewCell photo image view margin
-#define PHOTOIMAGEVIEW_MARGIN    5.0
+#define PHOTOIMAGEVIEW_MARGIN    6.0
 // tableViewCell padding
 #define PADDING 2.0
 
 // photo image view height
-#define PHOTOIMGVIEW_HEIGHT  30.0
+#define PHOTOIMGVIEW_HEIGHT  24.0
 // full name label height
 #define DISPLAYNAMELABEL_HEIGHT 20.0
 // phone numbers label default height
 #define PHONENUMBERSLABEL_DEFAULTHEIGHT   18.0
+
 
 @implementation ContactsListTableViewCell
 
@@ -32,28 +33,26 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // init contentView subViews
-        // contact photo image button
-        _mPhotoImgButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        // set frame
-        _mPhotoImgButton.frame = CGRectMake(MARGIN + PHOTOIMAGEVIEW_MARGIN, MARGIN + PHOTOIMAGEVIEW_MARGIN, PHOTOIMGVIEW_HEIGHT, PHOTOIMGVIEW_HEIGHT);
-        // add to content view
-        [self.contentView addSubview:_mPhotoImgButton];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        // contact display name label
-        _mDisplayNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_mPhotoImgButton.frame.origin.x + _mPhotoImgButton.frame.size.width + PADDING + PHOTOIMAGEVIEW_MARGIN, MARGIN, self.frame.size.width / 2 - MARGIN - (_mPhotoImgButton.frame.size.width + PADDING), DISPLAYNAMELABEL_HEIGHT)];
-        // set text font
-        _mDisplayNameLabel.font = [UIFont boldSystemFontOfSize:18.0];
-        // add to content view
+        // init contentView subViews
+        _mCheckButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _mCheckButton.frame = CGRectMake(MARGIN + PHOTOIMAGEVIEW_MARGIN, MARGIN + PHOTOIMAGEVIEW_MARGIN, PHOTOIMGVIEW_HEIGHT, PHOTOIMGVIEW_HEIGHT);
+        [self.contentView addSubview:_mCheckButton];
+        
+        _mDisplayNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_mCheckButton.frame.origin.x + _mCheckButton.frame.size.width + PADDING + PHOTOIMAGEVIEW_MARGIN + MARGIN, MARGIN, self.frame.size.width / 2 - MARGIN - (_mCheckButton.frame.size.width + PADDING), DISPLAYNAMELABEL_HEIGHT)];
+        _mDisplayNameLabel.textColor = [UIColor colorWithIntegerRed:122 integerGreen:122 integerBlue:122 alpha:1];
+        _mDisplayNameLabel.font = [UIFont fontWithName:@"Arial" size:15];
+        _mDisplayNameLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_mDisplayNameLabel];
         
-        // contact phone numbers label
         _mPhoneNumbersLabel = [[UILabel alloc] initWithFrame:CGRectMake(_mDisplayNameLabel.frame.origin.x, _mDisplayNameLabel.frame.origin.y + _mDisplayNameLabel.frame.size.height + PADDING, _mDisplayNameLabel.frame.size.width, PHONENUMBERSLABEL_DEFAULTHEIGHT)];
-        // set text color and font
-        _mPhoneNumbersLabel.textColor = [UIColor lightGrayColor];
-        _mPhoneNumbersLabel.font = [UIFont systemFontOfSize:14.0];
-        // add to content view
+        _mPhoneNumbersLabel.textColor = [UIColor colorWithIntegerRed:181 integerGreen:181 integerBlue:181 alpha:1];
+        _mPhoneNumbersLabel.font = [UIFont fontWithName:@"Arial" size:14];
+        _mPhoneNumbersLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_mPhoneNumbersLabel];
+        
+        
     }
     return self;
 }
@@ -63,6 +62,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    if (selected) {
+        self.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"left_region_selected"]];
+    } else {
+        self.contentView.backgroundColor = [UIColor clearColor];
+    }
 }
 
 - (void)setPhotoImg:(UIImage *)photoImg{
@@ -72,13 +76,13 @@
     // check photo image
     if (photoImg) {
         // set photo image view image
-        [_mPhotoImgButton setImage:photoImg forState:UIControlStateNormal];
-        [_mPhotoImgButton setImage:photoImg forState:UIControlStateHighlighted];
+        [_mCheckButton setImage:photoImg forState:UIControlStateNormal];
+        [_mCheckButton setImage:photoImg forState:UIControlStateHighlighted];
     }
     else {
         // recover photo image view default photo image
-        [_mPhotoImgButton setImage:CONTACT_DEFAULT_PHOTO forState:UIControlStateNormal];
-        [_mPhotoImgButton setImage:CONTACT_DEFAULT_PHOTO forState:UIControlStateHighlighted];
+        [_mCheckButton setImage:CONTACT_DEFAULT_PHOTO forState:UIControlStateNormal];
+        [_mCheckButton setImage:CONTACT_DEFAULT_PHOTO forState:UIControlStateHighlighted];
     }
 }
 
@@ -102,17 +106,27 @@
     
     // set phone number label text
     _mPhoneNumbersLabel.text = [phoneNumbersArray getContactPhoneNumbersDisplayTextWithStyle:vertical];
+
+    CGFloat sepY = _mPhoneNumbersLabel.frame.origin.y + phoneNumbersArray.count * PHONENUMBERSLABEL_DEFAULTHEIGHT + MARGIN;
+    CGRect frame = CGRectMake(0, sepY, self.frame.size.width, 1);
+    if (!_mSeparateLine) { 
+        _mSeparateLine = [[UIImageView alloc] initWithFrame:frame];
+        _mSeparateLine.contentMode = UIViewContentModeScaleAspectFit;
+        _mSeparateLine.image = [UIImage imageNamed:@"left_sep_line"];
+        [self.contentView addSubview:_mSeparateLine];
+    } else {
+        _mSeparateLine.frame = frame;
+    }
 }
 
 - (void)addImgButtonTarget:(id)pTarget andActionSelector:(SEL)pSelector{
     // add photo image button target and action selector
-    [_mPhotoImgButton addTarget:pTarget action:pSelector forControlEvents:UIControlEventTouchDown];
+    [_mCheckButton addTarget:pTarget action:pSelector forControlEvents:UIControlEventTouchDown];
 }
 
 + (CGFloat)cellHeightWithContact:(ContactBean *)pContact{
     // set contacts list TableViewCell default height
-    CGFloat _ret = 2 * /*top margin*/MARGIN + 4.0 / 3 * /*photo image view height*/PHOTOIMGVIEW_HEIGHT;
-    
+    CGFloat _ret = MARGIN + DISPLAYNAMELABEL_HEIGHT + PADDING + PHONENUMBERSLABEL_DEFAULTHEIGHT + MARGIN + 1;
     // check phone numbers
     if (pContact.phoneNumbers && [pContact.phoneNumbers count] > 1) {
         _ret += ([pContact.phoneNumbers count] - 1) * PHONENUMBERSLABEL_DEFAULTHEIGHT;
@@ -122,3 +136,5 @@
 }
 
 @end
+
+

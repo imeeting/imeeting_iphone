@@ -11,6 +11,7 @@
 
 
 @interface ECBaseUIView : UIView <UITextFieldDelegate> {
+    UILabel *_titleView;
 }
 
 - (UITextField*)makeTextFieldWithPlaceholder:(NSString*)placeholder frame:(CGRect)frame keyboardType:(UIKeyboardType)keyboardType;

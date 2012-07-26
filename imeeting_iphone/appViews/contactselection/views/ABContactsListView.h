@@ -21,6 +21,7 @@
     NSIndexPath *_mSelectedCellIndexPath;
 }
 
+@property (nonatomic, retain) UIView *contactsSelectView;
 @property (nonatomic, readonly) NSMutableArray *allContactsInfoArrayInABRef;
 
 @property (nonatomic, retain) NSMutableArray *presentContactsInfoArrayRef;

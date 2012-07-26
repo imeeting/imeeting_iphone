@@ -1,32 +1,22 @@
 //
-//  ContactsListTableViewCell.h
-//  IMeeting
+//  ECMeetingContactsListCell.h
+//  imeeting_iphone
 //
-//  Created by  on 12-6-15.
-//  Copyright (c) 2012年 richitec. All rights reserved.
+//  Created by star king on 12-7-26.
+//  Copyright (c) 2012年 elegant cloud. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
 #import "CommonToolkit/CommonToolkit.h"
 
+#define CONTACT_PREINMEETING_PHOTO [UIImage imageNamed:@"left_arrow.png"]
 
-
-// contact default photo
-#define CONTACT_DEFAULT_PHOTO [UIImage imageNamed:@"unselected.png"]
-// contact selected photo
-#define CONTACT_SELECTED_PHOTO [UIImage imageNamed:@"selected.png"]
-// contact prein meeting photo
-//#define CONTACT_PREINMEETING_PHOTO [UIImage imageNamed:@"left_arrow.png"]
-
-@interface ContactsListTableViewCell : UITableViewCell {
+@interface ECMeetingContactsListCell : UITableViewCell {
     // contact check button
     UIButton *_mCheckButton;
     // contact display name label
     UILabel *_mDisplayNameLabel;
-    // contact phone numbers display label
-    UILabel *_mPhoneNumbersLabel;
-    UIImageView *_mSeparateLine;
+
 }
 
 // contact photo imageView photo image

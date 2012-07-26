@@ -20,10 +20,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.isAppearedInCreatingNewGroup = YES;
-        
-        // set title
-        self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"invite", "") style:UIBarButtonItemStyleDone target:self action:@selector(onInviteAttendeeAction)];
-        self.rightBarButtonItem.tintColor = [UIColor colorWithIntegerRed:70 integerGreen:130 integerBlue:180 alpha:1];
+                
+        UIButton *createButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [createButton setBackgroundImage:[UIImage imageNamed:@"createbutton"] forState:UIControlStateNormal];
+        createButton.frame = CGRectMake(0, 0, 58, 29);
+        [createButton addTarget:self action:@selector(onInviteAttendeeAction) forControlEvents:UIControlEventTouchUpInside];
+        self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:createButton];
+
     }
     
     return self;

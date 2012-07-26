@@ -14,9 +14,26 @@
 {
     self = [super init];
     if (self) {
-        // Custom initialization
-        // set navigationBar tint color
-        self.navigationBar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
+        // Custom initialization       
+        UINavigationBar *navBar = self.navigationBar;
+                
+#define kSCNavBarImageTag 10
+        if ([navBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)])
+        {
+            //if iOS 5.0 and later
+            [navBar setBackgroundImage:[UIImage imageNamed:@"navigationbar.png"] forBarMetrics:UIBarMetricsDefault];
+        }
+        else
+        {
+            UIImageView *imageView = (UIImageView *)[navBar viewWithTag:kSCNavBarImageTag];
+            if (imageView == nil)
+            {
+                imageView = [[UIImageView alloc] initWithImage:
+                             [UIImage imageNamed:@"navigationbar.png"]];
+                [imageView setTag:kSCNavBarImageTag];
+                [navBar insertSubview:imageView atIndex:0];
+            }
+        }
     }
     return self;
 }

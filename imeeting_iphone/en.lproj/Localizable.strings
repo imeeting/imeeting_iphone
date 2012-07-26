@@ -55,9 +55,7 @@
 "This attendee is offline" = "This attendee is offline";
 "error in creating group" = "Fail to create group";
 "select attendee" = "Select Attendee";
-"contacts list table view section header title" = "From AddressBook";
-"meeting contacts table view in meeting section header title" = "In Grouop";
-"meeting contacts table view prein meeting section header title" = "To Be Invited";
+"contacts list table view section header title" = "Contact List";
 "contact has no phone number alertView title" = "The contact has no phone number";
 "contact has no phone number alertView button title" = "Select again";
 "contact phone number select actionSheet title" = "Select %@'s phone number to join group";
@@ -96,3 +94,5 @@
 "Reach the maximum number of members" = "Reach the maximum number of memebers!";
 "Only 5 members in all are allowed" = "Only 5 members in all are allowed!";
 "Remove %@ ?" = "Are you sure to remove %@ ?";
+"Already Added Contacts" = "Added Contacts";
+"Search Contacts" = "Search Contacts";

@@ -10,14 +10,6 @@
 #import "CommonToolkit/CommonToolkit.h"
 
 
-/*
-@interface AttendeeListView : JTListView <JTListViewDelegate, JTListViewDataSource>
-
-@property (nonatomic, retain) NSArray *attendeeArray;
-
-@end
-*/
-
 typedef enum {
     expanded,
     shrinked

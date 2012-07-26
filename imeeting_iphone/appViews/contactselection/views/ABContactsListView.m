@@ -29,7 +29,7 @@
 
 
 @implementation ABContactsListView
-
+@synthesize contactsSelectView = _contactsSelectView;
 @synthesize allContactsInfoArrayInABRef = _mAllContactsInfoArrayInABRef;
 
 @synthesize presentContactsInfoArrayRef = _mPresentContactsInfoArrayRef;
@@ -85,11 +85,6 @@
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    // Return the header title in the section.
-    return NSLocalizedString(@"contacts list table view section header title", nil);
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     // Return the height for row at the indexPath.
     return [ContactsListTableViewCell cellHeightWithContact:[_mPresentContactsInfoArrayRef objectAtIndex:indexPath.row]];
@@ -102,7 +97,7 @@
     [self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     
     // get parent view: contacts select container view
-    ContactsSelectContainerView *_contactsSelectContainerView = (ContactsSelectContainerView *)self.superview;
+    ContactsSelectContainerView *_contactsSelectContainerView = (ContactsSelectContainerView *)self.contactsSelectView;
     
     // get the select contact contactBean
     ContactBean *_selectContactBean = [_mPresentContactsInfoArrayRef objectAtIndex:indexPath.row];
@@ -116,7 +111,7 @@
         }
         else if (_selectContactBean.phoneNumbers && 1 == [_selectContactBean.phoneNumbers count]) {
             // add the selected contact with selected phone number to meeting contacts list table view prein meeting section
-            [(ContactsSelectContainerView *)self.superview addSelectedContactToMeetingWithIndexPath:indexPath andSelectedPhoneNumber:[_selectContactBean.phoneNumbers objectAtIndex:[_selectContactBean.phoneNumbers count] - 1]];
+            [(ContactsSelectContainerView *)self.contactsSelectView addSelectedContactToMeetingWithIndexPath:indexPath andSelectedPhoneNumber:[_selectContactBean.phoneNumbers objectAtIndex:[_selectContactBean.phoneNumbers count] - 1]];
         }
         else {
             // select the selected contact phone number in his phone number array
@@ -138,7 +133,7 @@
             // compare contact id in present contacts info array with each contact which in meeting contacts list table view prein meeting contacts info array
             if (((ContactBean *)[_contactsSelectContainerView.preinMeetingContactsInfoArray objectAtIndex:_index]).id == ((ContactBean *)[_mPresentContactsInfoArrayRef objectAtIndex:indexPath.row]).id) {
                 // remove the selected contact from meeting contacts list table view prein meeting sextion
-                [(ContactsSelectContainerView *)self.superview removeSelectedContactFromMeetingWithIndexPath:[NSIndexPath indexPathForRow:_index inSection:1]];
+                [(ContactsSelectContainerView *)self.contactsSelectView removeSelectedContactFromMeetingWithIndexPath:[NSIndexPath indexPathForRow:_index inSection:1]];
             }
         }
     }
@@ -146,7 +141,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     // call parent view method:(void)hideSoftKeyboardWhenBeginScroll
-    [((ContactsSelectContainerView *)self.superview) hideSoftKeyboardWhenBeginScroll];
+    [((ContactsSelectContainerView *)self.contactsSelectView) hideSoftKeyboardWhenBeginScroll];
 }
 
 - (void)addContactForJoiningMeetingAction:(UIButton *)pSender{
@@ -156,7 +151,7 @@
 
 - (void)phoneNumbersSelectActionSheet:(UIActionSheet *)pActionSheet clickedButtonAtIndex:(NSInteger)pButtonIndex{
     // add the selected contact with selected phone number to meeting contacts list table view prein meeting section
-    [(ContactsSelectContainerView *)self.superview addSelectedContactToMeetingWithIndexPath:_mSelectedCellIndexPath andSelectedPhoneNumber:[pActionSheet buttonTitleAtIndex:pButtonIndex]];
+    [(ContactsSelectContainerView *)self.contactsSelectView addSelectedContactToMeetingWithIndexPath:_mSelectedCellIndexPath andSelectedPhoneNumber:[pActionSheet buttonTitleAtIndex:pButtonIndex]];
 }
 
 - (void)addressBookChanged:(ABAddressBookRef)pAddressBook info:(NSDictionary*)pInfo context:(void *)pContext {

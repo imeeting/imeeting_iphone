@@ -11,17 +11,18 @@
 #import "ABContactsListView.h"
 #import "MeetingContactsListView.h"
 #import "ContactsProcessToolbar.h"
+#import "ECBaseUIView.h"
 
-@interface ContactsSelectContainerView : UIView {
+@interface ContactsSelectContainerView : ECBaseUIView {
     // subview addressBook contacts list table view
     ABContactsListView *_mABContactsListView;
     // subview meeting contacts list table view
     MeetingContactsListView *_mMeetingContactsListView;
-    // subview contacts process toolbar
-    ContactsProcessToolbar *_mContactsProcessToolbar;
     
     // subview meeting contacts list table view prein meeting contacts info array
     NSMutableArray *_mPreinMeetingContactsInfoArray;
+    
+    UITextField *_mSearchField;
 }
 
 @property (nonatomic, readonly) NSMutableArray *preinMeetingContactsInfoArray;

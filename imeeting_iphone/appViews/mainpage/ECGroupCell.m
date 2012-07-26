@@ -23,83 +23,6 @@ static CGFloat Margin = 12;
 static CGFloat Padding = 3;
 
 
-/*
-@implementation AttendeeListView
-
-@synthesize attendeeArray = _attendeeArray;
-
-
-- (id)init {
-    self = [super init];
-    if (self) {
-        self.delegate = self;
-        self.dataSource = self;
-    }
-    return self;
-}
-
-- (void)setAttendeeArray:(NSArray *)attendeeArray {
-    if (!attendeeArray) {
-        _attendeeArray = [[NSArray alloc] init];
-    } else {
-        _attendeeArray = attendeeArray;
-    }
-}
-
-#pragma mark - JTListViewDataSource
-
-- (NSUInteger)numberOfItemsInListView:(JTListView *)listView {
-    return _attendeeArray.count;
-}
-
-- (UIView*)listView:(JTListView *)listView viewForItemAtIndex:(NSUInteger)index {
-    UIView *view = [listView dequeueReusableView];
-    if (!view) {
-        view = [[UIView alloc] init];
-        
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(MarginLeft + (NameLabelWidth - IconWidth) / 2, MarginTop, IconWidth, IconHeight)];
-        iconView.contentMode = UIViewContentModeScaleAspectFit;
-        iconView.image = [UIImage imageNamed:@"fashionChannel"];
-        iconView.backgroundColor = [UIColor clearColor];
-        [view addSubview:iconView];
-        
-        UILabel *nameLabel =[[UILabel alloc] initWithFrame:CGRectMake(MarginLeft, iconView.frame.origin.y + iconView.frame.size.height + MarginBotton, NameLabelWidth, NameLabelHeight)];
-        nameLabel.text = [_attendeeArray objectAtIndex:index];
-        [nameLabel setTextAlignment:UITextAlignmentCenter];
-        [nameLabel setFont:[UIFont systemFontOfSize:12]];
-        nameLabel.backgroundColor = [UIColor clearColor];
-        [view addSubview:nameLabel];
-    }
-    return view; 
-}
-
-#pragma mark - JTListViewDelegate
-
-- (CGFloat)listView:(JTListView *)listView widthForItemAtIndex:(NSUInteger)index
-{
-    return (CGFloat)(MarginLeft + NameLabelWidth + MarginRight);
-}
-
-- (CGFloat)listView:(JTListView *)listView heightForItemAtIndex:(NSUInteger)index
-{
-    return (CGFloat)(MarginTop + IconHeight + MarginBotton + NameLabelHeight);
-}
-
-#pragma mark - touch events
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITableViewCell *cell = (UITableViewCell*)self.superview.superview;
-    [cell touchesBegan:touches withEvent:event];
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITableViewCell *cell = (UITableViewCell*)self.superview.superview;
-    [cell touchesEnded:touches withEvent:event];
-}
-
-@end
-*/
-
 @implementation AttendeeGridView
 
 @synthesize attendeeArray = _attendeeArray;
@@ -133,12 +56,12 @@ static CGFloat Padding = 3;
 - (void)initUI {
     if (self.attendeeArray) {
         line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cellWidth * 5, cellHeight)];
-        line2 = [[UIView alloc] initWithFrame:CGRectMake(0, line1.frame.origin.y + line1.frame.size.height, line1.frame.size.width, line1.frame.size.height)];
+       // line2 = [[UIView alloc] initWithFrame:CGRectMake(0, line1.frame.origin.y + line1.frame.size.height, line1.frame.size.width, line1.frame.size.height)];
 
         
         if (self.attendeeArray.count > 5) {
             self.expansible = YES;
-            // only display 10 people as maximum
+            // only display 5 people as maximum
             
             for (NSUInteger i = 0; i < 5; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];
@@ -153,6 +76,7 @@ static CGFloat Padding = 3;
                 
             }
             
+            /*
             int len = self.attendeeArray.count > 10 ? 10 : self.attendeeArray.count;
             for (NSUInteger i = 5; i < len; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];
@@ -166,9 +90,9 @@ static CGFloat Padding = 3;
                 cell.frame = frame;
                 [line2 addSubview:cell];
             }
-            
+            */
             [self addSubview:line1];
-            [self addSubview:line2];
+            //[self addSubview:line2];
         } else {
             for (NSUInteger i = 0; i < self.attendeeArray.count; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];

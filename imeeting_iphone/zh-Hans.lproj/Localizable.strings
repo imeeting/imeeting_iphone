@@ -55,9 +55,7 @@
 "This attendee is offline" = "此成员未上线";
 "error in creating group" = "新建群聊失败";
 "select attendee" = "添加成员";
-"contacts list table view section header title" = "通讯录";
-"meeting contacts table view in meeting section header title" = "已存在";
-"meeting contacts table view prein meeting section header title" = "待加入";
+"contacts list table view section header title" = "联系人列表";
 "contact has no phone number alertView title" = "此人没有号码";
 "contact has no phone number alertView button title" = "重新选择";
 "contact phone number select actionSheet title" = "选择 %@ 加入群聊的号码";
@@ -96,3 +94,5 @@
 "Reach the maximum number of members" = "已达到人数上限！";
 "Only 5 members in all are allowed" = "最多允许5人！";
 "Remove %@ ?" = "确定要将 %@ 移出群聊吗？";
+"Already Added Contacts" = "已添加名单";
+"Search Contacts" = "搜索联系人";

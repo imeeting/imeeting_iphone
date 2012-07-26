@@ -116,7 +116,8 @@
 
 - (void)initUI {
     
-    self.title = NSLocalizedString(@"Talking Group", "");
+    _titleView.text = NSLocalizedString(@"Talking Group", "");
+    self.titleView = _titleView;
     UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [settingButton addTarget:self action:@selector(onSystemSettingAction) forControlEvents:UIControlEventTouchUpInside];
     self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: settingButton];

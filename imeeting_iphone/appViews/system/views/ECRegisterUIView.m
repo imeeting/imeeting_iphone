@@ -35,7 +35,9 @@
 
 - (void)initUI {
     
-    self.title = NSLocalizedString(@"register", "register view title");
+    _titleView.text = NSLocalizedString(@"register", "register view title");
+    self.titleView = _titleView;
+    
     self.leftBarButtonItem = nil; // use default
         
     //### user register step 1

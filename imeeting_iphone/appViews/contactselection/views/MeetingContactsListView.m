@@ -8,7 +8,7 @@
 
 #import "MeetingContactsListView.h"
 
-#import "ContactsListTableViewCell.h"
+#import "ECMeetingContactsListCell.h"
 
 #import "ContactsSelectContainerView.h"
 
@@ -17,8 +17,6 @@
 // selction rows number array in meeting contacts list table view
 #define SECTION_ROWSNUMBERARRAY_INVIEW    [NSArray arrayWithObjects:[NSNumber numberWithInteger:[_inMeetingContactsInfoArrayRef count]], [NSNumber numberWithInteger:[_preinMeetingContactsInfoArrayRef count]], nil]
 
-// section header title array in meeting contacts list table view
-#define SECTION_HEADTITLEARRAY_INVIEW [NSArray arrayWithObjects:NSLocalizedString(@"meeting contacts table view in meeting section header title", nil), NSLocalizedString(@"meeting contacts table view prein meeting section header title", nil), nil]
 // contacts info array in meeting contacts list table view
 #define CONTACTSINFOARRAY_INVIEW [NSArray arrayWithObjects:_inMeetingContactsInfoArrayRef, _preinMeetingContactsInfoArrayRef, nil]
 
@@ -101,28 +99,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
-    ContactsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ECMeetingContactsListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[ContactsListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[ECMeetingContactsListCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
     // get contact bean
     ContactBean *_contactBean = [[CONTACTSINFOARRAY_INVIEW objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    cell.photoImg = (0 == indexPath.section) ? CONTACT_SELECTED_PHOTO : /*nil*/CONTACT_PREINMEETING_PHOTO;
+    cell.photoImg = (0 == indexPath.section) ? nil : /*nil*/CONTACT_PREINMEETING_PHOTO;
     cell.displayName = _contactBean.displayName;
     cell.phoneNumbersArray = [NSArray arrayWithObject:_contactBean.selectedPhoneNumber];
     // add photo image button touchedDown event action
     [cell addImgButtonTarget:self andActionSelector:@selector(removePreinMeetingContactAction:)];
     
     return cell;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    // Return the header title in the section.
-    return [SECTION_HEADTITLEARRAY_INVIEW objectAtIndex:section];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -159,6 +152,11 @@
     [((ContactsSelectContainerView *)self.superview) hideSoftKeyboardWhenBeginScroll];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    // Return the height for row at the indexPath.
+    return [ECMeetingContactsListCell cellHeightWithContact:nil];
+}
+
 - (NSArray *)preparedForJoiningMeetingContactsPhoneNumberArray{
     NSMutableArray *_ret = [[NSMutableArray alloc] init];
     
@@ -171,7 +169,7 @@
 
 - (void)removePreinMeetingContactAction:(UIButton *)pSender{
     // get select cell indexPath
-    NSIndexPath *_indexPath = [self indexPathForCell:(ContactsListTableViewCell *)pSender./*UITableViewCellContentView*/superview./*ContactsListTableViewCell*/superview];
+    NSIndexPath *_indexPath = [self indexPathForCell:(ECMeetingContactsListCell *)pSender./*UITableViewCellContentView*/superview./*ContactsListTableViewCell*/superview];
     
     // check the contact is in prein meeting section
     if (0 != _indexPath.section) {

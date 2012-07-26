@@ -32,7 +32,9 @@
 #pragma mark - UI Initialization
 
 - (void)initUI {
-    self.title = NSLocalizedString(@"Account Setting", "");
+    _titleView.text = NSLocalizedString(@"Account Setting", "");
+    self.titleView = _titleView;
+    
     self.leftBarButtonItem = nil;
     
     self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"register", "") style:UIBarButtonItemStyleBordered target:self action:@selector(jumpToRegisterAction)];

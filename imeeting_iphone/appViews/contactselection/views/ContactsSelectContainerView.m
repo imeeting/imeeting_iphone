@@ -18,6 +18,9 @@
 #define MIDDLE_SEPERATE_PADDING   1.0
 // middle seperate color
 #define MIDDLE_SEPERATE_COLOR [UIColor colorWithIntegerRed:152 integerGreen:158 integerBlue:164 alpha:1.0]
+#define ABCONTACT_TABLEVIEW_WIDTH           215
+#define INMEETING_CONTACT_TABLEVIEW_WIDTH   105
+#define LIST_TITLE_BAR_HEIGHT               27
 
 // ContactsSelectContainerView extension
 @interface ContactsSelectContainerView ()
@@ -27,7 +30,8 @@
 
 // add new contact with user input phone number to meeting contacts list table view prein meeting section
 - (void)addNewContactToMeetingWithPhoneNumber:(NSString *)pPhoneNumber;
-
+- (void)goBack;
+- (void)searchFieldValueChanged:(UITextField*)textField;
 @end
 
 
@@ -43,9 +47,16 @@
         self.backgroundColor = MIDDLE_SEPERATE_COLOR;
         
         // set title
-        self.title = NSLocalizedString(@"select attendee", nil);
+        _titleView.text =  NSLocalizedString(@"select attendee", nil);
+        self.titleView = _titleView;
         
+        UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [backButton setBackgroundImage:[UIImage imageNamed:@"goback"] forState:UIControlStateNormal];
+        backButton.frame = CGRectMake(0, 0, 58, 29);
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
+            
         // get UIScreen bounds
         CGRect _screenBounds = [[UIScreen mainScreen] bounds];
         
@@ -53,29 +64,83 @@
         self.frame = CGRectMake(_screenBounds.origin.x, _screenBounds.origin.y, _screenBounds.size.width, _screenBounds.size.height - /*statusBar height*/[CommonUtils appStatusBarHeight] - /*navigationBar height*/[CommonUtils appNavigationBarHeight]);
         
         // create and init subviews
+        
+        // init list title bar
+        UIImageView *listTitleBar = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, LIST_TITLE_BAR_HEIGHT)];
+        listTitleBar.image = [UIImage imageNamed:@"listtitlebar"];
+        UILabel *addressBookListTitle = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, ABCONTACT_TABLEVIEW_WIDTH - 14, LIST_TITLE_BAR_HEIGHT)];
+        addressBookListTitle.text = NSLocalizedString(@"contacts list table view section header title", nil);
+        addressBookListTitle.textAlignment = UITextAlignmentLeft;
+        addressBookListTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:14];
+        addressBookListTitle.textColor = [UIColor whiteColor];
+        addressBookListTitle.backgroundColor = [UIColor clearColor];
+        [listTitleBar addSubview:addressBookListTitle];
+        
+        UILabel *inMeetingListTitle = [[UILabel alloc] initWithFrame:CGRectMake(ABCONTACT_TABLEVIEW_WIDTH + 14, 0, INMEETING_CONTACT_TABLEVIEW_WIDTH - 14, LIST_TITLE_BAR_HEIGHT)];
+        inMeetingListTitle.text = NSLocalizedString(@"Already Added Contacts", nil);
+        inMeetingListTitle.textAlignment = UITextAlignmentLeft;
+        inMeetingListTitle.font = addressBookListTitle.font;
+        inMeetingListTitle.textColor = addressBookListTitle.textColor;
+        inMeetingListTitle.backgroundColor = addressBookListTitle.backgroundColor;
+        [listTitleBar addSubview:inMeetingListTitle];
+        
+        
+        // init left region view
+        
+        UIView *leftRegionView = [[UIView alloc] initWithFrame:CGRectMake(self.frame.origin.x, listTitleBar.frame.origin.y + listTitleBar.frame.size.height, ABCONTACT_TABLEVIEW_WIDTH + 6, self.frame.size.height - listTitleBar.frame.size.height)];
+        leftRegionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leftregionbg"]];
+
+        // init search field
+        UIView *searchFieldView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ABCONTACT_TABLEVIEW_WIDTH, 35)];
+        searchFieldView.backgroundColor = [UIColor clearColor];
+        
+        //-- search field border
+        UIImageView *searchBGView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 162, 25)];
+        searchBGView.image = [UIImage imageNamed:@"searchbg"];
+        searchBGView.backgroundColor = [UIColor clearColor];
+        [searchFieldView addSubview:searchBGView];
+        
+        //-- search text field
+        _mSearchField = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"Search Contacts", nil) frame:CGRectMake(searchBGView.frame.origin.x + 32, searchBGView.frame.origin.y + 3, 135, 20) keyboardType:UIKeyboardTypeASCIICapable];
+        _mSearchField.backgroundColor = [UIColor clearColor];
+        _mSearchField.borderStyle = UITextBorderStyleNone;
+        _mSearchField.font = [UIFont fontWithName:@"Arial" size:13];
+        _mSearchField.autocorrectionType = UITextAutocorrectionTypeNo;
+        _mSearchField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _mSearchField.textColor = [UIColor colorWithIntegerRed:181 integerGreen:181 integerBlue:181 alpha:1];
+        [_mSearchField addTarget:self action:@selector(searchFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+        [searchFieldView addSubview:_mSearchField];
+        
+        // init add new contact button
+        UIButton *addNewContactButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [addNewContactButton setBackgroundImage:[UIImage imageNamed:@"addnew"] forState:UIControlStateNormal];
+        addNewContactButton.frame = CGRectMake(searchBGView.frame.origin.x + searchBGView.frame.size.width + 5, searchBGView.frame.origin.y + (searchBGView.frame.size.height - 22) / 2, 37, 22);
+        [searchFieldView addSubview:addNewContactButton];
+        
+        
+        [leftRegionView addSubview:searchFieldView];
+        
+        
         // init addressBook contacts list table view
-        _mABContactsListView = [[ABContactsListView alloc] initWithFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width / 2 - MIDDLE_SEPERATE_PADDING, self.frame.size.height - CONTACTSSEARCH_TOOLBAR_HEIGHT)];
+        _mABContactsListView = [[ABContactsListView alloc] initWithFrame:CGRectMake(searchFieldView.frame.origin.x, searchFieldView.frame.origin.y + searchFieldView.frame.size.height, ABCONTACT_TABLEVIEW_WIDTH, leftRegionView.frame.size.height - searchFieldView.frame.size.height)];
+        _mABContactsListView.contactsSelectView = self;
+        _mABContactsListView.backgroundColor = [UIColor clearColor];
+        _mABContactsListView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [leftRegionView addSubview:_mABContactsListView];
+        
         // init meeting contacts list table view
-        _mMeetingContactsListView = [[MeetingContactsListView alloc] initWithFrame:CGRectMake(self.frame.size.width / 2 + MIDDLE_SEPERATE_PADDING, _mABContactsListView.frame.origin.y, _mABContactsListView.frame.size.width, _mABContactsListView.frame.size.height)];
-        // init contacts process toolbar
-        _mContactsProcessToolbar = [[ContactsProcessToolbar alloc] initWithFrame:CGRectMake(self.frame.origin.x, self.frame.size.height - CONTACTSSEARCH_TOOLBAR_HEIGHT, self.frame.size.width, CONTACTSSEARCH_TOOLBAR_HEIGHT)];
+        _mMeetingContactsListView = [[MeetingContactsListView alloc] initWithFrame:CGRectMake(leftRegionView.frame.origin.x + ABCONTACT_TABLEVIEW_WIDTH, leftRegionView.frame.origin.y, INMEETING_CONTACT_TABLEVIEW_WIDTH, leftRegionView.frame.size.height)];
+        _mMeetingContactsListView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _mMeetingContactsListView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"rightregionbg"]];
         
         // add addressBook contacts list table view, meeting contacts list table view and contacts process toolbar to contacts select view
-        [self addSubview:_mABContactsListView];
+        [self addSubview:listTitleBar];
         [self addSubview:_mMeetingContactsListView];
-        [self addSubview:_mContactsProcessToolbar];
+        [self addSubview:leftRegionView];
+        
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 - (NSMutableArray *)preinMeetingContactsInfoArray{
     return _mMeetingContactsListView.preinMeetingContactsInfoArrayRef;
@@ -230,6 +295,12 @@
     }
 }
 
+- (void)searchFieldValueChanged:(UITextField *)textField {
+    NSString *searchText = textField.text;
+    NSLog(@"searchText: %@", searchText);
+    [self searchContactWithParameter:searchText];
+}
+
 - (void)searchContactWithParameter:(NSString *)pParameter{
     // check search parameter
     if ([pParameter isEqualToString:@""]) {
@@ -240,17 +311,14 @@
         // define temp array
         NSArray *_tmpArray = nil;
         
-        // check softKeyboard type
-        switch (_mContactsProcessToolbar.softKeyboardType) {
-            case custom:
-                // search by phone number
-                _tmpArray = [[AddressBookManager shareAddressBookManager] getContactByPhoneNumber:pParameter];
-                break;
-                
-            case iosSystem:
-                // search by name
-                _tmpArray = [[AddressBookManager shareAddressBookManager] getContactByName:pParameter];
-                break;
+        NSString *regex = @"^[0-9]+$";
+        BOOL match = [pParameter isMatchedByRegex:regex];
+        if (match) {
+            // search phone number
+            _tmpArray = [[AddressBookManager shareAddressBookManager] getContactByPhoneNumber:pParameter];
+        } else {
+            // search name
+            _tmpArray = [[AddressBookManager shareAddressBookManager] getContactByName:pParameter];
         }
         
         // define searched contacts array
@@ -276,12 +344,11 @@
     [_mABContactsListView reloadData];
 }
 
+
 - (void)hideSoftKeyboardWhenBeginScroll{
-    // check softKeyboard it is hidden
-    if (!_mContactsProcessToolbar.softKeyboardHidden) {
-        [_mContactsProcessToolbar performSelector:@selector(indicateSoftKeyboard)];
-    }
+    [_mSearchField resignFirstResponder];    
 }
+
 
 - (NSArray *)inMeetingContactsPhoneNumberArray{
     NSMutableArray *_ret = [[NSMutableArray alloc] initWithCapacity:[_mMeetingContactsListView.inMeetingContactsInfoArrayRef count]];
@@ -325,6 +392,10 @@
     [_mMeetingContactsListView.preinMeetingContactsInfoArrayRef addObject:_newAddedContact];
     [_mMeetingContactsListView insertRowAtIndexPath:[NSIndexPath indexPathForRow:[_mMeetingContactsListView.preinMeetingContactsInfoArrayRef count] - 1 inSection:_mMeetingContactsListView.numberOfSections - 1] withRowAnimation:UITableViewRowAnimationLeft];
         
+}
+
+- (void)goBack {
+    [self.viewControllerRef.navigationController popViewControllerAnimated:YES];
 }
 
 @end
