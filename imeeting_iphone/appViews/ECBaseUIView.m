@@ -19,7 +19,7 @@
         // set background color
         self.backgroundColor = [UIColor whiteColor];
         _titleView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 38)];
-        _titleView.font = [UIFont fontWithName:CHINESE_FONT size:22];
+        _titleView.font = [UIFont fontWithName:CHINESE_FONT size:20];
         _titleView.textAlignment = UITextAlignmentCenter;
         _titleView.textColor = [UIColor whiteColor];
         _titleView.backgroundColor = [UIColor clearColor];

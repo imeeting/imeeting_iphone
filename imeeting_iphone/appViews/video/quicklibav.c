@@ -164,7 +164,7 @@ int init_quick_video_output(QuickVideoOutput *qvo, const char *filename, const c
     }
     
     
-    printf("video stream time base: %d / %d - codec time base: %d / %d\n",video_st->time_base.num, video_st->time_base.den, video_st->codec->time_base.num, video_st->codec->time_base.den);
+  //  printf("video stream time base: %d / %d - codec time base: %d / %d\n",video_st->time_base.num, video_st->time_base.den, video_st->codec->time_base.num, video_st->codec->time_base.den);
     
     /* write the stream header, if any */
     avformat_write_header(oc, NULL);

@@ -7,7 +7,7 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
-
+#import <AudioToolbox/AudioToolbox.h>
 #import "ECAppDelegate.h"
 #import "CommonToolkit/CommonToolkit.h"
 #import "ECLoginViewController.h"
@@ -23,7 +23,7 @@
 @interface ECAppDelegate () {
     NSInteger tryTimes;
     NSDictionary *currentNotification;
-    AVAudioPlayer *player;
+    //AVAudioPlayer *player;
 }
 - (void)initSystemSound;
 - (void)loadAccount;
@@ -37,11 +37,12 @@
 @synthesize rootViewController = _rootViewController;
 
 - (void)initSystemSound {
+    /*
     NSURL *filePath   = [[NSBundle mainBundle] URLForResource:@"office_phone" withExtension: @"caf"];
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
     [player prepareToPlay];
     player.numberOfLoops = 1;
-    
+    */
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -140,7 +141,8 @@
             NSLog(@"application state: %d", [application applicationState]);
             if ([application applicationState] == UIApplicationStateActive) {
                 // show invited dialog & play sound
-                [player play];
+                //[player play];
+                AudioServicesPlaySystemSound(1007);
                 [[[UIAlertView alloc] initWithTitle:nil message:alert delegate:self cancelButtonTitle:NSLocalizedString(@"Join", nil) otherButtonTitles:NSLocalizedString(@"Cancel", nil), nil] show];
             } else {
                 // process directly
@@ -151,8 +153,8 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [player stop];
-    [player prepareToPlay];
+    //[player stop];
+    //[player prepareToPlay];
     switch (buttonIndex) {
         case 0: {
             ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;

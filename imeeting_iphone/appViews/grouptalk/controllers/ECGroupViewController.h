@@ -19,6 +19,7 @@
 }
 
 @property (nonatomic) BOOL refreshList;
+@property (nonatomic) BOOL smallVideoViewIsMine; // indicate if the video view is swapped, YES: small video view displays my video, NO: small view displays friend's 
 
 //###### video view related methods
 - (void)onLeaveGroup;
@@ -26,6 +27,7 @@
 - (void)switchCamera;
 - (void)startCaptureVideo;
 - (void)stopCaptureVideo;
+- (void)swapVideoView; // swap my video and friend video view
 // render the video of selected guy
 - (void)renderOppositVideo:(UIImage*)videoImage;
 - (void)setOppositeVideoName:(NSString*)name;

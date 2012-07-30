@@ -63,6 +63,7 @@
 
 - (void)alert:(NSString *)newPhoneStatus old:(NSString *)oldPhoneStatus {
     NSString *msg = [NSString stringWithFormat:@"Invalid status transformation from %@ to %@", oldPhoneStatus, newPhoneStatus];
-    [[[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show]; 
+   // [[[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show]; 
+    NSLog(@"%@", msg);
 }
 @end

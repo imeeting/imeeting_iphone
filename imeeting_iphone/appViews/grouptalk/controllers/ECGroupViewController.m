@@ -20,8 +20,10 @@
 
 @interface ECGroupViewController ()
 // video view realted methods
-- (void)attachVideoPreviewLayer;
-- (void)detachVideoPreviewLayer;
+- (UIView*)currentMyVideoView;
+- (UIImageView*)currentFriendVideoView;
+- (void)attachMyVideoPreviewLayer;
+- (void)detachMyVideoPreviewLayer;
 - (void)updateMyVideoOnStatus;
 - (void)updateMyVideoOffStatus;
 - (void)onNetworkFailed:(ASIHTTPRequest*)request;
@@ -46,12 +48,13 @@
 
 @implementation ECGroupViewController
 @synthesize refreshList = _refreshList;
-
+@synthesize smallVideoViewIsMine = _smallVideoViewIsMine;
 - (id)init {
     self = [self initWithCompatibleView:[[ECGroupView alloc] init]];
     if (self) {
         _isFirstLoad = YES;
         _refreshList = YES;
+        _smallVideoViewIsMine = YES;
     }
     return self;
 }
@@ -150,12 +153,11 @@
     [groupView switchToAttendeeListView];
 }
 
-- (void)attachVideoPreviewLayer {
-    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+- (void)attachMyVideoPreviewLayer {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     AVCaptureSession *session = module.videoManager.session;
     if (session) {
-        UIView *myVideoView = videoView.myVideoView;
+        UIView *myVideoView = [self currentMyVideoView];
         if (!_previewLayer) {
             _previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:session];
             _previewLayer.frame = myVideoView.bounds;
@@ -165,7 +167,7 @@
     }
 }
 
-- (void)detachVideoPreviewLayer {
+- (void)detachMyVideoPreviewLayer {
     [_previewLayer removeFromSuperlayer];
 }
 
@@ -179,7 +181,7 @@
 
 // start to capture video and upload
 - (void)startCaptureVideo {
-    [self attachVideoPreviewLayer];
+    [self attachMyVideoPreviewLayer];
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     [module.videoManager startVideoCapture];
     [self updateMyVideoOnStatus];
@@ -187,7 +189,7 @@
 
 // close camera, stop video capture
 - (void)stopCaptureVideo {
-    [self detachVideoPreviewLayer];
+    [self detachMyVideoPreviewLayer];
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     [module.videoManager stopVideoCapture];
     [self updateMyVideoOffStatus];
@@ -200,6 +202,38 @@
 }
 
 #pragma mark - video related
+
+- (UIView *)currentMyVideoView {
+    ECGroupView *groupView = (ECGroupView*)self.view;
+    if (_smallVideoViewIsMine) {
+        return groupView.videoView.smallVideoView;
+    } else {
+        return groupView.videoView.largeVideoView;
+    }
+}
+
+- (UIImageView *)currentFriendVideoView {
+    ECGroupView *groupView = (ECGroupView*)self.view;
+    if (_smallVideoViewIsMine) {
+        return groupView.videoView.largeVideoView;
+    } else {
+        return groupView.videoView.smallVideoView;
+    }
+}
+
+- (void)setSmallVideoViewIsMine:(BOOL)smallVideoViewIsMine {
+    _smallVideoViewIsMine = smallVideoViewIsMine;
+    
+    [self detachMyVideoPreviewLayer];
+    [self attachMyVideoPreviewLayer];
+    
+    [[self currentFriendVideoView] setImage:nil];
+    
+}
+
+- (void)swapVideoView {
+    [self setSmallVideoViewIsMine:!_smallVideoViewIsMine];
+}
 
 - (void)updateMyVideoOnStatus {
     NSString *username = [[UserManager shareUserManager] userBean].name;
@@ -217,9 +251,8 @@
 
 - (void)renderOppositVideo:(UIImage *)videoImage {
     NSLog(@"render opposite video");
-    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
-    UIImageView *oppositView = videoView.oppositeVideoView;
-    oppositView.image = videoImage;
+    UIImageView *largeView = [self currentFriendVideoView];
+    largeView.image = videoImage;
 }
 
 - (void)setOppositeVideoName:(NSString *)name {
@@ -315,7 +348,7 @@
     if ([videoStatus isEqualToString:ON]) {
         [actions addObject:NSLocalizedString(@"Watch Video", "")];
     }
-    if ([phoneStatus isEqualToString:TERMINATED] || [phoneStatus isEqualToString:FAILED]) {
+    if ([phoneStatus isEqualToString:TERMINATED] || [phoneStatus isEqualToString:FAILED] || [phoneStatus isEqualToString:TERMWAIT]) {
         [actions addObject:NSLocalizedString(@"Call", "")];
     } else if ([phoneStatus isEqualToString:CALL_WAIT] || [phoneStatus isEqualToString:ESTABLISHED]) {
         [actions addObject:NSLocalizedString(@"Hang Up", "")];
@@ -424,7 +457,7 @@
             break;
         }
         case 500: {
-            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call failed", nil)];
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call Failed", nil)];
             [[[iToast makeText:msg] setDuration:iToastDurationLong] show];
             break;
         }

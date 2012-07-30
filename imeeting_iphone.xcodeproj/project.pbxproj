@@ -18,6 +18,7 @@
 		F814E284157CA0AB00FBBB19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E282157CA09600FBBB19 /* SystemConfiguration.framework */; };
 		F814E286157CA0B600FBBB19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E285157CA0B600FBBB19 /* CFNetwork.framework */; };
 		F814E288157CA0CE00FBBB19 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */; };
+		F83D8A0215C3D09C00173C2D /* navibutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F83D8A0115C3D09C00173C2D /* navibutton.png */; };
 		F863C862157C61320045C08C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C861157C61320045C08C /* UIKit.framework */; };
 		F863C864157C61320045C08C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C863157C61320045C08C /* Foundation.framework */; };
 		F863C866157C61320045C08C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C865157C61320045C08C /* CoreGraphics.framework */; };
@@ -89,6 +90,13 @@
 		F8C11F4115B8015600B30BD5 /* ECGroupVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4015B8015600B30BD5 /* ECGroupVideoView.m */; };
 		F8C11F4615B8016100B30BD5 /* ECGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4315B8016100B30BD5 /* ECGroupManager.m */; };
 		F8C11F4715B8016100B30BD5 /* ECGroupModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F4515B8016100B30BD5 /* ECGroupModule.m */; };
+		F8C4744415C6209F003ABBD0 /* group_cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C4744215C6209F003ABBD0 /* group_cell_bg.png */; };
+		F8C4744515C6209F003ABBD0 /* group_cell_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C4744315C6209F003ABBD0 /* group_cell_bg@2x.png */; };
+		F8C4744915C623BF003ABBD0 /* mainpage_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C4744715C623BF003ABBD0 /* mainpage_bg.png */; };
+		F8C4744A15C623BF003ABBD0 /* mainpage_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C4744815C623BF003ABBD0 /* mainpage_bg@2x.png */; };
+		F8C4744C15C6390D003ABBD0 /* create_group_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C4744B15C6390D003ABBD0 /* create_group_button_bg.png */; };
+		F8C4744F15C69ACF003ABBD0 /* group_selected_cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C4744D15C69ACF003ABBD0 /* group_selected_cell_bg.png */; };
+		F8C4745015C69ACF003ABBD0 /* group_selected_cell_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C4744E15C69ACF003ABBD0 /* group_selected_cell_bg@2x.png */; };
 		F8D5E35C157EEF30005B5581 /* ECRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */; };
 		F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */; };
 		F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */; };
@@ -142,6 +150,7 @@
 		F814E282157CA09600FBBB19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F814E285157CA0B600FBBB19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		F83D8A0115C3D09C00173C2D /* navibutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navibutton.png; sourceTree = "<group>"; };
 		F863C85D157C61320045C08C /* imeeting_iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imeeting_iphone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F863C861157C61320045C08C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F863C863157C61320045C08C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -388,6 +397,13 @@
 		F8C11F4315B8016100B30BD5 /* ECGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupManager.m; path = grouptalk/ECGroupManager.m; sourceTree = "<group>"; };
 		F8C11F4415B8016100B30BD5 /* ECGroupModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECGroupModule.h; path = grouptalk/ECGroupModule.h; sourceTree = "<group>"; };
 		F8C11F4515B8016100B30BD5 /* ECGroupModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupModule.m; path = grouptalk/ECGroupModule.m; sourceTree = "<group>"; };
+		F8C4744215C6209F003ABBD0 /* group_cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group_cell_bg.png; sourceTree = "<group>"; };
+		F8C4744315C6209F003ABBD0 /* group_cell_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_cell_bg@2x.png"; sourceTree = "<group>"; };
+		F8C4744715C623BF003ABBD0 /* mainpage_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainpage_bg.png; sourceTree = "<group>"; };
+		F8C4744815C623BF003ABBD0 /* mainpage_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainpage_bg@2x.png"; sourceTree = "<group>"; };
+		F8C4744B15C6390D003ABBD0 /* create_group_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_group_button_bg.png; sourceTree = "<group>"; };
+		F8C4744D15C69ACF003ABBD0 /* group_selected_cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group_selected_cell_bg.png; sourceTree = "<group>"; };
+		F8C4744E15C69ACF003ABBD0 /* group_selected_cell_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_selected_cell_bg@2x.png"; sourceTree = "<group>"; };
 		F8D5E35A157EEF30005B5581 /* ECRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterViewController.h; path = system/controller/ECRegisterViewController.h; sourceTree = "<group>"; };
 		F8D5E35B157EEF30005B5581 /* ECRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRegisterViewController.m; path = system/controller/ECRegisterViewController.m; sourceTree = "<group>"; };
 		F8D5E35D157EEF3A005B5581 /* ECRegisterUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRegisterUIView.h; path = system/views/ECRegisterUIView.h; sourceTree = "<group>"; };
@@ -981,6 +997,7 @@
 		F8A4C6DE15BFE9CE00C35C93 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				F83D8A0115C3D09C00173C2D /* navibutton.png */,
 				F8A4C6E115BFECE600C35C93 /* navigationbar.png */,
 				F8A4C6DF15BFE9CE00C35C93 /* navigationbar@2x.png */,
 			);
@@ -1033,6 +1050,21 @@
 			);
 			name = keys;
 			path = imeeting_iphone/Resources/images/keys;
+			sourceTree = "<group>";
+		};
+		F8C4744115C6209F003ABBD0 /* mainpage */ = {
+			isa = PBXGroup;
+			children = (
+				F8C4744D15C69ACF003ABBD0 /* group_selected_cell_bg.png */,
+				F8C4744E15C69ACF003ABBD0 /* group_selected_cell_bg@2x.png */,
+				F8C4744B15C6390D003ABBD0 /* create_group_button_bg.png */,
+				F8C4744715C623BF003ABBD0 /* mainpage_bg.png */,
+				F8C4744815C623BF003ABBD0 /* mainpage_bg@2x.png */,
+				F8C4744215C6209F003ABBD0 /* group_cell_bg.png */,
+				F8C4744315C6209F003ABBD0 /* group_cell_bg@2x.png */,
+			);
+			name = mainpage;
+			path = imeeting_iphone/Resources/images/mainpage;
 			sourceTree = "<group>";
 		};
 		F8C9564D157DAC2F008FDFD3 /* Login */ = {
@@ -1182,6 +1214,7 @@
 		F8F1A743158B1292003F1EE8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8C4744115C6209F003ABBD0 /* mainpage */,
 				F88B7CC415C1599E00B58AD1 /* fonts */,
 				F8B291E815C003B900DB5047 /* contactselect */,
 				F8A4C6DE15BFE9CE00C35C93 /* common */,
@@ -1342,6 +1375,14 @@
 				F88B7CBA15C140F300B58AD1 /* right_region_selected@2x.png in Resources */,
 				F88B7CBC15C1502500B58AD1 /* left_arrow@2x.png in Resources */,
 				F88B7CC615C1599E00B58AD1 /* msyh.ttf in Resources */,
+				F83D8A0215C3D09C00173C2D /* navibutton.png in Resources */,
+				F8C4744415C6209F003ABBD0 /* group_cell_bg.png in Resources */,
+				F8C4744515C6209F003ABBD0 /* group_cell_bg@2x.png in Resources */,
+				F8C4744915C623BF003ABBD0 /* mainpage_bg.png in Resources */,
+				F8C4744A15C623BF003ABBD0 /* mainpage_bg@2x.png in Resources */,
+				F8C4744C15C6390D003ABBD0 /* create_group_button_bg.png in Resources */,
+				F8C4744F15C69ACF003ABBD0 /* group_selected_cell_bg.png in Resources */,
+				F8C4745015C69ACF003ABBD0 /* group_selected_cell_bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

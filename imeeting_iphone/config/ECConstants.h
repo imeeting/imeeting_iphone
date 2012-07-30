@@ -52,6 +52,7 @@ static NSString *CALL_WAIT = @"CallWait";
 static NSString *ESTABLISHED = @"Established";
 static NSString *FAILED = @"Failed";
 static NSString *TERMINATED = @"Terminated";
+static NSString *TERMWAIT = @"TermWait";
 
 // Notify Constants
 static NSString *TOPIC = @"topic";

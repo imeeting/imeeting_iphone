@@ -133,7 +133,7 @@ invite_error:
     mMsgViewController.recipients = _currentInviteArray;
     
     NSString *audioConfId = [[ECGroupManager sharedECGroupManager] currentGroupModule].audioConfId;
-    NSString *msgBody = [NSString stringWithFormat:@"%@邀请您加入讨论组,电话呼入号：%@。[iMeeting]", [UserManager shareUserManager].userBean.name, audioConfId];
+    NSString *msgBody = [NSString stringWithFormat:@"请拨打0551-2379997加入多方通话，会议号：%@", audioConfId];
     mMsgViewController.body = msgBody;
     mMsgViewController.messageComposeDelegate = self;
     [self presentModalViewController:mMsgViewController animated:YES];

@@ -108,7 +108,7 @@
         _mSearchField.font = [UIFont fontWithName:CHINESE_FONT size:13];
         _mSearchField.autocorrectionType = UITextAutocorrectionTypeNo;
         _mSearchField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        _mSearchField.textColor = [UIColor colorWithIntegerRed:181 integerGreen:181 integerBlue:181 alpha:1];
+        _mSearchField.textColor = [UIColor colorWithIntegerRed:108 integerGreen:108 integerBlue:108 alpha:1];
         [_mSearchField addTarget:self action:@selector(searchFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
         [searchFieldView addSubview:_mSearchField];
         

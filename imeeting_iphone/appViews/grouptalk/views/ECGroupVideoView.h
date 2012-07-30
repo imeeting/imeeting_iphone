@@ -10,9 +10,7 @@
 #import "ECBaseUIView.h"
 
 @interface ECGroupVideoView : ECBaseUIView <UIAlertViewDelegate> {
-    
-    UIImageView *_oppositeVideoView;
-    
+        
     UIButton *_leaveGroupButton;
     UIButton *_openCameraButton;
     UIButton *_cameraSwitchButton;
@@ -26,8 +24,8 @@
     UIActivityIndicatorView *_loadVideoIndicator;
 }
 
-@property (nonatomic,retain) UIView *myVideoView;
-@property (nonatomic,retain) UIImageView *oppositeVideoView;
+@property (nonatomic,retain) UIImageView *smallVideoView;
+@property (nonatomic,retain) UIImageView *largeVideoView;
 
 - (void)startShowLoadingVideo;
 - (void)stopShowLoadingVideo;

@@ -14,26 +14,20 @@ static CGFloat TitleLabelHeight = 18;
 static CGFloat TitleLabelWidth = 140;
 static CGFloat TimeLabelHeight = 16;
 static CGFloat TimeLabelWidth = 150;
-static CGFloat IconHeight = 50;
-static CGFloat IconWidth = 50;
+static CGFloat IconHeight = 40;
+static CGFloat IconWidth = 40;
 static CGFloat NameLabelHeight = 18;
 static CGFloat NameLabelWidth = 50;
-static CGFloat MarginTop = 6;
 static CGFloat Margin = 12;
-static CGFloat Padding = 3;
+static CGFloat Padding = 2;
 
 
 @implementation AttendeeGridView
 
 @synthesize attendeeArray = _attendeeArray;
-@synthesize expansible = _expansible;
-@synthesize state = _state;
 
 + (CGFloat)GridViewHeight:(NSArray*)attendeeArray {
-    CGFloat h = Padding * 3 + IconHeight + NameLabelHeight;
-    if (attendeeArray && attendeeArray.count > 5) {
-        h *= 2;
-    }
+    CGFloat h = Padding + IconHeight + NameLabelHeight;
     return h;
 }
 
@@ -44,8 +38,6 @@ static CGFloat Padding = 3;
         cellWidth = Padding * 2 + NameLabelWidth;
         cellHeight = Padding * 3 + IconHeight + NameLabelHeight;
         self.attendeeArray = attendeeArray;
-        self.expansible = NO;
-        self.state = shrinked;
         [self initUI];
         
     }
@@ -56,11 +48,9 @@ static CGFloat Padding = 3;
 - (void)initUI {
     if (self.attendeeArray) {
         line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cellWidth * 5, cellHeight)];
-       // line2 = [[UIView alloc] initWithFrame:CGRectMake(0, line1.frame.origin.y + line1.frame.size.height, line1.frame.size.width, line1.frame.size.height)];
-
+        line1.backgroundColor = [UIColor clearColor];
         
         if (self.attendeeArray.count > 5) {
-            self.expansible = YES;
             // only display 5 people as maximum
             
             for (NSUInteger i = 0; i < 5; i++) {
@@ -75,24 +65,7 @@ static CGFloat Padding = 3;
                 [line1 addSubview:cell];
                 
             }
-            
-            /*
-            int len = self.attendeeArray.count > 10 ? 10 : self.attendeeArray.count;
-            for (NSUInteger i = 5; i < len; i++) {
-                NSString *name = [self.attendeeArray objectAtIndex:i];
-                
-                UIImage *avatar = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:name];
-                NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:name] objectAtIndex:0];
-
-                
-                UIView *cell = [self makeCellWithName:displayName Icon:avatar];
-                CGRect frame = CGRectMake((i - 5) * cellWidth, 0, cellWidth, cellHeight);
-                cell.frame = frame;
-                [line2 addSubview:cell];
-            }
-            */
             [self addSubview:line1];
-            //[self addSubview:line2];
         } else {
             for (NSUInteger i = 0; i < self.attendeeArray.count; i++) {
                 NSString *name = [self.attendeeArray objectAtIndex:i];
@@ -113,30 +86,29 @@ static CGFloat Padding = 3;
         [self updateFrame];
     }
     
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)updateFrame {
     int height = cellHeight;
-    if (self.expansible) {
-        height = cellHeight * 2;
-    }
     self.frame = CGRectMake(0, 0, line1.frame.size.width, height);
 }
 
 - (UIView *)makeCellWithName:(NSString *)name Icon:(UIImage *)icon {
     UIView *cell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cellWidth, cellHeight)];
     
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(Padding + (NameLabelWidth - IconWidth) / 2, Padding, IconWidth, IconHeight)];
+    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(Padding + (NameLabelWidth - IconWidth) / 2, 0, IconWidth, IconHeight)];
     iconView.contentMode = UIViewContentModeScaleAspectFill;
     iconView.image = icon;
     iconView.layer.masksToBounds = YES;
     [iconView.layer setCornerRadius:5.0];
     [cell addSubview:iconView];
     
-    UILabel *nameLabel =[[UILabel alloc] initWithFrame:CGRectMake(Padding, iconView.frame.origin.y + iconView.frame.size.height + Padding, NameLabelWidth, NameLabelHeight)];
+    UILabel *nameLabel =[[UILabel alloc] initWithFrame:CGRectMake(Padding, iconView.frame.origin.y + iconView.frame.size.height, NameLabelWidth, NameLabelHeight)];
     nameLabel.text = name;
     [nameLabel setTextAlignment:UITextAlignmentCenter];
-    [nameLabel setFont:[UIFont systemFontOfSize:12]];
+    [nameLabel setFont:[UIFont fontWithName:CHINESE_FONT size:12]];
+    nameLabel.textColor = [UIColor colorWithIntegerRed:163 integerGreen:163 integerBlue:163 alpha:1];
     nameLabel.backgroundColor = [UIColor clearColor];
     [cell addSubview:nameLabel];
     
@@ -144,66 +116,47 @@ static CGFloat Padding = 3;
     
 }
 
-// expand the view
-//@Deprecated
-- (void)expand {
-    if (self.state == shrinked) {
-        self.state = expanded;
-        [self addSubview:line2];
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, cellHeight*2);
-    }
-}
-
-// shrink the view
-//@Depreacted
-- (void)shrink {
-    if (self.state == expanded) {
-        self.state = shrinked;
-        [line2 removeFromSuperview];
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, cellHeight);
-    }
-}
-
 
 @end
 
 @interface ECGroupCell ()
 
-- (void)refreshCellBgColor;
+- (void)refreshTitleColor;
 
 @end
 
 @implementation ECGroupCell
 
 + (CGFloat)cellHeight:(NSDictionary*)groupInfoJson {
-    CGFloat cellHeight = MarginTop + TitleLabelHeight;
-    if (groupInfoJson) {
-        NSArray *attendees = [groupInfoJson objectForKey:GROUP_ATTENDEES];
-        CGFloat attendeeGridHeight = [AttendeeGridView GridViewHeight:attendees];
-        cellHeight += attendeeGridHeight;
-    }
-    return cellHeight;
+    return 127;
 }
 
 - (id)initWithGroupInfo:(NSDictionary *)groupInfoJson {
     self = [super init];
     
     if (self) {
-        self.selectionStyle = UITableViewCellSelectionStyleGray;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.contentView.backgroundColor = [UIColor clearColor];
+        _myContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, [ECGroupCell cellHeight:groupInfoJson])];
+        _myContentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"group_cell_bg"]];
+        [self.contentView addSubview:_myContentView];
+        _containerView = [[UIView alloc] initWithFrame:CGRectMake(4, 0, 307, 113)];
+        _containerView.backgroundColor = [UIColor clearColor];
+        [_myContentView addSubview:_containerView];
         if (groupInfoJson) {
             NSString *title = [groupInfoJson objectForKey:GROUP_TITLE];
             NSNumber *createdTime = [groupInfoJson objectForKey:GROUP_CREATED_TIME];
             NSArray *attendees = [groupInfoJson objectForKey:GROUP_ATTENDEES];
-            mStatus = [groupInfoJson objectForKey:GROUP_STATUS];
+            _mStatus = [groupInfoJson objectForKey:GROUP_STATUS];
             
-            mTitle = [[UILabel alloc] initWithFrame:CGRectMake(Margin, MarginTop, TitleLabelWidth, TitleLabelHeight)];
-            mTitle.text = title;
-            mTitle.font = [UIFont systemFontOfSize:13];
-            mTitle.textColor = [UIColor colorWithIntegerRed:105 integerGreen:105 integerBlue:105 alpha:1];
-            mTitle.backgroundColor = [UIColor clearColor];
-            [self.contentView addSubview:mTitle];
+            _mTitle = [[UILabel alloc] initWithFrame:CGRectMake(13, 16, TitleLabelWidth, TitleLabelHeight)];
+            _mTitle.text = title;
+            _mTitle.font = [UIFont fontWithName:CHINESE_FONT size:16];
+            _mTitle.textColor = [UIColor colorWithIntegerRed:191 integerGreen:173 integerBlue:137 alpha:1];
+            _mTitle.backgroundColor = [UIColor clearColor];
+            [_containerView addSubview:_mTitle];
             
-            mTime = [[UILabel alloc] initWithFrame:CGRectMake(mTitle.frame.origin.x + mTitle.frame.size.width + Margin, MarginTop + (TitleLabelHeight - TimeLabelHeight), TimeLabelWidth, TimeLabelHeight)];
+            mTime = [[UILabel alloc] initWithFrame:CGRectMake(145, 18, TimeLabelWidth, TimeLabelHeight)];
             if (createdTime) {
                 NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:createdTime.doubleValue];
                 NSDateFormatter *formater = [[NSDateFormatter alloc] init];
@@ -211,47 +164,22 @@ static CGFloat Padding = 3;
                 NSString *time = [formater stringFromDate:date];
                 mTime.text = time;
             }
-            mTime.font = [UIFont systemFontOfSize:12];
-            mTime.textColor = [UIColor colorWithIntegerRed:205 integerGreen:133 integerBlue:63 alpha:1];
+            mTime.font = [UIFont fontWithName:CHARACTER_FONT size:12];
+            mTime.textColor = [UIColor colorWithIntegerRed:207 integerGreen:193 integerBlue:179 alpha:1];
             mTime.backgroundColor = [UIColor clearColor];
             [mTime setTextAlignment:UITextAlignmentRight];
-            [self.contentView addSubview:mTime];
-        
-            /*
-            mAttendeeListView = [[AttendeeListView alloc] init];
-            mAttendeeListView.frame = CGRectMake(0, mTitle.frame.origin.y + mTitle.frame.size.height, self.frame.size.width, MarginTop + IconHeight + MarginBotton + NameLabelHeight + MarginBotton);
-            [mAttendeeListView setAttendeeArray:attendees];
-            [mAttendeeListView reloadData];
-            [self.contentView addSubview:mAttendeeListView];
-            */
-            
-            mAttendeeGridView = [[AttendeeGridView alloc] initWithAttendees:attendees];
-            mAttendeeGridView.frame = CGRectMake(Margin, mTitle.frame.origin.y + mTitle.frame.size.height, mAttendeeGridView.frame.size.width, mAttendeeGridView.frame.size.height);
-            [self.contentView addSubview:mAttendeeGridView];
-            
-            /*
-            if (mAttendeeGridView.expansible) {
-                // add expand button
-                mExpandButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-                [mExpandButton setTitle:@"EXP" forState:UIControlStateNormal];
-                if (mAttendeeGridView.state == shrinked) {
-                    [mExpandButton setTitle:@"EXP" forState:UIControlStateNormal];
-                } else {
-                    [mExpandButton setTitle:@"SHK" forState:UIControlStateNormal];
-
-                }
-                mExpandButton.titleLabel.font = [UIFont systemFontOfSize:14];
-                mExpandButton.frame = CGRectMake(mAttendeeGridView.frame.origin.x + mAttendeeGridView.frame.size.width + Padding, mAttendeeGridView.frame.origin.y + (mAttendeeGridView.frame.size.height - 40)/2, 45, 40);
-                mExpandButton.titleLabel.textColor = [UIColor grayColor];
-                [mExpandButton addTarget:self action:@selector(updateGridView) forControlEvents:UIControlEventTouchUpInside];
-                [self.contentView addSubview:mExpandButton];
-            }
-            */
-            
-            [self refreshCellBgColor];
+            [_containerView addSubview:mTime];
+                    
+            _mAttendeeGridView = [[AttendeeGridView alloc] initWithAttendees:attendees];
+            _mAttendeeGridView.frame = CGRectMake(Margin, _mTitle.frame.origin.y + _mTitle.frame.size.height + 8, _mAttendeeGridView.frame.size.width, _mAttendeeGridView.frame.size.height);
+            [_containerView addSubview:_mAttendeeGridView];
+                        
+            [self refreshTitleColor];
             
             [self updateFrame];
+            
         }
+
     }
     
     return self;
@@ -264,8 +192,8 @@ static CGFloat Padding = 3;
     if (self) {
         // Initialization code
         
-        openBackgroundColor = [UIColor colorWithIntegerRed:143 integerGreen:188 integerBlue:143 alpha:1];
-        closeBackgroundColor = [UIColor whiteColor];
+        _statusOpenColor = [UIColor colorWithIntegerRed:143 integerGreen:188 integerBlue:143 alpha:1];
+        _statusCloseColor = [UIColor colorWithIntegerRed:191 integerGreen:173 integerBlue:137 alpha:1];
     }
     return self;
 }
@@ -273,53 +201,40 @@ static CGFloat Padding = 3;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    
-}
-
-- (void)refreshCellBgColor {
-    if (mStatus && [mStatus isEqualToString:@"OPEN"]) {
-        self.contentView.backgroundColor = openBackgroundColor;
+    if (selected) {
+        _containerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"group_selected_cell_bg"]];
     } else {
-        self.contentView.backgroundColor = closeBackgroundColor;
+        _containerView.backgroundColor = [UIColor clearColor];
     }
 }
 
-//@Deprecated
-- (void)updateGridView {
-    if (mAttendeeGridView.expansible) {
-        if (mAttendeeGridView.state == shrinked) {
-            // expand the grid view
-            [mExpandButton setTitle:@"SHK" forState:UIControlStateNormal];
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    _containerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"group_selected_cell_bg"]];
+}
 
-            [mAttendeeGridView expand];
-        } else {
-            // shrink the grid view
-            [mExpandButton setTitle:@"EXP" forState:UIControlStateNormal];
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesCancelled:touches withEvent:event];
+    _containerView.backgroundColor = [UIColor clearColor];
+}
 
-            [mAttendeeGridView shrink];            
-        }
-        [self updateFrame];
-     //   [self updateTableView];
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesEnded:touches withEvent:event];
+    _containerView.backgroundColor = [UIColor clearColor];
+}
+
+- (void)refreshTitleColor {
+    if (_mStatus && [_mStatus isEqualToString:@"OPEN"]) {
+        _mTitle.textColor = _statusOpenColor;
+    } else {
+        _mTitle.textColor = _statusCloseColor;
     }
 }
 
 - (void)updateFrame {
     CGRect frame = self.frame;
-    frame.size.height = Margin + TitleLabelHeight + mAttendeeGridView.frame.size.height;
+    frame.size.height = [ECGroupCell cellHeight:nil];
     self.frame = frame; 
-}
-
-//@Deprecated
-- (void)updateTableView {
-    
-    UITableView *tableView = (UITableView*)self.superview;
-    
-    NSIndexPath *path = [tableView indexPathForCell:self];
-  
-    NSLog(@"update row: %d", path.row);
-    
-    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:path, nil] withRowAnimation:UITableViewRowAnimationBottom];
-    
 }
 
 @end

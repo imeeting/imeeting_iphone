@@ -94,6 +94,10 @@
 
 - (void)processOneNotice:(NSDictionary *)notice {
     NSString *action = [notice objectForKey:ACTION];
+    NSString *groupId = [notice objectForKey:GROUP_ID];
+    if (![groupId isEqualToString:self.groupId]) {
+        return;
+    }
     if ([action isEqualToString:ACTION_UPDATE_STATUS]) {
         NSLog(@"processOneNotice - update attendee status");
         // update attendee status

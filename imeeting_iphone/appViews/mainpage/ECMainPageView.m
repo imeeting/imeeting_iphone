@@ -9,6 +9,11 @@
 #import "ECMainPageView.h"
 #import "ECGroupCell.h"
 #import "ECConstants.h"
+#import "CommonToolkit/CommonToolkit.h"
+
+#define GROUP_TABLEVIEW_WIDTH       312
+#define CREATE_GROUP_BUTTON_WIDTH   312
+#define CREATE_GROUP_BUTTON_HEIGHT  36
 
 @implementation ECMainTableView
 @synthesize currentDeletedIndexPath = _currentDeletedIndexPath;
@@ -19,6 +24,9 @@
         mGroupDataSource = [[NSMutableArray alloc] initWithCapacity:20];
         self.hasNext = [[NSNumber alloc] initWithBool:NO];
         self.autoLoadDelegate = self;
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        mRefreshHeaderView.backgroundColor = [UIColor clearColor];
+        self.tableFooterView.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -118,21 +126,37 @@
     
     _titleView.text = NSLocalizedString(@"Talking Group", "");
     self.titleView = _titleView;
-    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    self.frame = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height - [CommonUtils appStatusBarHeight] - [CommonUtils appNavigationBarHeight]);
+    
+    
+    
+    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingButton.frame = CGRectMake(0, 0, 53, 28);
+    settingButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:12];
+    [settingButton setTitle:NSLocalizedString(@"Setting", nil) forState:UIControlStateNormal];
+    [settingButton setBackgroundImage:[UIImage imageNamed:@"navibutton"] forState:UIControlStateNormal];
     [settingButton addTarget:self action:@selector(onSystemSettingAction) forControlEvents:UIControlEventTouchUpInside];
     self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: settingButton];
-    self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onCreateNewGroupAction)];
-    self.rightBarButtonItem.tintColor = [UIColor colorWithIntegerRed:107 integerGreen:147 integerBlue:35 alpha:1];
-    
-    
-    mGroupTableView = [[ECMainTableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 64)];
-    mGroupTableView.backgroundColor = self.backgroundColor;
+        
+    mGroupTableView = [[ECMainTableView alloc] initWithFrame:CGRectMake((self.frame.size.width - GROUP_TABLEVIEW_WIDTH) / 2 - 2, 6, self.frame.size.width, self.frame.size.height - CREATE_GROUP_BUTTON_HEIGHT - 14)];
+    mGroupTableView.backgroundColor = [UIColor clearColor];
     mGroupTableView.dataSource = mGroupTableView;
     mGroupTableView.delegate = mGroupTableView;
     
     [self addSubview:mGroupTableView];
     
-
+    
+    UIButton *createGroupButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    createGroupButton.frame = CGRectMake((self.frame.size.width - CREATE_GROUP_BUTTON_WIDTH) / 2, self.frame.size.height - CREATE_GROUP_BUTTON_HEIGHT - 4, CREATE_GROUP_BUTTON_WIDTH, CREATE_GROUP_BUTTON_HEIGHT);
+    [createGroupButton setBackgroundImage:[UIImage imageNamed:@"create_group_button_bg"] forState:UIControlStateNormal];
+    [createGroupButton setTitle:NSLocalizedString(@"Create Group Talk", nil) forState:UIControlStateNormal];
+    [createGroupButton addTarget:self action:@selector(onCreateNewGroupAction) forControlEvents:UIControlEventTouchUpInside];
+    createGroupButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:16];
+    [self addSubview:createGroupButton];
+    
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
 }
 
 

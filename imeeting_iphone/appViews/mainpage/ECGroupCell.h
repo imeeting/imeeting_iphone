@@ -10,10 +10,6 @@
 #import "CommonToolkit/CommonToolkit.h"
 
 
-typedef enum {
-    expanded,
-    shrinked
-} AttendeeGridViewState;
 
 @interface AttendeeGridView : UIView {
     UIView *line1;
@@ -23,39 +19,33 @@ typedef enum {
 }
 
 @property (nonatomic, retain) NSArray *attendeeArray;
-@property (readwrite) BOOL expansible;
-@property (readwrite) AttendeeGridViewState state;
 + (CGFloat)GridViewHeight:(NSArray*)attendeeArray ;
 - (id)initWithAttendees:(NSArray*)attendeeArray;
 - (void)initUI;
 - (void)updateFrame;
-- (void)expand;
-- (void)shrink;
 - (UIView*)makeCellWithName:(NSString*)name Icon:(UIImage*)icon;
 @end
 
 
 @interface ECGroupCell : UITableViewCell {
-    UILabel *mTitle;
+    UIView * _myContentView;
+    UIView *_containerView;
+    
+    UILabel *_mTitle;
     UILabel *mTime;
-  //  AttendeeListView *mAttendeeListView;
-    AttendeeGridView *mAttendeeGridView;
+    AttendeeGridView *_mAttendeeGridView;
     
     UIButton *mExpandButton;
     
-    NSString *mStatus;
+    NSString *_mStatus;
     
-    UIColor *openBackgroundColor;
-    UIColor *closeBackgroundColor;
+    UIColor *_statusOpenColor;
+    UIColor *_statusCloseColor;
 }
 
 + (CGFloat)cellHeight:(NSDictionary*)groupInfoJson;
 
 - (id)initWithGroupInfo:(NSDictionary*)groupInfoJson;
 
-- (void)updateGridView;
-
 - (void)updateFrame;
-
-- (void)updateTableView;
 @end

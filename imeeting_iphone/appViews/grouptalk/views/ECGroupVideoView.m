@@ -9,11 +9,11 @@
 #import "ECGroupVideoView.h"
 
 static CGFloat VideoRegionWidth = 320;
-static CGFloat VideoRegionHeight = 426;
+static CGFloat VideoRegionHeight = 480;
 static CGFloat BottomBarWidth = 320;
-static CGFloat BottomBarHeight = 54;
-static CGFloat MyVideoViewWidth = 108;
-static CGFloat MyVideoViewHeight = 144;
+static CGFloat BottomBarHeight = 74;
+static CGFloat SmallVideoViewWidth = 114;
+static CGFloat SmallVideoViewHeight = 152;
 static CGFloat LeaveButtonWidth = 80;
 static CGFloat LeaveButtonHeight = 40;
 static CGFloat SwitchToAttendeeListButtonWidth = 90;
@@ -33,14 +33,47 @@ static CGFloat OppositeNameLabelHeight = 20;
 - (void)onSwitchFBCameraAction;
 @end
 
+@interface SmallVideoViewGesture : NSObject <UIViewGestureRecognizerDelegate>
+@property (nonatomic, retain) ECGroupVideoView *videoView;
+@end
+
+@implementation SmallVideoViewGesture
+@synthesize videoView = _videoView;
+
+- (GestureType)supportedGestureInView:(UIView *)pView {
+    return tap | pan;
+}
+
+- (TapCountMode)tapCountModeInView:(UIView *)pView {
+    return once;
+}
+
+- (TapFingerMode)tapFingerModeInView:(UIView *)pView {
+    return single;
+}
+
+- (void)view:(UIView *)pView tapAtPoint:(CGPoint)pPoint andFingerMode:(TapFingerMode)pFingerMode andCountMode:(TapCountMode)pCountMode {
+    NSLog(@"tap");
+    if (pFingerMode == single && pCountMode == once) {
+        // swap the video in small video view and large video view
+        [self.videoView.viewControllerRef performSelector:@selector(swapVideoView)];
+    }
+}
+
+@end
+
+
 @implementation ECGroupVideoView
-@synthesize myVideoView = _myVideoView;
-@synthesize oppositeVideoView = _oppositeVideoView;
+@synthesize smallVideoView = _smallVideoView;
+@synthesize largeVideoView = _largeVideoView;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        CGRect screenBounds = [[UIScreen mainScreen] bounds];
+        self.frame = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
+        
         [self initUI];
         _isCameraOpen = NO;
     }
@@ -69,24 +102,34 @@ static CGFloat OppositeNameLabelHeight = 20;
     [self addSubview:_cameraSwitchButton];
     [_cameraSwitchButton setHidden:YES];
     
-       
+    // make name label
+    _oppositeVideoNameLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width - OppositeNameLabelWidth) / 2, 15, OppositeNameLabelWidth, OppositeNameLabelHeight)];
+    _oppositeVideoNameLabel.font = [UIFont systemFontOfSize:12];
+    [_oppositeVideoNameLabel.layer setMasksToBounds:YES];
+    [_oppositeVideoNameLabel.layer setCornerRadius:10];
+    _oppositeVideoNameLabel.backgroundColor = [UIColor colorWithIntegerRed:156 integerGreen:156 integerBlue:156 alpha:0.5];
+    _oppositeVideoNameLabel.textAlignment = UITextAlignmentCenter;
+    [self addSubview:_oppositeVideoNameLabel];
+    [_oppositeVideoNameLabel setHidden:YES];
+
+    
 }
 
 - (UIView *)makeVideoRegion {
     UIView *videoRegion = [[UIView alloc] initWithFrame:CGRectMake(0, 0, VideoRegionWidth, VideoRegionHeight)];
     videoRegion.backgroundColor = [UIColor clearColor];
     
-    CGColorRef borderColor = [[UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:0.8] CGColor];
+    CGColorRef borderColor = [[UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:1] CGColor];
     
-    _oppositeVideoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, VideoRegionWidth, VideoRegionHeight)];
-    _oppositeVideoView.contentMode = UIViewContentModeScaleAspectFill;
-    _oppositeVideoView.backgroundColor = [UIColor colorWithIntegerRed:240 integerGreen:255 integerBlue:255 alpha:1];
-    [videoRegion addSubview:_oppositeVideoView];
+    _largeVideoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, VideoRegionWidth, VideoRegionHeight)];
+    _largeVideoView.contentMode = UIViewContentModeScaleAspectFill;
+    _largeVideoView.backgroundColor = [UIColor colorWithIntegerRed:240 integerGreen:255 integerBlue:255 alpha:1];
+    [videoRegion addSubview:_largeVideoView];
     
     // make load video indicator
    
     _loadVideoIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _loadVideoIndicator.center = CGPointMake(_oppositeVideoView.center.x, _oppositeVideoView.center.y);
+    _loadVideoIndicator.center = CGPointMake(_largeVideoView.center.x, _largeVideoView.center.y);
 
     UILabel *loadVideoLabel = [[UILabel alloc] initWithFrame:CGRectMake((_loadVideoIndicator.frame.size.width - 120) / 2, 25, 120, 20)];
     loadVideoLabel.text = NSLocalizedString(@"Loading Video", "");
@@ -94,31 +137,24 @@ static CGFloat OppositeNameLabelHeight = 20;
     loadVideoLabel.backgroundColor = [UIColor clearColor];
     loadVideoLabel.textAlignment = UITextAlignmentCenter;
     [_loadVideoIndicator addSubview:loadVideoLabel];
-    [_oppositeVideoView addSubview:_loadVideoIndicator];
+    [_largeVideoView addSubview:_loadVideoIndicator];
     
-    // make name label
-    _oppositeVideoNameLabel = [[UILabel alloc] initWithFrame:CGRectMake((_oppositeVideoView.frame.size.width - OppositeNameLabelWidth) / 2, 15, OppositeNameLabelWidth, OppositeNameLabelHeight)];
-    _oppositeVideoNameLabel.font = [UIFont systemFontOfSize:12];
-    [_oppositeVideoNameLabel.layer setMasksToBounds:YES];
-    [_oppositeVideoNameLabel.layer setCornerRadius:10];
-    _oppositeVideoNameLabel.backgroundColor = [UIColor colorWithIntegerRed:156 integerGreen:156 integerBlue:156 alpha:0.5];
-    _oppositeVideoNameLabel.textAlignment = UITextAlignmentCenter;
-    [_oppositeVideoView addSubview:_oppositeVideoNameLabel];
-    [_oppositeVideoNameLabel setHidden:YES];
-        
-    _myVideoView = [[UIView alloc] initWithFrame:CGRectMake(VideoRegionWidth - MyVideoViewWidth, VideoRegionHeight - MyVideoViewHeight, MyVideoViewWidth, MyVideoViewHeight)];
-    [_myVideoView.layer setBorderWidth:2];
-    [_myVideoView.layer setBorderColor:borderColor];
-    _myVideoView.backgroundColor = [UIColor colorWithIntegerRed:159 integerGreen:182 integerBlue:205 alpha:1];
-    [videoRegion addSubview:_myVideoView];
-    
+            
+    _smallVideoView = [[UIImageView alloc] initWithFrame:CGRectMake(VideoRegionWidth - SmallVideoViewWidth, VideoRegionHeight - SmallVideoViewHeight - BottomBarHeight, SmallVideoViewWidth, SmallVideoViewHeight)];
+    _smallVideoView.layer.masksToBounds = YES;
+    [_smallVideoView.layer setBorderWidth:1];
+    [_smallVideoView.layer setBorderColor:borderColor];
+    _smallVideoView.backgroundColor = [UIColor colorWithIntegerRed:159 integerGreen:182 integerBlue:205 alpha:1];
+    _smallVideoView.userInteractionEnabled = YES;
+    [_smallVideoView setViewGestureRecognizerDelegate:[[SmallVideoViewGesture alloc] init]];
+    [videoRegion addSubview:_smallVideoView];
     
     return videoRegion;
 }
 
 - (UIView *)makeBottonBar {
-    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, VideoRegionHeight, BottomBarWidth, BottomBarHeight)];
-    bottomBar.backgroundColor = [UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:0.8];
+    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - BottomBarHeight, BottomBarWidth, BottomBarHeight)];
+    bottomBar.backgroundColor = [UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:0.5];
     CGFloat secWidth = BottomBarWidth / 3;
     
     _leaveGroupButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -201,7 +237,7 @@ static CGFloat OppositeNameLabelHeight = 20;
 
 #pragma mark - video status
 - (void)startShowLoadingVideo {
-    _oppositeVideoView.image = nil;
+    _largeVideoView.image = nil;
     [_loadVideoIndicator startAnimating];
 }
 
@@ -218,7 +254,7 @@ static CGFloat OppositeNameLabelHeight = 20;
 - (void)resetOppositeVideoUI {
     [_oppositeVideoNameLabel setHidden:YES];
     [_loadVideoIndicator stopAnimating];
-    _oppositeVideoView.image = nil;
+    _largeVideoView.image = nil;
 }
 
 - (void)showVideoLoadFailedInfo {

@@ -232,6 +232,7 @@
 }
 
 - (void)setupVideoDecode {
+   // av_log_set_level(AV_LOG_DEBUG);
     av_register_all();
     avformat_network_init();
     

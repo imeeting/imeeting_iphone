@@ -118,6 +118,12 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (0 != indexPath.section) {
+        [(ContactsSelectContainerView *)self.superview removeSelectedContactFromMeetingWithIndexPath:indexPath];
+    }
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     BOOL _ret = NO;
     
