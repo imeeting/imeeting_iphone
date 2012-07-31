@@ -11,17 +11,18 @@
 @implementation ECGroupView
 @synthesize attendeeListView = _attendeeListView;
 @synthesize videoView = _videoView;
-
+@synthesize inVideoViewFlag = _inVideoViewFlag;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _inVideoViewFlag = YES;
         self.attendeeListView = [[ECGroupAttendeeListView alloc] init];
+        self.attendeeListView.frame = CGRectMake(-220, 0, 220, 480);
         self.videoView = [[ECGroupVideoView alloc] init];
         [self addSubview:self.videoView];
         [self addSubview:self.attendeeListView];
-        [self switchToVideoView];
     }
     return self;
 }
@@ -31,29 +32,46 @@
     self.videoView.viewControllerRef = viewControllerRef;
 }
 
-- (void)switchToVideoView {    
-    CATransition *animation = [CATransition animation];
-    animation.duration = 0.4f;
-    animation.timingFunction = UIViewAnimationCurveEaseInOut;
-    animation.type = kCATransitionPush;
-    animation.subtype = kCATransitionFromTop;
-    [self.attendeeListView.layer addAnimation:animation forKey:@"animationID"];
-    
-    
-    [self.attendeeListView setHidden:YES];
-
+- (void)switchVideoAndAttendeeListView {
+    if (_inVideoViewFlag) {
+        [self switchToAttendeeListView];
+    } else {
+        [self switchToVideoView];
+    }
 }
 
-- (void)switchToAttendeeListView {
-    CATransition *animation = [CATransition animation];
-    animation.duration = 0.4f;
-    animation.timingFunction = UIViewAnimationCurveEaseInOut;
-    animation.type = kCATransitionPush;
-    animation.subtype = kCATransitionFromBottom;
-    [self.attendeeListView.layer addAnimation:animation forKey:@"animationID"];
+- (void)switchToVideoView {    
+    if (!_inVideoViewFlag) {
+        [UIView beginAnimations:@"animationID" context:nil];
+        [UIView setAnimationDuration:0.2f];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationRepeatAutoreverses:NO];
+        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromRight forView:self.attendeeListView cache:YES];
+        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromRight forView:self.videoView cache:YES];
+        
+        [self.attendeeListView setCenter:CGPointMake(self.attendeeListView.center.x - self.attendeeListView.frame.size.width, self.attendeeListView.center.y)];
+        [self.videoView setCenter:CGPointMake(self.videoView.center.x - self.attendeeListView.frame.size.width, self.videoView.center.y)];
+        [UIView commitAnimations];
+    }
+    
+    _inVideoViewFlag = YES;
+}
 
-    [self.attendeeListView setHidden:NO];
-
+- (void)switchToAttendeeListView {  
+    if (_inVideoViewFlag) {
+        [UIView beginAnimations:@"animationID" context:nil];
+        [UIView setAnimationDuration:0.2f];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationRepeatAutoreverses:NO];
+        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromLeft forView:self.attendeeListView cache:YES];
+        [UIView setAnimationTransition:UIViewAnimationOptionTransitionFlipFromLeft forView:self.videoView cache:YES];
+        
+        [self.attendeeListView setCenter:CGPointMake(self.attendeeListView.center.x + self.attendeeListView.frame.size.width, self.attendeeListView.center.y)];
+        [self.videoView setCenter:CGPointMake(self.videoView.center.x + self.attendeeListView.frame.size.width, self.videoView.center.y)];
+        [UIView commitAnimations];
+    }
+    
+    _inVideoViewFlag = NO;
 }
 
 /*

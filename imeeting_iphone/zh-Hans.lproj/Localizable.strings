@@ -46,8 +46,7 @@
 "Error in login, please retry." = "登录出错，请重试！";
 "Talking Group" = "我的群聊";
 "Attendee List" = "成员列表";
-"Leave" = "离开";
-"Video" = "视频";
+"Leave Group" = "离开群聊";
 "error in join group" = "无法进入当前组, 请稍后重试！";
 "Invite Attendee" = "添加成员";
 "This attendee's video is off" = "此参与者尚未打开视频";
@@ -98,3 +97,8 @@
 "Search Contacts" = "搜索联系人";
 "Call Failed" = "呼叫失败";
 "Create Group Talk" = "创建群聊";
+"Group ID: %@" = "群聊号：%@";
+"Member List" = "成员列表";
+"Dial" = "电话呼入";
+"Close Video" = "关闭视频";
+"Open Video" = "打开视频";

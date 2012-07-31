@@ -23,23 +23,24 @@
 
 //###### video view related methods
 - (void)onLeaveGroup;
-- (void)switchToAttendeeListView;
 - (void)switchCamera;
 - (void)startCaptureVideo;
 - (void)stopCaptureVideo;
 - (void)swapVideoView; // swap my video and friend video view
 // render the video of selected guy
 - (void)renderOppositVideo:(UIImage*)videoImage;
-- (void)setOppositeVideoName:(NSString*)name;
 - (void)startVideoLoadingIndicator;
 - (void)stopVideoLoadingIndicator;
 - (void)resetOppositeVideoView;
 - (void)showVideoLoadFailedInfo;
 
 // attendee list view related methods
-- (void)switchToVideoView;
 - (void)refreshAttendeeList;
 - (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
 - (void)onAttendeeSelected:(NSDictionary*)attendee;
 - (void)addContacts;
+
+- (void)switchVideoAndAttendeeListView;
+- (void)switchToAttendeeListView;
+- (void)switchToVideoView;
 @end

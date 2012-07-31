@@ -65,7 +65,7 @@ static CGFloat padding = 4;
         _videoOnImg = [UIImage imageNamed:@"video_on"];
        // videoOffImg = [UIImage imageNamed:@"video_off"];
 
-        _normalBGColor = [UIColor colorWithIntegerRed:232 integerGreen:232 integerBlue:232 alpha:0.9];
+        _normalBGColor = [UIColor clearColor];
         _selectedBGColor = [UIColor colorWithIntegerRed:139 integerGreen:119 integerBlue:101 alpha:0.9];
         self.contentView.backgroundColor = _normalBGColor;
 
@@ -160,6 +160,7 @@ static CGFloat padding = 4;
 }
 
 - (void)initUI {    
+    /*
     _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, NavigationBarHeight)];
     _toolbar.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
     _toolbar.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactAction)];
@@ -170,13 +171,19 @@ static CGFloat padding = 4;
 
     _title = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Attendee List", "") style:UIBarButtonItemStylePlain target:nil action:nil];
     [self addSubview:_toolbar];
+    */
     
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"attendee_list_bg"]];
+
     
-    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _toolbar.frame.size.height, 320, 480 - _toolbar.frame.size.height)];
+    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((220 - 200) / 2, 0, 200, 480)];
     _attendeeListTableView.backgroundColor = self.backgroundColor;
     _attendeeListTableView.dataSource = self;
     _attendeeListTableView.delegate = self;
+    _attendeeListTableView.backgroundColor = [UIColor clearColor];
     [self addSubview:_attendeeListTableView];
+    
+    [_attendeeListTableView setViewGestureRecognizerDelegate:self];
     
     
     _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0.5 - _attendeeListTableView.frame.size.height, _attendeeListTableView.frame.size.width, _attendeeListTableView.frame.size.height)];
@@ -366,4 +373,20 @@ static CGFloat padding = 4;
     NSArray *toolButtonArray = [NSArray arrayWithObjects:_toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _toolbar.rightBarButtonItem, nil];
     [_toolbar setItems:toolButtonArray];
 }
+
+#pragma mark - gesture delegate
+- (GestureType)supportedGestureInView:(UIView *)pView {
+    return swipe;
+}
+
+- (UISwipeGestureRecognizerDirection)swipeDirectionInView:(UIView *)pView {
+    return UISwipeGestureRecognizerDirectionLeft;
+}
+
+- (void)view:(UIView *)pView swipeAtPoint:(CGPoint)pPoint andDirection:(UISwipeGestureRecognizerDirection)pDirection {
+    if (pDirection == UISwipeGestureRecognizerDirectionLeft) {
+        [self switchToVideoAction];
+    }
+}
+
 @end

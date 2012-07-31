@@ -221,7 +221,6 @@
     NSLog(@"onFetchVideoBeginToPrepare");
     if (self.inGroup) {
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
-        [gc setOppositeVideoName:name];
         [gc startVideoLoadingIndicator];
     }
 }

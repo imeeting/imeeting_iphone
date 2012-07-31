@@ -46,8 +46,7 @@
 "Error in login, please retry." = "Error in login, please retry!";
 "Talking Group" = "Talking Group";
 "Attendee List" = "Attendee List";
-"Leave" = "Leave";
-"Video" = "Video";
+"Leave Group" = "Leave";
 "error in join group" = "Cannot join the group talk, please try later!";
 "Invite Attendee" = "Invite Attendee";
 "This attendee's video is off" = "This attendee's video is not open";
@@ -98,3 +97,8 @@
 "Search Contacts" = "Search Contacts";
 "Call Failed" = "Call Failed";
 "Create Group Talk" = "Create Group Talk";
+"Group ID: %@" = "Group ID: %@";
+"Member List" = "Members";
+"Dial" = "Dial";
+"Close Video" = "Close";
+"Open Video" = "Open";

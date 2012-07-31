@@ -30,7 +30,7 @@
 - (void)updateAttendeeStatus:(NSDictionary*)attendee;
 @end
 
-@interface ECGroupAttendeeListView : ECBaseUIView <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, EGORefreshTableHeaderDelegate>{
+@interface ECGroupAttendeeListView : ECBaseUIView <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, EGORefreshTableHeaderDelegate, UIViewGestureRecognizerDelegate>{
     UITableView *_attendeeListTableView;
     UIToolbar *_toolbar;
     UIBarButtonItem *_title;

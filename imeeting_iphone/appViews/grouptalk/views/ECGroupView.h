@@ -14,8 +14,8 @@
 
 @property (nonatomic, retain) ECGroupAttendeeListView *attendeeListView;
 @property (nonatomic, retain) ECGroupVideoView *videoView;
-
+@property (nonatomic) BOOL inVideoViewFlag;
 - (void)switchToVideoView;
 - (void)switchToAttendeeListView;
-
+- (void)switchVideoAndAttendeeListView;
 @end

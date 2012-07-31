@@ -28,6 +28,7 @@
 @property (nonatomic) int imgHeight;
 @property (nonatomic, retain) NSString *rtmpUrl;
 @property (nonatomic, retain) NSString *groupId;
+@property (nonatomic, retain) NSString *username;
 
 - (void)startFetchVideoPictureWithUsername:(NSString*)username;
 - (void)handleError;
@@ -53,4 +54,6 @@
 - (void)releaseVideoDecode;
 - (void)startFetchVideoPictureWithUsername:(NSString*)username;
 - (void)stopFetchVideoPicture;
+// the username of current playing video
+- (NSString*)currentVideoUserName;
 @end

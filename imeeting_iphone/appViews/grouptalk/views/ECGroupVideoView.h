@@ -10,17 +10,11 @@
 #import "ECBaseUIView.h"
 
 @interface ECGroupVideoView : ECBaseUIView <UIAlertViewDelegate> {
-        
-    UIButton *_leaveGroupButton;
-    UIButton *_openCameraButton;
     UIButton *_cameraSwitchButton;
     
     BOOL _isCameraOpen;
     
-    UIImage *_cameraOnImg;
-    UIImage *_cameraOffImg;
-    
-    UILabel *_oppositeVideoNameLabel;
+    UILabel *_groupIdLabel;
     UIActivityIndicatorView *_loadVideoIndicator;
 }
 
@@ -29,7 +23,7 @@
 
 - (void)startShowLoadingVideo;
 - (void)stopShowLoadingVideo;
-- (void)setOppositeVideoName:(NSString*)name;
+- (void)setGroupIdText:(NSString*)name;
 - (void)resetOppositeVideoUI;
 - (void)showVideoLoadFailedInfo;
 - (void)onOpenCameraButtonClickAction;

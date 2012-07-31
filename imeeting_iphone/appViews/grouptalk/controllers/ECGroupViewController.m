@@ -19,8 +19,10 @@
 #import "UIViewController+AuthFailHandler.h"
 
 @interface ECGroupViewController ()
+- (void)setGroupIdLabel;
+
 // video view realted methods
-- (UIView*)currentMyVideoView;
+- (UIImageView*)currentMyVideoView;
 - (UIImageView*)currentFriendVideoView;
 - (void)attachMyVideoPreviewLayer;
 - (void)detachMyVideoPreviewLayer;
@@ -65,6 +67,7 @@
     
     if (_isFirstLoad) {
         _isFirstLoad = NO;
+        [self setGroupIdLabel];
         ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
         ECGroupAttendeeListView *alv = ((ECGroupView*)self.view).attendeeListView;
         if (module.ownerMode) {
@@ -113,6 +116,13 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)setGroupIdLabel {
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    ECGroupVideoView *view = ((ECGroupView*)self.view).videoView;
+    NSString *labelText = [NSString stringWithFormat:NSLocalizedString(@"Group ID: %@", nil), module.groupId];
+    [view setGroupIdText:labelText];
+}
+
 #pragma mark - actions
 - (void)onLeaveGroup {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
@@ -148,9 +158,14 @@
 }
 
 - (void)switchToAttendeeListView {
-   // [[UIApplication sharedApplication] setStatusBarHidden:NO];
     ECGroupView *groupView = (ECGroupView*)self.view;
     [groupView switchToAttendeeListView];
+}
+
+- (void)switchVideoAndAttendeeListView {
+   // [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    ECGroupView *groupView = (ECGroupView*)self.view;
+    [groupView switchVideoAndAttendeeListView];
 }
 
 - (void)attachMyVideoPreviewLayer {
@@ -169,6 +184,7 @@
 
 - (void)detachMyVideoPreviewLayer {
     [_previewLayer removeFromSuperlayer];
+    _previewLayer = nil;
 }
 
 #pragma mark - camera related methods
@@ -195,15 +211,13 @@
     [self updateMyVideoOffStatus];
 }
 
-#pragma mark - broadcast status
-
 - (void)onNetworkFailed:(ASIHTTPRequest *)request {
     // do nothing
 }
 
 #pragma mark - video related
 
-- (UIView *)currentMyVideoView {
+- (UIImageView*)currentMyVideoView {
     ECGroupView *groupView = (ECGroupView*)self.view;
     if (_smallVideoViewIsMine) {
         return groupView.videoView.smallVideoView;
@@ -212,7 +226,7 @@
     }
 }
 
-- (UIImageView *)currentFriendVideoView {
+- (UIImageView*)currentFriendVideoView {
     ECGroupView *groupView = (ECGroupView*)self.view;
     if (_smallVideoViewIsMine) {
         return groupView.videoView.largeVideoView;
@@ -222,16 +236,19 @@
 }
 
 - (void)setSmallVideoViewIsMine:(BOOL)smallVideoViewIsMine {
+    NSLog(@"setSmallVideoViewIsMine");
+
     _smallVideoViewIsMine = smallVideoViewIsMine;
     
     [self detachMyVideoPreviewLayer];
     [self attachMyVideoPreviewLayer];
     
     [[self currentFriendVideoView] setImage:nil];
-    
+    [[self currentMyVideoView] setImage:nil];
 }
 
 - (void)swapVideoView {
+    NSLog(@"swap video view");
     [self setSmallVideoViewIsMine:!_smallVideoViewIsMine];
 }
 
@@ -253,11 +270,6 @@
     NSLog(@"render opposite video");
     UIImageView *largeView = [self currentFriendVideoView];
     largeView.image = videoImage;
-}
-
-- (void)setOppositeVideoName:(NSString *)name {
-    ECGroupVideoView *view = ((ECGroupView*)self.view).videoView;
-    [view setOppositeVideoName:name];
 }
 
 - (void)startVideoLoadingIndicator {
@@ -417,9 +429,11 @@
 
 - (void)startVideoWatch:(NSString *)targetUsername {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
-    [module.videoManager stopVideoFetch];
-    sleep(0.5);
-    [module.videoManager startVideoFetchWithTargetUsername:targetUsername];
+    if (![targetUsername isEqualToString:[module.videoManager.videoDecode currentVideoUserName]]) {
+        [module.videoManager stopVideoFetch];
+        sleep(0.5);
+        [module.videoManager startVideoFetchWithTargetUsername:targetUsername];
+    }
     [self switchToVideoView];
 }
 

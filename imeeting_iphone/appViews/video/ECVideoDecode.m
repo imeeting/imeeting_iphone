@@ -17,6 +17,7 @@
 @synthesize imgHeight = _imgHeight;
 @synthesize rtmpUrl = _rtmpUrl;
 @synthesize groupId = _groupId;
+@synthesize username = _username;
 
 - (id)init {
     self = [super init];
@@ -179,6 +180,7 @@
 
 - (void)closeVideoInputStream {
     NSLog(@"close video input stream");
+    self.username = nil;
     if (_videoCodecContext) {
         avcodec_close(_videoCodecContext);
         _videoCodecContext = NULL;
@@ -254,10 +256,19 @@
     _executor.rtmpUrl = self.rtmpUrl;
     _executor.delegate = self.delegate;
     _executor.groupId = self.groupId;
+    _executor.username = username;
     
     _exeThread = [[NSThread alloc] initWithTarget:_executor selector:@selector(startFetchVideoPictureWithUsername:) object:username];
     [_exeThread start];
     
+}
+
+- (NSString *)currentVideoUserName {
+    if (_executor) {
+        return _executor.username;
+    } else {
+        return nil;
+    }
 }
 
 - (void)stopFetchVideoPicture {
