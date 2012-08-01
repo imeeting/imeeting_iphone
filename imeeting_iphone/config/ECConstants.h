@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#define CHINESE_FONT    @"MicrosoftYaHei"
-#define CHARACTER_FONT  @"Arial"
-#define CHARACTER_BOLD_FONT   @"Arial-BoldMT"
+#define CHINESE_FONT            @"MicrosoftYaHei"
+#define CHARACTER_FONT          @"Arial"
+#define CHARACTER_BOLD_FONT     @"Arial-BoldMT"
+
+#define CALL_CENTER_NUM         @"05512379997"
 
 static CGFloat StatusBarHeight = 20;
 static CGFloat NavigationBarHeight = 44;

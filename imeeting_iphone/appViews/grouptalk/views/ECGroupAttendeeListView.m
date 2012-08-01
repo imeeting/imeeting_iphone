@@ -10,18 +10,16 @@
 #import "ECConstants.h"
 #import "AddressBookManager+Avatar.h"
 
-static CGFloat cellHeight = 60;
-static CGFloat guyIconWidth = 50;
-static CGFloat guyIconHeight = 50;
-static CGFloat nameLabelWidth = 160;
-static CGFloat nameLabelHeight = 30;
-static CGFloat numberLabelWidth = 150;
-static CGFloat numberLabelHeight = 20;
-static CGFloat phoneStatusIconWidth = 20;
-static CGFloat phoneStatusIconHeight = 20;
-static CGFloat videoStatusIconWidth = 20;
-static CGFloat videoStatusIconHeight = 20;
-static CGFloat padding = 4;
+static CGFloat cellHeight = 56;
+static CGFloat guyIconWidth = 40;
+static CGFloat guyIconHeight = 40;
+static CGFloat nameLabelWidth = 120;
+static CGFloat nameLabelHeight = 18;
+static CGFloat phoneStatusIconWidth = 12;
+static CGFloat phoneStatusIconHeight = 12;
+static CGFloat videoStatusIconWidth = 12;
+static CGFloat videoStatusIconHeight = 12;
+static CGFloat padding = 6;
 
 @implementation AttendeeCell
 + (CGFloat)cellHeight {
@@ -33,40 +31,51 @@ static CGFloat padding = 4;
     if (self) {
         NSLog(@"initWithAttendee - %@", attendee);
         // init UI
-        self.selectionStyle = UITableViewCellSelectionStyleGray;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        _guyIconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (cellHeight - guyIconHeight) / 2, guyIconWidth, guyIconHeight)];
+        _guyIconView = [[UIImageView alloc] initWithFrame:CGRectMake(8, (cellHeight - guyIconHeight) / 2, guyIconWidth, guyIconHeight)];
         _guyIconView.contentMode = UIViewContentModeScaleAspectFill;
-       // mGuyIcon.backgroundColor = [UIColor clearColor];
         _guyIconView.layer.masksToBounds = YES;
         [_guyIconView.layer setCornerRadius:5.0];
         [self.contentView addSubview:_guyIconView];
         
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_guyIconView.frame.origin.x + guyIconWidth + padding * 2, padding, nameLabelWidth, nameLabelHeight)];
-        _nameLabel.textColor = [UIColor blackColor];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_guyIconView.frame.origin.x + guyIconWidth + padding * 2, _guyIconView.frame.origin.y, nameLabelWidth, nameLabelHeight)];
+        _nameLabel.textColor = [UIColor colorWithIntegerRed:122 integerGreen:122 integerBlue:122 alpha:1];
         _nameLabel.backgroundColor = [UIColor clearColor];
-        _nameLabel.font = [UIFont boldSystemFontOfSize:16];
+        _nameLabel.font = [UIFont fontWithName:CHINESE_FONT size:14];
         [self.contentView addSubview:_nameLabel];
         
-        _numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(_nameLabel.frame.origin.x, _nameLabel.frame.origin.y + _nameLabel.frame.size.height, numberLabelWidth, numberLabelHeight)];
-        _numberLabel.textColor = [UIColor colorWithIntegerRed:105 integerGreen:105 integerBlue:105 alpha:1];
-        _numberLabel.backgroundColor = [UIColor clearColor];
-        _numberLabel.font = [UIFont systemFontOfSize:12];
-        [self.contentView addSubview:_numberLabel];
-        
-        _phoneStatusIconView = [[UIImageView alloc] initWithFrame:CGRectMake(_nameLabel.frame.origin.x + _nameLabel.frame.size.width + padding*4, (cellHeight - phoneStatusIconHeight) / 2, phoneStatusIconWidth, phoneStatusIconHeight)];
-        _phoneStatusIconView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:_phoneStatusIconView];
-        
-        _videoStatusIconView = [[UIImageView alloc] initWithFrame:CGRectMake(_phoneStatusIconView.frame.origin.x + _phoneStatusIconView.frame.size.width + padding*2, (cellHeight - videoStatusIconWidth) / 2, videoStatusIconWidth, videoStatusIconHeight)];
+        _videoStatusIconView = [[UIImageView alloc] initWithFrame:CGRectMake(_nameLabel.frame.origin.x, _nameLabel.frame.origin.y + _nameLabel.frame.size.height + padding, videoStatusIconWidth, videoStatusIconHeight)];
         _videoStatusIconView.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:_videoStatusIconView];
         
+        _videoStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(_videoStatusIconView.frame.origin.x + _videoStatusIconView.frame.size.width + 2, _videoStatusIconView.frame.origin.y, 40, videoStatusIconHeight)];
+        _videoStatusLabel.textColor = [UIColor colorWithIntegerRed:163 integerGreen:163 integerBlue:163 alpha:1];
+        _videoStatusLabel.font = [UIFont fontWithName:CHINESE_FONT size:12];
+        _videoStatusLabel.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:_videoStatusLabel];
+        
+        _phoneStatusIconView = [[UIImageView alloc] initWithFrame:CGRectMake(_videoStatusLabel.frame.origin.x + _videoStatusLabel.frame.size.width + 2, _videoStatusLabel.frame.origin.y, phoneStatusIconWidth, phoneStatusIconHeight)];
+        _phoneStatusIconView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:_phoneStatusIconView];
+        
+        _phoneStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(_phoneStatusIconView.frame.origin.x + _phoneStatusIconView.frame.size.width + 2, _phoneStatusIconView.frame.origin.y, 100, phoneStatusIconHeight)];
+        _phoneStatusLabel.textColor = _videoStatusLabel.textColor;
+        _phoneStatusLabel.font = _videoStatusLabel.font;
+        _phoneStatusLabel.backgroundColor = _videoStatusLabel.backgroundColor;
+        [self.contentView addSubview:_phoneStatusLabel];
+        
+        UIImageView *sepLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, cellHeight - 1, 200, 1)];
+        sepLine.contentMode = UIViewContentModeScaleAspectFill;
+        sepLine.layer.masksToBounds = YES;
+        sepLine.image = [UIImage imageNamed:@"attendee_list_sep_line"];
+        [self.contentView addSubview:sepLine];
+        
         _videoOnImg = [UIImage imageNamed:@"video_on"];
-       // videoOffImg = [UIImage imageNamed:@"video_off"];
+        _videoOffImg = [UIImage imageNamed:@"video_off"];
 
         _normalBGColor = [UIColor clearColor];
-        _selectedBGColor = [UIColor colorWithIntegerRed:139 integerGreen:119 integerBlue:101 alpha:0.9];
+        _selectedBGColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"attendee_list_selected"]];
         self.contentView.backgroundColor = _normalBGColor;
 
         [self updateAttendeeStatus:attendee];
@@ -82,9 +91,7 @@ static CGFloat padding = 4;
     
     NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
     
-    _nameLabel.text = displayName;
-    _numberLabel.text = username;
-    
+    _nameLabel.text = displayName;    
     
     if ([onlineStatus isEqualToString:ONLINE]) {
         _guyIconView.image = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:username];
@@ -92,32 +99,39 @@ static CGFloat padding = 4;
         if ([videoStatus isEqualToString:ON]) {
             NSLog(@"set video on image - username: %@", username);
             _videoStatusIconView.image = _videoOnImg;
+            _videoStatusLabel.text = NSLocalizedString(@"Video On", nil);
         } else {
             NSLog(@"set video off image - username: %@", username);
-            _videoStatusIconView.image = nil;
+            _videoStatusIconView.image = _videoOffImg;
+            _videoStatusLabel.text = NSLocalizedString(@"Video Off", nil);
         }
         
     } else {
         _guyIconView.image = [[AddressBookManager shareAddressBookManager] grayAvatarByPhoneNumber:username];
         _videoStatusIconView.image = nil;
+        _videoStatusLabel.text = nil;
     }
     
     // set phone status
     if ([telephoneStatus isEqualToString:TERMINATED]) {
         NSLog(@"set phone terminated status");
         _phoneStatusIconView.image = nil;
+        _phoneStatusLabel.text = nil;
     } else if ([telephoneStatus isEqualToString:CALL_WAIT]) {
         NSLog(@"set phone call wait status");
 
-        _phoneStatusIconView.image = [UIImage imageNamed:@"voice_talkconnect"];
+        _phoneStatusIconView.image = [UIImage imageNamed:@"calling"];
+        _phoneStatusLabel.text = NSLocalizedString(@"Calling", nil);
     } else if ([telephoneStatus isEqualToString:ESTABLISHED]) {
         NSLog(@"set phone established status");
 
-        _phoneStatusIconView.image = [UIImage imageNamed:@"voice_talking"];
+        _phoneStatusIconView.image = [UIImage imageNamed:@"intalking"];
+        _phoneStatusLabel.text = NSLocalizedString(@"Talking", nil);
     } else if ([telephoneStatus isEqualToString:FAILED]) {
         NSLog(@"set phone call failed status");
 
-        _phoneStatusIconView.image = [UIImage imageNamed:@"voice_talkfail"];
+        _phoneStatusIconView.image = [UIImage imageNamed:@"call_failed"];
+        _phoneStatusLabel.text = NSLocalizedString(@"Call Failed", nil);
     }
 
 }
@@ -131,6 +145,21 @@ static CGFloat padding = 4;
     } else {
         self.contentView.backgroundColor = _normalBGColor;
     }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    self.contentView.backgroundColor = _selectedBGColor;
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesCancelled:touches withEvent:event];
+    self.contentView.backgroundColor = _normalBGColor;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesEnded:touches withEvent:event];
+    self.contentView.backgroundColor = _normalBGColor;
 }
 
 @end
@@ -160,27 +189,24 @@ static CGFloat padding = 4;
 }
 
 - (void)initUI {    
-    /*
-    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, NavigationBarHeight)];
-    _toolbar.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:self action:@selector(switchToVideoAction)];
-    _toolbar.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactAction)];
-    _toolbar.rightBarButtonItem.tintColor = [UIColor colorWithIntegerRed:107 integerGreen:147 integerBlue:35 alpha:1];
-    [_toolbar.rightBarButtonItem setStyle:UIBarButtonItemStyleBordered];
-    
-    _toolbar.tintColor = [UIColor colorWithIntegerRed:54 integerGreen:54 integerBlue:54 alpha:1];
-
-    _title = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Attendee List", "") style:UIBarButtonItemStylePlain target:nil action:nil];
-    [self addSubview:_toolbar];
-    */
-    
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"attendee_list_bg"]];
 
+    int marginTop = 27;
+    int marginBottom = 19;
+    int padding = 35;
+    int attendeeListTableViewWidth = 200;
+    int attendeeViewWidth = 220;
+    int addMemberButtonWidth = 200;
+    int addMemberButtonHeight = 36;
+
     
-    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((220 - 200) / 2, 0, 200, 480)];
+    
+    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((attendeeViewWidth - attendeeListTableViewWidth) / 2, marginTop, attendeeListTableViewWidth, 480 - marginTop - marginBottom - addMemberButtonHeight - padding)];
     _attendeeListTableView.backgroundColor = self.backgroundColor;
     _attendeeListTableView.dataSource = self;
     _attendeeListTableView.delegate = self;
     _attendeeListTableView.backgroundColor = [UIColor clearColor];
+    _attendeeListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self addSubview:_attendeeListTableView];
     
     [_attendeeListTableView setViewGestureRecognizerDelegate:self];
@@ -188,9 +214,18 @@ static CGFloat padding = 4;
     
     _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0.5 - _attendeeListTableView.frame.size.height, _attendeeListTableView.frame.size.width, _attendeeListTableView.frame.size.height)];
     _refreshHeaderView.delegate = self;
+    _refreshHeaderView.backgroundColor = [UIColor clearColor];
     [_attendeeListTableView addSubview:_refreshHeaderView];
     
     [_refreshHeaderView refreshLastUpdatedDate];
+    
+    UIButton *addMemberButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    addMemberButton.frame = CGRectMake((attendeeViewWidth - addMemberButtonWidth) / 2, 480 - marginBottom - addMemberButtonHeight, addMemberButtonWidth, addMemberButtonHeight);
+    [addMemberButton setTitle:NSLocalizedString(@"Add Attendee", nil) forState:UIControlStateNormal];
+    [addMemberButton setBackgroundImage:[UIImage imageNamed:@"add_member_button"] forState:UIControlStateNormal];
+    addMemberButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:14];
+    [addMemberButton addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:addMemberButton];
 }
 
 - (void)updateAttendee:(NSDictionary *)attendee withMyself:(BOOL)myself {

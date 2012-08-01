@@ -46,11 +46,13 @@
     ECContactsSelectContainerView *view = (ECContactsSelectContainerView*)self.view;
     view.isAppearedInCreatingNewGroup = isAppearedInCreateNewGroup;
     
+    /*
     if (isAppearedInCreateNewGroup) {
         [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"Next", "")];
     } else {
         [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"invite", "")];
     }
+     */
 }
 
 #pragma mark - actions

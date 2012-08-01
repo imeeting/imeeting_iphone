@@ -80,8 +80,8 @@
         
         [module.videoManager setupSession];
         // start video capturing
-        ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
-        [videoView onOpenCameraButtonClickAction];
+        //ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+        //[videoView onOpenCameraButtonClickAction];
     }
    
     if (_refreshList) {

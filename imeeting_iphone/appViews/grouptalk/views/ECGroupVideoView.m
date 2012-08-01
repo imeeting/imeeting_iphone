@@ -85,6 +85,7 @@ static CGFloat GroupIdLabelHeight = 20;
 - (void)onSwitchToAttendeeListViewAction;
 - (void)onSwitchToVideoViewAction;
 - (void)onSwitchFBCameraAction;
+- (void)onDialAction;
 @end
 
 @interface SmallVideoViewGesture : NSObject <UIViewGestureRecognizerDelegate>
@@ -200,7 +201,7 @@ static CGFloat GroupIdLabelHeight = 20;
     
     _largeVideoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, VideoRegionWidth, VideoRegionHeight)];
     _largeVideoView.contentMode = UIViewContentModeScaleAspectFill;
-    _largeVideoView.backgroundColor = [UIColor colorWithIntegerRed:240 integerGreen:255 integerBlue:255 alpha:1];
+    _largeVideoView.backgroundColor = [UIColor whiteColor];
     LargeVideoViewGesture *largeVideoViewGesture = [[LargeVideoViewGesture alloc] init];
     largeVideoViewGesture.videoView = self;
     _largeVideoView.userInteractionEnabled = YES;
@@ -249,6 +250,7 @@ static CGFloat GroupIdLabelHeight = 20;
     [bottomBar addSubview:sepLine];
     
     BottomBarButton *dialButton = [[BottomBarButton alloc] initWithFrame:CGRectMake(sepLine.frame.origin.x + sepLine.frame.size.width, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"Dial", nil) andIcon:[UIImage imageNamed:@"dial"]];
+    [dialButton addTarget:self action:@selector(onDialAction) forControlEvents:UIControlEventTouchUpInside];
     [bottomBar addSubview:dialButton];
 
     sepLine = [self makeBottomBarSepLine:CGRectMake(dialButton.frame.origin.x + dialButton.frame.size.width, 1, 2, BottomBarHeight - 1)];
@@ -342,6 +344,11 @@ static CGFloat GroupIdLabelHeight = 20;
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(switchCamera)]) {
         [self.viewControllerRef performSelector:@selector(switchCamera)];
     }
+}
+
+- (void)onDialAction {
+    NSString *phoneUrl = [NSString stringWithFormat:@"telprompt://%@", CALL_CENTER_NUM];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneUrl]];
 }
 
 #pragma mark - video status

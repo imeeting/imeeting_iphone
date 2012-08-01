@@ -13,9 +13,10 @@
 @interface AttendeeCell : UITableViewCell {
     UIImageView *_guyIconView;
     UILabel *_nameLabel;
-    UILabel *_numberLabel;
     UIImageView *_phoneStatusIconView;
+    UILabel *_phoneStatusLabel;
     UIImageView *_videoStatusIconView;
+    UILabel *_videoStatusLabel;
     
     UIImage *_videoOnImg;
     UIImage *_videoOffImg;

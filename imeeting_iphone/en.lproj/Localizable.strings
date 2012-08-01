@@ -48,7 +48,7 @@
 "Attendee List" = "Attendee List";
 "Leave Group" = "Leave";
 "error in join group" = "Cannot join the group talk, please try later!";
-"Invite Attendee" = "Invite Attendee";
+"Add Attendee" = "Add Attendee";
 "This attendee's video is off" = "This attendee's video is not open";
 "Loading Video" = "Loading Video";
 "This attendee is offline" = "This attendee is offline";
@@ -102,3 +102,9 @@
 "Dial" = "Dial";
 "Close Video" = "Close";
 "Open Video" = "Open";
+"Video On" = "On";
+"Video Off" = "Off";
+"Hanged up" = "Hanged Up";
+"Calling" = "Calling";
+"Talking" = "Talking";
+"Call Failed" = "Call Failed";

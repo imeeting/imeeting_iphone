@@ -48,8 +48,8 @@
 "Attendee List" = "成员列表";
 "Leave Group" = "离开群聊";
 "error in join group" = "无法进入当前组, 请稍后重试！";
-"Invite Attendee" = "添加成员";
-"This attendee's video is off" = "此参与者尚未打开视频";
+"Add Attendee" = "添加成员";
+"This attendee's video is off" = "此成员尚未打开视频";
 "Loading Video" = "正在加载视频";
 "This attendee is offline" = "此成员未上线";
 "error in creating group" = "新建群聊失败";
@@ -102,3 +102,9 @@
 "Dial" = "电话呼入";
 "Close Video" = "关闭视频";
 "Open Video" = "打开视频";
+"Video On" = "打开";
+"Video Off" = "关闭";
+"Hanged up" = "通话已断";
+"Calling" = "正在呼叫";
+"Talking" = "正在通话";
+"Call Failed" = "呼叫失败";

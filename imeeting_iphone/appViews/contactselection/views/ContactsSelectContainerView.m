@@ -52,8 +52,10 @@
         self.titleView = _titleView;
         
         UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [backButton setBackgroundImage:[UIImage imageNamed:@"goback"] forState:UIControlStateNormal];
-        backButton.frame = CGRectMake(0, 0, 58, 29);
+        [backButton setBackgroundImage:[UIImage imageNamed:@"back_navi_button"] forState:UIControlStateNormal];
+        [backButton setTitle:NSLocalizedString(@"Back", nil) forState:UIControlStateNormal];
+        backButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:12];
+        backButton.frame = CGRectMake(0, 0, 53, 28);
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
