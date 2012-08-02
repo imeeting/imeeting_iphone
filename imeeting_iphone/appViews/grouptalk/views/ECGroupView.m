@@ -18,11 +18,18 @@
     self = [super initWithFrame:frame];
     if (self) {
         _inVideoViewFlag = YES;
+        UIView *bgView = [[UIView alloc] init];
+        bgView.backgroundColor = [UIColor whiteColor];
+        bgView.frame = CGRectMake(-320, 0, 640, 480);
+        [self addSubview:bgView];
+        
         self.attendeeListView = [[ECGroupAttendeeListView alloc] init];
         self.attendeeListView.frame = CGRectMake(-220, 0, 220, 480);
         self.videoView = [[ECGroupVideoView alloc] init];
         [self addSubview:self.videoView];
         [self addSubview:self.attendeeListView];
+        
+        [self.attendeeListView setHidden:YES];
     }
     return self;
 }

@@ -108,3 +108,7 @@
 "Calling" = "正在呼叫";
 "Talking" = "正在通话";
 "Call Failed" = "呼叫失败";
+"Add" = "添加";
+"Please input phone number" = "请输入电话号码";
+"Mute" = "禁音通话";
+"Unmute" = "恢复通话";

@@ -16,6 +16,7 @@
     
     UILabel *_groupIdLabel;
     UIActivityIndicatorView *_loadVideoIndicator;
+    UIImage *_largeVideoBg;
 }
 
 @property (nonatomic,retain) UIImageView *smallVideoView;
@@ -27,5 +28,8 @@
 - (void)resetOppositeVideoUI;
 - (void)showVideoLoadFailedInfo;
 - (void)onOpenCameraButtonClickAction;
-
+- (void)setDialButtonAsMute;
+- (void)setDialButtonAsUnmute;
+- (void)setDialButtonAsDial;
+- (void)setDialButtonAsTalking;
 @end

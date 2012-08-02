@@ -57,6 +57,10 @@ static CGFloat GroupIdLabelHeight = 20;
     _titleLabel.text = title;
 }
 
+- (NSString*)title {
+    return _titleLabel.text;
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_button_pressed"]];
@@ -75,6 +79,7 @@ static CGFloat GroupIdLabelHeight = 20;
 
 @interface ECGroupVideoView () {
     BottomBarButton *_cameraButton;
+    BottomBarButton *_dialButton;
 }
 - (void)initUI;
 - (UIView*)makeVideoRegion;
@@ -199,9 +204,10 @@ static CGFloat GroupIdLabelHeight = 20;
     
     CGColorRef borderColor = [[UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:1] CGColor];
     
+    _largeVideoBg = [UIImage imageNamed:@"mainpage_bg"];
     _largeVideoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, VideoRegionWidth, VideoRegionHeight)];
     _largeVideoView.contentMode = UIViewContentModeScaleAspectFill;
-    _largeVideoView.backgroundColor = [UIColor whiteColor];
+    _largeVideoView.image = _largeVideoBg;
     LargeVideoViewGesture *largeVideoViewGesture = [[LargeVideoViewGesture alloc] init];
     largeVideoViewGesture.videoView = self;
     _largeVideoView.userInteractionEnabled = YES;
@@ -223,11 +229,16 @@ static CGFloat GroupIdLabelHeight = 20;
     
             
     _smallVideoView = [[UIImageView alloc] initWithFrame:CGRectMake(VideoRegionWidth - SmallVideoViewWidth - 8, VideoRegionHeight - SmallVideoViewHeight - BottomBarHeight - 8, SmallVideoViewWidth, SmallVideoViewHeight)];
+    _smallVideoView.backgroundColor = [UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:0.1];
     _smallVideoView.layer.masksToBounds = YES;
     [_smallVideoView.layer setCornerRadius:8];
     [_smallVideoView.layer setBorderWidth:1];
     [_smallVideoView.layer setBorderColor:borderColor];
-    _smallVideoView.backgroundColor = [UIColor colorWithIntegerRed:159 integerGreen:182 integerBlue:205 alpha:1];
+    [_smallVideoView.layer setShadowOffset:CGSizeMake(1, 1)];
+    [_smallVideoView.layer setShadowRadius:8];
+    [_smallVideoView.layer setShadowOpacity:1];
+    [_smallVideoView.layer setShadowColor:[[UIColor blackColor] CGColor]];
+
     _smallVideoView.userInteractionEnabled = YES;
     SmallVideoViewGesture *smallVideoGesture = [[SmallVideoViewGesture alloc] init];
     smallVideoGesture.videoView = self;
@@ -249,11 +260,11 @@ static CGFloat GroupIdLabelHeight = 20;
     UIImageView *sepLine = [self makeBottomBarSepLine:CGRectMake(memberListButton.frame.origin.x + memberListButton.frame.size.width, 1, 2, BottomBarHeight - 1)];
     [bottomBar addSubview:sepLine];
     
-    BottomBarButton *dialButton = [[BottomBarButton alloc] initWithFrame:CGRectMake(sepLine.frame.origin.x + sepLine.frame.size.width, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"Dial", nil) andIcon:[UIImage imageNamed:@"dial"]];
-    [dialButton addTarget:self action:@selector(onDialAction) forControlEvents:UIControlEventTouchUpInside];
-    [bottomBar addSubview:dialButton];
+    _dialButton = [[BottomBarButton alloc] initWithFrame:CGRectMake(sepLine.frame.origin.x + sepLine.frame.size.width, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"Dial", nil) andIcon:[UIImage imageNamed:@"dial"]];
+    [_dialButton addTarget:self action:@selector(onDialAction) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBar addSubview:_dialButton];
 
-    sepLine = [self makeBottomBarSepLine:CGRectMake(dialButton.frame.origin.x + dialButton.frame.size.width, 1, 2, BottomBarHeight - 1)];
+    sepLine = [self makeBottomBarSepLine:CGRectMake(_dialButton.frame.origin.x + _dialButton.frame.size.width, 1, 2, BottomBarHeight - 1)];
     [bottomBar addSubview:sepLine];    
     
     _cameraButton = [[BottomBarButton alloc] initWithFrame:CGRectMake(sepLine.frame.origin.x + sepLine.frame.size.width, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"Open Video", nil) andIcon:[UIImage imageNamed:@"camera"]];
@@ -281,7 +292,6 @@ static CGFloat GroupIdLabelHeight = 20;
 #pragma mark - button actions
 - (void)onLeaveAction {
     [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Leave Group?", "") delegate:self cancelButtonTitle:NSLocalizedString(@"OK", "") otherButtonTitles:NSLocalizedString(@"Cancel", ""), nil] show];
-
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -347,8 +357,16 @@ static CGFloat GroupIdLabelHeight = 20;
 }
 
 - (void)onDialAction {
-    NSString *phoneUrl = [NSString stringWithFormat:@"telprompt://%@", CALL_CENTER_NUM];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneUrl]];
+    NSString *title = _dialButton.title;
+    if ([NSLocalizedString(@"Dial", nil) isEqualToString:title]) {
+        NSString *phoneUrl = [NSString stringWithFormat:@"telprompt://%@", CALL_CENTER_NUM];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneUrl]];        
+    } else if ([NSLocalizedString(@"Mute", nil) isEqualToString:title]) {
+        
+    } else if ([NSLocalizedString(@"Unmute", nil) isEqualToString:title]) {
+        
+    }
+     
 }
 
 #pragma mark - video status
@@ -366,8 +384,9 @@ static CGFloat GroupIdLabelHeight = 20;
 }
 
 - (void)resetOppositeVideoUI {
+    NSLog(@"resetOppositeVideoUI");
     [_loadVideoIndicator stopAnimating];
-    _largeVideoView.image = nil;
+    _largeVideoView.image = _largeVideoBg;
     _smallVideoView.image = nil;
 }
 
@@ -376,5 +395,22 @@ static CGFloat GroupIdLabelHeight = 20;
     [[[iToast makeText:NSLocalizedString(@"Unable to load video", "")] setDuration:iToastDurationLong] show];
     sleep(2);
     [self resetOppositeVideoUI];
+}
+
+#pragma mark - dial button settings
+- (void)setDialButtonAsDial {
+    [_dialButton setTitle:NSLocalizedString(@"Dial", nil)];
+}
+
+- (void)setDialButtonAsTalking {
+    [_dialButton setTitle:NSLocalizedString(@"Talking", nil)];
+}
+
+- (void)setDialButtonAsMute {
+    [_dialButton setTitle:NSLocalizedString(@"Mute", nil)];
+}
+
+- (void)setDialButtonAsUnmute {
+    [_dialButton setTitle:NSLocalizedString(@"Unmute", nil)];
 }
 @end

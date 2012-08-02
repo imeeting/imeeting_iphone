@@ -108,3 +108,7 @@
 "Calling" = "Calling";
 "Talking" = "Talking";
 "Call Failed" = "Call Failed";
+"Add" = "Add";
+"Please input phone number" = "Input phone number";
+"Mute" = "Mute";
+"Unmute" = "Unmute";

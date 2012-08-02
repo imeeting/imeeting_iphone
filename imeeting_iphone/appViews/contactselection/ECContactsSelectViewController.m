@@ -163,7 +163,7 @@ invite_error:
         [NSThread detachNewThreadSelector:@selector(refreshGroupList) toTarget:mainController withObject:nil];
 
         [self.navigationController popViewControllerAnimated:NO];
-        [mainController.navigationController pushViewController:module.groupController animated:NO];
+        [mainController.navigationController pushViewController:module.groupController animated:YES];
     } else {
         NSLog(@"already in group mode");
         // already in group mode, so we jump back to group view
@@ -172,9 +172,28 @@ invite_error:
         gc.refreshList = YES;
         //[NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:gc withObject:nil];
         [gc refreshAttendeeList];
-        
-        [self.navigationController popViewControllerAnimated:YES];
+        [self goBackToGroupView];
     }
+}
+
+- (void)goBackToGroupView {
+    /*
+     CATransition *animation = [CATransition animation];
+     animation.duration = 0.3f;
+     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+     animation.type = kCATransitionReveal;
+     animation.subtype = kCATransitionFromBottom;        
+     [self.navigationController.view.layer addAnimation:animation forKey:nil];
+     [self.navigationController popViewControllerAnimated:NO];
+     */
+    [UIView beginAnimations:@"animationID" context:nil];
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationRepeatAutoreverses:NO];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:YES];
+    [self.navigationController popViewControllerAnimated:NO];
+    [UIView commitAnimations];
+
 }
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {

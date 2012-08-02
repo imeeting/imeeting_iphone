@@ -12,7 +12,10 @@
 #import "MeetingContactsListView.h"
 #import "ECBaseUIView.h"
 
-@interface ContactsSelectContainerView : ECBaseUIView {
+@interface ContactsSelectContainerView : ECBaseUIView <UIViewGestureRecognizerDelegate>{
+    UIView *_newContactInputView;
+    UITextField *_phoneNumberInputTextField;
+    
     // subview addressBook contacts list table view
     ABContactsListView *_mABContactsListView;
     // subview meeting contacts list table view

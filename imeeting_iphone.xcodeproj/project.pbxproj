@@ -48,7 +48,6 @@
 		F86F086F15C9106C00793E73 /* video_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F86F085B15C9106C00793E73 /* video_on.png */; };
 		F86F087115C914B100793E73 /* add_member_button.png in Resources */ = {isa = PBXBuildFile; fileRef = F86F087015C914B100793E73 /* add_member_button.png */; };
 		F86F087315C9216300793E73 /* back_navi_button.png in Resources */ = {isa = PBXBuildFile; fileRef = F86F087215C9216300793E73 /* back_navi_button.png */; };
-		F86F087A15C94FFA00793E73 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F86F087915C94FFA00793E73 /* CommonToolkit.framework */; };
 		F87BF5E11585DE3E00339C0C /* ECMainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F87BF5E01585DE3E00339C0C /* ECMainPageView.m */; };
 		F87BF5E41585DE6500339C0C /* ECMainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87BF5E31585DE6500339C0C /* ECMainPageViewController.m */; };
 		F885A584159A9DDA00709FC7 /* camera_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = F885A583159A9DDA00709FC7 /* camera_switch.png */; };
@@ -136,6 +135,8 @@
 		F8F45B6715AD67EC000A9285 /* voice_talkconnect.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6315AD67EC000A9285 /* voice_talkconnect.png */; };
 		F8F45B6815AD67EC000A9285 /* voice_talkfail.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6415AD67EC000A9285 /* voice_talkfail.png */; };
 		F8F45B6915AD67EC000A9285 /* voice_talking.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6515AD67EC000A9285 /* voice_talking.png */; };
+		F8FBB09615CA91D100384103 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8FBB09515CA91D100384103 /* CoreTelephony.framework */; };
+		F8FBB09815CA993700384103 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8FBB09715CA993700384103 /* CommonToolkit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -191,7 +192,6 @@
 		F86F085B15C9106C00793E73 /* video_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_on.png; sourceTree = "<group>"; };
 		F86F087015C914B100793E73 /* add_member_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_member_button.png; sourceTree = "<group>"; };
 		F86F087215C9216300793E73 /* back_navi_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_navi_button.png; sourceTree = "<group>"; };
-		F86F087915C94FFA00793E73 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F87BF5DF1585DE3E00339C0C /* ECMainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMainPageView.h; path = mainpage/ECMainPageView.h; sourceTree = "<group>"; };
 		F87BF5E01585DE3E00339C0C /* ECMainPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECMainPageView.m; path = mainpage/ECMainPageView.m; sourceTree = "<group>"; };
 		F87BF5E21585DE6500339C0C /* ECMainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMainPageViewController.h; path = mainpage/ECMainPageViewController.h; sourceTree = "<group>"; };
@@ -469,6 +469,8 @@
 		F8F45B6315AD67EC000A9285 /* voice_talkconnect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_talkconnect.png; path = imeeting_iphone/Resources/images/voice_talkconnect.png; sourceTree = "<group>"; };
 		F8F45B6415AD67EC000A9285 /* voice_talkfail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_talkfail.png; path = imeeting_iphone/Resources/images/voice_talkfail.png; sourceTree = "<group>"; };
 		F8F45B6515AD67EC000A9285 /* voice_talking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_talking.png; path = imeeting_iphone/Resources/images/voice_talking.png; sourceTree = "<group>"; };
+		F8FBB09515CA91D100384103 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		F8FBB09715CA993700384103 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = Frameworks/CommonToolkit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,7 +478,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F86F087A15C94FFA00793E73 /* CommonToolkit.framework in Frameworks */,
+				F8FBB09815CA993700384103 /* CommonToolkit.framework in Frameworks */,
+				F8FBB09615CA91D100384103 /* CoreTelephony.framework in Frameworks */,
 				F800185715B66C5800745A8F /* CoreText.framework in Frameworks */,
 				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
 				F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */,
@@ -533,7 +536,7 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
-				F86F087915C94FFA00793E73 /* CommonToolkit.framework */,
+				F8FBB09715CA993700384103 /* CommonToolkit.framework */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,
@@ -552,6 +555,7 @@
 		F863C860157C61320045C08C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8FBB09515CA91D100384103 /* CoreTelephony.framework */,
 				F800185615B66C5800745A8F /* CoreText.framework */,
 				F809862815B5076F00098A0C /* AudioToolbox.framework */,
 				F807584515A294C1008D8656 /* MessageUI.framework */,

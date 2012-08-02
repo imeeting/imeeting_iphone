@@ -33,6 +33,9 @@
 - (void)addNewContactToMeetingWithPhoneNumber:(NSString *)pPhoneNumber;
 - (void)goBack;
 - (void)searchFieldValueChanged:(UITextField*)textField;
+- (void)onAddNewContactAction;
+- (void)onConfirmAddContactAction;
+- (void)dismissInputDialog;
 @end
 
 
@@ -104,7 +107,7 @@
         [searchFieldView addSubview:searchBGView];
         
         //-- search text field
-        _mSearchField = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"Search Contacts", nil) frame:CGRectMake(searchBGView.frame.origin.x + 32, searchBGView.frame.origin.y + 5, 135, 20) keyboardType:UIKeyboardTypeASCIICapable];
+        _mSearchField = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"Search Contacts", nil) frame:CGRectMake(searchBGView.frame.origin.x + 32, searchBGView.frame.origin.y + 5, 130, 20) keyboardType:UIKeyboardTypeASCIICapable];
         _mSearchField.backgroundColor = [UIColor clearColor];
         _mSearchField.borderStyle = UITextBorderStyleNone;
         _mSearchField.font = [UIFont fontWithName:CHINESE_FONT size:13];
@@ -118,6 +121,7 @@
         UIButton *addNewContactButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [addNewContactButton setBackgroundImage:[UIImage imageNamed:@"addnew"] forState:UIControlStateNormal];
         addNewContactButton.frame = CGRectMake(searchBGView.frame.origin.x + searchBGView.frame.size.width + 5, searchBGView.frame.origin.y + (searchBGView.frame.size.height - 22) / 2, 37, 22);
+        [addNewContactButton addTarget:self action:@selector(onAddNewContactAction) forControlEvents:UIControlEventTouchUpInside];
         [searchFieldView addSubview:addNewContactButton];
         
         
@@ -140,6 +144,58 @@
         [self addSubview:listTitleBar];
         [self addSubview:_mMeetingContactsListView];
         [self addSubview:leftRegionView];
+        
+        // init add new phone number dialog
+        _newContactInputView = [[UIView alloc] initWithFrame:self.frame];
+        _newContactInputView.backgroundColor = [UIColor clearColor];
+        
+        UIView *tmpBgView = [[UIView alloc] initWithFrame:_newContactInputView.frame];
+        tmpBgView.backgroundColor = [UIColor clearColor];
+        [tmpBgView setViewGestureRecognizerDelegate:self];
+        [_newContactInputView addSubview:tmpBgView];
+        
+        int inputDialogViewWidth = 240;
+        int inputDialogViewHeight = 130;
+        UIView *inputDialogView = [[UIView alloc] initWithFrame:CGRectMake((_newContactInputView.frame.size.width - inputDialogViewWidth) / 2, 60, inputDialogViewWidth, inputDialogViewHeight)];
+        inputDialogView.backgroundColor = [UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:0.9];
+        [inputDialogView.layer setCornerRadius:5];
+        [inputDialogView.layer setBorderWidth:1];
+        [inputDialogView.layer setBorderColor:[[UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:0.6] CGColor]];
+        [inputDialogView.layer setShadowOffset:CGSizeMake(1, 1)];
+        [inputDialogView.layer setShadowRadius:5];
+        [inputDialogView.layer setShadowOpacity:1];
+        [inputDialogView.layer setShadowColor:[[UIColor blackColor] CGColor]];
+        
+        int closeDialogViewWidth = 30;
+        UILabel *closeDialogView = [[UILabel alloc] initWithFrame:CGRectMake(inputDialogView.frame.size.width - closeDialogViewWidth, 0, closeDialogViewWidth, closeDialogViewWidth)];
+        closeDialogView.font = [UIFont fontWithName:CHARACTER_FONT size:20];
+        closeDialogView.text = @"×";
+        closeDialogView.textAlignment = UITextAlignmentCenter;
+        closeDialogView.textColor = [UIColor whiteColor];
+        closeDialogView.backgroundColor = [UIColor clearColor];
+        closeDialogView.userInteractionEnabled = YES;
+        [closeDialogView setViewGestureRecognizerDelegate:self];
+        [inputDialogView addSubview:closeDialogView];
+        
+        int phoneNumberFieldWidth = 180;
+        int phoneNumberFieldHeight = 30;
+        _phoneNumberInputTextField = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"Please input phone number", nil) frame:CGRectMake((inputDialogView.frame.size.width - phoneNumberFieldWidth) / 2, (inputDialogView.frame.size.height - phoneNumberFieldHeight) / 2 - 10, phoneNumberFieldWidth, phoneNumberFieldHeight) keyboardType:UIKeyboardTypeNumberPad];
+        [_phoneNumberInputTextField addTarget:self action:@selector(searchFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+        [inputDialogView addSubview:_phoneNumberInputTextField];
+        
+        int confirmAddButtonWidth = 50;
+        int confirmAddButtonHeight = 25;
+        UIButton *confirmAddButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        confirmAddButton.frame = CGRectMake((inputDialogView.frame.size.width - confirmAddButtonWidth) / 2, _phoneNumberInputTextField.frame.origin.y + _phoneNumberInputTextField.frame.size.height + 20, confirmAddButtonWidth, confirmAddButtonHeight);
+        [confirmAddButton setTitle:NSLocalizedString(@"Add", nil) forState:UIControlStateNormal];
+        confirmAddButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:12];
+        confirmAddButton.titleLabel.textColor = [UIColor colorWithIntegerRed:122 integerGreen:122 integerBlue:122 alpha:1];
+        [confirmAddButton addTarget:self action:@selector(onConfirmAddContactAction) forControlEvents:UIControlEventTouchUpInside];
+        [inputDialogView addSubview:confirmAddButton];
+        
+        [_newContactInputView addSubview:inputDialogView];
+        [self addSubview:_newContactInputView];
+        [_newContactInputView setHidden:YES];
         
     }
     return self;
@@ -300,7 +356,6 @@
 
 - (void)searchFieldValueChanged:(UITextField *)textField {
     NSString *searchText = textField.text;
-    NSLog(@"searchText: %@", searchText);
     [self searchContactWithParameter:searchText];
 }
 
@@ -399,6 +454,62 @@
 
 - (void)goBack {
     [self.viewControllerRef.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onAddNewContactAction {
+    _phoneNumberInputTextField.text = nil;
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.4f;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.type = kCATransitionFade;
+    [_newContactInputView.layer addAnimation:animation forKey:nil];
+    
+    [_newContactInputView setHidden:NO];
+
+}
+
+- (void)onConfirmAddContactAction {
+    NSString *phoneNumber = _phoneNumberInputTextField.text;
+    
+    if (phoneNumber == nil || [phoneNumber isNil]) {
+        [[[iToast makeText:NSLocalizedString(@"new added phone number is nil", nil)] setDuration:iToastDurationLong] show];
+        return;
+    }
+    
+    [self addContactToMeetingWithPhoneNumber:phoneNumber];
+    [self dismissInputDialog];
+}
+
+- (GestureType)supportedGestureInView:(UIView *)pView {
+    return tap;
+}
+
+- (TapFingerMode)tapFingerModeInView:(UIView *)pView {
+    return single;
+}
+
+- (TapCountMode)tapCountModeInView:(UIView *)pView {
+    return once;
+}
+
+- (void)view:(UIView *)pView tapAtPoint:(CGPoint)pPoint andFingerMode:(TapFingerMode)pFingerMode andCountMode:(TapCountMode)pCountMode {
+    [self dismissInputDialog];
+}
+
+- (void)dismissInputDialog {
+    _mABContactsListView.presentContactsInfoArrayRef = [NSMutableArray arrayWithArray:_mABContactsListView.allContactsInfoArrayInABRef];
+    [_mABContactsListView reloadData];
+    
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.4f;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.type = kCATransitionFade;
+    [_newContactInputView.layer addAnimation:animation forKey:nil];
+    
+    [_newContactInputView setHidden:YES];
+    [_phoneNumberInputTextField resignFirstResponder];
+
+
 }
 
 @end

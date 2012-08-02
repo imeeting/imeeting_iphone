@@ -243,7 +243,7 @@ static ECMainPageViewController *instance;
                 
                 [module connectToNotifyServer];
                 
-                [self.navigationController pushViewController:module.groupController animated:NO];
+                [self.navigationController pushViewController:module.groupController animated:YES];
                 
                 return;
             } else {

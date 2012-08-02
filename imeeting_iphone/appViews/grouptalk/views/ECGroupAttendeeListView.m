@@ -164,7 +164,9 @@ static CGFloat padding = 6;
 
 @end
 
-@interface ECGroupAttendeeListView () 
+@interface ECGroupAttendeeListView () {
+    UIButton *_addMemberButton;
+}
 - (void)initUI;
 - (void)switchToVideoAction;
 - (void)addContactAction;
@@ -199,8 +201,6 @@ static CGFloat padding = 6;
     int addMemberButtonWidth = 200;
     int addMemberButtonHeight = 36;
 
-    
-    
     _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((attendeeViewWidth - attendeeListTableViewWidth) / 2, marginTop, attendeeListTableViewWidth, 480 - marginTop - marginBottom - addMemberButtonHeight - padding)];
     _attendeeListTableView.backgroundColor = self.backgroundColor;
     _attendeeListTableView.dataSource = self;
@@ -209,9 +209,6 @@ static CGFloat padding = 6;
     _attendeeListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self addSubview:_attendeeListTableView];
     
-    [_attendeeListTableView setViewGestureRecognizerDelegate:self];
-    
-    
     _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0.5 - _attendeeListTableView.frame.size.height, _attendeeListTableView.frame.size.width, _attendeeListTableView.frame.size.height)];
     _refreshHeaderView.delegate = self;
     _refreshHeaderView.backgroundColor = [UIColor clearColor];
@@ -219,13 +216,15 @@ static CGFloat padding = 6;
     
     [_refreshHeaderView refreshLastUpdatedDate];
     
-    UIButton *addMemberButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    addMemberButton.frame = CGRectMake((attendeeViewWidth - addMemberButtonWidth) / 2, 480 - marginBottom - addMemberButtonHeight, addMemberButtonWidth, addMemberButtonHeight);
-    [addMemberButton setTitle:NSLocalizedString(@"Add Attendee", nil) forState:UIControlStateNormal];
-    [addMemberButton setBackgroundImage:[UIImage imageNamed:@"add_member_button"] forState:UIControlStateNormal];
-    addMemberButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:14];
-    [addMemberButton addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:addMemberButton];
+    _addMemberButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _addMemberButton.frame = CGRectMake((attendeeViewWidth - addMemberButtonWidth) / 2, 480 - marginBottom - addMemberButtonHeight, addMemberButtonWidth, addMemberButtonHeight);
+    [_addMemberButton setTitle:NSLocalizedString(@"Add Attendee", nil) forState:UIControlStateNormal];
+    [_addMemberButton setBackgroundImage:[UIImage imageNamed:@"add_member_button"] forState:UIControlStateNormal];
+    _addMemberButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:14];
+    [_addMemberButton addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_addMemberButton];
+    
+    [self setViewGestureRecognizerDelegate:self];
 }
 
 - (void)updateAttendee:(NSDictionary *)attendee withMyself:(BOOL)myself {
@@ -398,15 +397,12 @@ static CGFloat padding = 6;
 
 #pragma mark - set UI
 
-- (void)setAttendeeUI {
-    NSArray *toolButtonArray = [NSArray arrayWithObjects:_toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], nil];
-    [_toolbar setItems:toolButtonArray];
-    
+- (void)setAttendeeUI { 
+    [_addMemberButton setHidden:YES];
 }
 
 - (void)setOwnerUI {
-    NSArray *toolButtonArray = [NSArray arrayWithObjects:_toolbar.leftBarButtonItem, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _title, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _toolbar.rightBarButtonItem, nil];
-    [_toolbar setItems:toolButtonArray];
+    [_addMemberButton setHidden:NO];
 }
 
 #pragma mark - gesture delegate

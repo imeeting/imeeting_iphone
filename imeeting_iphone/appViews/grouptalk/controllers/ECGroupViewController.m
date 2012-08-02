@@ -5,7 +5,8 @@
 //  Created by star king on 12-7-5.
 //  Copyright (c) 2012年 elegant cloud. All rights reserved.
 //
-
+#import <CoreTelephony/CTCallCenter.h>
+#import <CoreTelephony/CTCall.h>
 #import "ECGroupViewController.h"
 #import "CommonToolkit/CommonToolkit.h"
 #import "ECGroupView.h"
@@ -46,6 +47,8 @@
 - (void)onFinishedHangup:(ASIHTTPRequest*)pRequest;
 - (void)kickout:(NSString*)targetUsername;
 - (void)onFinishedKickout:(ASIHTTPRequest*)pRequest;
+//- (void)muteMyself;
+//- (void)unmuteMyself;
 @end
 
 @implementation ECGroupViewController
@@ -62,7 +65,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
     if (_isFirstLoad) {
@@ -82,6 +85,21 @@
         // start video capturing
         //ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
         //[videoView onOpenCameraButtonClickAction];
+        
+        
+        // detect call state
+        CTCallCenter *callCenter = [[CTCallCenter alloc] init];
+        callCenter.callEventHandler=^(CTCall* call) {
+            if (call.callState == CTCallStateDisconnected) {
+                NSLog(@"call disconnected");
+                ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+                [videoView setDialButtonAsDial];
+            } else if (call.callState == CTCallStateConnected) {
+                NSLog(@"call connected");
+                ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+                [videoView setDialButtonAsTalking];                
+            }
+        };
     }
    
     if (_refreshList) {
@@ -97,6 +115,13 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     [super viewWillDisappear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    ECGroupAttendeeListView *alv = ((ECGroupView*)self.view).attendeeListView;
+    [alv setHidden:NO];
+    [self refreshAttendeeList];
 }
 
 - (void)viewDidLoad
@@ -145,14 +170,27 @@
     ECContactsSelectViewController *csvc = [[ECContactsSelectViewController alloc] init];
     [csvc initInMeetingAttendeesPhoneNumbers:phoneNumberArray];
     csvc.isAppearedInCreateNewGroup = NO;
-    
-    [self.navigationController pushViewController:csvc animated:YES];
+        
+    /*
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.3f;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.type = kCATransitionMoveIn;
+    animation.subtype = kCATransitionFromTop;
+    [self.navigationController.view.layer addAnimation:animation forKey:nil];
+    [self.navigationController pushViewController:csvc animated:NO];
+     */
+    [UIView beginAnimations:@"animationID" context:nil];
+    [UIView setAnimationDuration:0.4f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationRepeatAutoreverses:NO];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:YES];
+    [self.navigationController pushViewController:csvc animated:NO];
+    [UIView commitAnimations];
     
 }
 
 - (void)switchToVideoView {
-   // [[UIApplication sharedApplication] setStatusBarHidden:YES];
-
     ECGroupView *groupView = (ECGroupView*)self.view;
     [groupView switchToVideoView];
 }
@@ -243,8 +281,8 @@
     [self detachMyVideoPreviewLayer];
     [self attachMyVideoPreviewLayer];
     
-    [[self currentFriendVideoView] setImage:nil];
-    [[self currentMyVideoView] setImage:nil];
+    [self currentFriendVideoView].image = nil;
+    [self currentMyVideoView].image = nil;
 }
 
 - (void)swapVideoView {

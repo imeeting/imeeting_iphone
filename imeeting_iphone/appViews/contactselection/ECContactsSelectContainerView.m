@@ -66,4 +66,15 @@
 }
 
 
+- (void)goBack {
+    if (_isAppearedInCreatingNewGroup) {
+        [self.viewControllerRef.navigationController popViewControllerAnimated:YES];        
+    } else {
+        if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(goBackToGroupView)]) {
+            [self.viewControllerRef performSelector:@selector(goBackToGroupView)];
+        }
+    }
+}
+
+
 @end

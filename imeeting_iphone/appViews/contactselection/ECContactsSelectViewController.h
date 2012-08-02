@@ -21,6 +21,5 @@ MFMessageComposeViewController *mMsgViewController;
 
 
 - (void)inviteAttendees:(NSArray*)attendeeArray;
-
-
+- (void)goBackToGroupView;
 @end
