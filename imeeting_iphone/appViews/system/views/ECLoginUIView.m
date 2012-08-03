@@ -71,7 +71,7 @@
     rememberPwdLabel.font = [UIFont fontWithName:CHINESE_FONT size:15];
     rememberPwdLabel.text = NSLocalizedString(@"Remember Pwd", nil);
     rememberPwdLabel.backgroundColor = [UIColor clearColor];
-    _rememberPwdSwitch = [[UISwitch alloc] initWithFrame:CGRectMake((loginFormView.frame.size.width - SWITCH_WDITH) / 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 13, SWITCH_WDITH, SWITCH_HEIGHT)];
+    _rememberPwdSwitch = [[UISwitch alloc] initWithFrame:CGRectMake((loginFormView.frame.size.width - SWITCH_WDITH) / 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 12, SWITCH_WDITH, SWITCH_HEIGHT)];
     _rememberPwdSwitch.on = YES;
     [loginFormView addSubview:rememberPwdLabel];
     [loginFormView addSubview:_rememberPwdSwitch];
@@ -84,7 +84,7 @@
     _loginButton.frame = CGRectMake((loginFormView.frame.size.width - LOGIN_BUTTON_WIDTH) / 2, _rememberPwdSwitch.frame.origin.y + _rememberPwdSwitch.frame.size.height + 10, LOGIN_BUTTON_WIDTH, LOGIN_BUTTON_HEIGHT);
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"login_button"] forState:UIControlStateNormal];
     [_loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
-    _loginButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:16];
+    _loginButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:16];
     [_loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     [loginFormView addSubview:_loginButton];
     /*
@@ -171,6 +171,8 @@
     }
     ub.rememberPwd = rememberPwd;
     ub.autoLogin = autoLogin;
+    
+    NSLog(@"pwd: %@, md5: %@", pwd, ub.password);
     
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(login)]) {
         

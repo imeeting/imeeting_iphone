@@ -7,12 +7,20 @@
 //
 
 #import "ECRegisterUIView.h"
+#import "ECConstants.h"
+
+#define TITLE_WIDTH   268
+#define TITLE_HEIGHT    40
+#define INPUT_WIDTH     261
+#define INPUT_HEIGHT    35
+#define BUTTON_WIDTH    268
+#define BUTTON_HEIGHT   41
 
 @interface ECRegisterUIView ()
 
 - (void)initUI;
 - (UIView*)makeStepView;
-- (UILabel*)makeStepLabel:(NSString*)text;
+- (UIView*)makeStepLabel:(NSString*)text preTitle:(NSString*)preTitle;
 @end
 
 
@@ -21,16 +29,30 @@
 #pragma mark - UI Initialization
 
 - (UIView*)makeStepView {
-    UIColor *stepViewBgColor = self.backgroundColor;
     CGRect stepViewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     UIView *stepView = [[UIView alloc] initWithFrame:stepViewFrame];
-    stepView.backgroundColor = stepViewBgColor;
+    stepView.backgroundColor = [UIColor clearColor];
     return stepView;
 }
 
-- (UILabel*)makeStepLabel:(NSString*)text {
-    UILabel *stepLabel = [self makeLabel:text frame:CGRectMake(20, 5, 300, 30)];
-    return stepLabel;
+- (UIView*)makeStepLabel:(NSString*)text preTitle:(NSString*)preTitle {
+    UIView *labelView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - TITLE_WIDTH) / 2, 11, TITLE_WIDTH, TITLE_HEIGHT)];
+    labelView.backgroundColor = [UIColor clearColor];
+   
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+    label1.textAlignment = UITextAlignmentLeft;
+    label1.textColor = [UIColor colorWithIntegerRed:93 integerGreen:109 integerBlue:122 alpha:1];
+    label1.font = [UIFont fontWithName:CHARACTER_FONT size:26];
+    label1.text = preTitle;
+    label1.backgroundColor = [UIColor clearColor];
+    [labelView addSubview:label1];
+    
+    UILabel *stepLabel = [self makeLabel:text frame:CGRectMake(labelView.frame.size.width - 200, 14, 200, 22)];
+    stepLabel.font = [UIFont fontWithName:CHINESE_FONT size:13];
+    stepLabel.textColor = [UIColor colorWithIntegerRed:94 integerGreen:109 integerBlue:122 alpha:1];
+    stepLabel.textAlignment = UITextAlignmentRight;
+    [labelView addSubview:stepLabel];
+    return labelView;
 }
 
 - (void)initUI {
@@ -38,25 +60,26 @@
     _titleView.text = NSLocalizedString(@"register", "register view title");
     self.titleView = _titleView;
     
-    //self.leftBarButtonItem = nil; // use default
-        
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
+    
+    self.leftBarButtonItem = [self makeBarButtonItem:NSLocalizedString(@"Account Setting", nil) backgroundImg:[UIImage imageNamed:@"back_navi_button_long"] frame:CGRectMake(0, 0, 84, 28) target:self action:@selector(onBackAction)];        
+    
     //### user register step 1
     _mStep1View = [self makeStepView];
     
-    UILabel *step1Label = [self makeStepLabel:NSLocalizedString(@"Step 1", "")];
+    UIView *step1Label = [self makeStepLabel:NSLocalizedString(@"Step 1", "") preTitle:@"First"];
 
     [_mStep1View addSubview:step1Label];
     
     // user name input
-    _mUserNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "phone number input") frame:CGRectMake(20, step1Label.frame.origin.y + step1Label.frame.size.height + 10, _mStep1View.frame.size.width - 20*2, 30) keyboardType:UIKeyboardTypePhonePad];
-           
+    _mUserNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "phone number input") frame:CGRectMake((self.frame.size.width - INPUT_WIDTH) / 2, step1Label.frame.origin.y + step1Label.frame.size.height + 3, INPUT_WIDTH, INPUT_HEIGHT) keyboardType:UIKeyboardTypePhonePad];
     [_mStep1View addSubview:_mUserNameInput];
     
-    UIButton *getValidateCodeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    getValidateCodeButton.frame = CGRectMake((_mStep1View.frame.size.width - 140) / 2, _mUserNameInput.frame.origin.y + _mUserNameInput.frame.size.height + 20, 140, 30);
-    getValidateCodeButton.backgroundColor = [UIColor clearColor];
+    UIButton *getValidateCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    getValidateCodeButton.frame = CGRectMake((_mStep1View.frame.size.width - BUTTON_WIDTH) / 2, _mUserNameInput.frame.origin.y + _mUserNameInput.frame.size.height + 10, BUTTON_WIDTH, BUTTON_HEIGHT);
+    getValidateCodeButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:16.0];
     [getValidateCodeButton setTitle:NSLocalizedString(@"get validate code", "get validate code button string") forState:UIControlStateNormal];
-    getValidateCodeButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [getValidateCodeButton setBackgroundImage:[UIImage imageNamed:@"register_normal_button"] forState:UIControlStateNormal];
     [getValidateCodeButton addTarget:self action:@selector(getValidationCodeAction) forControlEvents:UIControlEventTouchUpInside];
     
     [_mStep1View addSubview:getValidateCodeButton];
@@ -64,19 +87,18 @@
     //### user register step 2
     _mStep2View = [self makeStepView];
     
-    UILabel *step2Label = [self makeStepLabel:NSLocalizedString(@"Step 2", "")];
+    UIView *step2Label = [self makeStepLabel:NSLocalizedString(@"Step 2", "") preTitle:@"Second"];
     
     [_mStep2View addSubview:step2Label];
     
-    _mValidateCodeInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input code", "input validation code") frame:CGRectMake(20, step2Label.frame.origin.y + step2Label.frame.size.height + 10, _mStep2View.frame.size.width - 20*2, 30) keyboardType:UIKeyboardTypeNumberPad];
-    
+    _mValidateCodeInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input code", "input validation code") frame:_mUserNameInput.frame keyboardType:UIKeyboardTypeNumberPad];
     [_mStep2View addSubview:_mValidateCodeInput];
     
-    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    nextButton.frame = CGRectMake((_mStep2View.frame.size.width - 140) /2 , _mValidateCodeInput.frame.origin.y + _mValidateCodeInput.frame.size.height + 20, 140, 30);
-    nextButton.backgroundColor = [UIColor clearColor];
+    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    nextButton.frame = getValidateCodeButton.frame;
+    nextButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:16.0];
     [nextButton setTitle:NSLocalizedString(@"Next", "next step") forState:UIControlStateNormal];
-    nextButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [nextButton setBackgroundImage:[UIImage imageNamed:@"register_normal_button"] forState:UIControlStateNormal];
     [nextButton addTarget:self action:@selector(verifyCodeAction) forControlEvents:UIControlEventTouchUpInside];
     
     [_mStep2View addSubview:nextButton];
@@ -84,21 +106,23 @@
     //### user register step 3
     _mStep3View = [self makeStepView];
     
-    UILabel *step3Label= [self makeStepLabel:NSLocalizedString(@"Step 3", "")];
+    UIView *step3Label= [self makeStepLabel:NSLocalizedString(@"Step 3", "") preTitle:@"Third"];
     
     [_mStep3View addSubview:step3Label];
     
-    _mPwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(20, step3Label.frame.origin.y + step3Label.frame.size.height + 10, _mStep3View.frame.size.width - 20*2, 30) keyboardType:UIKeyboardTypeDefault];
+    _mPwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:_mValidateCodeInput.frame keyboardType:UIKeyboardTypeDefault];
     _mPwdInput.secureTextEntry = YES;
-    
     [_mStep3View addSubview:_mPwdInput];
     
-    _mPwdConfirmInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"confirm pwd", "") frame:CGRectMake(20, _mPwdInput.frame.origin.y + _mPwdInput.frame.size.height + 10, _mStep3View.frame.size.width - 20*2, 30) keyboardType:UIKeyboardTypeDefault];
+    _mPwdConfirmInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"confirm pwd", "") frame:CGRectMake(_mPwdInput.frame.origin.x, _mPwdInput.frame.origin.y + _mPwdInput.frame.size.height + 5, _mPwdInput.frame.size.width, _mPwdInput.frame.size.height) keyboardType:UIKeyboardTypeDefault];
     _mPwdConfirmInput.secureTextEntry = YES;
-    
     [_mStep3View addSubview:_mPwdConfirmInput];
     
-    UIButton *finishButton = [self makeButtonWithTitle:NSLocalizedString(@"Finish", "") frame:CGRectMake((_mStep3View.frame.size.width - 140) / 2, _mPwdConfirmInput.frame.origin.y + _mPwdConfirmInput.frame.size.height + 20, 140, 30)];
+    UIButton *finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    finishButton.frame = CGRectMake((_mStep3View.frame.size.width - BUTTON_WIDTH) / 2, _mPwdConfirmInput.frame.origin.y + _mPwdConfirmInput.frame.size.height + 8, BUTTON_WIDTH, BUTTON_HEIGHT);
+    finishButton.titleLabel.font = nextButton.titleLabel.font;
+    [finishButton setTitle:NSLocalizedString(@"Finish", nil) forState:UIControlStateNormal];
+    [finishButton setBackgroundImage:[UIImage imageNamed:@"register_normal_button"] forState:UIControlStateNormal];
     [finishButton addTarget:self action:@selector(finishRegistrationAction) forControlEvents:UIControlEventTouchUpInside];
     
     [_mStep3View addSubview:finishButton];
@@ -129,7 +153,8 @@
 - (void)switchToStep1View {
     [_mStep1View setHidden:NO];
     [_mStep2View setHidden:YES];
-    [_mStep3View setHidden:YES];    
+    [_mStep3View setHidden:YES];  
+    [_mUserNameInput becomeFirstResponder];
 }
 
 - (void)switchToStep2View {
@@ -138,6 +163,7 @@
     [_mStep1View setHidden:YES];
     [_mStep2View setHidden:NO];
     [_mStep3View setHidden:YES];
+    [_mValidateCodeInput becomeFirstResponder];
 }
 
 - (void)switchToStep3View {
@@ -146,6 +172,7 @@
     [_mStep1View setHidden:YES];
     [_mStep2View setHidden:YES];
     [_mStep3View setHidden:NO];
+    [_mPwdInput becomeFirstResponder];
 }
 
 

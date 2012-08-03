@@ -219,7 +219,7 @@ static CGFloat padding = 6;
     _addMemberButton.frame = CGRectMake((attendeeViewWidth - addMemberButtonWidth) / 2, 480 - marginBottom - addMemberButtonHeight, addMemberButtonWidth, addMemberButtonHeight);
     [_addMemberButton setTitle:NSLocalizedString(@"Add Attendee", nil) forState:UIControlStateNormal];
     [_addMemberButton setBackgroundImage:[UIImage imageNamed:@"add_member_button"] forState:UIControlStateNormal];
-    _addMemberButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:14];
+    _addMemberButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:14];
     [_addMemberButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 4, 0)];
     [_addMemberButton addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addMemberButton];

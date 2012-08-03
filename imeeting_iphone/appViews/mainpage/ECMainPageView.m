@@ -146,7 +146,7 @@
     [createGroupButton setTitle:NSLocalizedString(@"Create Group Talk", nil) forState:UIControlStateNormal];
     [createGroupButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 2, 0)];
     [createGroupButton addTarget:self action:@selector(onCreateNewGroupAction) forControlEvents:UIControlEventTouchUpInside];
-    createGroupButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:16];
+    createGroupButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:16];
     [self addSubview:createGroupButton];
     
     
