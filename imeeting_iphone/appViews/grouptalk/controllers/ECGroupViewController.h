@@ -21,6 +21,9 @@
 @property (nonatomic) BOOL refreshList;
 @property (nonatomic) BOOL smallVideoViewIsMine; // indicate if the video view is swapped, YES: small video view displays my video, NO: small view displays friend's 
 
+// dial button related
+- (void)setDialButtonAsDial;
+- (void)setDialButtonAsTalking;
 //###### video view related methods
 - (void)onLeaveGroup;
 - (void)switchCamera;

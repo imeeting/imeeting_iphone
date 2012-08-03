@@ -64,7 +64,7 @@ static ECMainPageViewController *instance;
             NSLog(@"\tFont: %@", fontName);  
         }  
     }
-     */
+    */
 }
 
 - (void)viewDidLoad

@@ -15,5 +15,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ECRootViewController *rootViewController;
-
 @end

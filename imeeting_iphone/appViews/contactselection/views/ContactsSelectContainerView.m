@@ -3,7 +3,7 @@
 //  IMeeting
 //
 //  Created by  on 12-6-15.
-//  Copyright (c) 2012年 richitec. All rights reserved.
+//  Copyright (c) 2012 richitec. All rights reserved.
 //
 
 #import "ContactsSelectContainerView.h"
@@ -54,14 +54,7 @@
         _titleView.text =  NSLocalizedString(@"select attendee", nil);
         self.titleView = _titleView;
         
-        UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_navi_button"] forState:UIControlStateNormal];
-        [backButton setTitle:NSLocalizedString(@"Back", nil) forState:UIControlStateNormal];
-        backButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:12];
-        backButton.frame = CGRectMake(0, 0, 53, 28);
-        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-        self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        
+        self.leftBarButtonItem = [self makeBarButtonItem:NSLocalizedString(@"Back", nil) backgroundImg:[UIImage imageNamed:@"back_navi_button"] frame:CGRectMake(0, 0, 53, 28) target:self action:@selector(goBack)];
             
         // get UIScreen bounds
         CGRect _screenBounds = [[UIScreen mainScreen] bounds];
@@ -120,7 +113,7 @@
         // init add new contact button
         UIButton *addNewContactButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [addNewContactButton setBackgroundImage:[UIImage imageNamed:@"addnew"] forState:UIControlStateNormal];
-        addNewContactButton.frame = CGRectMake(searchBGView.frame.origin.x + searchBGView.frame.size.width + 5, searchBGView.frame.origin.y + (searchBGView.frame.size.height - 22) / 2, 37, 22);
+        addNewContactButton.frame = CGRectMake(searchBGView.frame.origin.x + searchBGView.frame.size.width + 5, searchBGView.frame.origin.y + (searchBGView.frame.size.height - 29) / 2, 37, 29);
         [addNewContactButton addTarget:self action:@selector(onAddNewContactAction) forControlEvents:UIControlEventTouchUpInside];
         [searchFieldView addSubview:addNewContactButton];
         
@@ -183,12 +176,12 @@
         [_phoneNumberInputTextField addTarget:self action:@selector(searchFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
         [inputDialogView addSubview:_phoneNumberInputTextField];
         
-        int confirmAddButtonWidth = 50;
-        int confirmAddButtonHeight = 25;
+        int confirmAddButtonWidth = 80;
+        int confirmAddButtonHeight = 32;
         UIButton *confirmAddButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        confirmAddButton.frame = CGRectMake((inputDialogView.frame.size.width - confirmAddButtonWidth) / 2, _phoneNumberInputTextField.frame.origin.y + _phoneNumberInputTextField.frame.size.height + 20, confirmAddButtonWidth, confirmAddButtonHeight);
+        confirmAddButton.frame = CGRectMake((inputDialogView.frame.size.width - confirmAddButtonWidth) / 2, _phoneNumberInputTextField.frame.origin.y + _phoneNumberInputTextField.frame.size.height + 18, confirmAddButtonWidth, confirmAddButtonHeight);
         [confirmAddButton setTitle:NSLocalizedString(@"Add", nil) forState:UIControlStateNormal];
-        confirmAddButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:12];
+        confirmAddButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:16];
         confirmAddButton.titleLabel.textColor = [UIColor colorWithIntegerRed:122 integerGreen:122 integerBlue:122 alpha:1];
         [confirmAddButton addTarget:self action:@selector(onConfirmAddContactAction) forControlEvents:UIControlEventTouchUpInside];
         [inputDialogView addSubview:confirmAddButton];
@@ -227,6 +220,10 @@
             
             // set contact select status image
             _contact.selectStatusImg = CONTACT_SELECTED_PHOTO;
+            
+            // reset contact matching index array
+            [_contact.extensionDic removeObjectForKey:PHONENUMBER_MATCHING_INDEXS];
+            [_contact.extensionDic removeObjectForKey:NAME_MATCHING_INDEXS];
         }
         else {
             // create and init an new contact bean object
@@ -362,6 +359,12 @@
 - (void)searchContactWithParameter:(NSString *)pParameter{
     // check search parameter
     if ([pParameter isEqualToString:@""]) {
+        // reset contact matching index array
+        for (ContactBean *_contact in _mABContactsListView.allContactsInfoArrayInABRef) {
+            [_contact.extensionDic removeObjectForKey:PHONENUMBER_MATCHING_INDEXS];
+            [_contact.extensionDic removeObjectForKey:NAME_MATCHING_INDEXS];
+        }
+        
         // show all contacts in addressBook
         _mABContactsListView.presentContactsInfoArrayRef = [NSMutableArray arrayWithArray:_mABContactsListView.allContactsInfoArrayInABRef];
     }
@@ -388,7 +391,11 @@
                 // if the two contacts id is equal, add it to searched contacts array
                 if (_contact.id == _searchedContact.id) {
                     [_searchedContactsArray addObject:_searchedContact];
-                    
+                    if (match) {
+		        [_contact.extensionDic removeObjectForKey:NAME_MATCHING_INDEXS];
+		   } else {
+			[_contact.extensionDic removeObjectForKey:PHONENUMBER_MATCHING_INDEXS];
+		   }
                     break;
                 }
             }
@@ -457,7 +464,9 @@
 }
 
 - (void)onAddNewContactAction {
-    _phoneNumberInputTextField.text = nil;
+    _mSearchField.text = nil;
+    [_phoneNumberInputTextField becomeFirstResponder];
+    
     CATransition *animation = [CATransition animation];
     animation.duration = 0.4f;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
@@ -472,7 +481,8 @@
     NSString *phoneNumber = _phoneNumberInputTextField.text;
     
     if (phoneNumber == nil || [phoneNumber isNil]) {
-        [[[iToast makeText:NSLocalizedString(@"new added phone number is nil", nil)] setDuration:iToastDurationLong] show];
+        //[[[iToast makeText:NSLocalizedString(@"new added phone number is nil", nil)] setDuration:iToastDurationLong] show];
+        [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"new added phone number is nil", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
         return;
     }
     
@@ -497,8 +507,9 @@
 }
 
 - (void)dismissInputDialog {
-    _mABContactsListView.presentContactsInfoArrayRef = [NSMutableArray arrayWithArray:_mABContactsListView.allContactsInfoArrayInABRef];
-    [_mABContactsListView reloadData];
+    //_mABContactsListView.presentContactsInfoArrayRef = [NSMutableArray arrayWithArray:_mABContactsListView.allContactsInfoArrayInABRef];
+    //[_mABContactsListView reloadData];
+    _phoneNumberInputTextField.text = nil;
     
     CATransition *animation = [CATransition animation];
     animation.duration = 0.4f;

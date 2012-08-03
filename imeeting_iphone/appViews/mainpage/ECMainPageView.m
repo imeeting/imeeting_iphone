@@ -130,16 +130,8 @@
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     self.frame = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height - [CommonUtils appStatusBarHeight] - [CommonUtils appNavigationBarHeight]);
     
+    self.leftBarButtonItem = [self makeBarButtonItem:NSLocalizedString(@"Setting", nil) backgroundImg:[UIImage imageNamed:@"navibutton"] frame:CGRectMake(0, 0, 53, 28) target:self action:@selector(onSystemSettingAction)];    
     
-    
-    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    settingButton.frame = CGRectMake(0, 0, 53, 28);
-    settingButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:12];
-    [settingButton setTitle:NSLocalizedString(@"Setting", nil) forState:UIControlStateNormal];
-    [settingButton setBackgroundImage:[UIImage imageNamed:@"navibutton"] forState:UIControlStateNormal];
-    [settingButton addTarget:self action:@selector(onSystemSettingAction) forControlEvents:UIControlEventTouchUpInside];
-    self.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: settingButton];
-        
     mGroupTableView = [[ECMainTableView alloc] initWithFrame:CGRectMake((self.frame.size.width - GROUP_TABLEVIEW_WIDTH) / 2 - 2, 6, self.frame.size.width, self.frame.size.height - CREATE_GROUP_BUTTON_HEIGHT - 14)];
     mGroupTableView.backgroundColor = [UIColor clearColor];
     mGroupTableView.dataSource = mGroupTableView;
@@ -152,9 +144,11 @@
     createGroupButton.frame = CGRectMake((self.frame.size.width - CREATE_GROUP_BUTTON_WIDTH) / 2, self.frame.size.height - CREATE_GROUP_BUTTON_HEIGHT - 4, CREATE_GROUP_BUTTON_WIDTH, CREATE_GROUP_BUTTON_HEIGHT);
     [createGroupButton setBackgroundImage:[UIImage imageNamed:@"create_group_button_bg"] forState:UIControlStateNormal];
     [createGroupButton setTitle:NSLocalizedString(@"Create Group Talk", nil) forState:UIControlStateNormal];
+    [createGroupButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 2, 0)];
     [createGroupButton addTarget:self action:@selector(onCreateNewGroupAction) forControlEvents:UIControlEventTouchUpInside];
     createGroupButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:16];
     [self addSubview:createGroupButton];
+    
     
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
 }

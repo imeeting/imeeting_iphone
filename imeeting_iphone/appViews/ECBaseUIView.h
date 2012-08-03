@@ -14,7 +14,9 @@
     UILabel *_titleView;
 }
 
+- (void)onBackAction;
 - (UITextField*)makeTextFieldWithPlaceholder:(NSString*)placeholder frame:(CGRect)frame keyboardType:(UIKeyboardType)keyboardType;
 - (UIButton*)makeButtonWithTitle:(NSString*)title frame:(CGRect)frame;
 - (UILabel*)makeLabel:(NSString*)text frame:(CGRect)frame;
+- (UIBarButtonItem*)makeBarButtonItem:(NSString*)title backgroundImg:(UIImage*)image frame:(CGRect)frame target:(id)target action:(SEL)action;
 @end

@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#define CHINESE_FONT            @"MicrosoftYaHei"
-#define CHARACTER_FONT          @"Arial"
+#define CHINESE_FONT            @"ArialMT"
+#define CHINESE_BOLD_FONT       @"Arial-BoldMT"
+#define CHARACTER_FONT          @"ArialMT"
 #define CHARACTER_BOLD_FONT     @"Arial-BoldMT"
 
 #define CALL_CENTER_NUM         @"05512379997"

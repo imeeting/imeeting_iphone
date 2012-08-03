@@ -3,7 +3,7 @@
 //  IMeeting
 //
 //  Created by  on 12-6-15.
-//  Copyright (c) 2012年 richitec. All rights reserved.
+//  Copyright (c) 2012 richitec. All rights reserved.
 //
 
 #import "ContactsListTableViewCell.h"
@@ -23,12 +23,17 @@
 // phone numbers label default height
 #define PHONENUMBERSLABEL_DEFAULTHEIGHT   18.0
 
+// matching text color
+#define MATCHINGTEXTCOLOR   [UIColor blueColor]
 
 @implementation ContactsListTableViewCell
 
 @synthesize photoImg = _photoImg;
 @synthesize displayName = _displayName;
 @synthesize phoneNumbersArray = _phoneNumbersArray;
+
+@synthesize phoneNumberMatchingIndexs = _mPhoneNumberMatchingIndexs;
+@synthesize nameMatchingIndexs = _mNameMatchingIndexs;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -41,7 +46,7 @@
         _mCheckButton.frame = CGRectMake(MARGIN + PHOTOIMAGEVIEW_MARGIN, MARGIN + PHOTOIMAGEVIEW_MARGIN, PHOTOIMGVIEW_HEIGHT, PHOTOIMGVIEW_HEIGHT);
         [self.contentView addSubview:_mCheckButton];
         
-        _mDisplayNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_mCheckButton.frame.origin.x + _mCheckButton.frame.size.width + PADDING + PHOTOIMAGEVIEW_MARGIN + MARGIN, MARGIN, self.frame.size.width / 2 - MARGIN - (_mCheckButton.frame.size.width + PADDING), DISPLAYNAMELABEL_HEIGHT)];
+        _mDisplayNameLabel = [[UIAttributedLabel alloc] initWithFrame:CGRectMake(_mCheckButton.frame.origin.x + _mCheckButton.frame.size.width + PADDING + PHOTOIMAGEVIEW_MARGIN + MARGIN, MARGIN, self.frame.size.width / 2 - MARGIN - (_mCheckButton.frame.size.width + PADDING), DISPLAYNAMELABEL_HEIGHT)];
         _mDisplayNameLabel.textColor = [UIColor colorWithIntegerRed:122 integerGreen:122 integerBlue:122 alpha:1];
         _mDisplayNameLabel.font = [UIFont fontWithName:CHINESE_FONT size:15];
         _mDisplayNameLabel.backgroundColor = [UIColor clearColor];
@@ -91,8 +96,11 @@
     // set display name text
     _displayName = displayName;
     
-    // set full name label text
-    _mDisplayNameLabel.text = displayName;
+    // set display name label text
+    NSMutableAttributedString *_attributedDisplayName = [NSMutableAttributedString attributedStringWithString:displayName];
+    [_attributedDisplayName setFont:_mDisplayNameLabel.font];
+    // set display name attributed label attributed text
+    _mDisplayNameLabel.attributedText = _attributedDisplayName;
 }
 
 - (void)setPhoneNumbersArray:(NSArray *)phoneNumbersArray{
@@ -117,6 +125,84 @@
         [self.contentView addSubview:_mSeparateLine];
     } else {
         _mSeparateLine.frame = frame;
+    }
+}
+
+- (void)setPhoneNumberMatchingIndexs:(NSArray *)phoneNumberMatchingIndexs{
+    // set phone number matching index array
+    _mPhoneNumberMatchingIndexs = phoneNumberMatchingIndexs;
+    
+    // process phone numbers matching index array
+    if (phoneNumberMatchingIndexs) {
+        // set phone number attributed label parent view
+        if (_mPhoneNumbersAttributedLabelParentView) {
+            for (UIView *_view in _mPhoneNumbersAttributedLabelParentView.subviews) {
+                [_view removeFromSuperview];
+            }
+            [_mPhoneNumbersAttributedLabelParentView removeFromSuperview];
+        }
+        _mPhoneNumbersAttributedLabelParentView = [[UIView alloc] initWithFrame:_mPhoneNumbersLabel.frame];
+        
+        // process each phone number
+        for (NSInteger _index = 0; _index < [_phoneNumbersArray count]; _index++) {
+            // generate attributed string with phone number
+            NSMutableAttributedString *_attributedPhoneNumber = [NSMutableAttributedString attributedStringWithString:[_phoneNumbersArray objectAtIndex:_index]];
+            // set font
+            [_attributedPhoneNumber setFont:[UIFont systemFontOfSize:14.0]];
+            // set attributed phone number text color
+            [_attributedPhoneNumber setTextColor:[UIColor lightGrayColor]];
+            if ([phoneNumberMatchingIndexs objectAtIndex:_index] && [[phoneNumberMatchingIndexs objectAtIndex:_index] count] > 0) {
+                for (NSNumber *__index in [phoneNumberMatchingIndexs objectAtIndex:_index]) {
+                    [_attributedPhoneNumber setTextColor:MATCHINGTEXTCOLOR range:NSMakeRange(__index.integerValue, 1)];
+                }
+            }
+            
+            // generate each phone number attributed label and add to phone number attributed label parent view
+            @autoreleasepool {
+                UIAttributedLabel *_phoneNumberAttributedLabel = [[UIAttributedLabel alloc] initWithFrame:CGRectMake(0.0, _index * PHONENUMBERSLABEL_DEFAULTHEIGHT, _mPhoneNumbersLabel.frame.size.width, PHONENUMBERSLABEL_DEFAULTHEIGHT)];
+                _phoneNumberAttributedLabel.backgroundColor = [UIColor clearColor];
+                // set phone number attributed label attributed text
+                _phoneNumberAttributedLabel.attributedText = _attributedPhoneNumber;
+                // add to phone number attributed label parent view
+                [_mPhoneNumbersAttributedLabelParentView addSubview:_phoneNumberAttributedLabel];
+            }
+        }
+        
+        // hide phone number label and add phone number attributed label parent view to cell content view
+        _mPhoneNumbersLabel.hidden = YES;
+        [self.contentView addSubview:_mPhoneNumbersAttributedLabelParentView];
+    }
+    else {
+        // show phone number label and remove phone number attributed label parent view
+        _mPhoneNumbersLabel.hidden = NO;
+        for (UIView *_view in _mPhoneNumbersAttributedLabelParentView.subviews) {
+            [_view removeFromSuperview];
+        }
+        [_mPhoneNumbersAttributedLabelParentView removeFromSuperview];
+    }
+}
+
+- (void)setNameMatchingIndexs:(NSArray *)nameMatchingIndexs{
+    // set name matching index array
+    _mNameMatchingIndexs = nameMatchingIndexs;
+    
+    // process name matching index array
+    if (nameMatchingIndexs) {
+        // generate attributed string with display name
+        NSMutableAttributedString *_attributedDisplayName = [NSMutableAttributedString attributedStringWithString:_displayName];
+        // set font
+        [_attributedDisplayName setFont:_mDisplayNameLabel.font];
+        // set attributed display name text color
+        for (NSNumber *_index in nameMatchingIndexs) {
+            [_attributedDisplayName setTextColor:MATCHINGTEXTCOLOR range:NSMakeRange(_index.integerValue >= [_displayName rangeOfString:@" "].location ? _index.integerValue + 1 : _index.integerValue, 1)];
+        }
+        
+        // set display name label attributed text
+        _mDisplayNameLabel.attributedText = _attributedDisplayName;
+    }
+    else {
+        // reset display name label text
+        self.displayName = _displayName;
     }
 }
 

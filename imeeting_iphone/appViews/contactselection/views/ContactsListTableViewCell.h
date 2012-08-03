@@ -21,12 +21,18 @@
 
 @interface ContactsListTableViewCell : UITableViewCell {
     // contact check button
+  // phone number matching index array
+    NSArray *_mPhoneNumberMatchingIndexs;
+    // name matching index array
+    NSArray *_mNameMatchingIndexs;
     UIButton *_mCheckButton;
     // contact display name label
-    UILabel *_mDisplayNameLabel;
+    UIAttributedLabel *_mDisplayNameLabel;
     // contact phone numbers display label
     UILabel *_mPhoneNumbersLabel;
     UIImageView *_mSeparateLine;
+    // contact phone numbers display attributed label parent view
+    UIView *_mPhoneNumbersAttributedLabelParentView;
 }
 
 // contact photo imageView photo image
@@ -35,6 +41,9 @@
 @property (nonatomic, retain) NSString *displayName;
 // contact phone numbers array
 @property (nonatomic, retain) NSArray *phoneNumbersArray;
+
+@property (nonatomic, retain) NSArray *phoneNumberMatchingIndexs;
+@property (nonatomic, retain) NSArray *nameMatchingIndexs;
 
 // add target/action for UIControlEventTouchDown event
 - (void)addImgButtonTarget:(id)pTarget andActionSelector:(SEL)pSelector;

@@ -26,7 +26,7 @@
         createButton.frame = CGRectMake(0, 0, 53, 28);
         [createButton setBackgroundImage:[UIImage imageNamed:@"navibutton"] forState:UIControlStateNormal];
         [createButton setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
-        createButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:12];
+        createButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:13];
         [createButton addTarget:self action:@selector(onInviteAttendeeAction) forControlEvents:UIControlEventTouchUpInside];
         self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:createButton];
          

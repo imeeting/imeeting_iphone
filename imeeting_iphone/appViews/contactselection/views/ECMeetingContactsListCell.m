@@ -14,9 +14,9 @@
 // tableViewCell padding
 #define PADDING 1.0
 
-#define PHOTOIMGVIEW_WIDTH   36.0
+#define PHOTOIMGVIEW_WIDTH   10.0
 // photo image view height
-#define PHOTOIMGVIEW_HEIGHT  11.0
+#define PHOTOIMGVIEW_HEIGHT  13.0
 // full name label height
 #define DISPLAYNAMELABEL_HEIGHT 22.0
 
@@ -35,12 +35,12 @@
         
         // init contentView subViews
         _mCheckButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _mCheckButton.frame = CGRectMake(0, MARGIN + (DISPLAYNAMELABEL_HEIGHT - PHOTOIMGVIEW_HEIGHT) / 2, PHOTOIMGVIEW_WIDTH, PHOTOIMGVIEW_HEIGHT);
+        _mCheckButton.frame = CGRectMake(10, MARGIN + (DISPLAYNAMELABEL_HEIGHT - PHOTOIMGVIEW_HEIGHT) / 2, PHOTOIMGVIEW_WIDTH, PHOTOIMGVIEW_HEIGHT);
         [self.contentView addSubview:_mCheckButton];
         
-        _mDisplayNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_mCheckButton.frame.origin.x + _mCheckButton.frame.size.width, MARGIN, INMEETING_CONTACT_TABLEVIEW_WIDTH - _mCheckButton.frame.origin.x - _mCheckButton.frame.size.width, DISPLAYNAMELABEL_HEIGHT)];
+        _mDisplayNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_mCheckButton.frame.origin.x + _mCheckButton.frame.size.width + 8, MARGIN, INMEETING_CONTACT_TABLEVIEW_WIDTH - _mCheckButton.frame.origin.x - _mCheckButton.frame.size.width, DISPLAYNAMELABEL_HEIGHT)];
         _mDisplayNameLabel.textColor = [UIColor colorWithIntegerRed:74 integerGreen:74 integerBlue:74 alpha:1];
-        _mDisplayNameLabel.font = [UIFont fontWithName:CHINESE_FONT size:17];
+        _mDisplayNameLabel.font = [UIFont fontWithName:CHINESE_FONT size:16];
         _mDisplayNameLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_mDisplayNameLabel];
 

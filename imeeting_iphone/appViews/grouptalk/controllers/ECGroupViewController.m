@@ -5,8 +5,6 @@
 //  Created by star king on 12-7-5.
 //  Copyright (c) 2012年 elegant cloud. All rights reserved.
 //
-#import <CoreTelephony/CTCallCenter.h>
-#import <CoreTelephony/CTCall.h>
 #import "ECGroupViewController.h"
 #import "CommonToolkit/CommonToolkit.h"
 #import "ECGroupView.h"
@@ -87,19 +85,7 @@
         //[videoView onOpenCameraButtonClickAction];
         
         
-        // detect call state
-        CTCallCenter *callCenter = [[CTCallCenter alloc] init];
-        callCenter.callEventHandler=^(CTCall* call) {
-            if (call.callState == CTCallStateDisconnected) {
-                NSLog(@"call disconnected");
-                ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
-                [videoView setDialButtonAsDial];
-            } else if (call.callState == CTCallStateConnected) {
-                NSLog(@"call connected");
-                ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
-                [videoView setDialButtonAsTalking];                
-            }
-        };
+       
     }
    
     if (_refreshList) {
@@ -121,7 +107,6 @@
     [super viewDidAppear:animated];
     ECGroupAttendeeListView *alv = ((ECGroupView*)self.view).attendeeListView;
     [alv setHidden:NO];
-    [self refreshAttendeeList];
 }
 
 - (void)viewDidLoad
@@ -281,8 +266,8 @@
     [self detachMyVideoPreviewLayer];
     [self attachMyVideoPreviewLayer];
     
-    [self currentFriendVideoView].image = nil;
-    [self currentMyVideoView].image = nil;
+    //[self currentFriendVideoView].image = nil;
+    //[self currentMyVideoView].image = nil;
 }
 
 - (void)swapVideoView {
@@ -595,6 +580,19 @@
             break;
     }
 
+}
+
+#pragma mark - dial button related
+- (void)setDialButtonAsDial {
+    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+   // [videoView setDialButtonAsDial];
+    [videoView performSelectorOnMainThread:@selector(setDialButtonAsDial) withObject:nil waitUntilDone:NO];
+}
+
+- (void)setDialButtonAsTalking {
+    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+   // [videoView setDialButtonAsTalking];
+    [videoView performSelectorOnMainThread:@selector(setDialButtonAsTalking) withObject:nil waitUntilDone:NO];
 }
 
 @end

@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ECBaseUIView.h"
 
-@interface ECSettingView : ECBaseUIView <UITableViewDataSource> {
-    UIButton *_accountSettingButton;
+@interface ECSettingView : ECBaseUIView <UITableViewDataSource, UITableViewDelegate> {
 }
 
 @end

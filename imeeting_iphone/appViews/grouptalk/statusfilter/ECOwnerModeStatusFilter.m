@@ -33,7 +33,7 @@
 - (NSString *)checkNewPhoneStatus:(NSString *)newPhoneStatus withOld:(NSString *)oldPhoneStatus {
     NSString *checkedStatus = oldPhoneStatus;
     if ([oldPhoneStatus isEqualToString:TERMINATED]) {
-        if ([newPhoneStatus isEqualToString:CALL_WAIT] || [newPhoneStatus isEqualToString:TERMINATED]) {
+        if ([newPhoneStatus isEqualToString:CALL_WAIT] || [newPhoneStatus isEqualToString:ESTABLISHED] || [newPhoneStatus isEqualToString:TERMINATED]) {
             checkedStatus = newPhoneStatus;
         } else {
             [self alert:newPhoneStatus old:oldPhoneStatus];
@@ -51,7 +51,7 @@
             [self alert:newPhoneStatus old:oldPhoneStatus];
         }
     } else if ([oldPhoneStatus isEqualToString:FAILED]) {
-        if ([newPhoneStatus isEqualToString:CALL_WAIT] || [newPhoneStatus isEqualToString:FAILED]) {
+        if ([newPhoneStatus isEqualToString:CALL_WAIT] || [newPhoneStatus isEqualToString:ESTABLISHED] || [newPhoneStatus isEqualToString:FAILED]) {
             checkedStatus = newPhoneStatus;
         } else {
             [self alert:newPhoneStatus old:oldPhoneStatus];

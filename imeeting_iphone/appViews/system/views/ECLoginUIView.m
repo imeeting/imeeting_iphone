@@ -9,6 +9,16 @@
 #import "ECLoginUIView.h"
 #import "CommonToolkit/CommonToolkit.h"
 #import "UserBean+IMeeting.h"
+#import "ECConstants.h"
+
+#define LOGIN_FORM_WIDTH    312
+#define LOGIN_FORM_HEIGHT   291
+#define INPUT_FIELD_WIDTH   266
+#define INPUT_FIELD_HEIGHT  35
+#define LOGIN_BUTTON_WIDTH  268
+#define LOGIN_BUTTON_HEIGHT 41
+#define SWITCH_WDITH        50
+#define SWITCH_HEIGHT       30
 
 @interface ECLoginUIView ()
 - (void)initUI;
@@ -35,42 +45,66 @@
     _titleView.text = NSLocalizedString(@"Account Setting", "");
     self.titleView = _titleView;
     
-    self.leftBarButtonItem = nil;
+    self.leftBarButtonItem = [self makeBarButtonItem:NSLocalizedString(@"Setting", nil) backgroundImg:[UIImage imageNamed:@"back_navi_button"] frame:CGRectMake(0, 0, 53, 28) target:self action:@selector(onBackAction)];
     
-    self.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"register", "") style:UIBarButtonItemStyleBordered target:self action:@selector(jumpToRegisterAction)];
+    self.rightBarButtonItem = [self makeBarButtonItem:NSLocalizedString(@"register", "") backgroundImg:[UIImage imageNamed:@"navibutton"] frame:CGRectMake(0, 0, 53, 28) target:self action:@selector(jumpToRegisterAction)];
+    
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
+    
+    UIView *loginFormView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - LOGIN_FORM_WIDTH) / 2, 52, LOGIN_FORM_WIDTH, LOGIN_FORM_HEIGHT)];
+    loginFormView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_form_bg"]];
+    [self addSubview:loginFormView];
     
     // user phone number input
-    _userNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "") frame:CGRectMake(0, 0, 280, 30) keyboardType:UIKeyboardTypeNumbersAndPunctuation];
+    _userNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "") frame:CGRectMake((loginFormView.frame.size.width - INPUT_FIELD_WIDTH) / 2, 50, INPUT_FIELD_WIDTH, INPUT_FIELD_HEIGHT) keyboardType:UIKeyboardTypeNumbersAndPunctuation];
     [_userNameInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+    [loginFormView addSubview:_userNameInput];
     
     // user password input
-    _pwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(0, 0, 280, 30) keyboardType:UIKeyboardTypeDefault];
+    _pwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(_userNameInput.frame.origin.x, _userNameInput.frame.origin.y + _userNameInput.frame.size.height + 4, INPUT_FIELD_WIDTH, INPUT_FIELD_HEIGHT) keyboardType:UIKeyboardTypeDefault];
     _pwdInput.secureTextEntry = YES;
     [_pwdInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
-
+    [loginFormView addSubview:_pwdInput];
     
-    _rememberPwdSwitch = [[UISwitch alloc] init];
+    UILabel *rememberPwdLabel = [[UILabel alloc] initWithFrame:CGRectMake(_pwdInput.frame.origin.x + 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 10, 100, SWITCH_HEIGHT)];
+    rememberPwdLabel.textColor = [UIColor colorWithIntegerRed:133 integerGreen:133 integerBlue:133 alpha:1];
+    rememberPwdLabel.font = [UIFont fontWithName:CHINESE_FONT size:15];
+    rememberPwdLabel.text = NSLocalizedString(@"Remember Pwd", nil);
+    rememberPwdLabel.backgroundColor = [UIColor clearColor];
+    _rememberPwdSwitch = [[UISwitch alloc] initWithFrame:CGRectMake((loginFormView.frame.size.width - SWITCH_WDITH) / 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 13, SWITCH_WDITH, SWITCH_HEIGHT)];
     _rememberPwdSwitch.on = YES;
+    [loginFormView addSubview:rememberPwdLabel];
+    [loginFormView addSubview:_rememberPwdSwitch];
     
     _autoLoginSwitch = [[UISwitch alloc] init];
     [_autoLoginSwitch addTarget:self action:@selector(switchAutoLoginAction:) forControlEvents:UIControlEventValueChanged];
     
     // login button
-    _loginButton = [self makeButtonWithTitle:NSLocalizedString(@"Login", "") frame:CGRectMake(0, 0, 140, 30)];
+    _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _loginButton.frame = CGRectMake((loginFormView.frame.size.width - LOGIN_BUTTON_WIDTH) / 2, _rememberPwdSwitch.frame.origin.y + _rememberPwdSwitch.frame.size.height + 10, LOGIN_BUTTON_WIDTH, LOGIN_BUTTON_HEIGHT);
+    [_loginButton setBackgroundImage:[UIImage imageNamed:@"login_button"] forState:UIControlStateNormal];
+    [_loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
+    _loginButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:16];
     [_loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
-    
+    [loginFormView addSubview:_loginButton];
+    /*
     UITableView *loginTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStyleGrouped];
     loginTableView.backgroundColor = self.backgroundColor;
     loginTableView.dataSource = self;
     
     [self addSubview:loginTableView];
-        
+    */
+     
     //##### set user info in the view
     UserBean *userBean = [[UserManager shareUserManager] userBean];
     _userNameInput.text = userBean.name;
     _pwdInput.text = userBean.password;
     _rememberPwdSwitch.on = userBean.rememberPwd;
     _autoLoginSwitch.on = userBean.autoLogin;
+    
+    
+    
+    
     
 }
 

@@ -8,6 +8,85 @@
 
 #import "ECSettingView.h"
 #import "CommonToolkit/CommonToolkit.h"
+#import "ECConstants.h"
+
+#define SETTING_CELL_WIDTH      268
+
+#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), nil]
+
+@interface SettingItemCell : UITableViewCell {
+    UIImageView *bgView;
+    UILabel *titleLabel;
+    
+    UIColor *normalTextColor;
+    UIColor *selectedTextColor;
+}
++ (CGFloat)cellHeight;
+@end
+
+@implementation SettingItemCell
+
++ (CGFloat)cellHeight {
+    return 52;
+}
+
+- (id)initWithTitle:(NSString*)title {
+    self = [super init];
+    if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.contentView.backgroundColor = [UIColor clearColor];
+        
+        bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 268, [SettingItemCell cellHeight])];
+        bgView.contentMode = UIViewContentModeScaleAspectFit;
+        bgView.layer.masksToBounds = YES;
+        bgView.image = [UIImage imageNamed:@"setting_cell_normal"];
+        [self.contentView addSubview:bgView];
+        
+        normalTextColor = [UIColor colorWithIntegerRed:146 integerGreen:146 integerBlue:146 alpha:1];
+        selectedTextColor = [UIColor whiteColor];
+        
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 268, [SettingItemCell cellHeight])];
+        titleLabel.textColor = normalTextColor;
+        titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:16];
+        titleLabel.textAlignment = UITextAlignmentCenter;
+        titleLabel.text = title;
+        titleLabel.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:titleLabel];
+    }
+    
+    return self;
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    if (selected) {
+        bgView.image = [UIImage imageNamed:@"setting_cell_selected"];
+        titleLabel.textColor = selectedTextColor;
+    } else {
+        bgView.image = [UIImage imageNamed:@"setting_cell_normal"];
+        titleLabel.textColor = normalTextColor;
+    }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    bgView.image = [UIImage imageNamed:@"setting_cell_selected"];
+    titleLabel.textColor = selectedTextColor;
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesCancelled:touches withEvent:event];
+    bgView.image = [UIImage imageNamed:@"setting_cell_normal"];
+    titleLabel.textColor = normalTextColor;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesEnded:touches withEvent:event];
+    bgView.image = [UIImage imageNamed:@"setting_cell_normal"];
+    titleLabel.textColor = normalTextColor;
+}
+
+@end
 
 @interface ECSettingView ()
 - (void)initUI;
@@ -29,15 +108,16 @@
     _titleView.text = NSLocalizedString(@"Setting", "");
     self.titleView = _titleView;
     
-    _accountSettingButton = [self makeButtonWithTitle:NSLocalizedString(@"Set Account", nil) frame:CGRectMake(0, 0, 300, 45)];
-    [_accountSettingButton addTarget:self action:@selector(showAccountSettingView) forControlEvents:UIControlEventTouchUpInside];
+    self.leftBarButtonItem = [self makeBarButtonItem:NSLocalizedString(@"Talking Group", nil) backgroundImg:[UIImage imageNamed:@"back_navi_button_long"] frame:CGRectMake(0, 0, 84, 28) target:self action:@selector(onBackAction)];
     
-    UITableView *settingTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStyleGrouped];
-    settingTableView.backgroundColor = self.backgroundColor;
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
+        
+    UITableView *settingTableView = [[UITableView alloc] initWithFrame:CGRectMake((self.frame.size.width - SETTING_CELL_WIDTH) / 2, 0, SETTING_CELL_WIDTH, 340)style:UITableViewStylePlain];
+    settingTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    settingTableView.backgroundColor = [UIColor clearColor];
     settingTableView.dataSource = self;
-    
+    settingTableView.delegate = self;
     [self addSubview:settingTableView];
-
 }
 
 /*
@@ -51,49 +131,49 @@
 
 #pragma mark - table view datasource delegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *gap = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SETTING_CELL_WIDTH, 30)];
+    gap.backgroundColor = [UIColor clearColor];
+    return gap;
+}
+ 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [SettingItemCell cellHeight];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *title = nil;
-    switch (section) {
-        case 0:
-            title = NSLocalizedString(@"Account", nil);
-            break;
-            
-        default:
-            break;
-    }
-    return title;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger rows = 1;
-    switch (section) {
-        case 0:
-            rows = 1;
-            break;
-            
-        default:
-            break;
-    }
-    return rows;
+    return [SETTING_TITLE_ARRAY count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"setting cell"];
     
     if (cell == nil) {
-        switch (indexPath.row) {
-            case 0:
-                cell = [[ECUIControlTableViewCell alloc] initWithControls:[NSArray arrayWithObject:_accountSettingButton]];
-                break;
-            default:
-                break;
-        }
+        NSString *title = [SETTING_TITLE_ARRAY objectAtIndex:indexPath.row];
+        cell = [[SettingItemCell alloc] initWithTitle:title];
     }
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0:
+            [self showAccountSettingView];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - actions

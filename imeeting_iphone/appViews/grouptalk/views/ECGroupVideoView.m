@@ -217,7 +217,7 @@ static CGFloat GroupIdLabelHeight = 20;
     // make load video indicator
    
     _loadVideoIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _loadVideoIndicator.center = CGPointMake(_largeVideoView.center.x, _largeVideoView.center.y);
+    _loadVideoIndicator.center = CGPointMake(_largeVideoView.center.x, _largeVideoView.center.y - BottomBarHeight);
 
     UILabel *loadVideoLabel = [[UILabel alloc] initWithFrame:CGRectMake((_loadVideoIndicator.frame.size.width - 120) / 2, 25, 120, 20)];
     loadVideoLabel.text = NSLocalizedString(@"Loading Video", "");
@@ -361,17 +361,19 @@ static CGFloat GroupIdLabelHeight = 20;
     if ([NSLocalizedString(@"Dial", nil) isEqualToString:title]) {
         NSString *phoneUrl = [NSString stringWithFormat:@"telprompt://%@", CALL_CENTER_NUM];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneUrl]];        
+    } else if ([NSLocalizedString(@"Talking", nil) isEqualToString:title]) {
+        [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"You're in talking now.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
     } else if ([NSLocalizedString(@"Mute", nil) isEqualToString:title]) {
         
     } else if ([NSLocalizedString(@"Unmute", nil) isEqualToString:title]) {
         
-    }
+    } 
      
 }
 
 #pragma mark - video status
 - (void)startShowLoadingVideo {
-    _largeVideoView.image = nil;
+    _largeVideoView.image = _largeVideoBg;
     [_loadVideoIndicator startAnimating];
 }
 

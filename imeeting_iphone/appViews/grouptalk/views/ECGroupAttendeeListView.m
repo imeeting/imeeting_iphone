@@ -193,7 +193,6 @@ static CGFloat padding = 6;
 - (void)initUI {    
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"attendee_list_bg"]];
 
-    int marginTop = 27;
     int marginBottom = 19;
     int padding = 35;
     int attendeeListTableViewWidth = 200;
@@ -201,7 +200,7 @@ static CGFloat padding = 6;
     int addMemberButtonWidth = 200;
     int addMemberButtonHeight = 36;
 
-    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((attendeeViewWidth - attendeeListTableViewWidth) / 2, marginTop, attendeeListTableViewWidth, 480 - marginTop - marginBottom - addMemberButtonHeight - padding)];
+    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((attendeeViewWidth - attendeeListTableViewWidth) / 2, 0, attendeeListTableViewWidth, 480 - marginBottom - addMemberButtonHeight - padding)];
     _attendeeListTableView.backgroundColor = self.backgroundColor;
     _attendeeListTableView.dataSource = self;
     _attendeeListTableView.delegate = self;
@@ -221,6 +220,7 @@ static CGFloat padding = 6;
     [_addMemberButton setTitle:NSLocalizedString(@"Add Attendee", nil) forState:UIControlStateNormal];
     [_addMemberButton setBackgroundImage:[UIImage imageNamed:@"add_member_button"] forState:UIControlStateNormal];
     _addMemberButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:14];
+    [_addMemberButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 4, 0)];
     [_addMemberButton addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addMemberButton];
     
@@ -329,6 +329,17 @@ static CGFloat padding = 6;
 }
 
 #pragma mark - data source implementation
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 27;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *gap = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    gap.backgroundColor = [UIColor clearColor];
+    return gap;
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _attendeeArray.count;
 }

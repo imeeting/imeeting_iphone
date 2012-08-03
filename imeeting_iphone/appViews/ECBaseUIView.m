@@ -19,7 +19,7 @@
         // set background color
         self.backgroundColor = [UIColor whiteColor];
         _titleView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 38)];
-        _titleView.font = [UIFont fontWithName:CHINESE_FONT size:20];
+        _titleView.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:20];
         _titleView.textAlignment = UITextAlignmentCenter;
         _titleView.textColor = [UIColor whiteColor];
         _titleView.backgroundColor = [UIColor clearColor];
@@ -68,13 +68,22 @@
     return label;
 }
 
+- (UIBarButtonItem *)makeBarButtonItem:(NSString *)title backgroundImg:(UIImage *)image frame:(CGRect)frame target:(id)target action:(SEL)action {
+    UIButton *barButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    barButton.frame = frame;
+    barButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:13];
+    [barButton setTitle:title forState:UIControlStateNormal];
+    [barButton setBackgroundImage:image forState:UIControlStateNormal];
+    [barButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView: barButton];
+}
+
 #pragma mark - UITextFieldDelegate methods implementation
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     
     return YES;
 }
-
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -84,5 +93,11 @@
     // Drawing code
 }
 */
+
+- (void)onBackAction {
+    if (self.viewControllerRef) {
+        [self.viewControllerRef.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 @end
