@@ -36,7 +36,7 @@ static CGFloat padding = 6;
         _guyIconView = [[UIImageView alloc] initWithFrame:CGRectMake(8, (cellHeight - guyIconHeight) / 2, guyIconWidth, guyIconHeight)];
         _guyIconView.contentMode = UIViewContentModeScaleAspectFill;
         _guyIconView.layer.masksToBounds = YES;
-        [_guyIconView.layer setCornerRadius:5.0];
+       // [_guyIconView.layer setCornerRadius:5.0];
         [self.contentView addSubview:_guyIconView];
         
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_guyIconView.frame.origin.x + guyIconWidth + padding * 2, _guyIconView.frame.origin.y, nameLabelWidth, nameLabelHeight)];
@@ -297,6 +297,11 @@ static CGFloat padding = 6;
 
 - (void)addContactAction {
     NSLog(@"add contact");
+    if (_attendeeArray.count >= MAX_MEMBER_LIMIT) {
+        [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Reach the maximum number of members", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
+        return; 
+    }
+    
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(addContacts)]) {
         [self.viewControllerRef performSelector:@selector(addContacts)];
     }
@@ -304,11 +309,19 @@ static CGFloat padding = 6;
 
 - (void)setAttendeeArray:(NSMutableArray *)attendeeArray {
     [_attendeeArray removeAllObjects];
-    for (NSDictionary *att in attendeeArray) {
-        NSMutableDictionary *newAtt = [[NSMutableDictionary alloc] initWithDictionary:att];
-        [_attendeeArray addObject:newAtt];
+    if (attendeeArray.count > 0) {
+        NSString *accountName = [UserManager shareUserManager].userBean.name;
+        for (NSDictionary *att in attendeeArray) {
+            NSMutableDictionary *newAtt = [[NSMutableDictionary alloc] initWithDictionary:att];
+            NSString *name = [newAtt objectForKey:USERNAME];
+            if ([accountName isEqualToString:name]) {
+                [_attendeeArray insertObject:newAtt atIndex:0];
+            } else {
+                [_attendeeArray addObject:newAtt];                
+            }
+        }
     }
-     NSLog(@"attendee size: %d", _attendeeArray.count);
+    NSLog(@"attendee size: %d", _attendeeArray.count);
 
     [_attendeeListTableView reloadData];
 }

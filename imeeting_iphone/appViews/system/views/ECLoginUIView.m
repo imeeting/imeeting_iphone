@@ -19,6 +19,7 @@
 #define LOGIN_BUTTON_HEIGHT 41
 #define SWITCH_WDITH        50
 #define SWITCH_HEIGHT       30
+#define PWD_MASK            @"#@1d~`*)"
 
 @interface ECLoginUIView ()
 - (void)initUI;
@@ -51,74 +52,55 @@
     
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
     
-    UIView *loginFormView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - LOGIN_FORM_WIDTH) / 2, 52, LOGIN_FORM_WIDTH, LOGIN_FORM_HEIGHT)];
+    UIView *loginFormView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - LOGIN_FORM_WIDTH) / 2 - 2, 50, LOGIN_FORM_WIDTH, LOGIN_FORM_HEIGHT)];
     loginFormView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_form_bg"]];
     [self addSubview:loginFormView];
     
     // user phone number input
-    _userNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "") frame:CGRectMake((loginFormView.frame.size.width - INPUT_FIELD_WIDTH) / 2, 50, INPUT_FIELD_WIDTH, INPUT_FIELD_HEIGHT) keyboardType:UIKeyboardTypeNumbersAndPunctuation];
+    _userNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "") frame:CGRectMake((loginFormView.frame.size.width - INPUT_FIELD_WIDTH) / 2, 30, INPUT_FIELD_WIDTH, INPUT_FIELD_HEIGHT) keyboardType:UIKeyboardTypeNumberPad];
     [_userNameInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     [loginFormView addSubview:_userNameInput];
     
     // user password input
-    _pwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(_userNameInput.frame.origin.x, _userNameInput.frame.origin.y + _userNameInput.frame.size.height + 4, INPUT_FIELD_WIDTH, INPUT_FIELD_HEIGHT) keyboardType:UIKeyboardTypeDefault];
+    _pwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(_userNameInput.frame.origin.x, _userNameInput.frame.origin.y + _userNameInput.frame.size.height + 15, INPUT_FIELD_WIDTH, INPUT_FIELD_HEIGHT) keyboardType:UIKeyboardTypeDefault];
     _pwdInput.secureTextEntry = YES;
     [_pwdInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     [loginFormView addSubview:_pwdInput];
     
-    UILabel *rememberPwdLabel = [[UILabel alloc] initWithFrame:CGRectMake(_pwdInput.frame.origin.x + 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 10, 100, SWITCH_HEIGHT)];
+    UILabel *rememberPwdLabel = [[UILabel alloc] initWithFrame:CGRectMake(_pwdInput.frame.origin.x + 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 15, 100, SWITCH_HEIGHT)];
     rememberPwdLabel.textColor = [UIColor colorWithIntegerRed:133 integerGreen:133 integerBlue:133 alpha:1];
     rememberPwdLabel.font = [UIFont fontWithName:CHINESE_FONT size:15];
     rememberPwdLabel.text = NSLocalizedString(@"Remember Pwd", nil);
     rememberPwdLabel.backgroundColor = [UIColor clearColor];
-    _rememberPwdSwitch = [[UISwitch alloc] initWithFrame:CGRectMake((loginFormView.frame.size.width - SWITCH_WDITH) / 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 12, SWITCH_WDITH, SWITCH_HEIGHT)];
+    _rememberPwdSwitch = [[UISwitch alloc] initWithFrame:CGRectMake((loginFormView.frame.size.width - SWITCH_WDITH) / 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 17, SWITCH_WDITH, SWITCH_HEIGHT)];
     _rememberPwdSwitch.on = YES;
     [loginFormView addSubview:rememberPwdLabel];
     [loginFormView addSubview:_rememberPwdSwitch];
-    
-    _autoLoginSwitch = [[UISwitch alloc] init];
-    [_autoLoginSwitch addTarget:self action:@selector(switchAutoLoginAction:) forControlEvents:UIControlEventValueChanged];
-    
+        
     // login button
     _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _loginButton.frame = CGRectMake((loginFormView.frame.size.width - LOGIN_BUTTON_WIDTH) / 2, _rememberPwdSwitch.frame.origin.y + _rememberPwdSwitch.frame.size.height + 10, LOGIN_BUTTON_WIDTH, LOGIN_BUTTON_HEIGHT);
+    _loginButton.frame = CGRectMake((loginFormView.frame.size.width - LOGIN_BUTTON_WIDTH) / 2, _rememberPwdSwitch.frame.origin.y + _rememberPwdSwitch.frame.size.height + 15, LOGIN_BUTTON_WIDTH, LOGIN_BUTTON_HEIGHT);
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"login_button"] forState:UIControlStateNormal];
     [_loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
     _loginButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:16];
     [_loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     [loginFormView addSubview:_loginButton];
-    /*
-    UITableView *loginTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStyleGrouped];
-    loginTableView.backgroundColor = self.backgroundColor;
-    loginTableView.dataSource = self;
-    
-    [self addSubview:loginTableView];
-    */
+
      
     //##### set user info in the view
     UserBean *userBean = [[UserManager shareUserManager] userBean];
     _userNameInput.text = userBean.name;
-    _pwdInput.text = userBean.password;
+    if (userBean.password == nil || [userBean.password isEqualToString:@""]) {
+        _pwdInput.text = nil;
+    } else {
+        _pwdInput.text = PWD_MASK;
+    }
     _rememberPwdSwitch.on = userBean.rememberPwd;
-    _autoLoginSwitch.on = userBean.autoLogin;
-    
-    
-    
-    
-    
 }
 
 - (void)textFieldValueChanged:(UITextField*)textField {
     NSLog(@"text field value changed");
     _useSavedPwd = NO;
-}
-
-#pragma mark - UITextFieldDelegate methods implementation
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    
-    return YES;
 }
 
 #pragma mark - Switch Actions
@@ -148,7 +130,6 @@
     NSString *phoneNumber = [_userNameInput.text trimWhitespaceAndNewline];
     NSString *pwd = [_pwdInput.text trimWhitespaceAndNewline];
     BOOL rememberPwd = _rememberPwdSwitch.on;
-    BOOL autoLogin = _autoLoginSwitch.on;
     
     [_userNameInput resignFirstResponder];
     [_pwdInput resignFirstResponder];
@@ -170,10 +151,7 @@
         [[UserManager shareUserManager] setUser:phoneNumber andPassword:pwd];
     }
     ub.rememberPwd = rememberPwd;
-    ub.autoLogin = autoLogin;
-    
-    NSLog(@"pwd: %@, md5: %@", pwd, ub.password);
-    
+        
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(login)]) {
         
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
@@ -182,42 +160,5 @@
          
     }
 }
-
-#pragma mark - UITableView Datasource Implementation
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
-}
-
-// render table cell UI
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"login cell"];
-    
-    if (cell == nil) {
-        switch (indexPath.row) {
-            case 0:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_userNameInput];
-                break;
-            case 1:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_pwdInput];
-                break;
-            case 2:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:NSLocalizedString(@"Remember Pwd", "") andControl:_rememberPwdSwitch];
-                break;
-                /*
-            case 3:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:NSLocalizedString(@"Auto Login", "") andControl:_autoLoginSwitch];
-                break;
-                 */
-            case 3:
-                cell = [[ECUIControlTableViewCell alloc] initWithLabelTip:nil andControl:_loginButton];
-                break;
-            default:
-                break;
-        }
-    }
-    return cell;
-}
-
 
 @end

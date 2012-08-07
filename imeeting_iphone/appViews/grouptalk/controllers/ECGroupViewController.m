@@ -156,15 +156,6 @@
     [csvc initInMeetingAttendeesPhoneNumbers:phoneNumberArray];
     csvc.isAppearedInCreateNewGroup = NO;
         
-    /*
-    CATransition *animation = [CATransition animation];
-    animation.duration = 0.3f;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    animation.type = kCATransitionMoveIn;
-    animation.subtype = kCATransitionFromTop;
-    [self.navigationController.view.layer addAnimation:animation forKey:nil];
-    [self.navigationController pushViewController:csvc animated:NO];
-     */
     [UIView beginAnimations:@"animationID" context:nil];
     [UIView setAnimationDuration:0.4f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -186,7 +177,6 @@
 }
 
 - (void)switchVideoAndAttendeeListView {
-   // [[UIApplication sharedApplication] setStatusBarHidden:NO];
     ECGroupView *groupView = (ECGroupView*)self.view;
     [groupView switchVideoAndAttendeeListView];
 }
@@ -455,6 +445,7 @@
     if (![targetUsername isEqualToString:[module.videoManager.videoDecode currentVideoUserName]]) {
         [module.videoManager stopVideoFetch];
         sleep(0.5);
+        [self setSmallVideoViewIsMine:YES];
         [module.videoManager startVideoFetchWithTargetUsername:targetUsername];
     }
     [self switchToVideoView];

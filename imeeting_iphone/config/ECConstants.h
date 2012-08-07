@@ -15,6 +15,8 @@
 
 #define CALL_CENTER_NUM         @"05512379997"
 
+#define MAX_MEMBER_LIMIT        5
+
 static CGFloat StatusBarHeight = 20;
 static CGFloat NavigationBarHeight = 44;
 

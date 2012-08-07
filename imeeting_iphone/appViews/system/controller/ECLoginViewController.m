@@ -34,14 +34,6 @@
         
         [self initLogin];
         self = [self initWithCompatibleView:[[ECLoginUIView alloc] init]];
-       
-        /*
-        UserBean *userBean = [[UserManager shareUserManager] userBean];
-        if (userBean.autoLogin && userBean.password) {
-            [self.view performSelector:@selector(loginAction)];
-        }
-         */
-        
     }
     return self;
 }
@@ -67,7 +59,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
+    if (_isForLogin) {
+        // login status
+        self.navigationItem.leftBarButtonItem = nil;
+    }
 }
 
 - (void)viewDidLoad

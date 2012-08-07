@@ -157,6 +157,7 @@
 }
 
 - (void)addressBookChanged:(ABAddressBookRef)pAddressBook info:(NSDictionary*)pInfo context:(void *)pContext {
+    NSLog(@"addressbookchanged");
     if (pInfo && 0 != [pInfo count]) {
         // get changed contact id array
         NSArray *_changedContactIdArr = [pInfo allKeys];

@@ -232,7 +232,6 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [userDefaults objectForKey:USERNAME];
     NSString *password = [userDefaults objectForKey:PASSWORD];
-    NSNumber *autologin = [userDefaults objectForKey:AUTOLOGIN];
     NSString *userkey = [userDefaults objectForKey:USERKEY];
     
     UserBean *userBean = [[UserManager shareUserManager] userBean];
@@ -243,14 +242,13 @@
     } else {
         userBean.rememberPwd = NO;
     }
-    userBean.autoLogin = autologin.boolValue;
     userBean.userKey = userkey;
 }
 
 - (BOOL)isNeedLogin {
     BOOL flag = NO;
     UserBean *userBean = [[UserManager shareUserManager] userBean];
-    if (!userBean.name || !userBean.password || !userBean.userKey /*|| !userBean.autoLogin*/) {
+    if (!userBean.name || !userBean.password || !userBean.userKey) {
         flag = YES;
     }
     

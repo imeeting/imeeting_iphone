@@ -21,6 +21,7 @@
 - (void)initUI;
 - (UIView*)makeStepView;
 - (UIView*)makeStepLabel:(NSString*)text preTitle:(NSString*)preTitle;
+- (CATransition*)fadeAnimation;
 @end
 
 
@@ -67,12 +68,12 @@
     //### user register step 1
     _mStep1View = [self makeStepView];
     
-    UIView *step1Label = [self makeStepLabel:NSLocalizedString(@"Step 1", "") preTitle:@"First"];
+    UIView *step1Label = [self makeStepLabel:NSLocalizedString(@"Step 1", "") preTitle:NSLocalizedString(@"First", nil)];
 
     [_mStep1View addSubview:step1Label];
     
     // user name input
-    _mUserNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "phone number input") frame:CGRectMake((self.frame.size.width - INPUT_WIDTH) / 2, step1Label.frame.origin.y + step1Label.frame.size.height + 3, INPUT_WIDTH, INPUT_HEIGHT) keyboardType:UIKeyboardTypePhonePad];
+    _mUserNameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"phone number", "phone number input") frame:CGRectMake((self.frame.size.width - INPUT_WIDTH) / 2, step1Label.frame.origin.y + step1Label.frame.size.height + 3, INPUT_WIDTH, INPUT_HEIGHT) keyboardType:UIKeyboardTypeNumberPad];
     [_mStep1View addSubview:_mUserNameInput];
     
     UIButton *getValidateCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -87,7 +88,7 @@
     //### user register step 2
     _mStep2View = [self makeStepView];
     
-    UIView *step2Label = [self makeStepLabel:NSLocalizedString(@"Step 2", "") preTitle:@"Second"];
+    UIView *step2Label = [self makeStepLabel:NSLocalizedString(@"Step 2", "") preTitle:NSLocalizedString(@"Second", nil)];
     
     [_mStep2View addSubview:step2Label];
     
@@ -106,7 +107,7 @@
     //### user register step 3
     _mStep3View = [self makeStepView];
     
-    UIView *step3Label= [self makeStepLabel:NSLocalizedString(@"Step 3", "") preTitle:@"Third"];
+    UIView *step3Label= [self makeStepLabel:NSLocalizedString(@"Step 3", "") preTitle:NSLocalizedString(@"Third", nil)];
     
     [_mStep3View addSubview:step3Label];
     
@@ -150,7 +151,18 @@
 
 
 #pragma mark - UI Related Operations
+- (CATransition *)fadeAnimation {
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.6f;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.type = kCATransitionFade;
+    return animation;
+}
+
 - (void)switchToStep1View {
+    CATransition *animation = [self fadeAnimation];
+    [_mStep1View.layer addAnimation:animation forKey:nil];
+    
     [_mStep1View setHidden:NO];
     [_mStep2View setHidden:YES];
     [_mStep3View setHidden:YES];  
@@ -160,6 +172,10 @@
 - (void)switchToStep2View {
     NSLog(@"switch to step2 view");
     _mValidateCodeInput.text = nil;
+    
+    CATransition *animation = [self fadeAnimation];
+    [_mStep2View.layer addAnimation:animation forKey:nil];
+    
     [_mStep1View setHidden:YES];
     [_mStep2View setHidden:NO];
     [_mStep3View setHidden:YES];
@@ -169,6 +185,10 @@
 - (void)switchToStep3View {
     _mPwdInput.text = nil;
     _mPwdConfirmInput.text = nil;
+    
+    CATransition *animation = [self fadeAnimation];
+    [_mStep3View.layer addAnimation:animation forKey:nil];
+    
     [_mStep1View setHidden:YES];
     [_mStep2View setHidden:YES];
     [_mStep3View setHidden:NO];
@@ -187,7 +207,7 @@
     if(!phoneNumber || [phoneNumber isEqualToString:@""]) {
         NSLog(@"user input phone number is nil.");
                 
-        [[[iToast makeText:NSLocalizedString(@"please input phone number first", "")] setDuration:iToastDurationLong] show];
+        [[[iToast makeText:NSLocalizedString(@"please input phone number first", "")] setDuration:iToastDurationNormal] show];
         return;
     }
 
@@ -206,7 +226,7 @@
     // check phone code
     if (!code || [code isEqualToString:@""]) {
         NSLog(@"user input code is nil");
-        [[[iToast makeText:NSLocalizedString(@"please input code", "")] setDuration:iToastDurationLong] show];
+        [[[iToast makeText:NSLocalizedString(@"please input code", "")] setDuration:iToastDurationNormal] show];
         return;
     }
     
@@ -227,17 +247,17 @@
     
     // check passwords
     if (!pwd1 || [pwd1 isEqualToString:@""]) {
-        [[[iToast makeText:NSLocalizedString(@"please input password", "")] setDuration:iToastDurationLong] show];
+        [[[iToast makeText:NSLocalizedString(@"please input password", "")] setDuration:iToastDurationNormal] show];
         return;
     }
     
     if (!pwd2 || [pwd2 isEqualToString:@""]) {
-        [[[iToast makeText:NSLocalizedString(@"please input confirm password", "")] setDuration:iToastDurationLong] show];
+        [[[iToast makeText:NSLocalizedString(@"please input confirm password", "")] setDuration:iToastDurationNormal] show];
         return;
     }
     
     if (![pwd1 isEqualToString:pwd2]) {
-        [[[iToast makeText:NSLocalizedString(@"pwd1 is different to pwd2", "")] setDuration:iToastDurationLong] show];
+        [[[iToast makeText:NSLocalizedString(@"pwd1 is different to pwd2", "")] setDuration:iToastDurationNormal] show];
         return;
     }
     

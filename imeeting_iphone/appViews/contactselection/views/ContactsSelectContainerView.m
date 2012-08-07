@@ -181,7 +181,7 @@
         UIButton *confirmAddButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         confirmAddButton.frame = CGRectMake((inputDialogView.frame.size.width - confirmAddButtonWidth) / 2, _phoneNumberInputTextField.frame.origin.y + _phoneNumberInputTextField.frame.size.height + 18, confirmAddButtonWidth, confirmAddButtonHeight);
         [confirmAddButton setTitle:NSLocalizedString(@"Add", nil) forState:UIControlStateNormal];
-        confirmAddButton.titleLabel.font = [UIFont fontWithName:CHINESE_FONT size:16];
+        confirmAddButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:16];
         confirmAddButton.titleLabel.textColor = [UIColor colorWithIntegerRed:122 integerGreen:122 integerBlue:122 alpha:1];
         [confirmAddButton addTarget:self action:@selector(onConfirmAddContactAction) forControlEvents:UIControlEventTouchUpInside];
         [inputDialogView addSubview:confirmAddButton];
@@ -244,7 +244,7 @@
 
 - (void)addSelectedContactToMeetingWithIndexPath:(NSIndexPath *)pIndexPath andSelectedPhoneNumber:(NSString *)pSelectedPhoneNumber{
     NSInteger totalNumber = _mMeetingContactsListView.preinMeetingContactsInfoArrayRef.count + _mMeetingContactsListView.inMeetingContactsInfoArrayRef.count;
-    if (totalNumber < 5) {
+    if (totalNumber < MAX_MEMBER_LIMIT) {
         // if the select contact not existed in meeting contacts list table view in meeting section
         if (![self.inMeetingContactsPhoneNumberArray containsObject:pSelectedPhoneNumber]) {
             // update selected cell photo image
@@ -332,7 +332,7 @@
                     NSLog(@"Error: has a contact with user input phone number has been existed in prein meeting");
                     
                     // show toast
-                    [[[iToast makeText:[NSString stringWithFormat:@"%@ %@", ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:_index]).displayName, NSLocalizedString(@"contact with user input phone number has been existed in prein meeting", nil)]] setDuration:iToastDurationLong] show];
+                    [[[iToast makeText:[NSString stringWithFormat:NSLocalizedString(@"%@ is existed", nil), ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:_index]).displayName]] setDuration:iToastDurationLong] show];
                 }
                 // add the user input phone number to meeting contacts list table view prein meeting section
                 else {
@@ -434,15 +434,16 @@
             NSLog(@"new added contact with the phone number has added in meeting contacts list table view in meeting section");
             
             // show toast
-            [[[iToast makeText:NSLocalizedString(@"new added contact with user input phone number has been existed in prein meeting", nil)] setDuration:iToastDurationLong] show];
+            NSString *info = [NSString stringWithFormat:NSLocalizedString(@"%@ is existed", nil), pPhoneNumber];
+            [[[iToast makeText:info] setDuration:iToastDurationNormal] show];
             
             // return immediately
             return;
         }
     }
     NSInteger totalNumber = _mMeetingContactsListView.preinMeetingContactsInfoArrayRef.count + _mMeetingContactsListView.inMeetingContactsInfoArrayRef.count;
-    if (totalNumber >= 5) {
-        [[[iToast makeText:NSLocalizedString(@"Reach the maximum number of members", nil)] setDuration:iToastDurationLong] show];
+    if (totalNumber >= MAX_MEMBER_LIMIT) {
+        [[[iToast makeText:NSLocalizedString(@"Reach the maximum number of members", nil)] setDuration:iToastDurationNormal] show];
         return;
     }
     

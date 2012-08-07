@@ -59,10 +59,10 @@
 "contact has no phone number alertView button title" = "Select again";
 "contact phone number select actionSheet title" = "Select %@'s phone number to join group";
 "contact has been in meeting" = "Existed in group";
-"contact with user input phone number has been existed in prein meeting" = "Phone number is existed in the invitation list";
+"contact with user input phone number has been existed in prein meeting" = "is existed";
 "new added phone number is nil" = "New added phone number can't be null";
 "invite" = "Invite";
-"new added contact with user input phone number has been existed in prein meeting" = "Phone number is existed in the invite list";
+"%@ is existed" = "%@ is existed";
 "error in inviting attendees" = "Fail to invite attendees";
 "Creating Group" = "Creating New Group Talk";
 "inviting attendees" = "Sending invitation request";
@@ -112,3 +112,7 @@
 "Please input phone number" = "Input phone number";
 "Mute" = "Mute";
 "Unmute" = "Unmute";
+"First" = "First";
+"Second" = "Second";
+"Third" = "Third";
+"You're in talking now." = "You are in talking now";

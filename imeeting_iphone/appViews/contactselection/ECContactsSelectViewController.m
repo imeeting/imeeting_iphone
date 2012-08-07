@@ -130,8 +130,8 @@ invite_error:
 }
 
 - (void)sendSMS {
-    mMsgViewController= [[MFMessageComposeViewController alloc] init];
-    
+    mMsgViewController = [[MFMessageComposeViewController alloc] init];
+
     mMsgViewController.recipients = _currentInviteArray;
     
     NSString *audioConfId = [[ECGroupManager sharedECGroupManager] currentGroupModule].audioConfId;

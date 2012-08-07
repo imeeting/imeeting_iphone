@@ -16,7 +16,6 @@
     
     UILabel *_groupIdLabel;
     UIActivityIndicatorView *_loadVideoIndicator;
-    UIImage *_largeVideoBg;
 }
 
 @property (nonatomic,retain) UIImageView *smallVideoView;

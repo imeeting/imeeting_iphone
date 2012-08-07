@@ -172,6 +172,7 @@ static CGFloat GroupIdLabelHeight = 20;
 
 - (void)initUI {
     NSLog(@"ECGroupVideoView - initUI");
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
     
     [self addSubview:[self makeVideoRegion]];
     [self addSubview:[self makeBottomBar]];
@@ -204,10 +205,9 @@ static CGFloat GroupIdLabelHeight = 20;
     
     CGColorRef borderColor = [[UIColor colorWithIntegerRed:0 integerGreen:0 integerBlue:0 alpha:1] CGColor];
     
-    _largeVideoBg = [UIImage imageNamed:@"mainpage_bg"];
     _largeVideoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, VideoRegionWidth, VideoRegionHeight)];
     _largeVideoView.contentMode = UIViewContentModeScaleAspectFill;
-    _largeVideoView.image = _largeVideoBg;
+    _largeVideoView.backgroundColor = [UIColor clearColor];
     LargeVideoViewGesture *largeVideoViewGesture = [[LargeVideoViewGesture alloc] init];
     largeVideoViewGesture.videoView = self;
     _largeVideoView.userInteractionEnabled = YES;
@@ -373,7 +373,7 @@ static CGFloat GroupIdLabelHeight = 20;
 
 #pragma mark - video status
 - (void)startShowLoadingVideo {
-    _largeVideoView.image = _largeVideoBg;
+    _largeVideoView.image = nil;
     [_loadVideoIndicator startAnimating];
 }
 
@@ -388,7 +388,7 @@ static CGFloat GroupIdLabelHeight = 20;
 - (void)resetOppositeVideoUI {
     NSLog(@"resetOppositeVideoUI");
     [_loadVideoIndicator stopAnimating];
-    _largeVideoView.image = _largeVideoBg;
+    _largeVideoView.image = nil;
     _smallVideoView.image = nil;
 }
 

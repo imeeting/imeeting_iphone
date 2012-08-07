@@ -101,14 +101,14 @@ static CGFloat Padding = 2;
     iconView.contentMode = UIViewContentModeScaleAspectFill;
     iconView.image = icon;
     iconView.layer.masksToBounds = YES;
-    [iconView.layer setCornerRadius:5.0];
+   // [iconView.layer setCornerRadius:5.0];
     [cell addSubview:iconView];
     
     UILabel *nameLabel =[[UILabel alloc] initWithFrame:CGRectMake(Padding, iconView.frame.origin.y + iconView.frame.size.height, NameLabelWidth, NameLabelHeight)];
     nameLabel.text = name;
     [nameLabel setTextAlignment:UITextAlignmentCenter];
     [nameLabel setFont:[UIFont fontWithName:CHINESE_FONT size:12]];
-    nameLabel.textColor = [UIColor colorWithIntegerRed:163 integerGreen:163 integerBlue:163 alpha:1];
+    nameLabel.textColor = [UIColor colorWithIntegerRed:110 integerGreen:106 integerBlue:106 alpha:1];
     nameLabel.backgroundColor = [UIColor clearColor];
     [cell addSubview:nameLabel];
     

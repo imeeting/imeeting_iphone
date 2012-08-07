@@ -59,11 +59,10 @@
 "contact has no phone number alertView button title" = "重新选择";
 "contact phone number select actionSheet title" = "选择 %@ 加入群聊的号码";
 "contact has been in meeting" = "已经在群聊中";
-"contact with user input phone number has been existed in prein meeting" = "待加入列表已存在此号码";
 "new added phone number is nil" = "新添加号码不能为空";
 "invite" = "确定";
 "inviting attendees" = "正在发送邀请请求";
-"new added contact with user input phone number has been existed in prein meeting" = "待加入列表已存在此号码";
+"%@ is existed" = "%@ 已存在";
 "error in inviting attendees" = "成员邀请失败";
 "Creating Group" = "正在创建群聊";
 "no attendee selected" = "您没有选择新成员！";
@@ -90,8 +89,8 @@
 "%@ has been removed from the group" = "%@已被移出群聊";
 "Unable to load video" = "加载视频失败";
 "Join" = "加入";
-"Reach the maximum number of members" = "已达到人数上限！";
-"Only 5 members in all are allowed" = "最多允许5人！";
+"Reach the maximum number of members" = "无法添加新成员，已达到人数上限！";
+"Only 5 members in all are allowed" = "最多允许5名成员！";
 "Remove %@ ?" = "确定要将 %@ 移出群聊吗？";
 "Already Added Contacts" = "已添加成员";
 "Search Contacts" = "搜索联系人";
@@ -112,3 +111,7 @@
 "Please input phone number" = "请输入电话号码";
 "Mute" = "禁音通话";
 "Unmute" = "恢复通话";
+"First" = "第一步";
+"Second" = "第二步";
+"Third" = "第三步";
+"You're in talking now." = "您正在通话中";
