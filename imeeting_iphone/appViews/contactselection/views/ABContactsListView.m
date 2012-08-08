@@ -156,7 +156,7 @@
     [(ContactsSelectContainerView *)self.contactsSelectView addSelectedContactToMeetingWithIndexPath:_mSelectedCellIndexPath andSelectedPhoneNumber:[pActionSheet buttonTitleAtIndex:pButtonIndex]];
 }
 
-- (void)addressBookChanged:(ABAddressBookRef)pAddressBook info:(NSDictionary*)pInfo context:(void *)pContext {
+- (void)addressBookChanged:(ABAddressBookRef)pAddressBook info:(NSDictionary*)pInfo observer:(id)pObserver {
     NSLog(@"addressbookchanged");
     if (pInfo && 0 != [pInfo count]) {
         // get changed contact id array
@@ -166,15 +166,15 @@
             // get action
             switch (((NSNumber *)[[pInfo objectForKey:_contactId] objectForKey:CONTACT_ACTION]).intValue) {
                 case contactAdd:
-                    [self insertRowAtIndexPath:[NSIndexPath indexPathForRow:[_mPresentContactsInfoArrayRef count] - 1 inSection:0] withRowAnimation:UITableViewRowAnimationLeft];
+                    [pObserver insertRowAtIndexPath:[NSIndexPath indexPathForRow:[_mPresentContactsInfoArrayRef count] - 1 inSection:0] withRowAnimation:UITableViewRowAnimationLeft];
                     break;
                     
                 case contactModify:
-                    [self reloadRowAtIndexPath:[NSIndexPath indexPathForRow:[_mPresentContactsInfoArrayRef indexOfObject:[[AddressBookManager shareAddressBookManager] getContactInfoById:_contactId.intValue]] inSection:0] withRowAnimation:UITableViewRowAnimationMiddle];
+                    [pObserver reloadRowAtIndexPath:[NSIndexPath indexPathForRow:[_mPresentContactsInfoArrayRef indexOfObject:[[AddressBookManager shareAddressBookManager] getContactInfoById:_contactId.intValue]] inSection:0] withRowAnimation:UITableViewRowAnimationMiddle];
                     break;
                     
                 case contactDelete:
-                    [self reloadData];
+                    [pObserver reloadData];
                     break;
             }
         }
