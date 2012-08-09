@@ -308,7 +308,7 @@ static ECMainPageViewController *instance;
 #pragma mark - socket io
 - (void)connectToNotifyServer {
     NSLog(@"connect to notify server..");
-    [mSocketIO connectToHost:NOTIFY_SERVER_HOST onPort:80];
+    [mSocketIO connectToHost:NOTIFY_SERVER_HOST onPort:NOTIFY_SERVER_PORT];
 }
 
 - (void)stopGetNoticeFromNotifyServer {

@@ -149,8 +149,7 @@
     createGroupButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:16];
     [self addSubview:createGroupButton];
     
-    
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
+    self.backgroundImg = [UIImage imageNamed:@"mainpage_bg"];
 }
 
 

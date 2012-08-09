@@ -50,10 +50,10 @@
     
     self.rightBarButtonItem = [self makeBarButtonItem:NSLocalizedString(@"register", "") backgroundImg:[UIImage imageNamed:@"navibutton"] frame:CGRectMake(0, 0, 53, 28) target:self action:@selector(jumpToRegisterAction)];
     
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
+    self.backgroundImg = [UIImage imageNamed:@"mainpage_bg"];
     
     UIView *loginFormView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - LOGIN_FORM_WIDTH) / 2 - 2, 50, LOGIN_FORM_WIDTH, LOGIN_FORM_HEIGHT)];
-    loginFormView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_form_bg"]];
+    loginFormView.backgroundImg = [UIImage imageNamed:@"login_form_bg"];
     [self addSubview:loginFormView];
     
     // user phone number input

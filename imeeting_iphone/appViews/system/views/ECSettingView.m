@@ -110,8 +110,8 @@
     
     self.leftBarButtonItem = [self makeBarButtonItem:NSLocalizedString(@"Talking Group", nil) backgroundImg:[UIImage imageNamed:@"back_navi_button_long"] frame:CGRectMake(0, 0, 84, 28) target:self action:@selector(onBackAction)];
     
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
-        
+    self.backgroundImg = [UIImage imageNamed:@"mainpage_bg"];
+    
     UITableView *settingTableView = [[UITableView alloc] initWithFrame:CGRectMake((self.frame.size.width - SETTING_CELL_WIDTH) / 2, 0, SETTING_CELL_WIDTH, 340)style:UITableViewStylePlain];
     settingTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     settingTableView.backgroundColor = [UIColor clearColor];

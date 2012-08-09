@@ -125,7 +125,9 @@
     AVCaptureConnection *videoConnection = [AVCamUtilities connectionWithMediaType:AVMediaTypeVideo fromConnections:self.videoDataOutput.connections];    
     if (videoConnection) {
         NSLog(@"connection found");
-        videoConnection.videoMinFrameDuration = CMTimeMake(1, fps);
+        if (videoConnection.isVideoMinFrameDurationSupported) {
+            videoConnection.videoMinFrameDuration = CMTimeMake(1, fps);
+        }
         if (videoConnection.isVideoOrientationSupported) {
             NSLog(@"set video orientation");
             videoConnection.videoOrientation = orientation;

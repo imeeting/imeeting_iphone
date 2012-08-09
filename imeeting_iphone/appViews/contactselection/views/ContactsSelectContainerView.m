@@ -87,8 +87,8 @@
         // init left region view
         
         UIView *leftRegionView = [[UIView alloc] initWithFrame:CGRectMake(self.frame.origin.x, listTitleBar.frame.origin.y + listTitleBar.frame.size.height, ABCONTACT_TABLEVIEW_WIDTH + 6, self.frame.size.height - listTitleBar.frame.size.height)];
-        leftRegionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leftregionbg"]];
-
+        leftRegionView.backgroundImg = [UIImage imageNamed:@"leftregionbg"];
+        
         // init search field
         UIView *searchFieldView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ABCONTACT_TABLEVIEW_WIDTH, 35)];
         searchFieldView.backgroundColor = [UIColor clearColor];
@@ -131,7 +131,7 @@
         // init meeting contacts list table view
         _mMeetingContactsListView = [[MeetingContactsListView alloc] initWithFrame:CGRectMake(leftRegionView.frame.origin.x + ABCONTACT_TABLEVIEW_WIDTH, leftRegionView.frame.origin.y, INMEETING_CONTACT_TABLEVIEW_WIDTH, leftRegionView.frame.size.height)];
         _mMeetingContactsListView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _mMeetingContactsListView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"rightregionbg"]];
+        _mMeetingContactsListView.backgroundImg = [UIImage imageNamed:@"rightregionbg"];
         
         // add addressBook contacts list table view, meeting contacts list table view and contacts process toolbar to contacts select view
         [self addSubview:listTitleBar];

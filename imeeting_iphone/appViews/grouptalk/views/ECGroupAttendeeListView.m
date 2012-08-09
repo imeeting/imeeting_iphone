@@ -142,6 +142,7 @@ static CGFloat padding = 6;
     [super setSelected:selected animated:animated];
     if (selected) {
         self.contentView.backgroundColor = _selectedBGColor;
+        self.contentView.opaque = NO;
     } else {
         self.contentView.backgroundColor = _normalBGColor;
     }
@@ -191,8 +192,8 @@ static CGFloat padding = 6;
 }
 
 - (void)initUI {    
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"attendee_list_bg"]];
-
+    self.backgroundImg = [UIImage imageNamed:@"attendee_list_bg"];
+    
     int marginBottom = 19;
     int padding = 35;
     int attendeeListTableViewWidth = 200;

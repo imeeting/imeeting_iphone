@@ -31,4 +31,5 @@
 
 
 #define NOTIFY_SERVER_HOST          @"msg.walkwork.net"
+#define NOTIFY_SERVER_PORT          80
 #define RTMP_SERVER_URL             @"rtmp://122.96.24.173/quick_server"

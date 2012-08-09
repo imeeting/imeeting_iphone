@@ -69,7 +69,7 @@
 
     // Configure the view for the selected state
     if (selected) {
-        self.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"left_region_selected"]];
+        self.contentView.backgroundImg = [UIImage imageNamed:@"left_region_selected"];
     } else {
         self.contentView.backgroundColor = [UIColor clearColor];
     }

@@ -63,7 +63,7 @@ static CGFloat GroupIdLabelHeight = 20;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_button_pressed"]];
+    self.backgroundImg = [UIImage imageNamed:@"bottom_button_pressed"];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -172,7 +172,7 @@ static CGFloat GroupIdLabelHeight = 20;
 
 - (void)initUI {
     NSLog(@"ECGroupVideoView - initUI");
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mainpage_bg"]];
+    self.backgroundImg = [UIImage imageNamed:@"mainpage_bg"];
     
     [self addSubview:[self makeVideoRegion]];
     [self addSubview:[self makeBottomBar]];
@@ -250,7 +250,7 @@ static CGFloat GroupIdLabelHeight = 20;
 
 - (UIView *)makeBottomBar {
     UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - BottomBarHeight, BottomBarWidth, BottomBarHeight)];
-    bottomBar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bottom_bar"]];
+    bottomBar.backgroundImg = [UIImage imageNamed:@"bottom_bar"];
     CGFloat secWidth = BottomBarWidth / 4;
     
     BottomBarButton *memberListButton = [[BottomBarButton alloc] initWithFrame:CGRectMake(0, 0, secWidth - 1, BottomBarHeight) andTitle:NSLocalizedString(@"Member List", nil) andIcon:[UIImage imageNamed:@"memberlist"]];

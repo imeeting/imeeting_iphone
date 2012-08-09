@@ -138,7 +138,7 @@ static CGFloat Padding = 2;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.contentView.backgroundColor = [UIColor clearColor];
         _myContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, [ECGroupCell cellHeight:groupInfoJson])];
-        _myContentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"group_cell_bg"]];
+        _myContentView.backgroundImg = [UIImage imageNamed:@"group_cell_bg"];
         [self.contentView addSubview:_myContentView];
         _containerView = [[UIView alloc] initWithFrame:CGRectMake(4, 0, 307, 113)];
         _containerView.backgroundColor = [UIColor clearColor];
@@ -202,7 +202,7 @@ static CGFloat Padding = 2;
 {
     [super setSelected:selected animated:animated];
     if (selected) {
-        _containerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"group_selected_cell_bg"]];
+        _containerView.backgroundImg = [UIImage imageNamed:@"group_selected_cell_bg"];
     } else {
         _containerView.backgroundColor = [UIColor clearColor];
     }
@@ -210,7 +210,7 @@ static CGFloat Padding = 2;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    _containerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"group_selected_cell_bg"]];
+    _containerView.backgroundImg = [UIImage imageNamed:@"group_selected_cell_bg"];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {

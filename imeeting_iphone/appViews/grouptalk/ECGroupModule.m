@@ -68,7 +68,7 @@
 
 - (void)connectToNotifyServer {
     NSLog(@"connect to notify server..");
-    [_socketIO connectToHost:NOTIFY_SERVER_HOST onPort:80];
+    [_socketIO connectToHost:NOTIFY_SERVER_HOST onPort:NOTIFY_SERVER_PORT];
 }
 
 // process notices from notify server
