@@ -115,8 +115,8 @@
     
     // set phone number label text
     _mPhoneNumbersLabel.text = [phoneNumbersArray getContactPhoneNumbersDisplayTextWithStyle:vertical];
-
-    CGFloat sepY = _mPhoneNumbersLabel.frame.origin.y + phoneNumbersArray.count * PHONENUMBERSLABEL_DEFAULTHEIGHT + MARGIN;
+    
+    CGFloat sepY = _mPhoneNumbersLabel.frame.origin.y + (phoneNumbersArray.count == 0 ? 1 : phoneNumbersArray.count) * PHONENUMBERSLABEL_DEFAULTHEIGHT + MARGIN;
     CGRect frame = CGRectMake(0, sepY, self.frame.size.width, 1);
     if (!_mSeparateLine) { 
         _mSeparateLine = [[UIImageView alloc] initWithFrame:frame];
