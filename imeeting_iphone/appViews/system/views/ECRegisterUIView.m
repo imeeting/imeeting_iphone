@@ -69,7 +69,6 @@
     _mStep1View = [self makeStepView];
     
     UIView *step1Label = [self makeStepLabel:NSLocalizedString(@"Step 1", "") preTitle:NSLocalizedString(@"First", nil)];
-
     [_mStep1View addSubview:step1Label];
     
     // user name input
@@ -82,14 +81,21 @@
     [getValidateCodeButton setTitle:NSLocalizedString(@"get validate code", "get validate code button string") forState:UIControlStateNormal];
     [getValidateCodeButton setBackgroundImage:[UIImage imageNamed:@"register_normal_button"] forState:UIControlStateNormal];
     [getValidateCodeButton addTarget:self action:@selector(getValidationCodeAction) forControlEvents:UIControlEventTouchUpInside];
-    
     [_mStep1View addSubview:getValidateCodeButton];
+    
+    UILabel *infoTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(getValidateCodeButton.frame.origin.x, getValidateCodeButton.frame.origin.y + getValidateCodeButton.frame.size.height, getValidateCodeButton.frame.size.width, 60)];
+    infoTextLabel.text = NSLocalizedString(@"We won't send junk message to you", nil);
+    infoTextLabel.font = [UIFont fontWithName:CHINESE_FONT size:13];
+    infoTextLabel.textColor = [UIColor colorWithIntegerRed:93 integerGreen:109 integerBlue:122 alpha:1];
+    infoTextLabel.backgroundColor = [UIColor clearColor];
+    infoTextLabel.numberOfLines = 0;
+    infoTextLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+    [_mStep1View addSubview:infoTextLabel];
     
     //### user register step 2
     _mStep2View = [self makeStepView];
-    
+
     UIView *step2Label = [self makeStepLabel:NSLocalizedString(@"Step 2", "") preTitle:NSLocalizedString(@"Second", nil)];
-    
     [_mStep2View addSubview:step2Label];
     
     _mValidateCodeInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input code", "input validation code") frame:_mUserNameInput.frame keyboardType:UIKeyboardTypeNumberPad];
@@ -101,14 +107,12 @@
     [nextButton setTitle:NSLocalizedString(@"Next", "next step") forState:UIControlStateNormal];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"register_normal_button"] forState:UIControlStateNormal];
     [nextButton addTarget:self action:@selector(verifyCodeAction) forControlEvents:UIControlEventTouchUpInside];
-    
     [_mStep2View addSubview:nextButton];
     
     //### user register step 3
     _mStep3View = [self makeStepView];
     
     UIView *step3Label= [self makeStepLabel:NSLocalizedString(@"Step 3", "") preTitle:NSLocalizedString(@"Third", nil)];
-    
     [_mStep3View addSubview:step3Label];
     
     _mPwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:_mValidateCodeInput.frame keyboardType:UIKeyboardTypeDefault];
@@ -125,7 +129,6 @@
     [finishButton setTitle:NSLocalizedString(@"Finish", nil) forState:UIControlStateNormal];
     [finishButton setBackgroundImage:[UIImage imageNamed:@"register_normal_button"] forState:UIControlStateNormal];
     [finishButton addTarget:self action:@selector(finishRegistrationAction) forControlEvents:UIControlEventTouchUpInside];
-    
     [_mStep3View addSubview:finishButton];
     
     // display step 1 view

@@ -30,6 +30,7 @@
 
 @synthesize photoImg = _photoImg;
 @synthesize displayName = _displayName;
+@synthesize fullNames = _mFullNames;
 @synthesize phoneNumbersArray = _phoneNumbersArray;
 
 @synthesize phoneNumberMatchingIndexs = _mPhoneNumberMatchingIndexs;
@@ -193,8 +194,24 @@
         // set font
         [_attributedDisplayName setFont:_mDisplayNameLabel.font];
         // set attributed display name text color
+        /*
         for (NSNumber *_index in nameMatchingIndexs) {
-            [_attributedDisplayName setTextColor:MATCHINGTEXTCOLOR range:NSMakeRange(_index.integerValue >= [_displayName rangeOfString:@" "].location ? _index.integerValue + 1 : _index.integerValue, 1)];
+            [_attributedDisplayName setTextColor:MATCHINGTEXTCOLOR range:[_mDisplayName rangeOfString:[[_mDisplayName nameArraySeparatedByCharacter] objectAtIndex:_index.integerValue]]];
+        }
+         */
+        for (NSDictionary *_indexDic in nameMatchingIndexs) {
+            // get matching name character index
+            NSInteger _nameMatchingCharIndex = 0;
+            for (NSInteger _index = 0; _index < [_mFullNames count]; _index++) {
+                if (_index < ((NSNumber *)[_indexDic.allKeys objectAtIndex:0]).integerValue && [[_mFullNames objectAtIndex:_index] isEqualToString:[[_displayName nameArraySeparatedByCharacter] objectAtIndex:((NSNumber *)[_indexDic.allKeys objectAtIndex:0]).integerValue]]) {
+                    _nameMatchingCharIndex += 1;
+                }
+            }
+            
+            // get range of name matching
+            NSRange _range = NSRangeFromString([[_displayName rangesOfString:[[_displayName nameArraySeparatedByCharacter] objectAtIndex:((NSNumber *)[_indexDic.allKeys objectAtIndex:0]).integerValue]] objectAtIndex:_nameMatchingCharIndex]);
+            
+            [_attributedDisplayName setTextColor:MATCHINGTEXTCOLOR range:NSMakeRange(_range.location, NAME_CHARACTER_FULLMATCHING.integerValue == ((NSNumber *)[_indexDic.allValues objectAtIndex:0]).integerValue ? _range.length : ((NSNumber *)[_indexDic.allValues objectAtIndex:0]).integerValue)];
         }
         
         // set display name label attributed text

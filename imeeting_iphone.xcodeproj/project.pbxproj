@@ -118,6 +118,8 @@
 		F8D5E35F157EEF3A005B5581 /* ECRegisterUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D5E35E157EEF3A005B5581 /* ECRegisterUIView.m */; };
 		F8D791AC15995AB700986BCD /* UINavigationController+CustomNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */; };
 		F8D791C61599670A00986BCD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D791C51599670A00986BCD /* libicucore.dylib */; };
+		F8D81C8915DCDF6400E1F17C /* ECAboutUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D81C8815DCDF6400E1F17C /* ECAboutUIView.m */; };
+		F8D81C8C15DCDFB700E1F17C /* ECAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D81C8B15DCDFB700E1F17C /* ECAboutViewController.m */; };
 		F8DC714615AFC82600146A73 /* UIViewController+AuthFailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DC714515AFC82600146A73 /* UIViewController+AuthFailHandler.m */; };
 		F8DC714B15B0081600146A73 /* ECSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DC714A15B0081600146A73 /* ECSettingView.m */; };
 		F8DC714E15B0082C00146A73 /* ECSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DC714D15B0082C00146A73 /* ECSettingViewController.m */; };
@@ -442,6 +444,10 @@
 		F8D791AA15995AB700986BCD /* UINavigationController+CustomNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CustomNavigation.h"; sourceTree = "<group>"; };
 		F8D791AB15995AB700986BCD /* UINavigationController+CustomNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CustomNavigation.m"; sourceTree = "<group>"; };
 		F8D791C51599670A00986BCD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		F8D81C8715DCDF6400E1F17C /* ECAboutUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECAboutUIView.h; path = system/views/ECAboutUIView.h; sourceTree = "<group>"; };
+		F8D81C8815DCDF6400E1F17C /* ECAboutUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECAboutUIView.m; path = system/views/ECAboutUIView.m; sourceTree = "<group>"; };
+		F8D81C8A15DCDFB700E1F17C /* ECAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECAboutViewController.h; path = system/controller/ECAboutViewController.h; sourceTree = "<group>"; };
+		F8D81C8B15DCDFB700E1F17C /* ECAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECAboutViewController.m; path = system/controller/ECAboutViewController.m; sourceTree = "<group>"; };
 		F8DC714415AFC82600146A73 /* UIViewController+AuthFailHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AuthFailHandler.h"; sourceTree = "<group>"; };
 		F8DC714515AFC82600146A73 /* UIViewController+AuthFailHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AuthFailHandler.m"; sourceTree = "<group>"; };
 		F8DC714915B0081600146A73 /* ECSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSettingView.h; path = system/views/ECSettingView.h; sourceTree = "<group>"; };
@@ -539,6 +545,7 @@
 		F814E289157CA16200FBBB19 /* System */ = {
 			isa = PBXGroup;
 			children = (
+				F8D81C8515DCDF2400E1F17C /* About */,
 				F8DC714815B007ED00146A73 /* Setting */,
 				F8E3BEE5158F1F4B00467088 /* User */,
 				F8C9564E157DAC41008FDFD3 /* Register */,
@@ -1163,6 +1170,17 @@
 			name = Custom;
 			sourceTree = "<group>";
 		};
+		F8D81C8515DCDF2400E1F17C /* About */ = {
+			isa = PBXGroup;
+			children = (
+				F8D81C8715DCDF6400E1F17C /* ECAboutUIView.h */,
+				F8D81C8815DCDF6400E1F17C /* ECAboutUIView.m */,
+				F8D81C8A15DCDFB700E1F17C /* ECAboutViewController.h */,
+				F8D81C8B15DCDFB700E1F17C /* ECAboutViewController.m */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
 		F8DC714815B007ED00146A73 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1505,6 +1523,8 @@
 				F8C11F4615B8016100B30BD5 /* ECGroupManager.m in Sources */,
 				F8C11F4715B8016100B30BD5 /* ECGroupModule.m in Sources */,
 				F88B7CB215C131BF00B58AD1 /* ECMeetingContactsListCell.m in Sources */,
+				F8D81C8915DCDF6400E1F17C /* ECAboutUIView.m in Sources */,
+				F8D81C8C15DCDFB700E1F17C /* ECAboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

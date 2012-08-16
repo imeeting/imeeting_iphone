@@ -13,7 +13,7 @@
 "Step 2" = "Input code and press 'Next' to verify";
 "Step 3" = "Input password and confirmation to finish the register";
 "input code" = "Input Validation Code";
-"Next" = "Next Step";
+"Next" = "Next";
 "input pwd" = "Input Password";
 "confirm pwd" = "Confirm Password";
 "Finish" = "Finish Register";
@@ -83,7 +83,7 @@
 "Hangup failed" = "Hangup failed";
 "Kickout is forbidden for %@" = "Cannot kick out, maybe %@ is already out of group";
 "Kickout Failed" = "Kickout failed";
-"Setting" = "Settings";
+"Setting" = "Setting";
 "Account" = "Account";
 "Set Account" = "Set Account";
 "You have been removed from the group by host" = "You have been removed from the group by host";
@@ -93,7 +93,7 @@
 "Reach the maximum number of members" = "Reach the maximum number of memebers!";
 "Only 5 members in all are allowed" = "Only 5 members in all are allowed!";
 "Remove %@ ?" = "Are you sure to remove %@ ?";
-"Already Added Contacts" = "Added Attendees";
+"Already Added Contacts" = "Added";
 "Search Contacts" = "Search Contacts";
 "Call Failed" = "Call Failed";
 "Create Group Talk" = "Create Group Talk";
@@ -116,3 +116,6 @@
 "Second" = "Second";
 "Third" = "Third";
 "You're in talking now." = "You are in talking now";
+"We won't send junk message to you" = "(Your phone number is used for authentication only, we assure that we won't send junk message to you.)";
+"About" = "About";
+"about paragraph" = "Programming\nWang Xing      Zhai Shaohu\n\n\nUI Design\nLi Xin\n\n\nCopy Right\nHefei Youyun Info Tech Ltd.\n\n\nThanks\nNanjing Futuo Network Tech Ltd.";

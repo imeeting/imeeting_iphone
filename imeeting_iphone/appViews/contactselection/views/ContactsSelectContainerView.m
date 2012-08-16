@@ -60,7 +60,7 @@
         CGRect _screenBounds = [[UIScreen mainScreen] bounds];
         
         // update contacts select container view frame
-        self.frame = CGRectMake(_screenBounds.origin.x, _screenBounds.origin.y, _screenBounds.size.width, _screenBounds.size.height - /*statusBar height*/[CommonUtils appStatusBarHeight] - /*navigationBar height*/[CommonUtils appNavigationBarHeight]);
+        self.frame = CGRectMake(_screenBounds.origin.x, _screenBounds.origin.y, _screenBounds.size.width, _screenBounds.size.height - /*statusBar height*/[[UIDevice currentDevice] statusBarHeight] - /*navigationBar height*/[[UIDevice currentDevice] navigationBarHeight]);
         
         // create and init subviews
         
@@ -100,7 +100,7 @@
         [searchFieldView addSubview:searchBGView];
         
         //-- search text field
-        _mSearchField = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"Search Contacts", nil) frame:CGRectMake(searchBGView.frame.origin.x + 32, searchBGView.frame.origin.y + 5, 130, 20) keyboardType:UIKeyboardTypeASCIICapable];
+        _mSearchField = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"Search Contacts", nil) frame:CGRectMake(searchBGView.frame.origin.x + 32, searchBGView.frame.origin.y + 1, 130, 28) keyboardType:UIKeyboardTypeASCIICapable];
         _mSearchField.backgroundColor = [UIColor clearColor];
         _mSearchField.borderStyle = UITextBorderStyleNone;
         _mSearchField.font = [UIFont fontWithName:CHINESE_FONT size:13];
@@ -162,7 +162,7 @@
         int closeDialogViewWidth = 30;
         UILabel *closeDialogView = [[UILabel alloc] initWithFrame:CGRectMake(inputDialogView.frame.size.width - closeDialogViewWidth, 0, closeDialogViewWidth, closeDialogViewWidth)];
         closeDialogView.font = [UIFont fontWithName:CHARACTER_FONT size:20];
-        closeDialogView.text = @"×";
+        closeDialogView.text = @"x";
         closeDialogView.textAlignment = UITextAlignmentCenter;
         closeDialogView.textColor = [UIColor whiteColor];
         closeDialogView.backgroundColor = [UIColor clearColor];
@@ -210,7 +210,7 @@
         ContactBean *_contact = nil;
         
         // get contacts from addressBook by phone number
-        NSArray *_contacts = [[AddressBookManager shareAddressBookManager] getContactByPhoneNumber:_phoneNumber];        
+        NSArray *_contacts = [[AddressBookManager shareAddressBookManager] getContactByPhoneNumber:_phoneNumber matchingType:full orderBy:identity];
         if ([_contacts count] > 0) {
             // get first
             _contact = [_contacts objectAtIndex:0];
@@ -222,8 +222,10 @@
             _contact.selectStatusImg = CONTACT_SELECTED_PHOTO;
             
             // reset contact matching index array
-            [_contact.extensionDic removeObjectForKey:PHONENUMBER_MATCHING_INDEXS];
-            [_contact.extensionDic removeObjectForKey:NAME_MATCHING_INDEXS];
+            for (ContactBean *__contact in _contacts) {
+                [__contact.extensionDic removeObjectForKey:PHONENUMBER_MATCHING_INDEXS];
+                [__contact.extensionDic removeObjectForKey:NAME_MATCHING_INDEXS];
+            }
         }
         else {
             // create and init an new contact bean object
@@ -352,13 +354,16 @@
 }
 
 - (void)searchFieldValueChanged:(UITextField *)textField {
-    NSString *searchText = textField.text;
-    [self searchContactWithParameter:searchText];
+    [self searchContactWithParameter];
 }
 
-- (void)searchContactWithParameter:(NSString *)pParameter{
+- (void)searchContactWithParameter{
+     NSString *searchText = _mSearchField.text;
+    if (searchText == nil || [searchText isEqualToString:@""]) {
+        searchText = _phoneNumberInputTextField.text;
+    }
     // check search parameter
-    if ([pParameter isEqualToString:@""]) {
+    if (searchText == nil || [searchText isEqualToString:@""]) {
         // reset contact matching index array
         for (ContactBean *_contact in _mABContactsListView.allContactsInfoArrayInABRef) {
             [_contact.extensionDic removeObjectForKey:PHONENUMBER_MATCHING_INDEXS];
@@ -366,20 +371,20 @@
         }
         
         // show all contacts in addressBook
-        _mABContactsListView.presentContactsInfoArrayRef = [NSMutableArray arrayWithArray:_mABContactsListView.allContactsInfoArrayInABRef];
+        _mABContactsListView.presentContactsInfoArrayRef = _mABContactsListView.allContactsInfoArrayInABRef;
     }
     else {
         // define temp array
         NSArray *_tmpArray = nil;
         
         NSString *regex = @"^[0-9]+$";
-        BOOL match = [pParameter isMatchedByRegex:regex];
+        BOOL match = [searchText isMatchedByRegex:regex];
         if (match) {
             // search phone number
-            _tmpArray = [[AddressBookManager shareAddressBookManager] getContactByPhoneNumber:pParameter];
+            _tmpArray = [[AddressBookManager shareAddressBookManager] getContactByPhoneNumber:searchText];
         } else {
             // search name
-            _tmpArray = [[AddressBookManager shareAddressBookManager] getContactByName:pParameter];
+            _tmpArray = [[AddressBookManager shareAddressBookManager] getContactByName:searchText];
         }
         
         // define searched contacts array

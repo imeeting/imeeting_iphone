@@ -128,7 +128,7 @@
     self.titleView = _titleView;
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    self.frame = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height - [CommonUtils appStatusBarHeight] - [CommonUtils appNavigationBarHeight]);
+    self.frame = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height - [[UIDevice currentDevice] statusBarHeight] - [[UIDevice currentDevice] navigationBarHeight]);
     
     self.leftBarButtonItem = [self makeBarButtonItem:NSLocalizedString(@"Setting", nil) backgroundImg:[UIImage imageNamed:@"navibutton"] frame:CGRectMake(0, 0, 53, 28) target:self action:@selector(onSystemSettingAction)];    
     

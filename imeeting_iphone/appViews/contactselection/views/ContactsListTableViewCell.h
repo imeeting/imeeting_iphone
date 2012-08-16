@@ -20,7 +20,7 @@
 //#define CONTACT_PREINMEETING_PHOTO [UIImage imageNamed:@"left_arrow.png"]
 
 @interface ContactsListTableViewCell : UITableViewCell {
-    // contact check button
+  
   // phone number matching index array
     NSArray *_mPhoneNumberMatchingIndexs;
     // name matching index array
@@ -35,11 +35,9 @@
     UIView *_mPhoneNumbersAttributedLabelParentView;
 }
 
-// contact photo imageView photo image
 @property (nonatomic, retain) UIImage *photoImg;
-// contact diaplay name label text
 @property (nonatomic, retain) NSString *displayName;
-// contact phone numbers array
+@property (nonatomic, retain) NSArray *fullNames;
 @property (nonatomic, retain) NSArray *phoneNumbersArray;
 
 @property (nonatomic, retain) NSArray *phoneNumberMatchingIndexs;

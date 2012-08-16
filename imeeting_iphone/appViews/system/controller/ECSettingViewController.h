@@ -11,4 +11,5 @@
 @interface ECSettingViewController : UIViewController
 
 - (void)showAccountSettingView;
+- (void)showAboutView;
 @end

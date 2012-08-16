@@ -12,7 +12,7 @@
 
 #define SETTING_CELL_WIDTH      268
 
-#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), nil]
+#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), NSLocalizedString(@"About", nil), nil]
 
 @interface SettingItemCell : UITableViewCell {
     UIImageView *bgView;
@@ -59,19 +59,12 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    if (selected) {
-        bgView.image = [UIImage imageNamed:@"setting_cell_selected"];
-        titleLabel.textColor = selectedTextColor;
-    } else {
-        bgView.image = [UIImage imageNamed:@"setting_cell_normal"];
-        titleLabel.textColor = normalTextColor;
-    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
     bgView.image = [UIImage imageNamed:@"setting_cell_selected"];
     titleLabel.textColor = selectedTextColor;
+    [super touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -91,6 +84,7 @@
 @interface ECSettingView ()
 - (void)initUI;
 - (void)showAccountSettingView;
+- (void)showAboutView;
 @end
 
 @implementation ECSettingView
@@ -170,7 +164,9 @@
         case 0:
             [self showAccountSettingView];
             break;
-            
+        case 1:
+            [self showAboutView];
+            break;
         default:
             break;
     }
@@ -184,4 +180,9 @@
     }
 }
 
+- (void)showAboutView {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(showAboutView)]) {
+        [self.viewControllerRef performSelector:@selector(showAboutView)];
+    }
+}
 @end

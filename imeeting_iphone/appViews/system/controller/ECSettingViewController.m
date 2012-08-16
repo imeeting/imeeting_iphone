@@ -10,6 +10,7 @@
 #import "CommonToolkit/CommonToolkit.h"
 #import "ECSettingView.h"
 #import "ECLoginViewController.h"
+#import "ECAboutViewController.h"
 
 @interface ECSettingViewController ()
 
@@ -55,5 +56,9 @@
     ECLoginViewController *loginViewController = [[ECLoginViewController alloc] init];
     loginViewController.isForLogin = NO;
     [self.navigationController pushViewController:loginViewController animated:YES];
+}
+
+- (void)showAboutView {
+    [self.navigationController pushViewController:[[ECAboutViewController alloc] init] animated:YES];
 }
 @end
