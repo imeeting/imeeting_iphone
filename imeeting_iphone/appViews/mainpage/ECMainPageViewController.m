@@ -15,6 +15,7 @@
 #import "ECGroupViewController.h"
 #import "UIViewController+AuthFailHandler.h"
 #import "ECSettingViewController.h"
+#import "AuthInterceptor.h"
 
 static ECMainPageViewController *instance;
 
@@ -27,6 +28,7 @@ static ECMainPageViewController *instance;
 - (void)onLoadingMoreGroupListFailed:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedJoinGroup:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedHideGroup:(ASIHTTPRequest*)pRequest;
+- (void)onNetworkFailed:(ASIHTTPRequest*)pRequest;
 @end
 
 @implementation ECMainPageViewController
@@ -91,7 +93,7 @@ static ECMainPageViewController *instance;
 }
 
 - (void)onFinishedGetGroupList:(ASIHTTPRequest *)pRequest {
-     NSLog(@"onFinishedGetGroupList - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    NSLog(@"onFinishedGetGroupList - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
     
     int statusCode = pRequest.responseStatusCode;
     
@@ -124,6 +126,8 @@ static ECMainPageViewController *instance;
 - (void)onGetGroupListFailed:(ASIHTTPRequest *)pRequest {
     ECMainPageView *mainPageView = (ECMainPageView*)self.view;
     [mainPageView stopReloadTableView];
+    
+    HTTP_RETURN_CHECK(pRequest, self);
 }
 
 - (void)loadMoreGroupList {
@@ -137,7 +141,7 @@ static ECMainPageViewController *instance;
 
 - (void)onFinishedLoadingMoreGroupList:(ASIHTTPRequest*)pRequest {
     NSLog(@"onFinishedLoadingMoreGroupList - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
-    
+
     int statusCode = pRequest.responseStatusCode;
 
     ECMainPageView *mainPageView = (ECMainPageView*)self.view;
@@ -169,12 +173,14 @@ static ECMainPageViewController *instance;
 - (void)onLoadingMoreGroupListFailed:(ASIHTTPRequest *)pRequest {
     ECMainPageView *mainPageView = (ECMainPageView*)self.view;
     [mainPageView stopLoadMoreTableView];
+    
+    HTTP_RETURN_CHECK(pRequest, self);
 }
 
 - (void)hideGroup:(NSString *)groupId {
     NSLog(@"hide group: %@", groupId);
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:HIDE_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHideGroup:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:HIDE_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHideGroup:) andFailedRespSelector:@selector(onNetworkFailed:)];
 }
 
 - (void)onFinishedHideGroup:(ASIHTTPRequest *)pRequest {
@@ -220,7 +226,7 @@ static ECMainPageViewController *instance;
 
 - (void)joinGroup:(NSString*)groupId {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:JOIN_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedJoinGroup:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:JOIN_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedJoinGroup:) andFailedRespSelector:@selector(onNetworkFailed:)];
 
 }
 
@@ -289,6 +295,10 @@ static ECMainPageViewController *instance;
     }
     selectedGroupInfo = nil;
     [[ECGroupManager sharedECGroupManager] setCurrentGroupModule:nil];
+}
+
+- (void)onNetworkFailed:(ASIHTTPRequest *)pRequest {
+    HTTP_RETURN_CHECK(pRequest, self);
 }
 
 - (void)createNewGroup {    

@@ -15,12 +15,14 @@
 #import "ECUrlConfig.h"
 #import "ECGroupViewController.h"
 #import "ECMainPageViewController.h"
+#import "AuthInterceptor.h"
 
 @interface ECContactsSelectViewController ()
 - (void)onFinishedInviteAttendees:(ASIHTTPRequest*)pRequest;
 - (void)doJump;
 - (void)setupGroupModuleWithGroupId:(NSString *)groupId;
 - (void)sendSMS;
+- (void)onNetworkFailed:(ASIHTTPRequest*)pRequest;
 @end
 
 @implementation ECContactsSelectViewController
@@ -67,13 +69,13 @@
     if (self.isAppearedInCreateNewGroup) {
         // begin to create new group
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:attendeesJsonString, GROUP_ATTENDEES, nil];
-        [HttpUtil postSignatureRequestWithUrl:CREATE_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedInviteAttendees:) andFailedRespSelector:nil];
+        [HttpUtil postSignatureRequestWithUrl:CREATE_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedInviteAttendees:) andFailedRespSelector:@selector(onNetworkFailed:)];
     } else {
         // already in group
         
         NSString *groupId = [[ECGroupManager sharedECGroupManager] currentGroupModule].groupId;
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:groupId, GROUP_ID, attendeesJsonString, GROUP_ATTENDEES, nil];
-        [HttpUtil postSignatureRequestWithUrl:INVITE_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedInviteAttendees:) andFailedRespSelector:nil];
+        [HttpUtil postSignatureRequestWithUrl:INVITE_ATTENDEE_LIST_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedInviteAttendees:) andFailedRespSelector:@selector(onNetworkFailed:)];
     }
 }
 
@@ -127,6 +129,10 @@ invite_error:
     [[[iToast makeText:NSLocalizedString(@"error in inviting attendees", "")] setDuration:iToastDurationLong] show];
     [self.navigationController popViewControllerAnimated:YES];
     
+}
+
+- (void)onNetworkFailed:(ASIHTTPRequest *)pRequest {
+    HTTP_RETURN_CHECK(pRequest, self);
 }
 
 - (void)sendSMS {

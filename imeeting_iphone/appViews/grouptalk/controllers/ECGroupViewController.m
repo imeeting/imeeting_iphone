@@ -16,6 +16,7 @@
 #import "ECOwnerModeStatusFilter.h"
 #import "ECAttendeeModeStatusFilter.h"
 #import "UIViewController+AuthFailHandler.h"
+#import "AuthInterceptor.h"
 
 @interface ECGroupViewController ()
 - (void)setGroupIdLabel;
@@ -225,7 +226,7 @@
 }
 
 - (void)onNetworkFailed:(ASIHTTPRequest *)request {
-    // do nothing
+    HTTP_RETURN_CHECK(request, self);
 }
 
 #pragma mark - video related
@@ -314,7 +315,7 @@
 
 - (void)onFinishedGetAttendeeList:(ASIHTTPRequest *)pRequest {
     NSLog(@"onFinishedGetAttendeeList - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
-    
+
     int statusCode = pRequest.responseStatusCode;
     
     ECGroupAttendeeListView *attListView = ((ECGroupView*)self.view).attendeeListView;
@@ -455,12 +456,12 @@
 - (void)call:(NSString *)targetUsername {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:targetUsername, @"dstUserName", module.groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:CALL_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedCall:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:CALL_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedCall:) andFailedRespSelector:@selector(onNetworkFailed:)];
 }
 
 - (void)onFinishedCall:(ASIHTTPRequest *)pRequest {
     NSLog(@"onFinishedCall - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
-    
+
     int statusCode = pRequest.responseStatusCode;
 
     NSString *username = [_selectedAttendee objectForKey:USERNAME];
@@ -499,13 +500,13 @@
 - (void)hangup:(NSString *)targetUsername {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:targetUsername, @"dstUserName", module.groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:HANGUP_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHangup:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:HANGUP_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHangup:) andFailedRespSelector:@selector(onNetworkFailed:)];
 
 }
 
 - (void)onFinishedHangup:(ASIHTTPRequest *)pRequest {
     NSLog(@"onFinishedHangup - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
-    
+
     int statusCode = pRequest.responseStatusCode;
     
     NSString *username = [_selectedAttendee objectForKey:USERNAME];
@@ -542,12 +543,12 @@
 - (void)kickout:(NSString *)targetUsername {
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:targetUsername, @"dstUserName", module.groupId, GROUP_ID, nil];
-    [HttpUtil postSignatureRequestWithUrl:KICKOUT_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedKickout:) andFailedRespSelector:nil];
+    [HttpUtil postSignatureRequestWithUrl:KICKOUT_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedKickout:) andFailedRespSelector:@selector(onNetworkFailed:)];
 }
 
 - (void)onFinishedKickout:(ASIHTTPRequest *)pRequest {
     NSLog(@"onFinishedKickout - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
-    
+
     int statusCode = pRequest.responseStatusCode;
     
     NSString *username = [_selectedAttendee objectForKey:USERNAME];

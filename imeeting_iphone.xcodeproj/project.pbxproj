@@ -209,6 +209,7 @@
 		F86F085B15C9106C00793E73 /* video_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_on.png; sourceTree = "<group>"; };
 		F86F087015C914B100793E73 /* add_member_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_member_button.png; sourceTree = "<group>"; };
 		F86F087215C9216300793E73 /* back_navi_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_navi_button.png; sourceTree = "<group>"; };
+		F87686B515DDDFC900DDDA23 /* AuthInterceptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AuthInterceptor.h; path = Util/AuthInterceptor.h; sourceTree = "<group>"; };
 		F878773E15D21D0E00B799AB /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F87BF5DF1585DE3E00339C0C /* ECMainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMainPageView.h; path = mainpage/ECMainPageView.h; sourceTree = "<group>"; };
 		F87BF5E01585DE3E00339C0C /* ECMainPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECMainPageView.m; path = mainpage/ECMainPageView.m; sourceTree = "<group>"; };
@@ -1288,6 +1289,7 @@
 				F809862E15B5741A00098A0C /* ECDeviceTokenPoster.m */,
 				F8EDF12B15A6B462003DF47F /* AddressBookManager+Avatar.h */,
 				F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */,
+				F87686B515DDDFC900DDDA23 /* AuthInterceptor.h */,
 			);
 			name = Util;
 			sourceTree = "<group>";

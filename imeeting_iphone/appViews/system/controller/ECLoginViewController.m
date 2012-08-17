@@ -61,7 +61,10 @@
     
     if (_isForLogin) {
         // login status
-        self.navigationItem.leftBarButtonItem = nil;
+        // hide left barbutton
+        UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
+        bt.backgroundColor = [UIColor clearColor];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bt];
     }
 }
 
