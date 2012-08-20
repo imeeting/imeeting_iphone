@@ -12,4 +12,5 @@
 
 - (void)showAccountSettingView;
 - (void)showAboutView;
+- (void)showHelpView;
 @end

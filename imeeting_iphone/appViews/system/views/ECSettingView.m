@@ -12,8 +12,35 @@
 
 #define SETTING_CELL_WIDTH      268
 
-#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), NSLocalizedString(@"About", nil), nil]
+#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), NSLocalizedString(@"About", nil), NSLocalizedString(@"Help", nil), nil]
 
+/*
+@interface SettingButton : UIButton
+@end
+
+@implementation SettingButton
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesCancelled:touches withEvent:event];
+
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesEnded:touches withEvent:event];
+    self.titleLabel.textColor = [UIColor colorWithIntegerRed:146 integerGreen:146 integerBlue:146 alpha:1];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesMoved:touches withEvent:event];
+    self.titleLabel.textColor = [UIColor colorWithIntegerRed:146 integerGreen:146 integerBlue:146 alpha:1];
+}
+@end
+*/
 @interface SettingItemCell : UITableViewCell {
     UIImageView *bgView;
     UILabel *titleLabel;
@@ -36,13 +63,15 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.contentView.backgroundColor = [UIColor clearColor];
         
+        normalTextColor = [UIColor colorWithIntegerRed:146 integerGreen:146 integerBlue:146 alpha:1];
+        
+        
         bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 268, [SettingItemCell cellHeight])];
         bgView.contentMode = UIViewContentModeScaleAspectFit;
         bgView.layer.masksToBounds = YES;
         bgView.image = [UIImage imageNamed:@"setting_cell_normal"];
         [self.contentView addSubview:bgView];
         
-        normalTextColor = [UIColor colorWithIntegerRed:146 integerGreen:146 integerBlue:146 alpha:1];
         selectedTextColor = [UIColor whiteColor];
         
         titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 268, [SettingItemCell cellHeight])];
@@ -52,14 +81,28 @@
         titleLabel.text = title;
         titleLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:titleLabel];
+         
+        /*
+        SettingButton *bt = [SettingButton buttonWithType:UIButtonTypeCustom];
+      //  bt.tableViewCell = self;
+        bt.frame = CGRectMake(0, 0, 268, [SettingItemCell cellHeight]);
+        [bt setBackgroundImage:[UIImage imageNamed:@"setting_cell_normal"] forState:UIControlStateNormal];
+        [bt setTitle:title forState:UIControlStateNormal];
+        [bt setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 2, 0)];
+        bt.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:16];
+        bt.titleLabel.textColor = normalTextColor;
+        [self.contentView addSubview:bt];
+         */
     }
     
     return self;
 }
 
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     bgView.image = [UIImage imageNamed:@"setting_cell_selected"];
@@ -77,6 +120,7 @@
     [super touchesEnded:touches withEvent:event];
     bgView.image = [UIImage imageNamed:@"setting_cell_normal"];
     titleLabel.textColor = normalTextColor;
+
 }
 
 @end
@@ -85,6 +129,7 @@
 - (void)initUI;
 - (void)showAccountSettingView;
 - (void)showAboutView;
+- (void)showHelpView;
 @end
 
 @implementation ECSettingView
@@ -113,15 +158,6 @@
     settingTableView.delegate = self;
     [self addSubview:settingTableView];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 #pragma mark - table view datasource delegate
 
@@ -167,6 +203,9 @@
         case 1:
             [self showAboutView];
             break;
+        case 2:
+            [self showHelpView];
+            break;
         default:
             break;
     }
@@ -185,4 +224,11 @@
         [self.viewControllerRef performSelector:@selector(showAboutView)];
     }
 }
+
+- (void)showHelpView {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(showHelpView)]) {
+        [self.viewControllerRef performSelector:@selector(showHelpView)];
+    }
+}
+
 @end

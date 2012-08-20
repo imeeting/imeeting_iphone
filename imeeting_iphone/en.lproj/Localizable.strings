@@ -118,5 +118,9 @@
 "You're in talking now." = "You are in talking now";
 "We won't send junk message to you" = "(Your phone number is used for authentication only, we assure that we won't send junk message to you.)";
 "About" = "About";
-"about paragraph" = "Programming\nWang Xing      Zhai Shaohu\n\n\nUI Design\nLi Xin\n\n\nCopy Right\nHefei Youyun Info Tech Ltd.\n\n\nThanks\nNanjing Futuo Network Tech Ltd.";
+"about paragraph" = "Programming\nWang Xing      Zhai Shaohu\n\nUI Design\nLi Xin\n\nCopy Right\nHefei Youyun Info Tech Ltd.\n\nThanks\nNanjing Futuo Network Tech Ltd.";
 "Your account need login" = "Your account needs re-login now!";
+"Help" = "Help";
+"help page retrieve error" = "Oops, something error happens! ";
+"Intelligent choice for highly efficient people" = "Intelligent Choice For Highly Efficient People";
+"Version:" = "Version: ";

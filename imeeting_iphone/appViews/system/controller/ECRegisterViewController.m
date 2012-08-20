@@ -171,7 +171,8 @@ check_phone_code_error:
                 } else if ([result isEqualToString:@"6"]) {
                     [[[iToast makeText:NSLocalizedString(@"register session timeout", "")] setDuration:iToastDurationLong] show];
                     [self.view performSelector:@selector(switchToStep1View)];
-                    
+                } else {
+                    goto finish_register_error;
                 }
             } else {
                 goto finish_register_error;

@@ -10,7 +10,6 @@
 		F800185715B66C5800745A8F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F800185615B66C5800745A8F /* CoreText.framework */; };
 		F807584615A294C1008D8656 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F807584515A294C1008D8656 /* MessageUI.framework */; };
 		F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F809862815B5076F00098A0C /* AudioToolbox.framework */; };
-		F809862C15B566F500098A0C /* office_phone.caf in Resources */ = {isa = PBXBuildFile; fileRef = F809862B15B566F500098A0C /* office_phone.caf */; };
 		F809862F15B5741A00098A0C /* ECDeviceTokenPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = F809862E15B5741A00098A0C /* ECDeviceTokenPoster.m */; };
 		F80BD3ED159C29A900A83C81 /* ECVideoEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3EC159C29A900A83C81 /* ECVideoEncode.m */; };
 		F80BD3F1159C3FF400A83C81 /* ECVideoDecode.m in Sources */ = {isa = PBXBuildFile; fileRef = F80BD3F0159C3FF400A83C81 /* ECVideoDecode.m */; };
@@ -56,7 +55,6 @@
 		F86F086F15C9106C00793E73 /* video_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F86F085B15C9106C00793E73 /* video_on.png */; };
 		F86F087115C914B100793E73 /* add_member_button.png in Resources */ = {isa = PBXBuildFile; fileRef = F86F087015C914B100793E73 /* add_member_button.png */; };
 		F86F087315C9216300793E73 /* back_navi_button.png in Resources */ = {isa = PBXBuildFile; fileRef = F86F087215C9216300793E73 /* back_navi_button.png */; };
-		F878773F15D21D0E00B799AB /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F878773E15D21D0E00B799AB /* CommonToolkit.framework */; };
 		F87BF5E11585DE3E00339C0C /* ECMainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F87BF5E01585DE3E00339C0C /* ECMainPageView.m */; };
 		F87BF5E41585DE6500339C0C /* ECMainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87BF5E31585DE6500339C0C /* ECMainPageViewController.m */; };
 		F885A584159A9DDA00709FC7 /* camera_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = F885A583159A9DDA00709FC7 /* camera_switch.png */; };
@@ -99,6 +97,7 @@
 		F8B291EC15C0093A00DB5047 /* goback.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B291EB15C0093A00DB5047 /* goback.png */; };
 		F8B291EE15C00B0100DB5047 /* createbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B291ED15C00B0100DB5047 /* createbutton.png */; };
 		F8B291F015C00DFB00DB5047 /* searchbg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B291EF15C00DFB00DB5047 /* searchbg.png */; };
+		F8B4054915E235F200E8D8E0 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B4054815E235F200E8D8E0 /* CommonToolkit.framework */; };
 		F8C11F3415B8011400B30BD5 /* ECAttendeeModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3015B8011400B30BD5 /* ECAttendeeModeStatusFilter.m */; };
 		F8C11F3515B8011400B30BD5 /* ECOwnerModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3215B8011400B30BD5 /* ECOwnerModeStatusFilter.m */; };
 		F8C11F3815B8012C00B30BD5 /* ECGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3715B8012C00B30BD5 /* ECGroupView.m */; };
@@ -141,10 +140,12 @@
 		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
 		F8EDF12815A68FE4003DF47F /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F8EDF12715A68FE4003DF47F /* default_avatar.png */; };
 		F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */; };
-		F8F45B6615AD67EC000A9285 /* video_hangup_50X50.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6215AD67EC000A9285 /* video_hangup_50X50.png */; };
-		F8F45B6715AD67EC000A9285 /* voice_talkconnect.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6315AD67EC000A9285 /* voice_talkconnect.png */; };
-		F8F45B6815AD67EC000A9285 /* voice_talkfail.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6415AD67EC000A9285 /* voice_talkfail.png */; };
-		F8F45B6915AD67EC000A9285 /* voice_talking.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F45B6515AD67EC000A9285 /* voice_talking.png */; };
+		F8F8C8DD15E1D66A0022F121 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F8C8DC15E1D66A0022F121 /* Default.png */; };
+		F8F8C8DF15E1D6810022F121 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F8C8DE15E1D6810022F121 /* Default@2x.png */; };
+		F8F8C8E115E1D69A0022F121 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F8C8E015E1D69A0022F121 /* logo.png */; };
+		F8F8C8E315E1D6A00022F121 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F8C8E215E1D6A00022F121 /* logo@2x.png */; };
+		F8F8C8E715E1E4160022F121 /* ECHelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8C8E615E1E4160022F121 /* ECHelpView.m */; };
+		F8F8C8EA15E1E42A0022F121 /* ECHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F8C8E915E1E42A0022F121 /* ECHelpViewController.m */; };
 		F8FBB09615CA91D100384103 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8FBB09515CA91D100384103 /* CoreTelephony.framework */; };
 /* End PBXBuildFile section */
 
@@ -154,7 +155,6 @@
 		F8050CD11589852E00024951 /* ECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstants.h; sourceTree = "<group>"; };
 		F807584515A294C1008D8656 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F809862815B5076F00098A0C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		F809862B15B566F500098A0C /* office_phone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = office_phone.caf; sourceTree = "<group>"; };
 		F809862D15B5741A00098A0C /* ECDeviceTokenPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDeviceTokenPoster.h; path = Util/ECDeviceTokenPoster.h; sourceTree = "<group>"; };
 		F809862E15B5741A00098A0C /* ECDeviceTokenPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDeviceTokenPoster.m; path = Util/ECDeviceTokenPoster.m; sourceTree = "<group>"; };
 		F80BD3EB159C29A900A83C81 /* ECVideoEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECVideoEncode.h; path = video/ECVideoEncode.h; sourceTree = "<group>"; };
@@ -210,12 +210,11 @@
 		F86F087015C914B100793E73 /* add_member_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_member_button.png; sourceTree = "<group>"; };
 		F86F087215C9216300793E73 /* back_navi_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_navi_button.png; sourceTree = "<group>"; };
 		F87686B515DDDFC900DDDA23 /* AuthInterceptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AuthInterceptor.h; path = Util/AuthInterceptor.h; sourceTree = "<group>"; };
-		F878773E15D21D0E00B799AB /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F87BF5DF1585DE3E00339C0C /* ECMainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMainPageView.h; path = mainpage/ECMainPageView.h; sourceTree = "<group>"; };
 		F87BF5E01585DE3E00339C0C /* ECMainPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECMainPageView.m; path = mainpage/ECMainPageView.m; sourceTree = "<group>"; };
 		F87BF5E21585DE6500339C0C /* ECMainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMainPageViewController.h; path = mainpage/ECMainPageViewController.h; sourceTree = "<group>"; };
 		F87BF5E31585DE6500339C0C /* ECMainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ECMainPageViewController.m; path = mainpage/ECMainPageViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		F885A583159A9DDA00709FC7 /* camera_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_switch.png; path = imeeting_iphone/Resources/images/camera_switch.png; sourceTree = "<group>"; };
+		F885A583159A9DDA00709FC7 /* camera_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_switch.png; path = ../camera_switch.png; sourceTree = "<group>"; };
 		F885A586159AA24000709FC7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F885A592159AB07800709FC7 /* ECVideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECVideoManager.h; path = video/ECVideoManager.h; sourceTree = "<group>"; };
 		F885A593159AB07800709FC7 /* ECVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECVideoManager.m; path = video/ECVideoManager.m; sourceTree = "<group>"; };
@@ -414,6 +413,7 @@
 		F8B291EB15C0093A00DB5047 /* goback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goback.png; sourceTree = "<group>"; };
 		F8B291ED15C00B0100DB5047 /* createbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createbutton.png; sourceTree = "<group>"; };
 		F8B291EF15C00DFB00DB5047 /* searchbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbg.png; sourceTree = "<group>"; };
+		F8B4054815E235F200E8D8E0 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = Frameworks/CommonToolkit.framework; sourceTree = "<group>"; };
 		F8C11F2F15B8011400B30BD5 /* ECAttendeeModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECAttendeeModeStatusFilter.h; path = grouptalk/statusfilter/ECAttendeeModeStatusFilter.h; sourceTree = "<group>"; };
 		F8C11F3015B8011400B30BD5 /* ECAttendeeModeStatusFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECAttendeeModeStatusFilter.m; path = grouptalk/statusfilter/ECAttendeeModeStatusFilter.m; sourceTree = "<group>"; };
 		F8C11F3115B8011400B30BD5 /* ECOwnerModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECOwnerModeStatusFilter.h; path = grouptalk/statusfilter/ECOwnerModeStatusFilter.h; sourceTree = "<group>"; };
@@ -433,7 +433,7 @@
 		F8C11F4515B8016100B30BD5 /* ECGroupModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECGroupModule.m; path = grouptalk/ECGroupModule.m; sourceTree = "<group>"; };
 		F8C4744215C6209F003ABBD0 /* group_cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group_cell_bg.png; sourceTree = "<group>"; };
 		F8C4744315C6209F003ABBD0 /* group_cell_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_cell_bg@2x.png"; sourceTree = "<group>"; };
-		F8C4744715C623BF003ABBD0 /* mainpage_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainpage_bg.png; sourceTree = "<group>"; };
+		F8C4744715C623BF003ABBD0 /* mainpage_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mainpage_bg.png; path = ../mainpage/mainpage_bg.png; sourceTree = "<group>"; };
 		F8C4744815C623BF003ABBD0 /* mainpage_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainpage_bg@2x.png"; sourceTree = "<group>"; };
 		F8C4744B15C6390D003ABBD0 /* create_group_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_group_button_bg.png; sourceTree = "<group>"; };
 		F8C4744D15C69ACF003ABBD0 /* group_selected_cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group_selected_cell_bg.png; sourceTree = "<group>"; };
@@ -484,13 +484,17 @@
 		F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECBaseUIView.h; sourceTree = "<group>"; };
 		F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECBaseUIView.m; sourceTree = "<group>"; };
 		F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ECUrlConfig.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		F8EDF12715A68FE4003DF47F /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = imeeting_iphone/Resources/images/default_avatar.png; sourceTree = "<group>"; };
+		F8EDF12715A68FE4003DF47F /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = ../default_avatar.png; sourceTree = "<group>"; };
 		F8EDF12B15A6B462003DF47F /* AddressBookManager+Avatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AddressBookManager+Avatar.h"; path = "Util/AddressBookManager+Avatar.h"; sourceTree = "<group>"; };
 		F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AddressBookManager+Avatar.m"; path = "Util/AddressBookManager+Avatar.m"; sourceTree = "<group>"; };
-		F8F45B6215AD67EC000A9285 /* video_hangup_50X50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = video_hangup_50X50.png; path = imeeting_iphone/Resources/images/video_hangup_50X50.png; sourceTree = "<group>"; };
-		F8F45B6315AD67EC000A9285 /* voice_talkconnect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_talkconnect.png; path = imeeting_iphone/Resources/images/voice_talkconnect.png; sourceTree = "<group>"; };
-		F8F45B6415AD67EC000A9285 /* voice_talkfail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_talkfail.png; path = imeeting_iphone/Resources/images/voice_talkfail.png; sourceTree = "<group>"; };
-		F8F45B6515AD67EC000A9285 /* voice_talking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voice_talking.png; path = imeeting_iphone/Resources/images/voice_talking.png; sourceTree = "<group>"; };
+		F8F8C8DC15E1D66A0022F121 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../../../../Default.png; sourceTree = "<group>"; };
+		F8F8C8DE15E1D6810022F121 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../../../../Default@2x.png"; sourceTree = "<group>"; };
+		F8F8C8E015E1D69A0022F121 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../../logo.png; sourceTree = "<group>"; };
+		F8F8C8E215E1D6A00022F121 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "../../../../logo@2x.png"; sourceTree = "<group>"; };
+		F8F8C8E515E1E4160022F121 /* ECHelpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECHelpView.h; path = system/views/ECHelpView.h; sourceTree = "<group>"; };
+		F8F8C8E615E1E4160022F121 /* ECHelpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECHelpView.m; path = system/views/ECHelpView.m; sourceTree = "<group>"; };
+		F8F8C8E815E1E42A0022F121 /* ECHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECHelpViewController.h; path = system/controller/ECHelpViewController.h; sourceTree = "<group>"; };
+		F8F8C8E915E1E42A0022F121 /* ECHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECHelpViewController.m; path = system/controller/ECHelpViewController.m; sourceTree = "<group>"; };
 		F8FBB09515CA91D100384103 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -499,7 +503,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F878773F15D21D0E00B799AB /* CommonToolkit.framework in Frameworks */,
+				F8B4054915E235F200E8D8E0 /* CommonToolkit.framework in Frameworks */,
 				F8FBB09615CA91D100384103 /* CoreTelephony.framework in Frameworks */,
 				F800185715B66C5800745A8F /* CoreText.framework in Frameworks */,
 				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
@@ -537,7 +541,6 @@
 		F809862A15B566F500098A0C /* audio */ = {
 			isa = PBXGroup;
 			children = (
-				F809862B15B566F500098A0C /* office_phone.caf */,
 			);
 			name = audio;
 			path = imeeting_iphone/Resources/audio;
@@ -546,6 +549,7 @@
 		F814E289157CA16200FBBB19 /* System */ = {
 			isa = PBXGroup;
 			children = (
+				F8F8C8E415E1E3B00022F121 /* Help */,
 				F8D81C8515DCDF2400E1F17C /* About */,
 				F8DC714815B007ED00146A73 /* Setting */,
 				F8E3BEE5158F1F4B00467088 /* User */,
@@ -558,7 +562,7 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
-				F878773E15D21D0E00B799AB /* CommonToolkit.framework */,
+				F8B4054815E235F200E8D8E0 /* CommonToolkit.framework */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,
@@ -659,6 +663,7 @@
 		F86F084715C9106C00793E73 /* videopage */ = {
 			isa = PBXGroup;
 			children = (
+				F885A583159A9DDA00709FC7 /* camera_switch.png */,
 				F86F087015C914B100793E73 /* add_member_button.png */,
 				F86F084815C9106C00793E73 /* attendee_list_bg.png */,
 				F86F084915C9106C00793E73 /* attendee_list_bg@2x.png */,
@@ -1086,6 +1091,12 @@
 		F8A4C6DE15BFE9CE00C35C93 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				F8C4744715C623BF003ABBD0 /* mainpage_bg.png */,
+				F8EDF12715A68FE4003DF47F /* default_avatar.png */,
+				F8F8C8DE15E1D6810022F121 /* Default@2x.png */,
+				F8F8C8DC15E1D66A0022F121 /* Default.png */,
+				F8F8C8E215E1D6A00022F121 /* logo@2x.png */,
+				F8F8C8E015E1D69A0022F121 /* logo.png */,
 				F8669EFA15CBD15F00134B30 /* back_navi_button_long.png */,
 				F86F087215C9216300793E73 /* back_navi_button.png */,
 				F83D8A0115C3D09C00173C2D /* navibutton.png */,
@@ -1129,7 +1140,6 @@
 				F8C4744D15C69ACF003ABBD0 /* group_selected_cell_bg.png */,
 				F8C4744E15C69ACF003ABBD0 /* group_selected_cell_bg@2x.png */,
 				F8C4744B15C6390D003ABBD0 /* create_group_button_bg.png */,
-				F8C4744715C623BF003ABBD0 /* mainpage_bg.png */,
 				F8C4744815C623BF003ABBD0 /* mainpage_bg@2x.png */,
 				F8C4744215C6209F003ABBD0 /* group_cell_bg.png */,
 				F8C4744315C6209F003ABBD0 /* group_cell_bg@2x.png */,
@@ -1305,17 +1315,22 @@
 				F8B291E815C003B900DB5047 /* contactselect */,
 				F8A4C6DE15BFE9CE00C35C93 /* common */,
 				F809862A15B566F500098A0C /* audio */,
-				F8F45B6215AD67EC000A9285 /* video_hangup_50X50.png */,
-				F8F45B6315AD67EC000A9285 /* voice_talkconnect.png */,
-				F8F45B6415AD67EC000A9285 /* voice_talkfail.png */,
-				F8F45B6515AD67EC000A9285 /* voice_talking.png */,
-				F8EDF12715A68FE4003DF47F /* default_avatar.png */,
 				F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */,
 				F8E0C08115A14DDE00E66F27 /* Pinyin4jBundle.bundle */,
-				F885A583159A9DDA00709FC7 /* camera_switch.png */,
 			);
 			name = Resources;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		F8F8C8E415E1E3B00022F121 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				F8F8C8E515E1E4160022F121 /* ECHelpView.h */,
+				F8F8C8E615E1E4160022F121 /* ECHelpView.m */,
+				F8F8C8E815E1E42A0022F121 /* ECHelpViewController.h */,
+				F8F8C8E915E1E42A0022F121 /* ECHelpViewController.m */,
+			);
+			name = Help;
 			sourceTree = "<group>";
 		};
 		F8FA196B1591DFBA00947304 /* GroupTalk */ = {
@@ -1413,11 +1428,6 @@
 				F8E0C08215A14DDE00E66F27 /* Pinyin4jBundle.bundle in Resources */,
 				F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */,
 				F8EDF12815A68FE4003DF47F /* default_avatar.png in Resources */,
-				F8F45B6615AD67EC000A9285 /* video_hangup_50X50.png in Resources */,
-				F8F45B6715AD67EC000A9285 /* voice_talkconnect.png in Resources */,
-				F8F45B6815AD67EC000A9285 /* voice_talkfail.png in Resources */,
-				F8F45B6915AD67EC000A9285 /* voice_talking.png in Resources */,
-				F809862C15B566F500098A0C /* office_phone.caf in Resources */,
 				F8A4C6E015BFE9CE00C35C93 /* navigationbar@2x.png in Resources */,
 				F8A4C6E215BFECE600C35C93 /* navigationbar.png in Resources */,
 				F8B291EA15C003B900DB5047 /* listtitlebar.png in Resources */,
@@ -1477,6 +1487,10 @@
 				F8669F0715CBE5C200134B30 /* login_form_bg@2x.png in Resources */,
 				F8669F0C15CBEC4300134B30 /* register_button.png in Resources */,
 				F8669F1115CBED5E00134B30 /* register_normal_button.png in Resources */,
+				F8F8C8DD15E1D66A0022F121 /* Default.png in Resources */,
+				F8F8C8DF15E1D6810022F121 /* Default@2x.png in Resources */,
+				F8F8C8E115E1D69A0022F121 /* logo.png in Resources */,
+				F8F8C8E315E1D6A00022F121 /* logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1527,6 +1541,8 @@
 				F88B7CB215C131BF00B58AD1 /* ECMeetingContactsListCell.m in Sources */,
 				F8D81C8915DCDF6400E1F17C /* ECAboutUIView.m in Sources */,
 				F8D81C8C15DCDFB700E1F17C /* ECAboutViewController.m in Sources */,
+				F8F8C8E715E1E4160022F121 /* ECHelpView.m in Sources */,
+				F8F8C8EA15E1E42A0022F121 /* ECHelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1602,7 +1618,7 @@
 		F863C88B157C61320045C08C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Feng (873P3T58BW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: guanghui hu (TS23V9C6Z2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
@@ -1620,7 +1636,7 @@
 					"\"$(SRCROOT)/Library/rtmplib/include/librtmp\"",
 				);
 				INFOPLIST_FILE = "imeeting_iphone/imeeting_iphone-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
@@ -1631,7 +1647,7 @@
 					"\"$(SRCROOT)/Library/x264lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E6BDAA3D-861F-4206-BC7A-F2364FBC2C04";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B5396E1B-0220-4DCF-B2A5-3F993BC5AE08";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\" \"$(SRCROOT)/Library/ffmpeglib\" \"$(SRCROOT)/Library/openssllib\" \"$(SRCROOT)/Library/rtmplib\" \"$(SRCROOT)/Library/speexlib\" \"$(SRCROOT)/Library/x264lib\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1640,7 +1656,7 @@
 		F863C88C157C61320045C08C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing RichonWay Co.,Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: guanghui hu";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
@@ -1658,7 +1674,7 @@
 					"\"$(SRCROOT)/Library/rtmplib/include/librtmp\"",
 				);
 				INFOPLIST_FILE = "imeeting_iphone/imeeting_iphone-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\"",
@@ -1669,7 +1685,7 @@
 					"\"$(SRCROOT)/Library/x264lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67DE5F06-F548-4FC6-ABF0-5ACCDD26338E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CB6BDA3-5077-44BF-A015-8C7F93692493";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\" \"$(SRCROOT)/Library/ffmpeglib\" \"$(SRCROOT)/Library/openssllib\" \"$(SRCROOT)/Library/rtmplib\" \"$(SRCROOT)/Library/speexlib\" \"$(SRCROOT)/Library/x264lib\"";
 				WRAPPER_EXTENSION = app;
 			};

@@ -117,5 +117,9 @@
 "You're in talking now." = "您正在通话中";
 "We won't send junk message to you" = "（您的手机号码仅用于身份验证，我们不会向您发送垃圾短信。）";
 "About" = "关于";
-"about paragraph" = "程序设计\n王    星        翟绍虎\n\n\nUI设计\n李    欣\n\n\n版权所有\n合肥优云信息技术有限公司\n\n\n鸣     谢\n南京富拓网络科技有限公司";
+"about paragraph" = "程序设计\n王    星        翟绍虎\n\nUI设计\n李    欣\n\n版权所有\n合肥优云信息技术有限公司\n\n鸣     谢\n南京富拓网络科技有限公司";
 "Your account need login" = "您的账户需要重新登录啦！";
+"Help" = "帮助";
+"help page retrieve error" = "额。。发生错误啦！";
+"Intelligent choice for highly efficient people" = "高效能人士的智慧选择";
+"Version:" = "版本号：";

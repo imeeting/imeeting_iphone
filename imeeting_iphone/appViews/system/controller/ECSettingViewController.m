@@ -11,6 +11,7 @@
 #import "ECSettingView.h"
 #import "ECLoginViewController.h"
 #import "ECAboutViewController.h"
+#import "ECHelpViewController.h"
 
 @interface ECSettingViewController ()
 
@@ -60,5 +61,9 @@
 
 - (void)showAboutView {
     [self.navigationController pushViewController:[[ECAboutViewController alloc] init] animated:YES];
+}
+
+- (void)showHelpView {
+    [self.navigationController pushViewController:[[ECHelpViewController alloc] init] animated:YES];
 }
 @end
