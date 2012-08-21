@@ -38,7 +38,7 @@
     
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
-
+    
 }
 
 @property (nonatomic, retain) NSMutableArray *attendeeArray;

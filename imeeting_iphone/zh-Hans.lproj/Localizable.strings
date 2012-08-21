@@ -52,7 +52,7 @@
 "This attendee's video is off" = "此成员尚未打开视频";
 "Loading Video" = "正在加载视频";
 "This attendee is offline" = "此成员未上线";
-"error in creating group" = "新建群聊失败";
+"error in creating group" = "创建群聊失败";
 "select attendee" = "添加成员";
 "contacts list table view section header title" = "通讯录";
 "contact has no phone number alertView title" = "此人没有号码";
@@ -99,8 +99,8 @@
 "Group ID: %@" = "群聊号：%@";
 "Member List" = "成员列表";
 "Dial" = "电话呼入";
-"Close Video" = "关闭视频";
-"Open Video" = "打开视频";
+"Close Video" = "关闭镜头";
+"Open Video" = "打开镜头";
 "Video On" = "打开";
 "Video Off" = "关闭";
 "Hanged up" = "通话已断";
@@ -123,3 +123,7 @@
 "help page retrieve error" = "额。。发生错误啦！";
 "Intelligent choice for highly efficient people" = "高效能人士的智慧选择";
 "Version:" = "版本号：";
+"SMS Invitation" = "短信邀请";
+"No member to invite" = "没有需要邀请的成员！";
+"Your phone doesn't support SMS" = "您的手机不支持短信功能！";
+"Open Talk" = "开启";

@@ -21,7 +21,6 @@
 - (void)onFinishedInviteAttendees:(ASIHTTPRequest*)pRequest;
 - (void)doJump;
 - (void)setupGroupModuleWithGroupId:(NSString *)groupId;
-- (void)sendSMS;
 - (void)onNetworkFailed:(ASIHTTPRequest*)pRequest;
 @end
 
@@ -48,13 +47,15 @@
     ECContactsSelectContainerView *view = (ECContactsSelectContainerView*)self.view;
     view.isAppearedInCreatingNewGroup = isAppearedInCreateNewGroup;
     
-    /*
+    
     if (isAppearedInCreateNewGroup) {
-        [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"Next", "")];
+        ECContactsSelectContainerView *view = (ECContactsSelectContainerView*)self.view;
+        [view.createButton setTitle:NSLocalizedString(@"Open Talk", nil) forState:UIControlStateNormal];
     } else {
-        [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"invite", "")];
+        ECContactsSelectContainerView *view = (ECContactsSelectContainerView*)self.view;
+        [view.createButton setTitle:NSLocalizedString(@"invite", nil) forState:UIControlStateNormal];
     }
-     */
+     
 }
 
 #pragma mark - actions
@@ -87,12 +88,8 @@
     switch (statusCode) {
         case 200:
             // invite ok
-            if ([MFMessageComposeViewController canSendText]) {
-                [self sendSMS];
-            } else {
-                [self doJump];
-            }
-            
+            [self doJump];
+       
             break;
         case 201: {
             // create group and invite ok
@@ -106,11 +103,7 @@
                 module.audioConfId = [jsonData objectForKey:AUDIO_CONF_ID];
                 module.owner = [jsonData objectForKey:OWNER];
                 
-                if ([MFMessageComposeViewController canSendText] && _currentInviteArray.count > 0) {
-                    [self sendSMS];
-                } else {
-                    [self doJump];
-                }
+                [self doJump];
                 
             } else {
                 goto invite_error;
@@ -133,18 +126,6 @@ invite_error:
 
 - (void)onNetworkFailed:(ASIHTTPRequest *)pRequest {
     HTTP_RETURN_CHECK(pRequest, self);
-}
-
-- (void)sendSMS {
-    mMsgViewController = [[MFMessageComposeViewController alloc] init];
-
-    mMsgViewController.recipients = _currentInviteArray;
-    
-    NSString *audioConfId = [[ECGroupManager sharedECGroupManager] currentGroupModule].audioConfId;
-    NSString *msgBody = [NSString stringWithFormat:@"请拨打0551-2379997加入多方通话，会议号：%@", audioConfId];
-    mMsgViewController.body = msgBody;
-    mMsgViewController.messageComposeDelegate = self;
-    [self presentModalViewController:mMsgViewController animated:YES];
 }
 
 - (void)setupGroupModuleWithGroupId:(NSString *)groupId {
@@ -202,14 +183,5 @@ invite_error:
 
 }
 
-- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
-    NSLog(@"messageComposeViewController finished - result: %d", result);
-    
-    [self dismissModalViewControllerAnimated:YES];
-    mMsgViewController = nil;
-    
-    [self doJump];
-    
-}
 
 @end

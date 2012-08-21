@@ -17,6 +17,8 @@
 		F814E284157CA0AB00FBBB19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E282157CA09600FBBB19 /* SystemConfiguration.framework */; };
 		F814E286157CA0B600FBBB19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E285157CA0B600FBBB19 /* CFNetwork.framework */; };
 		F814E288157CA0CE00FBBB19 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */; };
+		F827EE8A15E321240095103E /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F827EE8915E321240095103E /* CommonToolkit.framework */; };
+		F827EE8D15E327640095103E /* BottomBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F827EE8C15E327640095103E /* BottomBarButton.m */; };
 		F83D8A0215C3D09C00173C2D /* navibutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F83D8A0115C3D09C00173C2D /* navibutton.png */; };
 		F863C862157C61320045C08C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C861157C61320045C08C /* UIKit.framework */; };
 		F863C864157C61320045C08C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C863157C61320045C08C /* Foundation.framework */; };
@@ -97,7 +99,6 @@
 		F8B291EC15C0093A00DB5047 /* goback.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B291EB15C0093A00DB5047 /* goback.png */; };
 		F8B291EE15C00B0100DB5047 /* createbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B291ED15C00B0100DB5047 /* createbutton.png */; };
 		F8B291F015C00DFB00DB5047 /* searchbg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B291EF15C00DFB00DB5047 /* searchbg.png */; };
-		F8B4054915E235F200E8D8E0 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B4054815E235F200E8D8E0 /* CommonToolkit.framework */; };
 		F8C11F3415B8011400B30BD5 /* ECAttendeeModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3015B8011400B30BD5 /* ECAttendeeModeStatusFilter.m */; };
 		F8C11F3515B8011400B30BD5 /* ECOwnerModeStatusFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3215B8011400B30BD5 /* ECOwnerModeStatusFilter.m */; };
 		F8C11F3815B8012C00B30BD5 /* ECGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C11F3715B8012C00B30BD5 /* ECGroupView.m */; };
@@ -166,6 +167,9 @@
 		F814E282157CA09600FBBB19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F814E285157CA0B600FBBB19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		F827EE8915E321240095103E /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphonesimulator/CommonToolkit.framework"; sourceTree = "<group>"; };
+		F827EE8B15E327640095103E /* BottomBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BottomBarButton.h; path = grouptalk/views/BottomBarButton.h; sourceTree = "<group>"; };
+		F827EE8C15E327640095103E /* BottomBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BottomBarButton.m; path = grouptalk/views/BottomBarButton.m; sourceTree = "<group>"; };
 		F83D8A0115C3D09C00173C2D /* navibutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navibutton.png; sourceTree = "<group>"; };
 		F863C85D157C61320045C08C /* imeeting_iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imeeting_iphone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F863C861157C61320045C08C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -413,7 +417,6 @@
 		F8B291EB15C0093A00DB5047 /* goback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goback.png; sourceTree = "<group>"; };
 		F8B291ED15C00B0100DB5047 /* createbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createbutton.png; sourceTree = "<group>"; };
 		F8B291EF15C00DFB00DB5047 /* searchbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbg.png; sourceTree = "<group>"; };
-		F8B4054815E235F200E8D8E0 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = Frameworks/CommonToolkit.framework; sourceTree = "<group>"; };
 		F8C11F2F15B8011400B30BD5 /* ECAttendeeModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECAttendeeModeStatusFilter.h; path = grouptalk/statusfilter/ECAttendeeModeStatusFilter.h; sourceTree = "<group>"; };
 		F8C11F3015B8011400B30BD5 /* ECAttendeeModeStatusFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECAttendeeModeStatusFilter.m; path = grouptalk/statusfilter/ECAttendeeModeStatusFilter.m; sourceTree = "<group>"; };
 		F8C11F3115B8011400B30BD5 /* ECOwnerModeStatusFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECOwnerModeStatusFilter.h; path = grouptalk/statusfilter/ECOwnerModeStatusFilter.h; sourceTree = "<group>"; };
@@ -503,7 +506,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8B4054915E235F200E8D8E0 /* CommonToolkit.framework in Frameworks */,
+				F827EE8A15E321240095103E /* CommonToolkit.framework in Frameworks */,
 				F8FBB09615CA91D100384103 /* CoreTelephony.framework in Frameworks */,
 				F800185715B66C5800745A8F /* CoreText.framework in Frameworks */,
 				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
@@ -562,7 +565,7 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
-				F8B4054815E235F200E8D8E0 /* CommonToolkit.framework */,
+				F827EE8915E321240095103E /* CommonToolkit.framework */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,
@@ -1336,6 +1339,8 @@
 		F8FA196B1591DFBA00947304 /* GroupTalk */ = {
 			isa = PBXGroup;
 			children = (
+				F827EE8B15E327640095103E /* BottomBarButton.h */,
+				F827EE8C15E327640095103E /* BottomBarButton.m */,
 				F8C11F4215B8016100B30BD5 /* ECGroupManager.h */,
 				F8C11F4315B8016100B30BD5 /* ECGroupManager.m */,
 				F8C11F4415B8016100B30BD5 /* ECGroupModule.h */,
@@ -1543,6 +1548,7 @@
 				F8D81C8C15DCDFB700E1F17C /* ECAboutViewController.m in Sources */,
 				F8F8C8E715E1E4160022F121 /* ECHelpView.m in Sources */,
 				F8F8C8EA15E1E42A0022F121 /* ECHelpViewController.m in Sources */,
+				F827EE8D15E327640095103E /* BottomBarButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

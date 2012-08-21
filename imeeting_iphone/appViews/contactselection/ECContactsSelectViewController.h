@@ -8,11 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "ContactsSelectViewController.h"
-#import <MessageUI/MessageUI.h>
 
-MFMessageComposeViewController *mMsgViewController;
-
-@interface ECContactsSelectViewController : ContactsSelectViewController <MFMessageComposeViewControllerDelegate> {
+@interface ECContactsSelectViewController : ContactsSelectViewController {
      NSMutableArray *_currentInviteArray;
 }
 

@@ -27,6 +27,7 @@ static ECMainPageViewController *instance;
 - (void)onGetGroupListFailed:(ASIHTTPRequest*)pRequest;
 - (void)onLoadingMoreGroupListFailed:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedJoinGroup:(ASIHTTPRequest*)pRequest;
+- (void)onFinishedCreateGroup:(ASIHTTPRequest*)pRequest;
 - (void)onFinishedHideGroup:(ASIHTTPRequest*)pRequest;
 - (void)onNetworkFailed:(ASIHTTPRequest*)pRequest;
 @end
@@ -261,17 +262,12 @@ static ECMainPageViewController *instance;
             [[[iToast makeText:NSLocalizedString(@"you'are prohibited to join the group", "")] setDuration:iToastDurationLong] show];
             break;
         case 404: {
-            // conference donesn't exist, start to create a new one
-            ECContactsSelectViewController *csvc = [[ECContactsSelectViewController alloc] init];
-            csvc.isAppearedInCreateNewGroup = YES;
-            
+            // conference doesn't exist, start to create a new one
             NSString *accountName = [UserManager shareUserManager].userBean.name;
-            NSMutableArray *inConferenceAttendeeArray = [NSMutableArray arrayWithCapacity:1];
-            [inConferenceAttendeeArray addObject:accountName];
-            [csvc initInMeetingAttendeesPhoneNumbers:inConferenceAttendeeArray];
             
             // set pre-in conference attendees
             NSLog(@"selected group: %@", selectedGroupInfo);
+            NSString *attendeesJsonString = nil;
             if (selectedGroupInfo) {
                 NSArray *attendees = [selectedGroupInfo objectForKey:GROUP_ATTENDEES];
                 if (attendees) {
@@ -282,11 +278,15 @@ static ECMainPageViewController *instance;
                         }
                     }
                     NSLog(@"pre in attendees: %@", preInConferenceAttendeeArray);
-                    [csvc initPreinMeetingAttendeesPhoneNumbers:preInConferenceAttendeeArray];
+                    
+                    attendeesJsonString = [preInConferenceAttendeeArray JSONString];
                 }
                 selectedGroupInfo = nil;
             }
-            [self.navigationController pushViewController:csvc animated:YES];
+            
+            NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:attendeesJsonString, GROUP_ATTENDEES, nil];
+            [HttpUtil postSignatureRequestWithUrl:CREATE_CONF_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedCreateGroup:) andFailedRespSelector:@selector(onNetworkFailed:)];
+       
             return;
         }
         default:
@@ -295,6 +295,47 @@ static ECMainPageViewController *instance;
     }
     selectedGroupInfo = nil;
     [[ECGroupManager sharedECGroupManager] setCurrentGroupModule:nil];
+}
+
+
+- (void)onFinishedCreateGroup:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedCreateGroup - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+       
+        case 201: {
+            // create group and invite ok
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            if (jsonData) {
+                NSString *groupId = [jsonData objectForKey:GROUP_ID];
+                
+                ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+                module.groupId = groupId;
+                module.audioConfId = [jsonData objectForKey:AUDIO_CONF_ID];
+                module.owner = [jsonData objectForKey:OWNER];
+                
+                [module connectToNotifyServer];
+                                
+                [NSThread detachNewThreadSelector:@selector(refreshGroupList) toTarget:self withObject:nil];
+                
+                [self.navigationController pushViewController:module.groupController animated:YES];
+                
+            } else {
+                goto create_error;
+            }
+            
+            break;
+        }
+        default:
+            goto create_error;
+            break;
+    }
+    
+    return;
+    
+create_error:
+    [[[iToast makeText:NSLocalizedString(@"error in creating group", "")] setDuration:iToastDurationNormal] show];
 }
 
 - (void)onNetworkFailed:(ASIHTTPRequest *)pRequest {

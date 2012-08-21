@@ -5,6 +5,8 @@
 //  Created by star king on 12-7-5.
 //  Copyright (c) 2012年 elegant cloud. All rights reserved.
 //
+
+
 #import "ECGroupViewController.h"
 #import "CommonToolkit/CommonToolkit.h"
 #import "ECGroupView.h"
@@ -18,7 +20,9 @@
 #import "UIViewController+AuthFailHandler.h"
 #import "AuthInterceptor.h"
 
-@interface ECGroupViewController ()
+@interface ECGroupViewController () {
+    MFMessageComposeViewController *mMsgViewController;
+}
 - (void)setGroupIdLabel;
 
 // video view realted methods
@@ -94,6 +98,8 @@
         [self refreshAttendeeList];
     }
 
+    mMsgViewController = [[MFMessageComposeViewController alloc] init];
+    mMsgViewController = nil;
     
     [super viewWillAppear:animated];
 }
@@ -114,6 +120,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
 }
 
 - (void)viewDidUnload
@@ -165,6 +172,36 @@
     [self.navigationController pushViewController:csvc animated:NO];
     [UIView commitAnimations];
     
+}
+
+- (void)inviteAllMembers:(NSMutableArray *)members {
+     if ([MFMessageComposeViewController canSendText]) {
+         if (members && members.count > 0) {
+             mMsgViewController = [[MFMessageComposeViewController alloc] init];
+             
+             mMsgViewController.recipients = members;
+             
+             NSString *audioConfId = [[ECGroupManager sharedECGroupManager] currentGroupModule].audioConfId;
+             NSString *msgBody = [NSString stringWithFormat:@"请拨打0551-2379997加入多方通话，会议号：%@", audioConfId];
+             mMsgViewController.body = msgBody;
+             mMsgViewController.messageComposeDelegate = self;
+             [self presentModalViewController:mMsgViewController animated:NO];
+           
+         } else {
+             [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"No member to invite", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
+         }
+     } else {
+         [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Your phone doesn't support SMS", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
+     }
+
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    NSLog(@"messageComposeViewController finished - result: %d", result);
+    
+    [self dismissModalViewControllerAnimated:YES];
+    mMsgViewController = nil;
+        
 }
 
 - (void)switchToVideoView {

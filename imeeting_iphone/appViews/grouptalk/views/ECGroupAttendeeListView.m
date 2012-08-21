@@ -9,6 +9,7 @@
 #import "ECGroupAttendeeListView.h"
 #import "ECConstants.h"
 #import "AddressBookManager+Avatar.h"
+#import "BottomBarButton.h"
 
 static CGFloat cellHeight = 56;
 static CGFloat guyIconWidth = 40;
@@ -20,6 +21,8 @@ static CGFloat phoneStatusIconHeight = 12;
 static CGFloat videoStatusIconWidth = 12;
 static CGFloat videoStatusIconHeight = 12;
 static CGFloat padding = 6;
+static CGFloat BottomBarWidth = 220;
+static CGFloat BottomBarHeight = 74;
 
 @implementation AttendeeCell
 + (CGFloat)cellHeight {
@@ -165,13 +168,15 @@ static CGFloat padding = 6;
 
 @end
 
+
 @interface ECGroupAttendeeListView () {
-    UIButton *_addMemberButton;
+    UIView *_bottomBar;
 }
 - (void)initUI;
 - (void)switchToVideoAction;
 - (void)addContactAction;
-
+- (void)inviteAllViaSMS;
+- (UIView *)makeBottomBar;
 @property (nonatomic, retain) NSIndexPath *selectedIndexPath;
 @end
 
@@ -193,15 +198,12 @@ static CGFloat padding = 6;
 
 - (void)initUI {    
     self.backgroundImg = [UIImage imageNamed:@"attendee_list_bg"];
-    
-    int marginBottom = 19;
-    int padding = 35;
+
     int attendeeListTableViewWidth = 200;
     int attendeeViewWidth = 220;
-    int addMemberButtonWidth = 200;
-    int addMemberButtonHeight = 36;
+ 
 
-    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((attendeeViewWidth - attendeeListTableViewWidth) / 2, 0, attendeeListTableViewWidth, 480 - marginBottom - addMemberButtonHeight - padding)];
+    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((attendeeViewWidth - attendeeListTableViewWidth) / 2, 0, attendeeListTableViewWidth, 480 - BottomBarHeight)];
     _attendeeListTableView.backgroundColor = self.backgroundColor;
     _attendeeListTableView.dataSource = self;
     _attendeeListTableView.delegate = self;
@@ -216,16 +218,40 @@ static CGFloat padding = 6;
     
     [_refreshHeaderView refreshLastUpdatedDate];
     
-    _addMemberButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _addMemberButton.frame = CGRectMake((attendeeViewWidth - addMemberButtonWidth) / 2, 480 - marginBottom - addMemberButtonHeight, addMemberButtonWidth, addMemberButtonHeight);
-    [_addMemberButton setTitle:NSLocalizedString(@"Add Attendee", nil) forState:UIControlStateNormal];
-    [_addMemberButton setBackgroundImage:[UIImage imageNamed:@"add_member_button"] forState:UIControlStateNormal];
-    _addMemberButton.titleLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:14];
-    [_addMemberButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 4, 0)];
-    [_addMemberButton addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_addMemberButton];
+    _bottomBar = [self makeBottomBar];
+    [self addSubview:_bottomBar];
     
     [self setViewGestureRecognizerDelegate:self];
+}
+
+- (UIView *)makeBottomBar {
+    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - BottomBarHeight, BottomBarWidth, BottomBarHeight)];
+    bottomBar.backgroundImg = [UIImage imageNamed:@"bottom_bar"];
+    CGFloat secWidth = BottomBarWidth / 2;
+    
+    BottomBarButton *sendInviteSMSBt = [[BottomBarButton alloc] initWithFrame:CGRectMake(0, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"SMS Invitation", nil) andIcon:nil];
+    [sendInviteSMSBt addTarget:self action:@selector(inviteAllViaSMS) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBar addSubview:sendInviteSMSBt];
+    
+    UIImageView *sepLine = [self makeBottomBarSepLine:CGRectMake(sendInviteSMSBt.frame.origin.x + sendInviteSMSBt.frame.size.width, 1, 2, BottomBarHeight - 1)];
+    [bottomBar addSubview:sepLine];
+    
+    BottomBarButton *addContactBt = [[BottomBarButton alloc] initWithFrame:CGRectMake(sepLine.frame.origin.x + sepLine.frame.size.width, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"Add Attendee", nil) andIcon:nil];
+    [addContactBt addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBar addSubview:addContactBt];
+    
+    sepLine = [self makeBottomBarSepLine:CGRectMake(addContactBt.frame.origin.x + addContactBt.frame.size.width, 1, 2, BottomBarHeight - 1)];
+    [bottomBar addSubview:sepLine];
+    
+    return bottomBar;
+}
+
+- (UIImageView *)makeBottomBarSepLine:(CGRect)frame {
+    UIImageView *sepLine = [[UIImageView alloc] initWithFrame:frame];
+    sepLine.layer.masksToBounds = YES;
+    sepLine.contentMode = UIViewContentModeScaleAspectFill;
+    sepLine.image = [UIImage imageNamed:@"bottom_sep_line"];
+    return sepLine;
 }
 
 - (void)updateAttendee:(NSDictionary *)attendee withMyself:(BOOL)myself {
@@ -305,6 +331,21 @@ static CGFloat padding = 6;
     
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(addContacts)]) {
         [self.viewControllerRef performSelector:@selector(addContacts)];
+    }
+}
+
+- (void)inviteAllViaSMS {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(inviteAllMembers:)]) {
+        NSMutableArray *members = [NSMutableArray arrayWithCapacity:4];
+        NSString *accoutName = [UserManager shareUserManager].userBean.name;
+        for (NSDictionary *attendee in _attendeeArray) {
+            NSString *name = [attendee objectForKey:USERNAME];
+            if (![accoutName isEqualToString:name]) {
+                [members addObject:name];
+            }
+        }
+        
+        [self.viewControllerRef performSelector:@selector(inviteAllMembers:) withObject:members];
     }
 }
 
@@ -423,11 +464,11 @@ static CGFloat padding = 6;
 #pragma mark - set UI
 
 - (void)setAttendeeUI { 
-    [_addMemberButton setHidden:YES];
+    _bottomBar.hidden = YES;
 }
 
 - (void)setOwnerUI {
-    [_addMemberButton setHidden:NO];
+    _bottomBar.hidden = NO;
 }
 
 #pragma mark - gesture delegate

@@ -12,6 +12,6 @@
 @interface ECContactsSelectContainerView : ContactsSelectContainerView
 
 @property (nonatomic) BOOL isAppearedInCreatingNewGroup;
-
+@property (nonatomic, readonly) UIButton *createButton;
 
 @end

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AVFoundation/AVFoundation.h"
+#import <MessageUI/MessageUI.h>
+#import <AVFoundation/AVFoundation.h>
 #import "ECVideoManager.h"
 
-@interface ECGroupViewController : UIViewController <UIAlertViewDelegate> {
+@interface ECGroupViewController : UIViewController <UIAlertViewDelegate, MFMessageComposeViewControllerDelegate> {
     AVCaptureVideoPreviewLayer *_previewLayer;
     
     BOOL _isFirstLoad; // inidcate if the controller loads first.
@@ -42,6 +43,7 @@
 - (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
 - (void)onAttendeeSelected:(NSDictionary*)attendee;
 - (void)addContacts;
+- (void)inviteAllMembers:(NSMutableArray *)members;
 
 - (void)switchVideoAndAttendeeListView;
 - (void)switchToAttendeeListView;

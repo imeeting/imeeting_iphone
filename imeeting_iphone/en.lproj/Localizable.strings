@@ -124,3 +124,7 @@
 "help page retrieve error" = "Oops, something error happens! ";
 "Intelligent choice for highly efficient people" = "Intelligent Choice For Highly Efficient People";
 "Version:" = "Version: ";
+"SMS Invitation" = "Invite";
+"No member to invite" = "No member to invite!";
+"Your phone doesn't support SMS" = "Your phone doesn't support SMS!";
+"Open Talk" = "Open";
