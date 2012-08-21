@@ -43,7 +43,7 @@
 - (void)updateAttendee:(NSDictionary*)attendee withMyself:(BOOL)myself;
 - (void)onAttendeeSelected:(NSDictionary*)attendee;
 - (void)addContacts;
-- (void)inviteAllMembers:(NSMutableArray *)members;
+- (void)sendInviteSMS:(NSMutableArray *)members;
 
 - (void)switchVideoAndAttendeeListView;
 - (void)switchToAttendeeListView;

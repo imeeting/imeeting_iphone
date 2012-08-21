@@ -276,6 +276,7 @@ static ECMainPageViewController *instance;
                         if (![accountName isEqualToString:name]) {
                             [preInConferenceAttendeeArray addObject:name];
                         }
+                      
                     }
                     NSLog(@"pre in attendees: %@", preInConferenceAttendeeArray);
                     

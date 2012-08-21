@@ -174,7 +174,7 @@ invite_error:
      [self.navigationController popViewControllerAnimated:NO];
      */
     [UIView beginAnimations:@"animationID" context:nil];
-    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationDuration:0.4f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationRepeatAutoreverses:NO];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:YES];

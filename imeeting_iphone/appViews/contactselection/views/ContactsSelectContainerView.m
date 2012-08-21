@@ -246,7 +246,7 @@
 
 - (void)addSelectedContactToMeetingWithIndexPath:(NSIndexPath *)pIndexPath andSelectedPhoneNumber:(NSString *)pSelectedPhoneNumber{
     NSInteger totalNumber = _mMeetingContactsListView.preinMeetingContactsInfoArrayRef.count + _mMeetingContactsListView.inMeetingContactsInfoArrayRef.count;
-    if (totalNumber < MAX_MEMBER_LIMIT) {
+  //  if (totalNumber < MAX_MEMBER_LIMIT) {
         // if the select contact not existed in meeting contacts list table view in meeting section
         if (![self.inMeetingContactsPhoneNumberArray containsObject:pSelectedPhoneNumber]) {
             // update selected cell photo image
@@ -268,9 +268,9 @@
             // show toast
             [[[iToast makeText:[NSString stringWithFormat:@"%@ %@", ((ContactBean *)[_mABContactsListView.presentContactsInfoArrayRef objectAtIndex:pIndexPath.row]).displayName, NSLocalizedString(@"contact has been in meeting", nil)]] setDuration:iToastDurationLong] show];
         }
-    } else {
-        [[[iToast makeText:NSLocalizedString(@"Reach the maximum number of members", nil)] setDuration:iToastDurationLong] show];
-    }
+  //  } else {
+   //     [[[iToast makeText:NSLocalizedString(@"Reach the maximum number of members", nil)] setDuration:iToastDurationLong] show];
+  //  }
 }
 
 - (void)removeSelectedContactFromMeetingWithIndexPath:(NSIndexPath *)pIndexPath{
@@ -446,11 +446,11 @@
             return;
         }
     }
-    NSInteger totalNumber = _mMeetingContactsListView.preinMeetingContactsInfoArrayRef.count + _mMeetingContactsListView.inMeetingContactsInfoArrayRef.count;
-    if (totalNumber >= MAX_MEMBER_LIMIT) {
-        [[[iToast makeText:NSLocalizedString(@"Reach the maximum number of members", nil)] setDuration:iToastDurationNormal] show];
-        return;
-    }
+    //NSInteger totalNumber = _mMeetingContactsListView.preinMeetingContactsInfoArrayRef.count + _mMeetingContactsListView.inMeetingContactsInfoArrayRef.count;
+    //if (totalNumber >= MAX_MEMBER_LIMIT) {
+    //    [[[iToast makeText:NSLocalizedString(@"Reach the maximum number of members", nil)] setDuration:iToastDurationNormal] show];
+    //    return;
+    //}
     
     // generate contact with user input phone number and add to meeting contacts list table view prein meeting section
     ContactBean *_newAddedContact = [[ContactBean alloc] init];

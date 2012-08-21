@@ -98,9 +98,11 @@
         [self refreshAttendeeList];
     }
 
-    mMsgViewController = [[MFMessageComposeViewController alloc] init];
-    mMsgViewController = nil;
-    
+    if ([MFMessageComposeViewController canSendText]) {
+        mMsgViewController = [[MFMessageComposeViewController alloc] init];
+        mMsgViewController = nil;       
+    }
+     
     [super viewWillAppear:animated];
 }
 
@@ -174,7 +176,7 @@
     
 }
 
-- (void)inviteAllMembers:(NSMutableArray *)members {
+- (void)sendInviteSMS:(NSMutableArray *)members {
      if ([MFMessageComposeViewController canSendText]) {
          if (members && members.count > 0) {
              mMsgViewController = [[MFMessageComposeViewController alloc] init];
@@ -294,8 +296,6 @@
     [self detachMyVideoPreviewLayer];
     [self attachMyVideoPreviewLayer];
     
-    //[self currentFriendVideoView].image = nil;
-    //[self currentMyVideoView].image = nil;
 }
 
 - (void)swapVideoView {
@@ -419,6 +419,7 @@
     
     NSString *accountName = [[UserManager shareUserManager] userBean].name;
     if (![accountName isEqualToString:username]) {
+        [actions addObject:NSLocalizedString(@"Send SMS", nil)];
         [actions addObject:NSLocalizedString(@"Kick", "")];
     }
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithContent:actions andTitleFormat:NSLocalizedString(@"Operation on %@", ""), displayName];
@@ -445,6 +446,10 @@
         NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
         NSString *alertMsg = [NSString stringWithFormat:NSLocalizedString(@"Remove %@ ?", nil), displayName];
         [[[UIAlertView alloc] initWithTitle:nil message:alertMsg delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:NSLocalizedString(@"Cancel", nil), nil] show];
+    } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Send SMS", nil)]) {
+        NSMutableArray *target = [NSMutableArray arrayWithCapacity:1];
+        [target addObject:username];
+        [self sendInviteSMS:target];
     }
 }
 

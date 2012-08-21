@@ -201,9 +201,9 @@ static CGFloat BottomBarHeight = 74;
 
     int attendeeListTableViewWidth = 200;
     int attendeeViewWidth = 220;
- 
+    int margin = 0;
 
-    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((attendeeViewWidth - attendeeListTableViewWidth) / 2, 0, attendeeListTableViewWidth, 480 - BottomBarHeight)];
+    _attendeeListTableView = [[UITableView alloc] initWithFrame:CGRectMake((attendeeViewWidth - attendeeListTableViewWidth) / 2, 0, attendeeListTableViewWidth, 480 - BottomBarHeight - margin)];
     _attendeeListTableView.backgroundColor = self.backgroundColor;
     _attendeeListTableView.dataSource = self;
     _attendeeListTableView.delegate = self;
@@ -229,18 +229,18 @@ static CGFloat BottomBarHeight = 74;
     bottomBar.backgroundImg = [UIImage imageNamed:@"bottom_bar"];
     CGFloat secWidth = BottomBarWidth / 2;
     
-    BottomBarButton *sendInviteSMSBt = [[BottomBarButton alloc] initWithFrame:CGRectMake(0, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"SMS Invitation", nil) andIcon:nil];
-    [sendInviteSMSBt addTarget:self action:@selector(inviteAllViaSMS) forControlEvents:UIControlEventTouchUpInside];
-    [bottomBar addSubview:sendInviteSMSBt];
-    
-    UIImageView *sepLine = [self makeBottomBarSepLine:CGRectMake(sendInviteSMSBt.frame.origin.x + sendInviteSMSBt.frame.size.width, 1, 2, BottomBarHeight - 1)];
-    [bottomBar addSubview:sepLine];
-    
-    BottomBarButton *addContactBt = [[BottomBarButton alloc] initWithFrame:CGRectMake(sepLine.frame.origin.x + sepLine.frame.size.width, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"Add Attendee", nil) andIcon:nil];
+    BottomBarButton *addContactBt = [[BottomBarButton alloc] initWithFrame:CGRectMake(0, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"Add Attendee", nil) andIcon:[UIImage imageNamed:@"addcontact"]];
     [addContactBt addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
     [bottomBar addSubview:addContactBt];
     
-    sepLine = [self makeBottomBarSepLine:CGRectMake(addContactBt.frame.origin.x + addContactBt.frame.size.width, 1, 2, BottomBarHeight - 1)];
+    UIImageView *sepLine = [self makeBottomBarSepLine:CGRectMake(addContactBt.frame.origin.x + addContactBt.frame.size.width, 1, 2, BottomBarHeight - 1)];
+    [bottomBar addSubview:sepLine];
+    
+    BottomBarButton *sendInviteSMSBt = [[BottomBarButton alloc] initWithFrame:CGRectMake(sepLine.frame.origin.x + sepLine.frame.size.width, 0, secWidth - 2, BottomBarHeight) andTitle:NSLocalizedString(@"SMS Invitation", nil) andIcon:[UIImage imageNamed:@"sms"]];
+    [sendInviteSMSBt addTarget:self action:@selector(inviteAllViaSMS) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBar addSubview:sendInviteSMSBt];
+    
+    sepLine = [self makeBottomBarSepLine:CGRectMake(sendInviteSMSBt.frame.origin.x + sendInviteSMSBt.frame.size.width, 1, 2, BottomBarHeight - 1)];
     [bottomBar addSubview:sepLine];
     
     return bottomBar;
@@ -324,18 +324,19 @@ static CGFloat BottomBarHeight = 74;
 
 - (void)addContactAction {
     NSLog(@"add contact");
+    /*
     if (_attendeeArray.count >= MAX_MEMBER_LIMIT) {
         [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Reach the maximum number of members", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
         return; 
     }
-    
+    */
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(addContacts)]) {
         [self.viewControllerRef performSelector:@selector(addContacts)];
     }
 }
 
 - (void)inviteAllViaSMS {
-    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(inviteAllMembers:)]) {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(sendInviteSMS:)]) {
         NSMutableArray *members = [NSMutableArray arrayWithCapacity:4];
         NSString *accoutName = [UserManager shareUserManager].userBean.name;
         for (NSDictionary *attendee in _attendeeArray) {
@@ -345,7 +346,7 @@ static CGFloat BottomBarHeight = 74;
             }
         }
         
-        [self.viewControllerRef performSelector:@selector(inviteAllMembers:) withObject:members];
+        [self.viewControllerRef performSelector:@selector(sendInviteSMS:) withObject:members];
     }
 }
 
@@ -465,6 +466,9 @@ static CGFloat BottomBarHeight = 74;
 
 - (void)setAttendeeUI { 
     _bottomBar.hidden = YES;
+    CGRect frame = _attendeeListTableView.frame;
+    CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 480);
+    _attendeeListTableView.frame = newFrame;
 }
 
 - (void)setOwnerUI {

@@ -17,8 +17,10 @@
 		F814E284157CA0AB00FBBB19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E282157CA09600FBBB19 /* SystemConfiguration.framework */; };
 		F814E286157CA0B600FBBB19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E285157CA0B600FBBB19 /* CFNetwork.framework */; };
 		F814E288157CA0CE00FBBB19 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */; };
-		F827EE8A15E321240095103E /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F827EE8915E321240095103E /* CommonToolkit.framework */; };
 		F827EE8D15E327640095103E /* BottomBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F827EE8C15E327640095103E /* BottomBarButton.m */; };
+		F827EE9015E37C680095103E /* addcontact.png in Resources */ = {isa = PBXBuildFile; fileRef = F827EE8E15E37C680095103E /* addcontact.png */; };
+		F827EE9115E37C680095103E /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = F827EE8F15E37C680095103E /* sms.png */; };
+		F827EE9A15E3A1130095103E /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F827EE9915E3A1130095103E /* CommonToolkit.framework */; };
 		F83D8A0215C3D09C00173C2D /* navibutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F83D8A0115C3D09C00173C2D /* navibutton.png */; };
 		F863C862157C61320045C08C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C861157C61320045C08C /* UIKit.framework */; };
 		F863C864157C61320045C08C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C863157C61320045C08C /* Foundation.framework */; };
@@ -167,9 +169,11 @@
 		F814E282157CA09600FBBB19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F814E285157CA0B600FBBB19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F814E287157CA0CE00FBBB19 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		F827EE8915E321240095103E /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphonesimulator/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F827EE8B15E327640095103E /* BottomBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BottomBarButton.h; path = grouptalk/views/BottomBarButton.h; sourceTree = "<group>"; };
 		F827EE8C15E327640095103E /* BottomBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BottomBarButton.m; path = grouptalk/views/BottomBarButton.m; sourceTree = "<group>"; };
+		F827EE8E15E37C680095103E /* addcontact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addcontact.png; sourceTree = "<group>"; };
+		F827EE8F15E37C680095103E /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
+		F827EE9915E3A1130095103E /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = Frameworks/CommonToolkit.framework; sourceTree = "<group>"; };
 		F83D8A0115C3D09C00173C2D /* navibutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navibutton.png; sourceTree = "<group>"; };
 		F863C85D157C61320045C08C /* imeeting_iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imeeting_iphone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F863C861157C61320045C08C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -506,7 +510,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F827EE8A15E321240095103E /* CommonToolkit.framework in Frameworks */,
+				F827EE9A15E3A1130095103E /* CommonToolkit.framework in Frameworks */,
 				F8FBB09615CA91D100384103 /* CoreTelephony.framework in Frameworks */,
 				F800185715B66C5800745A8F /* CoreText.framework in Frameworks */,
 				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
@@ -565,7 +569,7 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
-				F827EE8915E321240095103E /* CommonToolkit.framework */,
+				F827EE9915E3A1130095103E /* CommonToolkit.framework */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,
@@ -666,6 +670,8 @@
 		F86F084715C9106C00793E73 /* videopage */ = {
 			isa = PBXGroup;
 			children = (
+				F827EE8E15E37C680095103E /* addcontact.png */,
+				F827EE8F15E37C680095103E /* sms.png */,
 				F885A583159A9DDA00709FC7 /* camera_switch.png */,
 				F86F087015C914B100793E73 /* add_member_button.png */,
 				F86F084815C9106C00793E73 /* attendee_list_bg.png */,
@@ -1496,6 +1502,8 @@
 				F8F8C8DF15E1D6810022F121 /* Default@2x.png in Resources */,
 				F8F8C8E115E1D69A0022F121 /* logo.png in Resources */,
 				F8F8C8E315E1D6A00022F121 /* logo@2x.png in Resources */,
+				F827EE9015E37C680095103E /* addcontact.png in Resources */,
+				F827EE9115E37C680095103E /* sms.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
