@@ -402,6 +402,7 @@
 
 - (void)doActionForSelectedMemberInOwnerMode:(NSDictionary *)attendee {
     NSString *username = [attendee objectForKey:USERNAME];
+    NSString *onlineStatus = [attendee objectForKey:ONLINE_STATUS];
     NSString *videoStatus = [attendee objectForKey:VIDEO_STATUS];
     NSString *phoneStatus = [attendee objectForKey:TELEPHONE_STATUS];
     
@@ -411,12 +412,15 @@
     if ([videoStatus isEqualToString:ON]) {
         [actions addObject:NSLocalizedString(@"Watch Video", "")];
     }
-    if ([phoneStatus isEqualToString:TERMINATED] || [phoneStatus isEqualToString:FAILED] || [phoneStatus isEqualToString:TERMWAIT]) {
-        [actions addObject:NSLocalizedString(@"Call", "")];
-    } else if ([phoneStatus isEqualToString:CALL_WAIT] || [phoneStatus isEqualToString:ESTABLISHED]) {
-        [actions addObject:NSLocalizedString(@"Hang Up", "")];
-    }
     
+    if ([onlineStatus isEqualToString:ONLINE]) {
+        if ([phoneStatus isEqualToString:TERMINATED] || [phoneStatus isEqualToString:FAILED] || [phoneStatus isEqualToString:TERMWAIT]) {
+            [actions addObject:NSLocalizedString(@"Call", "")];
+        } else if ([phoneStatus isEqualToString:CALL_WAIT] || [phoneStatus isEqualToString:ESTABLISHED]) {
+            [actions addObject:NSLocalizedString(@"Hang Up", "")];
+        }
+    }
+ 
     NSString *accountName = [[UserManager shareUserManager] userBean].name;
     if (![accountName isEqualToString:username]) {
         [actions addObject:NSLocalizedString(@"Send SMS", nil)];
@@ -619,14 +623,17 @@
 #pragma mark - dial button related
 - (void)setDialButtonAsDial {
     ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
-   // [videoView setDialButtonAsDial];
     [videoView performSelectorOnMainThread:@selector(setDialButtonAsDial) withObject:nil waitUntilDone:NO];
 }
 
 - (void)setDialButtonAsTalking {
     ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
-   // [videoView setDialButtonAsTalking];
     [videoView performSelectorOnMainThread:@selector(setDialButtonAsTalking) withObject:nil waitUntilDone:NO];
+}
+
+- (void)setDialButtonASHangUp {
+    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+    [videoView performSelectorOnMainThread:@selector(setDialButtonAsHangUp) withObject:nil waitUntilDone:NO];
 }
 
 @end

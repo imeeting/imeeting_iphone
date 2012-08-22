@@ -99,6 +99,7 @@
 "Group ID: %@" = "群聊号：%@";
 "Member List" = "成员列表";
 "Dial" = "电话呼入";
+"Hangup Talking" = "挂断电话";
 "Close Video" = "关闭镜头";
 "Open Video" = "打开镜头";
 "Video On" = "打开";

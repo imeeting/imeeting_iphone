@@ -27,8 +27,8 @@
 - (void)resetOppositeVideoUI;
 - (void)showVideoLoadFailedInfo;
 - (void)onOpenCameraButtonClickAction;
-- (void)setDialButtonAsMute;
-- (void)setDialButtonAsUnmute;
+
 - (void)setDialButtonAsDial;
 - (void)setDialButtonAsTalking;
+- (void)setDialButtonAsHangUp;
 @end

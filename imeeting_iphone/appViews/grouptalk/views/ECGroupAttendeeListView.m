@@ -42,13 +42,18 @@ static CGFloat BottomBarHeight = 74;
        // [_guyIconView.layer setCornerRadius:5.0];
         [self.contentView addSubview:_guyIconView];
         
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_guyIconView.frame.origin.x + guyIconWidth + padding * 2, _guyIconView.frame.origin.y, nameLabelWidth, nameLabelHeight)];
+        _onlineStatusIconView = [[UIImageView alloc] initWithFrame:CGRectMake(_guyIconView.frame.origin.x + _guyIconView.frame.size.width + padding * 2, _guyIconView.frame.origin.y + (nameLabelHeight - 14), 14, 14)];
+        _onlineStatusIconView.contentMode = UIViewContentModeScaleAspectFit;
+        _onlineStatusIconView.layer.masksToBounds = YES;
+        [self.contentView addSubview:_onlineStatusIconView];
+        
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_onlineStatusIconView.frame.origin.x + _onlineStatusIconView.frame.size.width + padding, _guyIconView.frame.origin.y, nameLabelWidth, nameLabelHeight)];
         _nameLabel.textColor = [UIColor colorWithIntegerRed:122 integerGreen:122 integerBlue:122 alpha:1];
         _nameLabel.backgroundColor = [UIColor clearColor];
         _nameLabel.font = [UIFont fontWithName:CHINESE_FONT size:14];
         [self.contentView addSubview:_nameLabel];
         
-        _videoStatusIconView = [[UIImageView alloc] initWithFrame:CGRectMake(_nameLabel.frame.origin.x, _nameLabel.frame.origin.y + _nameLabel.frame.size.height + padding, videoStatusIconWidth, videoStatusIconHeight)];
+        _videoStatusIconView = [[UIImageView alloc] initWithFrame:CGRectMake(_onlineStatusIconView.frame.origin.x, _nameLabel.frame.origin.y + _nameLabel.frame.size.height + padding, videoStatusIconWidth, videoStatusIconHeight)];
         _videoStatusIconView.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:_videoStatusIconView];
         
@@ -98,7 +103,7 @@ static CGFloat BottomBarHeight = 74;
     
     if ([onlineStatus isEqualToString:ONLINE]) {
         _guyIconView.image = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:username];
-        
+        _onlineStatusIconView.image = [UIImage imageNamed:@"online_flag"];
         if ([videoStatus isEqualToString:ON]) {
             NSLog(@"set video on image - username: %@", username);
             _videoStatusIconView.image = _videoOnImg;
@@ -111,6 +116,7 @@ static CGFloat BottomBarHeight = 74;
         
     } else {
         _guyIconView.image = [[AddressBookManager shareAddressBookManager] grayAvatarByPhoneNumber:username];
+        _onlineStatusIconView.image = [UIImage imageNamed:@"offline_flag"];
         _videoStatusIconView.image = nil;
         _videoStatusLabel.text = nil;
     }

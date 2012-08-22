@@ -25,6 +25,7 @@
 // dial button related
 - (void)setDialButtonAsDial;
 - (void)setDialButtonAsTalking;
+- (void)setDialButtonASHangUp;
 //###### video view related methods
 - (void)onLeaveGroup;
 - (void)switchCamera;

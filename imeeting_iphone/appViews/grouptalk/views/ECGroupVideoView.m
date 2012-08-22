@@ -311,11 +311,7 @@ static CGFloat GroupIdLabelHeight = 20;
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneUrl]];        
     } else if ([NSLocalizedString(@"Talking", nil) isEqualToString:title]) {
         [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"You're in talking now.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
-    } else if ([NSLocalizedString(@"Mute", nil) isEqualToString:title]) {
-        
-    } else if ([NSLocalizedString(@"Unmute", nil) isEqualToString:title]) {
-        
-    } 
+    }
      
 }
 
@@ -356,11 +352,7 @@ static CGFloat GroupIdLabelHeight = 20;
     [_dialButton setTitle:NSLocalizedString(@"Talking", nil)];
 }
 
-- (void)setDialButtonAsMute {
-    [_dialButton setTitle:NSLocalizedString(@"Mute", nil)];
-}
-
-- (void)setDialButtonAsUnmute {
-    [_dialButton setTitle:NSLocalizedString(@"Unmute", nil)];
+- (void)setDialButtonAsHangUp {
+    [_dialButton setTitle:NSLocalizedString(@"Hangup Talking", nil)];
 }
 @end
