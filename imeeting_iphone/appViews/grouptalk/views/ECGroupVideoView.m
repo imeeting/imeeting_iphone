@@ -307,10 +307,35 @@ static CGFloat GroupIdLabelHeight = 20;
 - (void)onDialAction {
     NSString *title = _dialButton.title;
     if ([NSLocalizedString(@"Dial", nil) isEqualToString:title]) {
-        NSString *phoneUrl = [NSString stringWithFormat:@"telprompt://%@", CALL_CENTER_NUM];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneUrl]];        
+       // NSString *phoneUrl = [NSString stringWithFormat:@"telprompt://%@", CALL_CENTER_NUM];
+       // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneUrl]];
+        RIButtonItem *cancelItem = [RIButtonItem item];
+        cancelItem.label = NSLocalizedString(@"Cancel", nil);
+        RIButtonItem *callItem = [RIButtonItem item];
+        callItem.label = NSLocalizedString(@"Call Me In", nil);
+        callItem.action = ^{
+            if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(callMeIntoTalkingGroup)]) {
+                MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.superview];
+                [hud showWhileExecuting:@selector(callMeIntoTalkingGroup) onTarget:self.viewControllerRef withObject:nil animated:YES];
+            }
+        };
+        [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Call me into the talking group?", nil) cancelButtonItem:cancelItem otherButtonItems:callItem, nil] show];
+        
+        
     } else if ([NSLocalizedString(@"Talking", nil) isEqualToString:title]) {
         [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"You're in talking now.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
+    } else if ([NSLocalizedString(@"Hangup Talking", nil) isEqualToString:title]) {
+        RIButtonItem *cancelItem = [RIButtonItem item];
+        cancelItem.label = NSLocalizedString(@"Cancel", nil);
+        RIButtonItem *hangupItem = [RIButtonItem item];
+        hangupItem.label = NSLocalizedString(@"Hangup Talking", nil);
+        hangupItem.action = ^{
+            if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(hangMeUpFromTalkingGroup)]) {
+                MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.superview];
+                [hud showWhileExecuting:@selector(hangMeUpFromTalkingGroup) onTarget:self.viewControllerRef withObject:nil animated:YES];
+            }
+        };
+        [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Hangup Talking?", nil) cancelButtonItem:cancelItem otherButtonItems:hangupItem, nil] show];
     }
      
 }
@@ -347,12 +372,39 @@ static CGFloat GroupIdLabelHeight = 20;
 - (void)setDialButtonAsDial {
     [_dialButton setTitle:NSLocalizedString(@"Dial", nil)];
 }
-
+/*
 - (void)setDialButtonAsTalking {
     [_dialButton setTitle:NSLocalizedString(@"Talking", nil)];
 }
-
+*/
 - (void)setDialButtonAsHangUp {
     [_dialButton setTitle:NSLocalizedString(@"Hangup Talking", nil)];
 }
+
+- (void)setDialButtonAsCalling {
+    [_dialButton setTitle:NSLocalizedString(@"Calling In", nil)];
+}
+
+- (void)updateDialButtonStatus:(NSDictionary *)attendee {
+    NSString *accountName = [UserManager shareUserManager].userBean.name;
+    NSString *userName = [attendee objectForKey:USERNAME];
+    if ([accountName isEqualToString:userName]) {
+        NSString *phoneStatus = [attendee objectForKey:TELEPHONE_STATUS];
+        if (phoneStatus) {
+            if ([phoneStatus isEqualToString:FAILED]) {
+                if ([_dialButton.title isEqualToString:NSLocalizedString(@"Calling In", nil)]) {
+                    // set dial button as dial when call into talking group failed
+                    [self setDialButtonAsDial];
+                    [[[iToast makeText:NSLocalizedString(@"Call in failed", nil)] setDuration:iToastDurationNormal] show];
+                }
+            } else if ([phoneStatus isEqualToString:TERMINATED]) {
+                [self setDialButtonAsDial];
+            } else if ([phoneStatus isEqualToString:ESTABLISHED]) {
+                [self setDialButtonAsHangUp];
+            }
+        }
+    }
+
+}
+
 @end

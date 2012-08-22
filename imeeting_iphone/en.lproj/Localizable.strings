@@ -99,7 +99,7 @@
 "Create Group Talk" = "Create Group Talk";
 "Group ID: %@" = "Group ID: %@";
 "Member List" = "Members";
-"Dial" = "Dial";
+"Dial" = "Talk";
 "Hangup Talking" = "Hang Up";
 "Close Video" = "Close";
 "Open Video" = "Open";
@@ -130,3 +130,11 @@
 "Your phone doesn't support SMS" = "Your phone doesn't support SMS!";
 "Open Talk" = "Open";
 "Send SMS" = "Send SMS";
+"Call is forbidden for you" = "Call is forbidden for you";
+"Call in failed" = "Call In Failed";
+"Call me into the talking group?" = "Call into the talking group?";
+"Call Me In" = "Call In";
+"Calling In" = "Calling";
+"Hangup is forbidden" = "Hangup is forbidden!";
+"Hangup Talking failed" = "Hangup failed";
+"Hangup Talking?" = "Hangup current talking?";

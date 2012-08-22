@@ -22,6 +22,7 @@
 
 @interface ECGroupViewController () {
     MFMessageComposeViewController *mMsgViewController;
+  
 }
 - (void)setGroupIdLabel;
 
@@ -63,6 +64,7 @@
         _isFirstLoad = YES;
         _refreshList = YES;
         _smallVideoViewIsMine = YES;
+        
     }
     return self;
 }
@@ -386,6 +388,8 @@
     [attListView updateAttendee:attendee withMyself:myself];
 }
 
+
+
 #pragma mark - on member selected action
 - (void)onAttendeeSelected:(NSDictionary *)attendee {
     _selectedAttendee = attendee;
@@ -621,19 +625,117 @@
 }
 
 #pragma mark - dial button related
+- (void)callMeIntoTalkingGroup {
+    NSString *accountName = [[UserManager shareUserManager] userBean].name;
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:accountName, @"dstUserName", module.groupId, GROUP_ID, nil];
+    [HttpUtil postSignatureRequestWithUrl:CALL_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedCallMe:) andFailedRespSelector:@selector(onNetworkFailed:)];
+
+}
+
+- (void)onFinishedCallMe:(ASIHTTPRequest*)pRequest {
+    NSLog(@"onFinishedCallMe - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+
+    int statusCode = pRequest.responseStatusCode;
+    
+    NSString *accountName = [[UserManager shareUserManager] userBean].name;
+    switch (statusCode) {
+        case 200: {
+            // call command is accepted by server, update UI
+            NSDictionary *attendee = [NSDictionary dictionaryWithObjectsAndKeys:accountName, USERNAME, CALL_WAIT, TELEPHONE_STATUS, nil];
+            [self updateAttendee:attendee withMyself:YES];
+            [self setDialButtonAsCalling];
+            break;
+        }
+        case 403: {
+            // call is forbidden
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call is forbidden for you", nil)];
+            [[[iToast makeText:msg] setDuration:iToastDurationNormal] show];
+            break;
+        }
+        case 409: {
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call in failed", nil)];
+            [[[iToast makeText:msg] setDuration:iToastDurationNormal] show];
+            break;
+        }
+        case 500: {
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Call in failed", nil)];
+            [[[iToast makeText:msg] setDuration:iToastDurationNormal] show];
+            break;
+        }
+        default:
+            [[[iToast makeText:NSLocalizedString(@"Call in failed", "")] setDuration:iToastDurationNormal] show];
+            break;
+    }
+
+}
+
+- (void)hangMeUpFromTalkingGroup {
+    NSString *accountName = [[UserManager shareUserManager] userBean].name;
+
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:accountName, @"dstUserName", module.groupId, GROUP_ID, nil];
+    [HttpUtil postSignatureRequestWithUrl:HANGUP_ATTENDEE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedHangMeUp:) andFailedRespSelector:@selector(onNetworkFailed:)];
+}
+
+- (void)onFinishedHangMeUp:(ASIHTTPRequest*)pRequest {
+    NSLog(@"onFinishedHangMeUp - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+     NSString *accountName = [[UserManager shareUserManager] userBean].name;
+    switch (statusCode) {
+        case 409: {
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup failed, maybe already hung up", nil)];
+            [[[iToast makeText:msg] setDuration:iToastDurationNormal] show];
+        }
+        case 200: {
+            // hangup command is accepted by server, update UI
+            NSDictionary *attendee = [NSDictionary dictionaryWithObjectsAndKeys:accountName, USERNAME, TERMINATED, TELEPHONE_STATUS, nil];
+            [self updateAttendee:attendee withMyself:YES];
+            
+            break;
+        }
+        case 403: {
+            // hangup is forbidden
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup is forbidden", nil)];
+            [[[iToast makeText:msg] setDuration:iToastDurationNormal] show];
+            break;
+        }
+        case 500: {
+            NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup Talking failed", nil)];
+            [[[iToast makeText:msg] setDuration:iToastDurationNormal] show];
+            break;
+        }
+        default:
+            [[[iToast makeText:NSLocalizedString(@"Hangup Talking failed", "")] setDuration:iToastDurationNormal] show];
+            break;
+    }
+
+}
+
 - (void)setDialButtonAsDial {
     ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
     [videoView performSelectorOnMainThread:@selector(setDialButtonAsDial) withObject:nil waitUntilDone:NO];
 }
 
+/*
 - (void)setDialButtonAsTalking {
     ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
     [videoView performSelectorOnMainThread:@selector(setDialButtonAsTalking) withObject:nil waitUntilDone:NO];
 }
-
-- (void)setDialButtonASHangUp {
+*/
+- (void)setDialButtonAsHangUp {
     ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
     [videoView performSelectorOnMainThread:@selector(setDialButtonAsHangUp) withObject:nil waitUntilDone:NO];
 }
 
+- (void)setDialButtonAsCalling {
+    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+    [videoView performSelectorOnMainThread:@selector(setDialButtonAsCalling) withObject:nil waitUntilDone:NO];
+}
+
+- (void)updateDialButtonStatus:(NSDictionary *)attendee {
+    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
+    [videoView performSelectorOnMainThread:@selector(updateDialButtonStatus:) withObject:attendee waitUntilDone:NO];
+}
 @end

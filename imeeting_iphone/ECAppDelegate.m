@@ -89,6 +89,7 @@
     _callCenter = [[CTCallCenter alloc] init];
     _callCenter.callEventHandler=^(CTCall* call) {
         NSLog(@"call state changed: %@", call.callState);
+ 
         ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
         if (module && module.inGroup) {
             ECGroupViewController *gc = (ECGroupViewController*)module.groupController;
@@ -98,7 +99,7 @@
                 [gc setDialButtonAsDial];
             } else if (call.callState == CTCallStateConnected) {
                 NSLog(@"call connected");
-                [gc setDialButtonAsTalking];
+                [gc setDialButtonAsHangUp];
             }
         }
     };

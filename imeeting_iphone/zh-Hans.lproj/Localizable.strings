@@ -98,8 +98,8 @@
 "Create Group Talk" = "创建群聊";
 "Group ID: %@" = "群聊号：%@";
 "Member List" = "成员列表";
-"Dial" = "电话呼入";
-"Hangup Talking" = "挂断电话";
+"Dial" = "开始语音";
+"Hangup Talking" = "结束语音";
 "Close Video" = "关闭镜头";
 "Open Video" = "打开镜头";
 "Video On" = "打开";
@@ -129,3 +129,11 @@
 "Your phone doesn't support SMS" = "您的手机不支持短信功能！";
 "Open Talk" = "开启";
 "Send SMS" = "发送短信";
+"Call is forbidden for you" = "您的语音接入操作不被允许";
+"Call in failed" = "语音接入失败！";
+"Call me into the talking group?" = "需要接入语音群聊吗？";
+"Call Me In" = "接入";
+"Calling In" = "正在接入";
+"Hangup is forbidden" = "结束操作不被允许！";
+"Hangup Talking failed" = "结束操作失败！";
+"Hangup Talking?" = "要结束当前语音群聊吗？";

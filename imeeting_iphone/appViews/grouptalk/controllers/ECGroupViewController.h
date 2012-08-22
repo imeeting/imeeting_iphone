@@ -24,8 +24,13 @@
 
 // dial button related
 - (void)setDialButtonAsDial;
-- (void)setDialButtonAsTalking;
-- (void)setDialButtonASHangUp;
+//- (void)setDialButtonAsTalking;
+- (void)setDialButtonAsHangUp;
+- (void)setDialButtonAsCalling;
+- (void)callMeIntoTalkingGroup;
+- (void)hangMeUpFromTalkingGroup;
+- (void)updateDialButtonStatus:(NSDictionary *)attendee;
+
 //###### video view related methods
 - (void)onLeaveGroup;
 - (void)switchCamera;

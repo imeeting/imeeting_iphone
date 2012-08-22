@@ -102,14 +102,20 @@
         NSLog(@"processOneNotice - update attendee status");
         // update attendee status
         NSDictionary *attendee = [notice objectForKey:ATTENDEE];
+        
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
+        
+        if (self.inGroup) {
+            [gc updateDialButtonStatus:attendee];
+        }
+
         [gc updateAttendee:attendee withMyself:YES];
     } else if ([action isEqualToString:ACTION_UPDATE_ATTENDEE_LIST]) {
         NSLog(@"processOneNotice - update attendee list");
 
         // update attendee list
         ECGroupViewController *gc = (ECGroupViewController*)self.groupController;
-
+        
        // [NSThread detachNewThreadSelector:@selector(refreshAttendeeList) toTarget:gc withObject:nil];
         [gc refreshAttendeeList];
     } else if ([action isEqualToString:ACTION_KICKOUT]) {
