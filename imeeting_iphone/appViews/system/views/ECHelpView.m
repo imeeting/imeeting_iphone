@@ -7,7 +7,6 @@
 //
 
 #import "ECHelpView.h"
-#import "CommonToolkit/CommonToolkit.h"
 #import "ECConstants.h"
 
 @implementation ECHelpView
@@ -53,18 +52,21 @@
 {
     // starting the load, show the activity indicator in the status bar
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     // finished loading, hide the activity indicator in the status bar
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [MBProgressHUD hideHUDForView:self animated:YES];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     // load error, hide the activity indicator in the status bar
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [MBProgressHUD hideHUDForView:self animated:YES];
     
     // report the error inside the webview
     NSString* errorString = [NSString stringWithFormat:
