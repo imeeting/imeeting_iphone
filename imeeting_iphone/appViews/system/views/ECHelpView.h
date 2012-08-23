@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonToolkit/CommonToolkit.h"
 
 @interface ECHelpView : UIWebView <UIWebViewDelegate>
-
 @end
