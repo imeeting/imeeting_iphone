@@ -140,6 +140,7 @@
 		F8E4B9EF15A5267700322C7A /* ECContactsSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9EE15A5267700322C7A /* ECContactsSelectViewController.m */; };
 		F8E4B9F315A526AE00322C7A /* ECContactsSelectContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E4B9F215A526AE00322C7A /* ECContactsSelectContainerView.m */; };
 		F8E7891615A41E76009FD06D /* CommonToolkitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */; };
+		F8EC090D15E6094C0091F68E /* ECAppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EC090C15E6094C0091F68E /* ECAppUtil.m */; };
 		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
 		F8EDF12815A68FE4003DF47F /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F8EDF12715A68FE4003DF47F /* default_avatar.png */; };
 		F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */; };
@@ -488,6 +489,8 @@
 		F8E4B9F115A526AE00322C7A /* ECContactsSelectContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECContactsSelectContainerView.h; path = contactselection/ECContactsSelectContainerView.h; sourceTree = "<group>"; };
 		F8E4B9F215A526AE00322C7A /* ECContactsSelectContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECContactsSelectContainerView.m; path = contactselection/ECContactsSelectContainerView.m; sourceTree = "<group>"; };
 		F8E7891515A41E76009FD06D /* CommonToolkitBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = CommonToolkitBundle.bundle; path = imeeting_iphone/Resources/bundles/CommonToolkitBundle.bundle; sourceTree = "<group>"; };
+		F8EC090B15E6094C0091F68E /* ECAppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECAppUtil.h; path = Util/ECAppUtil.h; sourceTree = "<group>"; };
+		F8EC090C15E6094C0091F68E /* ECAppUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECAppUtil.m; path = Util/ECAppUtil.m; sourceTree = "<group>"; };
 		F8ED8AA81581974F009ECF13 /* ECBaseUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECBaseUIView.h; sourceTree = "<group>"; };
 		F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECBaseUIView.m; sourceTree = "<group>"; };
 		F8ED8AB01581E817009ECF13 /* ECUrlConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ECUrlConfig.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1304,6 +1307,8 @@
 		F8EDF12A15A6B41A003DF47F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F8EC090B15E6094C0091F68E /* ECAppUtil.h */,
+				F8EC090C15E6094C0091F68E /* ECAppUtil.m */,
 				F809862D15B5741A00098A0C /* ECDeviceTokenPoster.h */,
 				F809862E15B5741A00098A0C /* ECDeviceTokenPoster.m */,
 				F8EDF12B15A6B462003DF47F /* AddressBookManager+Avatar.h */,
@@ -1557,6 +1562,7 @@
 				F8F8C8E715E1E4160022F121 /* ECHelpView.m in Sources */,
 				F8F8C8EA15E1E42A0022F121 /* ECHelpViewController.m in Sources */,
 				F827EE8D15E327640095103E /* BottomBarButton.m in Sources */,
+				F8EC090D15E6094C0091F68E /* ECAppUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
