@@ -74,4 +74,12 @@
                              error.localizedDescription];
     [self loadHTMLString:errorString baseURL:nil];
 }
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSURL *url = [request URL];
+    if (([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"] || [url.scheme isEqualToString:@"mailto"]) && navigationType == UIWebViewNavigationTypeLinkClicked) {
+        return ![[UIApplication sharedApplication] openURL:url];
+    }
+    return YES;
+}
 @end
