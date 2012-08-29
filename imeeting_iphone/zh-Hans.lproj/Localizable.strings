@@ -138,3 +138,4 @@
 "Hangup Talking failed" = "结束操作失败！";
 "Hangup Talking?" = "要结束当前语音群聊吗？";
 "you'are prohibited to join the group" = "当前您无法进入群聊，可能已被发起人移除。";
+"call center" = "智会";
