@@ -47,7 +47,7 @@
 "Talking Group" = "我的群聊";
 "Attendee List" = "成员列表";
 "Leave Group" = "离开群聊";
-"error in join group" = "无法进入当前组, 请稍后重试！";
+"error in join group" = "无法进入当前群聊, 请稍后重试！";
 "Add Attendee" = "添加成员";
 "This attendee's video is off" = "此成员尚未打开视频";
 "Loading Video" = "正在加载视频";
@@ -67,7 +67,7 @@
 "Creating Group" = "正在创建群聊";
 "no attendee selected" = "您没有选择新成员！";
 "finishing creating group" = "正在创建..";
-"Leave Group?" = "确定要离开群聊?";
+"Leave Group?" = "您要离开群聊吗?";
 "Back" = "返回";
 "error in hide group" = "删除群聊失败";
 "Watch Video" = "观看视频";
@@ -85,7 +85,7 @@
 "Setting" = "设置";
 "Account" = "账户";
 "Set Account" = "设置账户";
-"You have been removed from the group by host" = "您被主持人移出群聊";
+"You have been removed from the group by host" = "您被发起人移出群聊";
 "%@ has been removed from the group" = "%@已被移出群聊";
 "Unable to load video" = "加载视频失败";
 "Join" = "加入";
@@ -137,3 +137,4 @@
 "Hangup is forbidden" = "结束操作不被允许！";
 "Hangup Talking failed" = "结束操作失败！";
 "Hangup Talking?" = "要结束当前语音群聊吗？";
+"you'are prohibited to join the group" = "当前您无法进入群聊，可能已被发起人移除。";

@@ -138,3 +138,4 @@
 "Hangup is forbidden" = "Hangup is forbidden!";
 "Hangup Talking failed" = "Hangup failed";
 "Hangup Talking?" = "Hangup current talking?";
+"you'are prohibited to join the group" = "You cannot join current group talk, may be removed by creater.";

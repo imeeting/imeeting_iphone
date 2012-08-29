@@ -417,7 +417,7 @@
         [actions addObject:NSLocalizedString(@"Watch Video", "")];
     }
     
-    if ([onlineStatus isEqualToString:ONLINE]) {
+    if (![onlineStatus isEqualToString:ONLINE]) {
         if ([phoneStatus isEqualToString:TERMINATED] || [phoneStatus isEqualToString:FAILED] || [phoneStatus isEqualToString:TERMWAIT]) {
             [actions addObject:NSLocalizedString(@"Call", "")];
         } else if ([phoneStatus isEqualToString:CALL_WAIT] || [phoneStatus isEqualToString:ESTABLISHED]) {
