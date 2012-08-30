@@ -410,6 +410,9 @@
     NSString *videoStatus = [attendee objectForKey:VIDEO_STATUS];
     NSString *phoneStatus = [attendee objectForKey:TELEPHONE_STATUS];
     
+    NSString *accountName = [[UserManager shareUserManager] userBean].name;
+
+    
     NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
     NSMutableArray *actions = [NSMutableArray arrayWithCapacity:5];
     // generate action items
@@ -417,7 +420,7 @@
         [actions addObject:NSLocalizedString(@"Watch Video", "")];
     }
     
-    if (![onlineStatus isEqualToString:ONLINE]) {
+    if (![onlineStatus isEqualToString:ONLINE] || [accountName isEqualToString:username]) {
         if ([phoneStatus isEqualToString:TERMINATED] || [phoneStatus isEqualToString:FAILED] || [phoneStatus isEqualToString:TERMWAIT]) {
             [actions addObject:NSLocalizedString(@"Call", "")];
         } else if ([phoneStatus isEqualToString:CALL_WAIT] || [phoneStatus isEqualToString:ESTABLISHED]) {
@@ -425,7 +428,6 @@
         }
     }
  
-    NSString *accountName = [[UserManager shareUserManager] userBean].name;
     if (![accountName isEqualToString:username]) {
         [actions addObject:NSLocalizedString(@"Send SMS", nil)];
         [actions addObject:NSLocalizedString(@"Kick", "")];
@@ -718,12 +720,6 @@
     [videoView performSelectorOnMainThread:@selector(setDialButtonAsDial) withObject:nil waitUntilDone:NO];
 }
 
-/*
-- (void)setDialButtonAsTalking {
-    ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
-    [videoView performSelectorOnMainThread:@selector(setDialButtonAsTalking) withObject:nil waitUntilDone:NO];
-}
-*/
 - (void)setDialButtonAsHangUp {
     ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
     [videoView performSelectorOnMainThread:@selector(setDialButtonAsHangUp) withObject:nil waitUntilDone:NO];

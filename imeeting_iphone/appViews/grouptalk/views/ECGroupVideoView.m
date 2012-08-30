@@ -307,8 +307,6 @@ static CGFloat GroupIdLabelHeight = 20;
 - (void)onDialAction {
     NSString *title = _dialButton.title;
     if ([NSLocalizedString(@"Dial", nil) isEqualToString:title]) {
-       // NSString *phoneUrl = [NSString stringWithFormat:@"telprompt://%@", CALL_CENTER_NUM];
-       // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneUrl]];
         RIButtonItem *cancelItem = [RIButtonItem item];
         cancelItem.label = NSLocalizedString(@"Cancel", nil);
         RIButtonItem *callItem = [RIButtonItem item];
@@ -320,10 +318,7 @@ static CGFloat GroupIdLabelHeight = 20;
             }
         };
         [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Call me into the talking group?", nil) cancelButtonItem:cancelItem otherButtonItems:callItem, nil] show];
-        
-        
-    } else if ([NSLocalizedString(@"Talking", nil) isEqualToString:title]) {
-        [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"You're in talking now.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil] show];
+                
     } else if ([NSLocalizedString(@"Hangup Talking", nil) isEqualToString:title]) {
         RIButtonItem *cancelItem = [RIButtonItem item];
         cancelItem.label = NSLocalizedString(@"Cancel", nil);
@@ -372,11 +367,7 @@ static CGFloat GroupIdLabelHeight = 20;
 - (void)setDialButtonAsDial {
     [_dialButton setTitle:NSLocalizedString(@"Dial", nil)];
 }
-/*
-- (void)setDialButtonAsTalking {
-    [_dialButton setTitle:NSLocalizedString(@"Talking", nil)];
-}
-*/
+
 - (void)setDialButtonAsHangUp {
     [_dialButton setTitle:NSLocalizedString(@"Hangup Talking", nil)];
 }
@@ -401,6 +392,8 @@ static CGFloat GroupIdLabelHeight = 20;
                 [self setDialButtonAsDial];
             } else if ([phoneStatus isEqualToString:ESTABLISHED]) {
                 [self setDialButtonAsHangUp];
+            } else if ([phoneStatus isEqualToString:CALL_WAIT]) {
+                [self setDialButtonAsCalling];
             }
         }
     }

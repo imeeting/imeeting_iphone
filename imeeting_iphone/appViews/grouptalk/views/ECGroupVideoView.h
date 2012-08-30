@@ -29,7 +29,6 @@
 - (void)onOpenCameraButtonClickAction;
 
 - (void)setDialButtonAsDial;
-- (void)setDialButtonAsTalking;
 - (void)setDialButtonAsHangUp;
 - (void)setDialButtonAsCalling;
 - (void)updateDialButtonStatus:(NSDictionary *)attendee;

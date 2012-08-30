@@ -24,7 +24,6 @@
 
 // dial button related
 - (void)setDialButtonAsDial;
-//- (void)setDialButtonAsTalking;
 - (void)setDialButtonAsHangUp;
 - (void)setDialButtonAsCalling;
 - (void)callMeIntoTalkingGroup;
