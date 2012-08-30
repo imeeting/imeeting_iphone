@@ -52,7 +52,7 @@
     NSString *version = [mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSLog(@"app name: %@ version: %@", appName, version);
     
-    UILabel *appNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(logoImgView.frame.origin.x + logoImgView.frame.size.width + 10, logoImgView.frame.origin.y + 5, 60, 30)];
+    UILabel *appNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(logoImgView.frame.origin.x + logoImgView.frame.size.width + 10, logoImgView.frame.origin.y + 5, 120, 30)];
     appNameLabel.text = appName;
     appNameLabel.textColor = [UIColor blackColor];
     appNameLabel.font = [UIFont fontWithName:CHINESE_BOLD_FONT size:20];

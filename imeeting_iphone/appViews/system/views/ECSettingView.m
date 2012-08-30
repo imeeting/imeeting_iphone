@@ -12,7 +12,7 @@
 
 #define SETTING_CELL_WIDTH      268
 
-#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), NSLocalizedString(@"About", nil), NSLocalizedString(@"Help", nil), nil]
+#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), NSLocalizedString(@"Help", nil), NSLocalizedString(@"About", nil), nil]
 
 /*
 @interface SettingButton : UIButton
@@ -201,10 +201,10 @@
             [self showAccountSettingView];
             break;
         case 1:
-            [self showAboutView];
+            [self showHelpView];
             break;
         case 2:
-            [self showHelpView];
+            [self showAboutView];
             break;
         default:
             break;
