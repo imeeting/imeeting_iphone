@@ -140,3 +140,6 @@
 "Hangup Talking?" = "Hangup current talking?";
 "you'are prohibited to join the group" = "You cannot join current group talk, may be removed by creater.";
 "call center" = "WeTalking";
+"Upload Addressbook" = "Upload Addressbook";
+"Upload Addressbook?" = "Are you sure to upload addressbook?\nThe old data in the cloud side will be overwritten";
+"Upload" = "Upload";

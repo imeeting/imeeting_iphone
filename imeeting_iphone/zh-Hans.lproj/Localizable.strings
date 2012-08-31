@@ -139,3 +139,6 @@
 "Hangup Talking?" = "要结束当前语音群聊吗？";
 "you'are prohibited to join the group" = "当前您无法进入群聊，可能已被发起人移除。";
 "call center" = "智会";
+"Upload Addressbook" = "上传通讯录";
+"Upload Addressbook?" = "确定要上传通讯录吗？\n上传后，云端原有数据将被覆盖。";
+"Upload" = "上传";

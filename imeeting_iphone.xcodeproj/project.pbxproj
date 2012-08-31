@@ -20,6 +20,7 @@
 		F827EE8D15E327640095103E /* BottomBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F827EE8C15E327640095103E /* BottomBarButton.m */; };
 		F827EE9015E37C680095103E /* addcontact.png in Resources */ = {isa = PBXBuildFile; fileRef = F827EE8E15E37C680095103E /* addcontact.png */; };
 		F827EE9115E37C680095103E /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = F827EE8F15E37C680095103E /* sms.png */; };
+		F839856315F0937700F28887 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F839856215F0937700F28887 /* CommonToolkit.framework */; };
 		F83D8A0215C3D09C00173C2D /* navibutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F83D8A0115C3D09C00173C2D /* navibutton.png */; };
 		F863C862157C61320045C08C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C861157C61320045C08C /* UIKit.framework */; };
 		F863C864157C61320045C08C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F863C863157C61320045C08C /* Foundation.framework */; };
@@ -58,7 +59,6 @@
 		F86F086F15C9106C00793E73 /* video_on.png in Resources */ = {isa = PBXBuildFile; fileRef = F86F085B15C9106C00793E73 /* video_on.png */; };
 		F86F087115C914B100793E73 /* add_member_button.png in Resources */ = {isa = PBXBuildFile; fileRef = F86F087015C914B100793E73 /* add_member_button.png */; };
 		F86F087315C9216300793E73 /* back_navi_button.png in Resources */ = {isa = PBXBuildFile; fileRef = F86F087215C9216300793E73 /* back_navi_button.png */; };
-		F87501C115E4739000507229 /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F87501C015E4739000507229 /* CommonToolkit.framework */; };
 		F87501C415E476BB00507229 /* offline_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = F87501C215E476BB00507229 /* offline_flag.png */; };
 		F87501C515E476BB00507229 /* online_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = F87501C315E476BB00507229 /* online_flag.png */; };
 		F87BF5E11585DE3E00339C0C /* ECMainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F87BF5E01585DE3E00339C0C /* ECMainPageView.m */; };
@@ -175,6 +175,7 @@
 		F827EE8C15E327640095103E /* BottomBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BottomBarButton.m; path = grouptalk/views/BottomBarButton.m; sourceTree = "<group>"; };
 		F827EE8E15E37C680095103E /* addcontact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addcontact.png; sourceTree = "<group>"; };
 		F827EE8F15E37C680095103E /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
+		F839856215F0937700F28887 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F83D8A0115C3D09C00173C2D /* navibutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navibutton.png; sourceTree = "<group>"; };
 		F863C85D157C61320045C08C /* imeeting_iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imeeting_iphone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F863C861157C61320045C08C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -218,7 +219,6 @@
 		F86F085B15C9106C00793E73 /* video_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_on.png; sourceTree = "<group>"; };
 		F86F087015C914B100793E73 /* add_member_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_member_button.png; sourceTree = "<group>"; };
 		F86F087215C9216300793E73 /* back_navi_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_navi_button.png; sourceTree = "<group>"; };
-		F87501C015E4739000507229 /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphonesimulator/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F87501C215E476BB00507229 /* offline_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offline_flag.png; sourceTree = "<group>"; };
 		F87501C315E476BB00507229 /* online_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = online_flag.png; sourceTree = "<group>"; };
 		F87686B515DDDFC900DDDA23 /* AuthInterceptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AuthInterceptor.h; path = Util/AuthInterceptor.h; sourceTree = "<group>"; };
@@ -515,7 +515,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F87501C115E4739000507229 /* CommonToolkit.framework in Frameworks */,
+				F839856315F0937700F28887 /* CommonToolkit.framework in Frameworks */,
 				F8FBB09615CA91D100384103 /* CoreTelephony.framework in Frameworks */,
 				F800185715B66C5800745A8F /* CoreText.framework in Frameworks */,
 				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
@@ -574,7 +574,7 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
-				F87501C015E4739000507229 /* CommonToolkit.framework */,
+				F839856215F0937700F28887 /* CommonToolkit.framework */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,
@@ -1709,7 +1709,7 @@
 					"\"$(SRCROOT)/Library/x264lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CB6BDA3-5077-44BF-A015-8C7F93692493";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4553F0D9-CCA8-496E-BCA3-760053A56763";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Build/Products/Debug-iphonesimulator\" \"$(SRCROOT)/Library/ffmpeglib\" \"$(SRCROOT)/Library/openssllib\" \"$(SRCROOT)/Library/rtmplib\" \"$(SRCROOT)/Library/speexlib\" \"$(SRCROOT)/Library/x264lib\"";
 				WRAPPER_EXTENSION = app;
 			};

@@ -12,6 +12,7 @@
 #import "ECLoginViewController.h"
 #import "ECAboutViewController.h"
 #import "ECHelpViewController.h"
+#import "ECConstants.h"
 
 @interface ECSettingViewController ()
 
@@ -65,5 +66,30 @@
 
 - (void)showHelpView {
     [self.navigationController pushViewController:[[ECHelpViewController alloc] init] animated:YES];
+}
+
+- (void)uploadAddressbook {
+    RIButtonItem *cancelItem = [RIButtonItem item];
+    cancelItem.label = NSLocalizedString(@"Cancel", nil);
+    RIButtonItem *uploadItem = [RIButtonItem item];
+    uploadItem.label = NSLocalizedString(@"Upload", nil);
+    uploadItem.action = ^{
+        NSArray *groups = [[AddressBookManager shareAddressBookManager] allGroupsInfoArray];
+               
+        NSArray *contacts = [[AddressBookManager shareAddressBookManager] allContactsInfoArray];
+        NSMutableArray *allContacts = [NSMutableArray arrayWithCapacity:10];
+        for (ContactBean * contact in contacts) {
+            NSLog(@"contact: %@", contact);
+            NSDictionary *contactDic = [NSDictionary dictionaryWithObjectsAndKeys:contact.displayName, AB_CONTACT_NAME, contact.namePhonetics, AB_CONTACT_PHONETIC_ARRAY, contact.groups, AB_CONTACT_GROUP_ARRAY, contact.phoneNumbers, AB_CONTACT_PHONE_ARRAY, nil];
+            [allContacts addObject:contactDic];
+        }
+
+        NSString *groupsJsonString = [groups JSONString];
+        NSString *contactsJsonString = [allContacts JSONString];
+        
+        // todo: post groups and contacts to server via http
+        
+    };
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Upload Addressbook", nil) message:NSLocalizedString(@"Upload Addressbook?", nil) cancelButtonItem:cancelItem otherButtonItems:uploadItem, nil] show];
 }
 @end

@@ -76,3 +76,12 @@ static NSString *ACTION_UPDATE_STATUS = @"update_status";
 static NSString *ACTION_UPDATE_ATTENDEE_LIST = @"update_attendee_list";
 static NSString *ACTION_KICKOUT = @"kickout";
 static NSString *ACTION_INVITED = @"invited";
+
+// Cloud AddressBook Constants
+static NSString *AB_ALL_GROUPS = @"all_groups";
+static NSString *AB_GROUP_ID = @"group_id";
+static NSString *AB_GROUP_NAME = @"group_name";
+static NSString *AB_CONTACT_NAME = @"contact_name";
+static NSString *AB_CONTACT_PHONETIC_ARRAY = @"phonetic_array";
+static NSString *AB_CONTACT_PHONE_ARRAY = @"phone_array";
+static NSString *AB_CONTACT_GROUP_ARRAY = @"group_array";

@@ -12,7 +12,7 @@
 
 #define SETTING_CELL_WIDTH      268
 
-#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), NSLocalizedString(@"Help", nil), NSLocalizedString(@"About", nil), nil]
+#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), NSLocalizedString(@"Upload Addressbook", nil), NSLocalizedString(@"Help", nil), NSLocalizedString(@"About", nil), nil]
 
 /*
 @interface SettingButton : UIButton
@@ -201,9 +201,12 @@
             [self showAccountSettingView];
             break;
         case 1:
-            [self showHelpView];
+            [self uploadAddressbook];
             break;
         case 2:
+            [self showHelpView];
+            break;
+        case 3:
             [self showAboutView];
             break;
         default:
@@ -228,6 +231,12 @@
 - (void)showHelpView {
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(showHelpView)]) {
         [self.viewControllerRef performSelector:@selector(showHelpView)];
+    }
+}
+
+- (void)uploadAddressbook {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(uploadAddressbook)]) {
+        [self.viewControllerRef performSelector:@selector(uploadAddressbook)];
     }
 }
 
