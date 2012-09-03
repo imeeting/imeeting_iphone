@@ -44,7 +44,7 @@
         [[AddressBookManager shareAddressBookManager] addABChangedObserver:self];
         
         // get all contacts info array from addressBook
-        _mAllContactsInfoArrayInABRef = _mPresentContactsInfoArrayRef = [[AddressBookManager shareAddressBookManager].allContactsInfoArray phoneticsSortedContactsInfoArray];
+        _mAllContactsInfoArrayInABRef = _mPresentContactsInfoArrayRef = [AddressBookManager shareAddressBookManager].allContactsInfoArray;
         // remove each contact extension dictionary
         for (ContactBean *_contact in _mAllContactsInfoArrayInABRef) {
             [_contact.extensionDic removeAllObjects];

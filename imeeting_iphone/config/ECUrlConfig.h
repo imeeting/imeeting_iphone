@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define SERVER_ADDR                 @"http://www.wetalking.net/imeeting"
-//#define SERVER_ADDR                 @"http://192.168.1.140:8080/imeeting"
+//#define SERVER_ADDR                 @"http://192.168.1.135:8080/imeeting"
 #define RETRIEVE_PHONE_CODE_URL     [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/getPhoneCode"]
 #define CHECK_PHONE_CODE_URL        [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/checkPhoneCode"]
 #define USER_REGISTER_URL           [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/regUser"]
@@ -27,6 +27,8 @@
 #define CALL_ATTENDEE_URL           [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/call"]
 #define HANGUP_ATTENDEE_URL         [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/hangup"]
 #define KICKOUT_ATTENDEE_URL        [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/kickout"]
+
+#define ADDRESSBOOK_UPLOAD_URL      [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/addressbook/upload"]
 
 #define HELP_PAGE_URL               [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/help"]
 

@@ -78,7 +78,7 @@ static NSString *ACTION_KICKOUT = @"kickout";
 static NSString *ACTION_INVITED = @"invited";
 
 // Cloud AddressBook Constants
-static NSString *AB_ALL_GROUPS = @"all_groups";
+static NSString *AB_OWNER = @"owner";
 static NSString *AB_GROUP_ID = @"group_id";
 static NSString *AB_GROUP_NAME = @"group_name";
 static NSString *AB_CONTACT_NAME = @"contact_name";

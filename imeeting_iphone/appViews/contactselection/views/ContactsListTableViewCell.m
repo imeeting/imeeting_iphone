@@ -235,7 +235,6 @@
     if (pContact.phoneNumbers && [pContact.phoneNumbers count] > 1) {
         _ret += ([pContact.phoneNumbers count] - 1) * PHONENUMBERSLABEL_DEFAULTHEIGHT;
     }
-    NSLog(@"#height: %f", _ret);
     return _ret;
 }
 

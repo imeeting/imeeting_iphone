@@ -141,5 +141,8 @@
 "you'are prohibited to join the group" = "You cannot join current group talk, may be removed by creater.";
 "call center" = "WeTalking";
 "Upload Addressbook" = "Upload Addressbook";
-"Upload Addressbook?" = "Are you sure to upload addressbook?\nThe old data in the cloud side will be overwritten";
+"Upload Addressbook?" = "You can create group talk after uploading in www.wetalking.net.";
 "Upload" = "Upload";
+"AddressBook Upload OK" = "AddressBook is uploaded successfully!";
+"AddressBook Upload Failed" = "Fail to upload addressbook, please try later.";
+"Uploading AddressBook" = "Uploading AddressBook...";
