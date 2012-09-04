@@ -99,7 +99,11 @@
     
     for (ContactBean * contact in contacts) {
         NSLog(@"contact: %@", contact);
-        NSDictionary *contactDic = [NSDictionary dictionaryWithObjectsAndKeys:accountName, AB_OWNER, contact.displayName, AB_CONTACT_NAME, contact.namePhonetics, AB_CONTACT_PHONETIC_ARRAY, contact.phoneNumbers, AB_CONTACT_PHONE_ARRAY, contact.groups, AB_CONTACT_GROUP_ARRAY, nil];
+        NSMutableString *searchName = [[NSMutableString alloc] initWithCapacity:10];
+        for (NSString *name in contact.fullNames) {
+            [searchName appendString:name];
+        }
+        NSDictionary *contactDic = [NSDictionary dictionaryWithObjectsAndKeys:accountName, AB_OWNER, contact.displayName, AB_CONTACT_DISPLAY_NAME, contact.namePhonetics, AB_CONTACT_PHONETIC_ARRAY, contact.fullNames, AB_CONTACT_NAMES, searchName, AB_CONTACT_SEARCH_NAME, contact.phoneNumbers, AB_CONTACT_PHONE_ARRAY, contact.groups, AB_CONTACT_GROUP_ARRAY, nil];
         [allContacts addObject:contactDic];
     }
     
