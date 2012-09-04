@@ -12,7 +12,5 @@
 @interface UserBean (IMeeting)
 
 @property (nonatomic) BOOL rememberPwd;
-@property (nonatomic) BOOL autoLogin;
-
 
 @end

@@ -10,19 +10,6 @@
 
 @implementation UserBean (IMeeting)
 
-- (void)setAutoLogin:(BOOL)autoLogin {
-    [self.extensionDic setObject:[NSNumber numberWithBool:autoLogin] forKey:@"autologin"];
-}
-
-- (BOOL)autoLogin {
-    NSNumber *ret = [self.extensionDic objectForKey:@"autologin"];
-    BOOL autoLogin = NO;
-    if (ret) {
-        autoLogin = [ret boolValue];
-    }
-    return autoLogin;
-}
-
 - (void)setRememberPwd:(BOOL)rememberPwd {
     [self.extensionDic setObject:[NSNumber numberWithBool:rememberPwd] forKey:@"rememberPwd"];
 }

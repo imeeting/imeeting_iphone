@@ -42,7 +42,6 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [userDefaults objectForKey:USERNAME];
     NSString *password = [userDefaults objectForKey:PASSWORD];
-    NSNumber *autologin = [userDefaults objectForKey:AUTOLOGIN];
     
     UserBean *userBean = [[UserManager shareUserManager] userBean];
     userBean.name = username;
@@ -52,7 +51,6 @@
     } else {
         userBean.rememberPwd = NO;
     }
-    userBean.autoLogin = autologin.boolValue;
     
 }
 
@@ -130,7 +128,6 @@
                     } else {
                         [userDefaults removeObjectForKey:PASSWORD];
                     }
-                    [userDefaults setObject:[NSNumber numberWithBool:userBean.autoLogin] forKey:AUTOLOGIN];
                     
                     NSString *userkey = [jsonData objectForKey:USERKEY];
                     NSLog(@"userkey: %@", userkey);
