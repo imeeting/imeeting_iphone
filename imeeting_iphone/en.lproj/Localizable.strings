@@ -68,7 +68,7 @@
 "inviting attendees" = "Sending invitation request";
 "no attendee selected" = "No attendee selected!";
 "finishing creating group" = "Creating group talk...";
-"Leave Group?" = "Leave Group Talk?";
+"Leave Group?" = "Are you sure to leave group talk?";
 "Back" = "Back";
 "error in hide group" = "Fail to delete group talk";
 "Watch Video" = "Watch Video";

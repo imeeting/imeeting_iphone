@@ -56,13 +56,7 @@
     }
     */
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(inviteAttendees:)]) {
-        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
-        
-        if (self.isAppearedInCreatingNewGroup) {
-            hud.labelText = NSLocalizedString(@"finishing creating group", "");
-        } else {
-            hud.labelText = NSLocalizedString(@"inviting attendees", "");
-        }
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];        
         [hud showWhileExecuting:@selector(inviteAttendees:) onTarget:self.viewControllerRef withObject:selectedAttendeeArray animated:YES];
     }
 }
