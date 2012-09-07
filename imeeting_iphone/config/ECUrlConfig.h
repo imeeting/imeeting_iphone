@@ -27,6 +27,7 @@
 #define CALL_ATTENDEE_URL           [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/call"]
 #define HANGUP_ATTENDEE_URL         [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/hangup"]
 #define KICKOUT_ATTENDEE_URL        [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/kickout"]
+#define HEART_BEAT_URL              [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/heartbeat"]
 
 #define ADDRESSBOOK_UPLOAD_URL      [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/addressbook/upload"]
 

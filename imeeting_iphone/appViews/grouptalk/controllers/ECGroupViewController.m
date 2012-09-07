@@ -22,7 +22,7 @@
 
 @interface ECGroupViewController () {
     MFMessageComposeViewController *mMsgViewController;
-  
+    NSTimer *_timer;
 }
 - (void)setGroupIdLabel;
 
@@ -51,8 +51,6 @@
 - (void)onFinishedHangup:(ASIHTTPRequest*)pRequest;
 - (void)kickout:(NSString*)targetUsername;
 - (void)onFinishedKickout:(ASIHTTPRequest*)pRequest;
-//- (void)muteMyself;
-//- (void)unmuteMyself;
 @end
 
 @implementation ECGroupViewController
@@ -87,11 +85,8 @@
         }
         
         [module.videoManager setupSession];
-        // start video capturing
-        //ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
-        //[videoView onOpenCameraButtonClickAction];
         
-        
+        _timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendHeartBeat) userInfo:nil repeats:YES];
        
     }
    
@@ -147,6 +142,8 @@
 
 #pragma mark - actions
 - (void)onLeaveGroup {
+    [_timer invalidate];
+    
     ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
     [module onLeaveGroup];
     NSLog(@"module onLeaveGroup ok");
@@ -733,5 +730,11 @@
 - (void)updateDialButtonStatus:(NSDictionary *)attendee {
     ECGroupVideoView *videoView = ((ECGroupView*)self.view).videoView;
     [videoView performSelectorOnMainThread:@selector(updateDialButtonStatus:) withObject:attendee waitUntilDone:NO];
+}
+
+- (void)sendHeartBeat {
+    ECGroupModule *module = [ECGroupManager sharedECGroupManager].currentGroupModule;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:module.groupId, GROUP_ID, nil];
+    [HttpUtil postSignatureRequestWithUrl:HEART_BEAT_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:nil andFailedRespSelector:@selector(onNetworkFailed:)];
 }
 @end
