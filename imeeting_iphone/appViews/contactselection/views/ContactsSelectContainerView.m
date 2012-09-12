@@ -358,7 +358,7 @@
 }
 
 - (void)searchContactWithParameter{
-     NSString *searchText = _mSearchField.text;
+    NSString *searchText = _mSearchField.text;
     if (searchText == nil || [searchText isEqualToString:@""]) {
         searchText = _phoneNumberInputTextField.text;
     }
@@ -397,10 +397,10 @@
                 if (_contact.id == _searchedContact.id) {
                     [_searchedContactsArray addObject:_searchedContact];
                     if (match) {
-		        [_contact.extensionDic removeObjectForKey:NAME_MATCHING_INDEXS];
-		   } else {
-			[_contact.extensionDic removeObjectForKey:PHONENUMBER_MATCHING_INDEXS];
-		   }
+                        [_contact.extensionDic removeObjectForKey:NAME_MATCHING_INDEXS];
+                    } else {
+                        [_contact.extensionDic removeObjectForKey:PHONENUMBER_MATCHING_INDEXS];
+                    }
                     break;
                 }
             }
