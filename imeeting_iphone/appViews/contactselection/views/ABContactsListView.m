@@ -234,65 +234,9 @@
     // get addressBook contacts list table view parent view
     ContactsSelectContainerView *_contactsSelectContainerView = (ContactsSelectContainerView *)_contactsSelectView;
     
-    // process changed contact id array
-    for (NSNumber *_contactId in [pInfo allKeys]) {
-        // get action
-        switch (((NSNumber *)[[pInfo objectForKey:_contactId] objectForKey:CONTACT_ACTION]).intValue) {
-            case contactAdd:
-                {
-                    // add to all contacts info array in addressBook reference
-                    for (NSInteger _index = 0; _index < [_newAllContactsInfoArrayInAB count]; _index++) {
-                        if (((ContactBean *)[_newAllContactsInfoArrayInAB objectAtIndex:_index]).id == _contactId.integerValue) {
-                            [_mAllContactsInfoArrayInABRef insertObject:[_newAllContactsInfoArrayInAB objectAtIndex:_index] atIndex:_index];
-                            
-                            [_contactsSelectContainerView searchContactWithParameter];
-                            
-                            break;
-                        }
-                    }
-                }
-                break;
-                
-            case contactModify:
-                {
-                    // save the modify contact index of all contacts info array in addressBook reference and new temp all contacts info array in addressBook
-                    NSInteger _oldindex, _newIndex;
-                    for (NSInteger _index = 0; _index < [_mAllContactsInfoArrayInABRef count]; _index++) {
-                        if (((ContactBean *)[_mAllContactsInfoArrayInABRef objectAtIndex:_index]).id == _contactId.integerValue) {
-                            _oldindex = _index;
-                            
-                            _newIndex = [_newAllContactsInfoArrayInAB indexOfObject:[_mAllContactsInfoArrayInABRef objectAtIndex:_index]];
-                            
-                            break;
-                        }
-                    }
-                    
-                    // check the two indexes
-                    if (_oldindex != _newIndex) {
-                        [_mAllContactsInfoArrayInABRef removeObjectAtIndex:_oldindex];
-                        [_mAllContactsInfoArrayInABRef insertObject:[_newAllContactsInfoArrayInAB objectAtIndex:_newIndex] atIndex:_newIndex];
-                    }
-                    
-                    [_contactsSelectContainerView searchContactWithParameter];
-                }
-                break;
-                
-            case contactDelete:
-                {
-                    // delete from all contacts info array in addressBook reference
-                    for (NSInteger _index = 0; _index < [_mAllContactsInfoArrayInABRef count]; _index++) {
-                        if (((ContactBean *)[_mAllContactsInfoArrayInABRef objectAtIndex:_index]).id == _contactId.integerValue) {
-                            [_mAllContactsInfoArrayInABRef removeObjectAtIndex:_index];
-                            
-                            [_contactsSelectContainerView searchContactWithParameter];
-                            
-                            break;
-                        }
-                    }
-                }
-                break;
-        }
-    }
+    _mAllContactsInfoArrayInABRef = [NSMutableArray arrayWithArray:_newAllContactsInfoArrayInAB];
+    [_contactsSelectContainerView searchContactWithParameter];
+    
 }
 
 - (void)addContactForJoiningMeetingAction:(UIButton *)pSender{
