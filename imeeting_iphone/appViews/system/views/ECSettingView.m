@@ -12,7 +12,8 @@
 
 #define SETTING_CELL_WIDTH      268
 
-#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), NSLocalizedString(@"Upload Addressbook", nil), NSLocalizedString(@"Help", nil), NSLocalizedString(@"About", nil), nil]
+#define SETTING_TITLE_ARRAY     [NSArray arrayWithObjects:NSLocalizedString(@"Set Account", nil), NSLocalizedString(@"Upload Addressbook", nil), \
+                                NSLocalizedString(@"Help", nil), NSLocalizedString(@"About", nil), nil]
 
 /*
 @interface SettingButton : UIButton

@@ -98,7 +98,7 @@
     NSMutableArray *allContacts = [NSMutableArray arrayWithCapacity:10];
     
     for (ContactBean * contact in contacts) {
-        NSLog(@"contact: %@", contact);
+      //  NSLog(@"contact: %@", contact);
         NSMutableString *searchName = [[NSMutableString alloc] initWithCapacity:10];
         for (NSString *name in contact.fullNames) {
             [searchName appendString:name];
