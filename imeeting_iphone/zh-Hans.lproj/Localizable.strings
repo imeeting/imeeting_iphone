@@ -139,9 +139,9 @@
 "Hangup Talking?" = "要结束当前语音群聊吗？";
 "you'are prohibited to join the group" = "当前您无法进入群聊，可能已被发起人移除。";
 "call center" = "智会";
-"Upload Addressbook" = "上传通讯录";
-"Upload Addressbook?" = "上传通讯后，您可以在www.wetalking.net上创建群聊。";
-"Upload" = "上传";
-"AddressBook Upload OK" = "通讯录上传成功！";
-"AddressBook Upload Failed" = "通讯录上传失败，请稍后重试。";
-"Uploading AddressBook" = "正在上传通讯录...";
+"Upload Addressbook" = "备份通讯录";
+"Upload Addressbook?" = "需要备份通讯录到服务器吗？";
+"Upload" = "备份";
+"AddressBook Upload OK" = "通讯录备份成功！";
+"AddressBook Upload Failed" = "通讯录备份失败，请稍后重试。";
+"Uploading AddressBook" = "正在备份通讯录...";

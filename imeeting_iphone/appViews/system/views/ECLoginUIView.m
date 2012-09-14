@@ -67,12 +67,12 @@
     [_pwdInput addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     [loginFormView addSubview:_pwdInput];
     
-    UILabel *rememberPwdLabel = [[UILabel alloc] initWithFrame:CGRectMake(_pwdInput.frame.origin.x + 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 15, 100, SWITCH_HEIGHT)];
+    UILabel *rememberPwdLabel = [[UILabel alloc] initWithFrame:CGRectMake(_pwdInput.frame.origin.x + 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 15, 175, SWITCH_HEIGHT)];
     rememberPwdLabel.textColor = [UIColor colorWithIntegerRed:133 integerGreen:133 integerBlue:133 alpha:1];
     rememberPwdLabel.font = [UIFont fontWithName:CHINESE_FONT size:15];
     rememberPwdLabel.text = NSLocalizedString(@"Remember Pwd", nil);
     rememberPwdLabel.backgroundColor = [UIColor clearColor];
-    _rememberPwdSwitch = [[UISwitch alloc] initWithFrame:CGRectMake((loginFormView.frame.size.width - SWITCH_WDITH) / 2, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 17, SWITCH_WDITH, SWITCH_HEIGHT)];
+    _rememberPwdSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(rememberPwdLabel.frame.origin.x + rememberPwdLabel.frame.size.width + 10, _pwdInput.frame.origin.y + _pwdInput.frame.size.height + 17, SWITCH_WDITH, SWITCH_HEIGHT)];
     _rememberPwdSwitch.on = YES;
     [loginFormView addSubview:rememberPwdLabel];
     [loginFormView addSubview:_rememberPwdSwitch];
