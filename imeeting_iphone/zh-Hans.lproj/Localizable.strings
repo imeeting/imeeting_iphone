@@ -45,7 +45,6 @@
 "Wrong phone number or password" = "手机号码或者密码不正确！";
 "Error in login, please retry." = "登录出错，请重试！";
 "Talking Group" = "我的群聊";
-"Attendee List" = "成员列表";
 "Leave Group" = "离开群聊";
 "error in join group" = "无法进入当前群聊, 请稍后重试！";
 "Add Attendee" = "添加成员";
