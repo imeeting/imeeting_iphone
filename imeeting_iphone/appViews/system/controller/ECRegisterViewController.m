@@ -65,7 +65,6 @@
 - (void)finishRegisterWithParam:(NSDictionary*)param {
     NSLog(@"finish register");
     NSString *nickname = [param objectForKey:@"nickname"];
-    NSLog(@"nickname: %@", nickname);
     NSArray *pwds = [param objectForKey:@"pwds"];
     
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[pwds objectAtIndex:0], @"password", [pwds objectAtIndex:1], @"password1", nickname, @"nickname", nil];

@@ -279,10 +279,10 @@
     
     if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(finishRegisterWithParam:)]) {
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-        [params setObject:@"nickname" forKey:nickname];
-        NSLog(@"## nickname: %@", nickname );
+        [params setObject:nickname forKey:NICKNAME];
+       
         NSArray *pwds = [[NSArray alloc] initWithObjects:pwd1, pwd2, nil];
-        [params setObject:@"pwds" forKey:pwds];
+        [params setObject:pwds forKey:@"pwds"];
         
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
         hud.labelText = NSLocalizedString(@"finishing register..", "");
