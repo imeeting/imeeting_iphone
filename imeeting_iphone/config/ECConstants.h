@@ -40,6 +40,7 @@ static NSString *OWNER = @"owner";
 // Attendee Constants
 static NSString *ATTENDEE = @"attendee";
 static NSString *USERNAME = @"username";
+static NSString *NICKNAME = @"nickname";
 static NSString *ONLINE_STATUS = @"online_status";
 static NSString *VIDEO_STATUS = @"video_status";
 static NSString *TELEPHONE_STATUS = @"telephone_status";

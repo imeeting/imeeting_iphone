@@ -10,6 +10,7 @@
 
 @interface ECRegisterUIView : ECBaseUIView {    
     UITextField *_mUserNameInput;
+    UITextField *_mNicknameInput;
     UITextField *_mPwdInput;
     UITextField *_mPwdConfirmInput;
     UITextField *_mValidateCodeInput;

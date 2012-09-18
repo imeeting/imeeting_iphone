@@ -79,6 +79,7 @@
 		F885A66B159AFE4500709FC7 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F885A661159AFE4500709FC7 /* libx264.a */; };
 		F885A66E159AFFB500709FC7 /* quicklibav.c in Sources */ = {isa = PBXBuildFile; fileRef = F885A66C159AFFB500709FC7 /* quicklibav.c */; };
 		F885A670159B114500709FC7 /* libbz2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F885A66F159B114500709FC7 /* libbz2.1.0.dylib */; };
+		F8886F181608638B008F3FEC /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8886F171608638B008F3FEC /* CommonToolkit.framework */; };
 		F88B7C9C15C0E78500B58AD1 /* leftregionbg.png in Resources */ = {isa = PBXBuildFile; fileRef = F88B7C9B15C0E78500B58AD1 /* leftregionbg.png */; };
 		F88B7C9F15C0F41200B58AD1 /* leftregionbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F88B7C9E15C0F41200B58AD1 /* leftregionbg@2x.png */; };
 		F88B7CA115C0F63700B58AD1 /* addnew.png in Resources */ = {isa = PBXBuildFile; fileRef = F88B7CA015C0F63700B58AD1 /* addnew.png */; };
@@ -144,7 +145,6 @@
 		F8ED8AAA1581974F009ECF13 /* ECBaseUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ED8AA91581974F009ECF13 /* ECBaseUIView.m */; };
 		F8EDF12815A68FE4003DF47F /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F8EDF12715A68FE4003DF47F /* default_avatar.png */; };
 		F8EDF12D15A6B462003DF47F /* AddressBookManager+Avatar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */; };
-		F8F0FA9916031CF2006465BA /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F0FA9816031CF2006465BA /* CommonToolkit.framework */; };
 		F8F8C8DD15E1D66A0022F121 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F8C8DC15E1D66A0022F121 /* Default.png */; };
 		F8F8C8DF15E1D6810022F121 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F8C8DE15E1D6810022F121 /* Default@2x.png */; };
 		F8F8C8E115E1D69A0022F121 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F8F8C8E015E1D69A0022F121 /* logo.png */; };
@@ -397,6 +397,7 @@
 		F885A66C159AFFB500709FC7 /* quicklibav.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = quicklibav.c; path = video/quicklibav.c; sourceTree = "<group>"; };
 		F885A66D159AFFB500709FC7 /* quicklibav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quicklibav.h; path = video/quicklibav.h; sourceTree = "<group>"; };
 		F885A66F159B114500709FC7 /* libbz2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.1.0.dylib; path = usr/lib/libbz2.1.0.dylib; sourceTree = SDKROOT; };
+		F8886F171608638B008F3FEC /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = "../Build/Products/Debug-iphoneos/CommonToolkit.framework"; sourceTree = "<group>"; };
 		F88B7C9B15C0E78500B58AD1 /* leftregionbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftregionbg.png; sourceTree = "<group>"; };
 		F88B7C9E15C0F41200B58AD1 /* leftregionbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftregionbg@2x.png"; sourceTree = "<group>"; };
 		F88B7CA015C0F63700B58AD1 /* addnew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addnew.png; sourceTree = "<group>"; };
@@ -496,7 +497,6 @@
 		F8EDF12715A68FE4003DF47F /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = ../default_avatar.png; sourceTree = "<group>"; };
 		F8EDF12B15A6B462003DF47F /* AddressBookManager+Avatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AddressBookManager+Avatar.h"; path = "Util/AddressBookManager+Avatar.h"; sourceTree = "<group>"; };
 		F8EDF12C15A6B462003DF47F /* AddressBookManager+Avatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AddressBookManager+Avatar.m"; path = "Util/AddressBookManager+Avatar.m"; sourceTree = "<group>"; };
-		F8F0FA9816031CF2006465BA /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = Frameworks/CommonToolkit.framework; sourceTree = "<group>"; };
 		F8F8C8DC15E1D66A0022F121 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../../../../Default.png; sourceTree = "<group>"; };
 		F8F8C8DE15E1D6810022F121 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../../../../Default@2x.png"; sourceTree = "<group>"; };
 		F8F8C8E015E1D69A0022F121 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../../logo.png; sourceTree = "<group>"; };
@@ -513,7 +513,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8F0FA9916031CF2006465BA /* CommonToolkit.framework in Frameworks */,
+				F8886F181608638B008F3FEC /* CommonToolkit.framework in Frameworks */,
 				F8FBB09615CA91D100384103 /* CoreTelephony.framework in Frameworks */,
 				F800185715B66C5800745A8F /* CoreText.framework in Frameworks */,
 				F809862915B5076F00098A0C /* AudioToolbox.framework in Frameworks */,
@@ -572,7 +572,7 @@
 		F863C852157C61320045C08C = {
 			isa = PBXGroup;
 			children = (
-				F8F0FA9816031CF2006465BA /* CommonToolkit.framework */,
+				F8886F171608638B008F3FEC /* CommonToolkit.framework */,
 				F863C867157C61320045C08C /* imeeting_iphone */,
 				F885A5A4159AFDDE00709FC7 /* Library */,
 				F863C860157C61320045C08C /* Frameworks */,

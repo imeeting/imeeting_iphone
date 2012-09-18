@@ -8,6 +8,7 @@
 
 #import "ECAppUtil.h"
 #import "ECConstants.h"
+#import "CommonToolkit/CommonToolkit.h"
 
 @implementation ECAppUtil
 
@@ -15,5 +16,15 @@
     NSString *name = NSLocalizedString(@"call center", nil);
     NSString *number = CALL_CENTER_NUM;
     
+}
+
++ (NSString *)displayNameFromAttendee:(NSDictionary *)attendee {
+    NSString *userName = [attendee objectForKey:USERNAME];
+    NSString *nickname = [attendee objectForKey:NICKNAME];
+    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:userName] objectAtIndex:0];
+    if ([userName isEqualToString:displayName] && nickname && ![nickname isEqualToString:@""]) {
+        displayName = nickname;
+    }
+    return displayName;
 }
 @end

@@ -62,12 +62,15 @@
     [HttpUtil postRequestWithUrl:CHECK_PHONE_CODE_URL andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedCheckPhoneCode:) andFailedRespSelector:nil];
 }
 
-- (void)finishRegisterWithPwds:(NSArray*)pwds {
+- (void)finishRegisterWithParam:(NSDictionary*)param {
     NSLog(@"finish register");
+    NSString *nickname = [param objectForKey:@"nickname"];
+    NSLog(@"nickname: %@", nickname);
+    NSArray *pwds = [param objectForKey:@"pwds"];
     
-    NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[pwds objectAtIndex:0], @"password", [pwds objectAtIndex:1], @"password1", nil];
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[pwds objectAtIndex:0], @"password", [pwds objectAtIndex:1], @"password1", nickname, @"nickname", nil];
     
-    [HttpUtil postRequestWithUrl:USER_REGISTER_URL andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedRegister:) andFailedRespSelector:nil];
+    [HttpUtil postRequestWithUrl:USER_REGISTER_URL andPostFormat:urlEncoded andParameter:parameter andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedRegister:) andFailedRespSelector:nil];
 }
 
 - (void)jumpToLoginView {

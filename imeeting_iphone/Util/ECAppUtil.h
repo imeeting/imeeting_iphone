@@ -11,5 +11,5 @@
 @interface ECAppUtil : NSObject
 
 + (void)addCallCenterNumberToAddressBook;
-
++ (NSString*)displayNameFromAttendee:(NSDictionary *)attendee;
 @end

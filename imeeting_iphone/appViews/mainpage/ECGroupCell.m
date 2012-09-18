@@ -9,6 +9,7 @@
 #import "ECGroupCell.h"
 #import "ECConstants.h"
 #import "AddressBookManager+Avatar.h"
+#import "ECAppUtil.h"
 
 static CGFloat TitleLabelHeight = 18;
 static CGFloat TitleLabelWidth = 140;
@@ -54,11 +55,12 @@ static CGFloat Padding = 2;
             // only display 5 people as maximum
             
             for (NSUInteger i = 0; i < 5; i++) {
-                NSString *name = [self.attendeeArray objectAtIndex:i];
+                NSDictionary *attendee = [self.attendeeArray objectAtIndex:i];
+                NSString *userName = [attendee objectForKey:USERNAME];
                 
-                UIImage *avatar = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:name];
-                NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:name] objectAtIndex:0];
-
+                UIImage *avatar = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:userName];
+                NSString *displayName = [ECAppUtil displayNameFromAttendee:attendee];
+                
                 UIView *cell = [self makeCellWithName:displayName Icon:avatar];
                 CGRect frame = CGRectMake(i * cellWidth, 0, cellWidth, cellHeight);
                 cell.frame = frame;
@@ -68,11 +70,12 @@ static CGFloat Padding = 2;
             [self addSubview:line1];
         } else {
             for (NSUInteger i = 0; i < self.attendeeArray.count; i++) {
-                NSString *name = [self.attendeeArray objectAtIndex:i];
+                NSDictionary *attendee = [self.attendeeArray objectAtIndex:i];
+                NSString *userName = [attendee objectForKey:USERNAME];
                 
-                UIImage *avatar = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:name];                
+                UIImage *avatar = [[AddressBookManager shareAddressBookManager] avatarByPhoneNumber:userName];
                 
-                NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:name] objectAtIndex:0];
+                NSString *displayName = [ECAppUtil displayNameFromAttendee:attendee];
                 
                 UIView *cell = [self makeCellWithName:displayName Icon:avatar];
                 CGRect frame = CGRectMake(i * cellWidth, 0, cellWidth, cellHeight);

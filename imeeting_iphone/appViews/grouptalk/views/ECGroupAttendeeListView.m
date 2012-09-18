@@ -10,6 +10,7 @@
 #import "ECConstants.h"
 #import "AddressBookManager+Avatar.h"
 #import "BottomBarButton.h"
+#import "ECAppUtil.h"
 
 static CGFloat cellHeight = 56;
 static CGFloat guyIconWidth = 40;
@@ -97,7 +98,7 @@ static CGFloat BottomBarHeight = 74;
     NSString *videoStatus = [attendee objectForKey:VIDEO_STATUS];
     NSString *telephoneStatus = [attendee objectForKey:TELEPHONE_STATUS];
     
-    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+    NSString *displayName = [ECAppUtil displayNameFromAttendee:attendee];
     
     _nameLabel.text = displayName;    
     

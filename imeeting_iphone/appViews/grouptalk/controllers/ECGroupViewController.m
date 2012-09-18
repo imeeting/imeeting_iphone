@@ -19,6 +19,7 @@
 #import "ECAttendeeModeStatusFilter.h"
 #import "UIViewController+AuthFailHandler.h"
 #import "AuthInterceptor.h"
+#import "ECAppUtil.h"
 
 @interface ECGroupViewController () {
     MFMessageComposeViewController *mMsgViewController;
@@ -409,8 +410,8 @@
     
     NSString *accountName = [[UserManager shareUserManager] userBean].name;
 
+    NSString *displayName = [ECAppUtil displayNameFromAttendee:_selectedAttendee];
     
-    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
     NSMutableArray *actions = [NSMutableArray arrayWithCapacity:5];
     // generate action items
     if ([videoStatus isEqualToString:ON]) {
@@ -441,6 +442,7 @@
 - (void)selectedActionInActionSheet:(UIActionSheet *)pActionSheet clickedButtonAtIndex:(NSInteger)pButtonIndex {
     NSString *buttonTitle = [pActionSheet buttonTitleAtIndex:pButtonIndex];
     NSString *username = [_selectedAttendee objectForKey:USERNAME];
+    
     if ([buttonTitle isEqualToString:NSLocalizedString(@"Watch Video", "")]) {
         [self startVideoWatch:username];
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Call", "")]) {
@@ -450,7 +452,7 @@
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
         [hud showWhileExecuting:@selector(hangup:) onTarget:self withObject:username animated:YES];
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Kick", "")]) {
-        NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+        NSString *displayName = [ECAppUtil displayNameFromAttendee:_selectedAttendee];
         NSString *alertMsg = [NSString stringWithFormat:NSLocalizedString(@"Remove %@ ?", nil), displayName];
         [[[UIAlertView alloc] initWithTitle:nil message:alertMsg delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:NSLocalizedString(@"Cancel", nil), nil] show];
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Send SMS", nil)]) {
@@ -514,7 +516,7 @@
     int statusCode = pRequest.responseStatusCode;
 
     NSString *username = [_selectedAttendee objectForKey:USERNAME];
-    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+    NSString *displayName = [ECAppUtil displayNameFromAttendee:_selectedAttendee];
     switch (statusCode) {
         case 200: {
             // call command is accepted by server, update UI
@@ -559,7 +561,7 @@
     int statusCode = pRequest.responseStatusCode;
     
     NSString *username = [_selectedAttendee objectForKey:USERNAME];
-    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+    NSString *displayName = [ECAppUtil displayNameFromAttendee:_selectedAttendee];
     switch (statusCode) {
         case 409: {
             NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Hangup failed, maybe %@ is already hung up", nil), displayName];
@@ -601,7 +603,7 @@
     int statusCode = pRequest.responseStatusCode;
     
     NSString *username = [_selectedAttendee objectForKey:USERNAME];
-    NSString *displayName = [[[AddressBookManager shareAddressBookManager] contactsDisplayNameArrayWithPhoneNumber:username] objectAtIndex:0];
+    NSString *displayName = [ECAppUtil displayNameFromAttendee:_selectedAttendee];
     switch (statusCode) {
         case 200: {
             // kickout command is accepted by server, update UI

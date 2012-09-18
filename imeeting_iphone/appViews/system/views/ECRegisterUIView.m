@@ -115,7 +115,10 @@
     UIView *step3Label= [self makeStepLabel:NSLocalizedString(@"Step 3", "") preTitle:NSLocalizedString(@"Third", nil)];
     [_mStep3View addSubview:step3Label];
     
-    _mPwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:_mValidateCodeInput.frame keyboardType:UIKeyboardTypeDefault];
+    _mNicknameInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input nickname", nil) frame:_mValidateCodeInput.frame keyboardType:UIKeyboardTypeDefault];
+    [_mStep3View addSubview:_mNicknameInput];
+    
+    _mPwdInput = [self makeTextFieldWithPlaceholder:NSLocalizedString(@"input pwd", "") frame:CGRectMake(_mNicknameInput.frame.origin.x, _mNicknameInput.frame.origin.y + _mNicknameInput.frame.size.height + 5, _mNicknameInput.frame.size.width, _mNicknameInput.frame.size.height) keyboardType:UIKeyboardTypeDefault];
     _mPwdInput.secureTextEntry = YES;
     [_mStep3View addSubview:_mPwdInput];
     
@@ -188,6 +191,7 @@
 - (void)switchToStep3View {
     _mPwdInput.text = nil;
     _mPwdConfirmInput.text = nil;
+    _mNicknameInput.text = nil;
     
     CATransition *animation = [self fadeAnimation];
     [_mStep3View.layer addAnimation:animation forKey:nil];
@@ -195,7 +199,7 @@
     [_mStep1View setHidden:YES];
     [_mStep2View setHidden:YES];
     [_mStep3View setHidden:NO];
-    [_mPwdInput becomeFirstResponder];
+    [_mNicknameInput becomeFirstResponder];
 }
 
 
@@ -242,11 +246,19 @@
 }
 
 - (void)finishRegistrationAction {
+    NSString *nickname = [_mNicknameInput.text trimWhitespaceAndNewline];
     NSString *pwd1 = [_mPwdInput.text trimWhitespaceAndNewline];
     NSString *pwd2 = [_mPwdConfirmInput.text trimWhitespaceAndNewline];
     
+    [_mNicknameInput resignFirstResponder];
     [_mPwdInput resignFirstResponder];
     [_mPwdConfirmInput resignFirstResponder];
+    
+    // check nickname
+    if (!nickname || [nickname isEqualToString:@""]) {
+        [[[iToast makeText:NSLocalizedString(@"input nickname", nil)] setDuration:iToastDurationNormal] show];
+        return;
+    }
     
     // check passwords
     if (!pwd1 || [pwd1 isEqualToString:@""]) {
@@ -265,11 +277,16 @@
     }
     
     
-    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(finishRegisterWithPwds:)]) {
+    if ([self validateViewControllerRef:self.viewControllerRef andSelector:@selector(finishRegisterWithParam:)]) {
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+        [params setObject:@"nickname" forKey:nickname];
+        NSLog(@"## nickname: %@", nickname );
         NSArray *pwds = [[NSArray alloc] initWithObjects:pwd1, pwd2, nil];
+        [params setObject:@"pwds" forKey:pwds];
+        
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self];
         hud.labelText = NSLocalizedString(@"finishing register..", "");
-        [hud showWhileExecuting:@selector(finishRegisterWithPwds:) onTarget:self.viewControllerRef withObject:pwds animated:YES];
+        [hud showWhileExecuting:@selector(finishRegisterWithParam:) onTarget:self.viewControllerRef withObject:params animated:YES];
     }
     
 }

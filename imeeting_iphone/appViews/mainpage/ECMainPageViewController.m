@@ -272,11 +272,11 @@ static ECMainPageViewController *instance;
                 NSArray *attendees = [selectedGroupInfo objectForKey:GROUP_ATTENDEES];
                 if (attendees) {
                     NSMutableArray *preInConferenceAttendeeArray = [NSMutableArray arrayWithCapacity:5];
-                    for (NSString *name in attendees) {
-                        if (![accountName isEqualToString:name]) {
-                            [preInConferenceAttendeeArray addObject:name];
+                    for (NSDictionary *attendee in attendees) {
+                        NSString *userName = [attendee objectForKey:USERNAME];
+                        if (![accountName isEqualToString:userName]) {
+                            [preInConferenceAttendeeArray addObject:userName];
                         }
-                      
                     }
                     NSLog(@"pre in attendees: %@", preInConferenceAttendeeArray);
                     

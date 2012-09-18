@@ -24,6 +24,6 @@
 /*
  * finish register
  */
-- (void)finishRegisterWithPwds:(NSArray*)pwds;
+- (void)finishRegisterWithParam:(NSDictionary*)param;
 
 @end
