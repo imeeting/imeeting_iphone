@@ -16,7 +16,7 @@
 #define USER_LOGIN_URL              [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/login"]
 #define USER_REG_TOKEN              [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/regToken"]
 
-#define GET_CONF_LIST_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/list"]
+#define GET_CONF_LIST_URL          [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/conflist"]
 #define CREATE_CONF_URL            [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/create"]
 #define HIDE_CONF_URL              [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/hide"]
 #define JOIN_CONF_URL              [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/conference/join"]

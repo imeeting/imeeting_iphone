@@ -216,6 +216,7 @@ static CGFloat BottomBarHeight = 74;
     _attendeeListTableView.delegate = self;
     _attendeeListTableView.backgroundColor = [UIColor clearColor];
     _attendeeListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _attendeeListTableView.showsVerticalScrollIndicator = NO;
     [self addSubview:_attendeeListTableView];
     
     _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0.5 - _attendeeListTableView.frame.size.height, _attendeeListTableView.frame.size.width, _attendeeListTableView.frame.size.height)];

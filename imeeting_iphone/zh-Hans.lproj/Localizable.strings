@@ -30,7 +30,7 @@
 "Error in checking validation code, please retry." = "验证出错，请重试！";
 "register session timeout" = "此次注册操作已过期，请重新开始";
 "Error in finishing register, please retry." = "注册过程出错，请重试！";
-"input nickname" = "请输入昵称";
+"input nickname" = "请输入名称";
 "please input password" = "请输入密码";
 "please input confirm password" = "请输入确认密码";
 "pwd1 is different to pwd2" = "两次密码不一致";
