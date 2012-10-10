@@ -140,7 +140,7 @@
 "you'are prohibited to join the group" = "当前您无法进入群聊，可能已被发起人移除。";
 "call center" = "智会";
 "Upload Addressbook" = "备份通讯录";
-"Upload Addressbook?" = "需要备份通讯录到服务器吗？";
+"Upload Addressbook?" = "确定备份通讯录到服务器吗？";
 "Upload" = "备份";
 "AddressBook Upload OK" = "通讯录备份成功！";
 "AddressBook Upload Failed" = "通讯录备份失败，请稍后重试。";
