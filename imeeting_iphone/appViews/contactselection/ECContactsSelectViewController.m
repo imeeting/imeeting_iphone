@@ -106,13 +106,13 @@
                 [self doJump];
                 
             } else {
-                goto invite_error;
+                goto create_error;
             }
             
             break;
         }
         default:
-            goto invite_error;
+            goto create_error;
             break;
     }
     
@@ -121,7 +121,12 @@
 invite_error:
     [[[iToast makeText:NSLocalizedString(@"error in inviting attendees", "")] setDuration:iToastDurationLong] show];
     [self.navigationController popViewControllerAnimated:YES];
+    return;
     
+create_error:
+    [[[iToast makeText:NSLocalizedString(@"error in creating group", "")] setDuration:iToastDurationLong] show];
+    [self.navigationController popViewControllerAnimated:YES];
+    return;
 }
 
 - (void)onNetworkFailed:(ASIHTTPRequest *)pRequest {
